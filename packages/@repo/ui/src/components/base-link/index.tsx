@@ -2,32 +2,31 @@ import { Slot } from "~/components/slot"
 
 import { cn, cva } from "~/lib/utils"
 
+import type { SlotProps } from "~/components/slot"
 import type { VariantProps } from "class-variance-authority"
 
-export const baseLinkVariants = cva(
-  "font-medium underline-offset-2 transition-colors",
-  {
-    variants: {
-      variant: {
-        default: "text-foreground underline",
-        hover:
-          "text-muted-foreground hover:text-primary aria-selected:text-primary hover:underline",
-        "no-underline": "no-underline",
-      },
-      size: {
-        base: "text-base",
-        sm: "text-sm",
-      },
+export const baseLinkVariants = cva("underline-offset-2 transition-colors", {
+  variants: {
+    variant: {
+      default: "text-foreground underline",
+      hover:
+        "text-muted-foreground hover:text-primary aria-selected:text-primary hover:underline",
+      "no-underline": "no-underline",
     },
-    defaultVariants: {
-      variant: "default",
+    size: {
+      base: "text-base",
+      sm: "text-sm",
     },
   },
-)
+  defaultVariants: {
+    variant: "default",
+  },
+})
 
 export interface BaseLinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
-    VariantProps<typeof baseLinkVariants> {
+  extends VariantProps<typeof baseLinkVariants>,
+    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "children">,
+    Pick<SlotProps, "children"> {
   href: string
   label?: string
   external?: boolean
