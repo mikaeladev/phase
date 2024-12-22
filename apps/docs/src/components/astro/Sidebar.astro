@@ -1,0 +1,49 @@
+---
+import { cn } from "@repo/ui"
+import { ScrollArea } from "@repo/ui/scroll-area"
+import { Link } from "~/components/react/link"
+
+import { getSidebarNavItems } from "~/config/sidebar"
+
+import type { SidebarNavItem } from "~/types/sidebar"
+
+const navItems = await getSidebarNavItems()
+
+const { pathname } = Astro.url
+---
+
+<ScrollArea className="flex h-full w-full flex-col gap-4">
+  {
+    navItems.map(function mapSidebarNavItem(navItem: SidebarNavItem) {
+      if (navItem.type === "category") {
+        return (
+          <div class="mb-4">
+            <h4 class="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
+              {navItem.label}
+            </h4>
+            <ul class="flex flex-col">
+              {navItem.children.map(mapSidebarNavItem)}
+            </ul>
+          </div>
+        )
+      }
+
+      return (
+        <li>
+          <Link
+            href={navItem.href}
+            label={navItem.label}
+            variant={"no-underline"}
+            className={cn(
+              "text-muted-foreground group flex w-full items-center rounded-md border border-transparent px-2 py-1 text-sm hover:underline",
+              pathname === navItem.href &&
+                "text-foreground font-medium underline",
+            )}
+          >
+            {navItem.label}
+          </Link>
+        </li>
+      )
+    })
+  }
+</ScrollArea>

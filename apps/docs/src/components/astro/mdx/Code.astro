@@ -1,0 +1,9 @@
+---
+import { Codeblock } from "@repo/ui/codeblock"
+
+const props = Astro.props
+---
+
+<Codeblock {...props} inline>
+  <slot />
+</Codeblock>

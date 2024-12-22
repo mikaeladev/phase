@@ -4,7 +4,14 @@
   "endOfLine": "lf",
   "plugins": [
     "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-astro",
     "prettier-plugin-tailwindcss"
+  ],
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": { "parser": "astro" }
+    }
   ],
   "tailwindAttributes": ["class", "className", "tw"],
   "tailwindFunctions": ["clsx", "cn", "cva", "tw"],
@@ -12,6 +19,7 @@
     "^(bun/(.*)$)|^(bun$)",
     "<BUILTIN_MODULES>",
     "",
+    "^(astro(\/|:)(.*)$)|^(astro$)",
     "^(next/(.*)$)|^(next$)",
     "^(react/(.*)$)|^(react$)",
     "^(@phasejs/(.*)$)|^(@phasejs$)",

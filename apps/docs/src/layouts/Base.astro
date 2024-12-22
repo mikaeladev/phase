@@ -1,0 +1,33 @@
+---
+import "~/styles/globals.css"
+
+import type { Frontmatter } from "~/types/props"
+
+interface Props {
+  frontmatter: Frontmatter
+}
+
+const { title } = Astro.props.frontmatter
+---
+
+<html
+  lang="en"
+  style="color-scheme: dark"
+  class="bg-background text-foreground"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://phasebot.xyz/favicon.ico"
+    />
+    <title>{title} - Docs</title>
+  </head>
+  <body
+    class="flex min-h-screen w-full flex-col font-sans tracking-tighter antialiased"
+  >
+    <slot />
+  </body>
+</html>
