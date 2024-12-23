@@ -1,7 +1,9 @@
 ---
 import Breadcrumbs from "~/components/astro/Breadcrumbs.astro"
-import Sidebar from "~/components/astro/Sidebar.astro"
 import { Header } from "~/components/react/header.tsx"
+import { Sidebar } from "~/components/react/sidebar.tsx"
+
+import { getSidebarNavItems } from "~/config/sidebar"
 
 import Base from "~/layouts/Base.astro"
 
@@ -11,6 +13,9 @@ interface Props {
   frontmatter: Frontmatter
 }
 
+const navItems = await getSidebarNavItems()
+
+const { pathname } = Astro.url
 const { frontmatter } = Astro.props
 const { title, description } = frontmatter
 ---
@@ -21,7 +26,7 @@ const { title, description } = frontmatter
     <aside
       class="h-screen-no-header sticky top-16 w-64 py-8 pr-6 max-md:hidden"
     >
-      <Sidebar />
+      <Sidebar pathname={pathname} items={navItems} client:idle />
     </aside>
     <div class="w-full py-8">
       <Breadcrumbs />

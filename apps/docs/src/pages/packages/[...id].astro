@@ -1,0 +1,22 @@
+---
+import { getCollection, render } from "astro:content"
+
+import { components } from "~/components/astro/mdx/index.astro"
+
+import Layout from "~/layouts/Default.astro"
+
+export async function getStaticPaths() {
+  const entries = await getCollection("packages")
+  return entries.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }))
+}
+
+const { entry } = Astro.props
+const { Content } = await render(entry)
+---
+
+<Layout frontmatter={entry.data}>
+  <Content components={components} />
+</Layout>

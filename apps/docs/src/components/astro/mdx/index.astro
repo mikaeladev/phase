@@ -1,6 +1,4 @@
 ---
-import { getCollection, render } from "astro:content"
-
 import A from "~/components/astro/mdx/A.astro"
 import Blockquote from "~/components/astro/mdx/Blockquote.astro"
 import Code from "~/components/astro/mdx/Code.astro"
@@ -17,38 +15,21 @@ import OL from "~/components/astro/mdx/OL.astro"
 import P from "~/components/astro/mdx/P.astro"
 import UL from "~/components/astro/mdx/UL.astro"
 
-import Layout from "~/layouts/Default.astro"
-
-export async function getStaticPaths() {
-  const collection = await getCollection("docs")
-  return collection.map((entry) => ({
-    params: { id: entry.id },
-    props: { entry },
-  }))
+export const components = {
+  h1: H1,
+  h2: H2,
+  h3: H3,
+  h4: H4,
+  h5: H5,
+  h6: H6,
+  a: A,
+  p: P,
+  ul: UL,
+  ol: OL,
+  li: LI,
+  blockquote: Blockquote,
+  img: Img,
+  hr: HR,
+  code: Code,
 }
-
-const { entry } = Astro.props
-const { Content } = await render(entry)
 ---
-
-<Layout frontmatter={entry.data}>
-  <Content
-    components={{
-      h1: H1,
-      h2: H2,
-      h3: H3,
-      h4: H4,
-      h5: H5,
-      h6: H6,
-      a: A,
-      p: P,
-      ul: UL,
-      ol: OL,
-      li: LI,
-      blockquote: Blockquote,
-      img: Img,
-      hr: HR,
-      code: Code,
-    }}
-  />
-</Layout>

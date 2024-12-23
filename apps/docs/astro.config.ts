@@ -7,5 +7,5 @@ import tailwind from "@astrojs/tailwind"
 export default defineConfig({
   integrations: [react(), tailwind({ applyBaseStyles: false }), mdx()],
   prefetch: true,
-  base: "/docs/",
+  base: "/docs",
 })
