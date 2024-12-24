@@ -6,7 +6,7 @@
       "cache": true,
       "dependsOn": [],
       "outputs": ["dist/**"],
-      "env": ["!*"]
+      "env": ["TURBO_*"]
     },
     "bot#build": {
       "cache": true,
@@ -19,7 +19,8 @@
         "TWITCH_*",
         "AUTH_*",
         "BRIDGE_*",
-        "WEBHOOK_*"
+        "WEBHOOK_*",
+        "TURBO_*"
       ]
     },
     "www#build": {
@@ -33,14 +34,15 @@
         "TWITCH_*",
         "AUTH_*",
         "BRIDGE_*",
-        "WEBHOOK_*"
+        "WEBHOOK_*",
+        "TURBO_*"
       ]
     },
     "build": {
       "cache": true,
       "dependsOn": ["@repo/config#build", "^build"],
       "outputs": ["dist/**"],
-      "env": ["!*"]
+      "env": ["TURBO_*"]
     },
     "lint": {
       "cache": true,
