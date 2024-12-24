@@ -30,7 +30,7 @@ export default defineConfig({
       entry: entries,
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ["react", "react/jsx-runtime", "react-dom"],
       output: {
         dir: "dist",
         entryFileNames: "components/[name]/index.js",
