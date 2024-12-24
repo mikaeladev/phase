@@ -1,5 +1,6 @@
+buildImage = "oven/bun:1.1.42"
+
 [phases.setup]
-nixPkgs = ["nodejs_20", "bun"]
 aptPkgs = ["build-essential", "python3"]
 
 [phases.install]
@@ -11,5 +12,5 @@ dependsOn = ["install"]
 cmds = ["bun run build:bot"]
 
 [start]
-runImage = "oven/bun:1.1"
+runImage = "oven/bun:1.1.42"
 cmd = "bun run start:bot"
