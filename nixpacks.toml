@@ -1,6 +1,6 @@
-buildImage = "oven/bun:1.1.42"
-
 [phases.setup]
+nixpkgsArchive = "8de37713e440b3eae10eadfbeac354e4b545092f" # for bun v1.1.42
+nixPkgs = ["nodejs_20", "bun"]
 aptPkgs = ["build-essential", "python3"]
 
 [phases.install]
