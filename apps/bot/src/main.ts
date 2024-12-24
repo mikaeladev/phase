@@ -10,6 +10,7 @@ import { bridgeServerPlugin } from "@repo/trpc/server"
 
 import { blacklistOptions } from "~/lib/blacklist"
 import { botConfig } from "~/lib/config"
+import { db } from "~/lib/db"
 import { Emojis, emojiSyncPlugin } from "~/lib/emojis"
 import { env } from "~/lib/env"
 
@@ -67,7 +68,7 @@ const phaseClient = new BotClient(djsClient, {
     voicePlugin(),
     musicPlugin(),
     emojiSyncPlugin(),
-    bridgeServerPlugin(),
+    bridgeServerPlugin({ db }),
   ],
   stores: {
     config: new ConfigStore(),

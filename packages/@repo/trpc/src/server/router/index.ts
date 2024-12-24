@@ -1,7 +1,9 @@
+import { authRouter } from "~/server/router/auth"
 import { guildsRouter } from "~/server/router/guilds"
 import { publicProcedure, router } from "~/server/trpc"
 
 export const appRouter = router({
+  auth: authRouter,
   guilds: guildsRouter,
   status: publicProcedure.query(({ ctx }) => {
     const { client } = ctx

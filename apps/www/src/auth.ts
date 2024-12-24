@@ -2,13 +2,13 @@ import { NextResponse } from "next/server"
 
 import { API } from "@discordjs/core/http-only"
 import { REST } from "@discordjs/rest"
+import { client } from "@repo/trpc/client"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import DiscordProvider from "next-auth/providers/discord"
 
 import { env } from "~/lib/env"
 
-import type { OTPResponse } from "~/app/api/auth/otp/route"
 import type { Profile, Session } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 
@@ -41,17 +41,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       id: "otp",
       name: "OTP",
       credentials: { code: {} },
-      async authorize({ code }, request) {
-        const url = new URL(`/api/auth/otp?code=${String(code)}`, request.url)
+      async authorize({ code }) {
+        const error = new Error("Invalid code provided")
 
-        const response = await fetch(url.toString(), { method: "POST" })
-        const json = (await response.json()) as OTPResponse
+        if (typeof code !== "string") throw error
+        const otpData = await client.auth.validateOTP.query({ code })
+        if (!otpData) throw error
 
-        if (!json.success) {
-          throw new Error(json.message)
-        }
-
-        return { userId: json.data.userId }
+        return { userId: otpData.userId }
       },
     }),
   ],
