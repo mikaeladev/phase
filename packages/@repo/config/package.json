@@ -10,7 +10,7 @@
   },
   "exports": {
     "./eslint/*": "./dist/eslint/*",
-    "./prettier/*": "./src/prettier/*",
+    "./prettier/*": "./src/prettier/base.json",
     "./tailwind/*": "./dist/tailwind/*",
     "./typescript": "./src/typescript/base.json"
   },

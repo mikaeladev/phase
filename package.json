@@ -3,7 +3,7 @@
   "name": "phase",
   "type": "module",
   "packageManager": "bun@1.1.42",
-  "prettier": "@repo/config/prettier/base.json",
+  "prettier": "@repo/config/prettier",
   "scripts": {
     "format": "prettier --write .",
     "dev": "turbo run dev --filter='./apps/*'",
