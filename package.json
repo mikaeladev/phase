@@ -11,7 +11,7 @@
     "dev:site": "turbo run dev --filter=www",
     "start": "turbo run start --filter='./apps/*'",
     "start:bot": "cd apps/bot && bun run start",
-    "start:site": "cd apps/site && bun run start",
+    "start:site": "cd apps/www && bun run start",
     "build": "turbo run build",
     "build:bot": "turbo run build --filter=bot",
     "build:site": "turbo run build --filter=www",
@@ -39,6 +39,7 @@
     "typescript": "^5.7.2"
   },
   "trustedDependencies": [
+    "@parcel/watcher",
     "@plugin/voice",
     "aws-sdk",
     "esbuild",
