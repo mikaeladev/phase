@@ -1,5 +1,4 @@
 ---
-import { cn } from "@repo/ui"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -35,10 +34,10 @@ const { pathname } = Astro.url
                   <Link
                     href={href}
                     variant={"no-underline"}
-                    className={cn(
+                    class:list={[
                       index + 1 === partsLength &&
                         "text-foreground font-medium",
-                    )}
+                    ]}
                   >
                     {part
                       .replaceAll("-", " ")
