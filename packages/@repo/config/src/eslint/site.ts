@@ -19,7 +19,6 @@ export default tseslint.config(...base, {
     },
   },
   plugins: {
-    // @ts-expect-error plugin types are wrong
     react: reactPlugin,
     "react-hooks": hooksPlugin,
     "@next/next": nextPlugin,
