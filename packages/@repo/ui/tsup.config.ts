@@ -11,6 +11,7 @@ type ExportsField = Record<
 
 export default tsup.defineConfig({
   entry: ["./src/index.ts", "./src/components/**/index.tsx"],
+  noExternal: ["lucide-react"],
   format: ["esm"],
   clean: true,
   dts: true,

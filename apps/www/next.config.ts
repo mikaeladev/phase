@@ -5,7 +5,7 @@ import { env } from "~/lib/env"
 import type { NextConfig } from "next"
 
 const config: NextConfig = {
-  transpilePackages: ["lucide-react"],
+  transpilePackages: ["@repo/ui"],
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   experimental: { mdxRs: true },
   async rewrites() {
