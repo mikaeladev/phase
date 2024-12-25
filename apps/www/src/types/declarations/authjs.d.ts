@@ -11,12 +11,7 @@ declare module "next-auth" {
   interface Profile extends APIUser {}
 
   interface Session {
-    user: {
-      id: string
-      username: string
-      globalName: string
-      avatarUrl: string
-    }
+    user: { id: string }
   }
 }
 

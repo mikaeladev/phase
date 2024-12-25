@@ -1,5 +1,7 @@
 import { createHmac } from "node:crypto"
 
+import { makeURLSearchParams, Routes } from "discord.js"
+
 import { z } from "zod"
 
 import { privateProcedure, router } from "~/server/trpc"
@@ -19,5 +21,24 @@ export const authRouter = router({
         userId: optDoc.userId,
         guildId: optDoc.guildId,
       }
+    }),
+
+  revokeToken: privateProcedure
+    .input(z.object({ token: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const client = ctx.client
+
+      await client.rest.post(Routes.oauth2TokenRevocation(), {
+        auth: false,
+        passThroughBody: true,
+        body: makeURLSearchParams({
+          token: input.token,
+          token_type_hint: "access_token",
+        }),
+        headers: {
+          Authorization: `Basic ${Buffer.from(`${ctx.env.DISCORD_ID}:${ctx.env.DISCORD_SECRET}`).toString("base64")}`,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
     }),
 })

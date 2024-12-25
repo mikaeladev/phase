@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server"
 
-import { API } from "@discordjs/core/http-only"
-import { REST } from "@discordjs/rest"
 import { client } from "@repo/trpc/client"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
@@ -11,9 +9,6 @@ import { env } from "~/lib/env"
 
 import type { Profile, Session } from "next-auth"
 import type { JWT } from "next-auth/jwt"
-
-const discordREST = new REST().setToken(env.DISCORD_TOKEN)
-const discordAPI = new API(discordREST)
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: env.AUTH_COOKIE_SECRET,
@@ -58,56 +53,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.userId = user.userId
 
         if (account?.access_token) {
-          void discordAPI.oauth2.revokeToken(
-            env.DISCORD_ID,
-            env.DISCORD_SECRET,
-            {
-              token: account.access_token,
-              token_type_hint: "access_token",
-            },
-          )
+          await client.auth.revokeToken.mutate({ token: account.access_token })
         }
       }
 
       return token
     },
     async session({ session, token }: { session: Session; token: JWT }) {
-      const userId = token.userId
-
-      if (!userId) {
+      if (!token.userId) {
         console.error("[Session] Missing user ID in JWT")
         return session
       }
 
-      // try {
-      //   const discordUser = await discordAPI.users.get(userId)
-
-      //   session.user = {
-      //     id: discordUser.id,
-      //     username: discordUser.username,
-      //     globalName: discordUser.global_name ?? discordUser.username,
-      //     avatarUrl: discordUser.avatar
-      //       ? discordREST.cdn.avatar(discordUser.id, discordUser.avatar)
-      //       : discordREST.cdn.defaultAvatar(
-      //           discordUser.discriminator === "0"
-      //             ? Number(BigInt(userId) >> 22n) % 6
-      //             : Number(discordUser.discriminator) % 5,
-      //         ),
-      //   }
-      // } catch (error) {
-      //   console.error("[Session] Failed to fetch user data:")
-      //   console.error(error)
-      //   return session
-      // }
-
-      session.user = {
-        id: userId,
-        username: "unknown",
-        globalName: "unknown",
-        avatarUrl: discordREST.cdn.defaultAvatar(
-          Number(BigInt(userId) >> 22n) % 6,
-        ),
-      }
+      session.user = { id: token.userId }
 
       return session
     },
