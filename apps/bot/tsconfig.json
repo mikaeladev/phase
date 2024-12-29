@@ -1,14 +1,11 @@
 {
-  "extends": "../../node_modules/@repo/config/src/typescript/base.json",
-  "include": ["src/**/*", "scripts/**/*", "eslint.config.js"],
+  "extends": "@repo/config/typescript/base.json",
   "exclude": [".phase"],
+  "include": ["src/**/*", "scripts/**/*", "eslint.config.js"],
   "compilerOptions": {
     "outDir": ".phase",
     "incremental": true,
     "baseUrl": ".",
-    "paths": {
-      "~/*": ["src/*"],
-      "@repo/db": ["../../node_modules/@repo/db/dist/mongo"]
-    }
+    "paths": { "~/*": ["src/*"] },
   }
 }

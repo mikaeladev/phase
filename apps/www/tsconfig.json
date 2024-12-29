@@ -1,5 +1,6 @@
 {
-  "extends": "../../node_modules/@repo/config/src/typescript/base.json",
+  "extends": "@repo/config/typescript/nextjs.json",
+  "exclude": [".next"],
   "include": [
     ".next/types/**/*.ts",
     "src/**/*",
@@ -9,13 +10,4 @@
     "postcss.config.cjs",
     "tailwind.config.ts"
   ],
-  "exclude": [".next"],
-  "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "jsx": "preserve",
-    "plugins": [{ "name": "next" }],
-    "incremental": true,
-    "noEmit": true,
-    "paths": { "~/*": ["src/*"] }
-  }
 }

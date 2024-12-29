@@ -1,10 +1,10 @@
 {
-  "extends": "@repo/config/typescript",
-  "include": ["src/**/*", "eslint.config.js", "tailwind.config.ts", "vite.config.ts"],
-  "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "baseUrl": "."
-  }
+  "extends": "@repo/config/typescript/react.json",
+  "exclude": ["dist"],
+  "include": [
+    "src/**/*",
+    "eslint.config.js",
+    "tailwind.config.ts",
+    "vite.config.ts"
+  ]
 }

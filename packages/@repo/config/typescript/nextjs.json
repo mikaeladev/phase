@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": ["./base.json", "./react.json"],
+  "compilerOptions": {
+    "jsx": "preserve",
+    "plugins": [{ "name": "next" }],
+    "incremental": true,
+    "noEmit": true,
+    "paths": { "~/*": ["./src/*"] }
+  }
+}

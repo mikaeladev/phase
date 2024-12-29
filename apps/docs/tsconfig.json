@@ -1,10 +1,12 @@
 {
-  "extends": "@repo/config/typescript",
-  "include": [".astro/types.d.ts", "**/*"],
+  "extends": "@repo/config/typescript/react.json",
   "exclude": ["dist"],
-  "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
-  }
+  "include": [
+    ".astro/types.d.ts",
+    "src/**/*",
+    "eslint.config.js",
+    "astro.config.ts",
+    "postcss.config.cjs",
+    "tailwind.config.ts"
+  ]
 }

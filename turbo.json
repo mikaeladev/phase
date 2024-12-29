@@ -2,16 +2,11 @@
   "$schema": "https://turbo.build/schema.json",
   "globalEnv": ["NODE_ENV"],
   "tasks": {
-    "@repo/config#build": {
-      "cache": true,
-      "dependsOn": [],
-      "outputs": ["dist/**"],
-      "env": ["TURBO_*"]
-    },
     "bot#build": {
       "cache": true,
-      "dependsOn": ["@repo/config#build", "^build"],
+      "dependsOn": ["^build"],
       "outputs": [".phase/**"],
+      "passThroughEnv": ["TURBO_*"],
       "env": [
         "MONGODB_URI",
         "POSTGRES_URI",
@@ -19,14 +14,36 @@
         "TWITCH_*",
         "AUTH_*",
         "BRIDGE_*",
-        "WEBHOOK_*",
-        "TURBO_*"
+        "WEBHOOK_*"
+      ]
+    },
+    "docs#build": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "outputs": [".astro/**", "!.astro/cache/**"],
+      "passThroughEnv": ["TURBO_*"],
+      "env": []
+    },
+    "dashboard#build": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"],
+      "passThroughEnv": ["TURBO_*"],
+      "env": [
+        "MONGODB_URI",
+        "POSTGRES_URI",
+        "DISCORD_*",
+        "TWITCH_*",
+        "AUTH_*",
+        "BRIDGE_*",
+        "WEBHOOK_*"
       ]
     },
     "www#build": {
       "cache": true,
-      "dependsOn": ["@repo/config#build", "^build"],
+      "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
+      "passThroughEnv": ["TURBO_*"],
       "env": [
         "MONGODB_URI",
         "POSTGRES_URI",
@@ -34,23 +51,29 @@
         "TWITCH_*",
         "AUTH_*",
         "BRIDGE_*",
-        "WEBHOOK_*",
-        "TURBO_*"
+        "WEBHOOK_*"
       ]
     },
     "build": {
       "cache": true,
-      "dependsOn": ["@repo/config#build", "^build"],
+      "dependsOn": ["^build"],
       "outputs": ["dist/**"],
-      "env": ["TURBO_*"]
+      "passThroughEnv": ["TURBO_*"]
     },
     "lint": {
       "cache": true,
-      "dependsOn": ["@repo/config#build", "^build"],
+      "dependsOn": ["^build"],
       "passThroughEnv": ["SKIP_ENV_VALIDATION"]
     },
     "dev": {
       "cache": false,
+      "dependsOn": ["^build"],
+      "persistent": true,
+      "env": ["*"]
+    },
+    "start": {
+      "cache": false,
+      "dependsOn": ["build"],
       "persistent": true,
       "env": ["*"]
     }

@@ -18,7 +18,7 @@
 
     // Paths
     "baseUrl": "${configDir}",
-    "paths": { "~/*": ["src/*"] },
+    "paths": { "~/*": ["./src/*"] },
 
     // Best practices
     "strict": true,

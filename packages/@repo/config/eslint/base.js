@@ -41,6 +41,13 @@ export default tseslint.config(
     },
   },
   {
-    ignores: [".next/", ".phase/", "dist/", "node_modules/", "tsup.config.ts"],
+    ignores: [
+      ".astro",
+      ".next/",
+      ".phase/",
+      "dist/",
+      "node_modules/",
+      "tsup.config.ts",
+    ],
   },
 )

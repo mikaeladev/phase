@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
-// @ts-expect-error no types
-import nextPlugin from "@next/eslint-plugin-next"
 import reactPlugin from "eslint-plugin-react"
 // @ts-expect-error no types
 import hooksPlugin from "eslint-plugin-react-hooks"
@@ -14,23 +9,17 @@ import base from "./base.js"
 export default tseslint.config(...base, {
   languageOptions: {
     globals: {
-      ...globals.node,
       ...globals.browser,
     },
   },
   plugins: {
     react: reactPlugin,
     "react-hooks": hooksPlugin,
-    "@next/next": nextPlugin,
   },
   rules: {
     ...reactPlugin.configs.recommended.rules,
     ...reactPlugin.configs["jsx-runtime"].rules,
     ...hooksPlugin.configs.recommended.rules,
-    ...nextPlugin.configs.recommended.rules,
-    ...nextPlugin.configs["core-web-vitals"].rules,
-    "@next/next/no-img-element": "off",
-    "@next/next/no-duplicate-head": "off",
     "react/no-unescaped-entities": "off",
     "react/prop-types": "off",
   },

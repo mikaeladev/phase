@@ -1,1 +1,1 @@
-export { default } from "@repo/config/eslint/site.js"
+export { default } from "@repo/config/eslint/astro.js"
