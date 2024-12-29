@@ -30,6 +30,7 @@ export interface BaseLinkProps
   href: string
   label?: string
   external?: boolean
+  mfe?: boolean
 }
 
 export function BaseLink({
@@ -38,14 +39,15 @@ export function BaseLink({
   size,
   label,
   external,
+  mfe,
   ...props
 }: BaseLinkProps) {
   return (
     <Slot
       title={label}
       aria-label={label}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noreferrer" : undefined}
+      target={!mfe && external ? "_blank" : undefined}
+      rel={!mfe && external ? "noreferrer" : undefined}
       className={cn(baseLinkVariants({ variant, size, className }))}
       {...props}
     />
