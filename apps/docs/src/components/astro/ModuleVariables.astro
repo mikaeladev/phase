@@ -1,10 +1,6 @@
 ---
 import { ModuleDefinitions } from "@repo/utils/modules"
 
-import Code from "~/components/astro/mdx/Code.astro"
-import LI from "~/components/astro/mdx/LI.astro"
-import UL from "~/components/astro/mdx/UL.astro"
-
 import type { ModuleId } from "@repo/utils/modules"
 
 interface Props {
@@ -17,14 +13,14 @@ const definition = ModuleDefinitions[moduleId]
 const variables = "variables" in definition ? definition.variables : undefined
 ---
 
-<UL>
+<ul>
   {
     variables?.variables.map((variable) => {
       return (
-        <LI>
-          <Code>{`{${variable.name}}`}</Code> - {variable.description}
-        </LI>
+        <li>
+          <code>{`{${variable.name}}`}</code> - {variable.description}
+        </li>
       )
     }) ?? null
   }
-</UL>
+</ul>
