@@ -5,7 +5,9 @@ import react from "@astrojs/react"
 import tailwind from "@astrojs/tailwind"
 
 export default defineConfig({
+  base: "/docs",
+  cacheDir: ".astro/cache/astro",
   integrations: [react(), tailwind({ applyBaseStyles: false }), mdx()],
   prefetch: true,
-  base: "/docs",
+  vite: { cacheDir: ".astro/cache/vite" },
 })
