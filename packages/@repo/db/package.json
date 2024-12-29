@@ -14,30 +14,30 @@
   "exports": {
     ".": {
       "types": "./dist/mongo/index.d.ts",
-      "main": "./dist/mongo/index.js",
-      "module": "./dist/mongo/index.js"
+      "import": "./dist/mongo/index.js",
+      "require": "./dist/mongo/index.js"
     },
     "./mongo": {
       "types": "./dist/mongo/index.d.ts",
-      "main": "./dist/mongo/index.js",
-      "module": "./dist/mongo/index.js"
+      "import": "./dist/mongo/index.js",
+      "require": "./dist/mongo/index.js"
     },
     "./postgres": {
       "types": "./dist/postgres/index.d.ts",
-      "main": "./dist/postgres/index.js",
-      "module": "./dist/postgres/index.js"
+      "import": "./dist/postgres/index.js",
+      "require": "./dist/postgres/index.js"
     }
   },
   "dependencies": {
     "@repo/env": "workspace:*",
     "@repo/utils": "workspace:*",
-    "drizzle-orm": "^0.35.3",
-    "mongoose": "^8.8.3",
+    "drizzle-orm": "^0.38.3",
+    "mongoose": "^8.9.2",
     "pg": "^8.13.1",
-    "zod": "^3.23.8"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/pg": "^8.11.10",
-    "drizzle-kit": "^0.26.2"
+    "drizzle-kit": "^0.30.1"
   }
 }
