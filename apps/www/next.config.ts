@@ -45,7 +45,7 @@ const config: NextConfig = {
       {
         // donation page 1
         source: "/redirect/buymeacoffee",
-        destination: "https://www.buymeacoffee.com/notcharliee",
+        destination: "https://www.buymeacoffee.com/mikaeladev",
         permanent: false,
       },
       {
