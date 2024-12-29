@@ -18,8 +18,8 @@ export function trpc(type: "client" | "server") {
     return createEnv({
       ...baseOptions,
       server: {
-        TRPC_DOMAIN: z.string(),
-        TRPC_TOKEN: z.string(),
+        TRPC_DOMAIN: z.string().url(),
+        TRPC_TOKEN: z.string().base64().max(32),
       },
     })
   }
@@ -29,7 +29,7 @@ export function trpc(type: "client" | "server") {
       ...baseOptions,
       server: {
         TRPC_PORT: z.string().transform(Number),
-        TRPC_TOKEN: z.string(),
+        TRPC_TOKEN: z.string().base64().max(32),
       },
     })
   }

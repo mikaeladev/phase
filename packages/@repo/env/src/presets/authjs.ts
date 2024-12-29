@@ -7,8 +7,8 @@ export function authjs() {
   return createEnv({
     ...baseOptions,
     server: {
-      AUTH_COOKIE_SECRET: z.string(),
-      AUTH_OTP_SECRET: z.string(),
+      AUTH_COOKIE_SECRET: z.string().base64().max(32),
+      AUTH_OTP_SECRET: z.string().base64().max(32),
     },
   })
 }

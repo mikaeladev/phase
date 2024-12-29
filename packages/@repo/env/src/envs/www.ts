@@ -13,8 +13,8 @@ export function www() {
     ...baseOptions,
     extends: [base("vercel"), trpc("client"), discord(), authjs()],
     server: {
-      DASH_DOMAIN: z.string(),
-      DOCS_DOMAIN: z.string(),
+      DASH_DOMAIN: z.string().url(),
+      DOCS_DOMAIN: z.string().url(),
     }
   })
 }
