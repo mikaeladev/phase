@@ -15,7 +15,7 @@ export function createContext(params: CreateContextParams) {
   const authorization = headers.get("Authorization") ?? ""
   const [prefix, token] = authorization.split(" ")
 
-  const isAuthorized = prefix === "Secret" && token === params.env.BRIDGE_TOKEN
+  const isAuthorized = prefix === "Secret" && token === params.env.TRPC_TOKEN
 
   return {
     db: params.db,

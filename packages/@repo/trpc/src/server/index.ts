@@ -24,7 +24,7 @@ export function bridgeServerPlugin(config: BridgeServerPluginConfig) {
       const env = bot()
 
       Bun.serve({
-        port: env.BRIDGE_PORT,
+        port: env.TRPC_PORT,
         fetch(request) {
           return fetchRequestHandler({
             endpoint: "/",

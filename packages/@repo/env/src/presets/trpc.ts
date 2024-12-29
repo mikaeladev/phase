@@ -4,13 +4,13 @@ import { z } from "zod"
 import { baseOptions } from "~/lib/constants"
 
 export function trpc(type: "client"): Readonly<{
-  BRIDGE_DOMAIN: string
-  BRIDGE_TOKEN: string
+  TRPC_DOMAIN: string
+  TRPC_TOKEN: string
 }>
 
 export function trpc(type: "server"): Readonly<{
-  BRIDGE_PORT: number
-  BRIDGE_TOKEN: string
+  TRPC_PORT: number
+  TRPC_TOKEN: string
 }>
 
 export function trpc(type: "client" | "server") {
@@ -18,8 +18,8 @@ export function trpc(type: "client" | "server") {
     return createEnv({
       ...baseOptions,
       server: {
-        BRIDGE_DOMAIN: z.string(),
-        BRIDGE_TOKEN: z.string(),
+        TRPC_DOMAIN: z.string(),
+        TRPC_TOKEN: z.string(),
       },
     })
   }
@@ -28,8 +28,8 @@ export function trpc(type: "client" | "server") {
     return createEnv({
       ...baseOptions,
       server: {
-        BRIDGE_PORT: z.string().transform(Number),
-        BRIDGE_TOKEN: z.string(),
+        TRPC_PORT: z.string().transform(Number),
+        TRPC_TOKEN: z.string(),
       },
     })
   }

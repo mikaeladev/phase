@@ -8,9 +8,9 @@ export const env = www()
 export const client = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: env.BRIDGE_DOMAIN,
+      url: env.TRPC_DOMAIN,
       headers: {
-        Authorization: `Secret ${env.BRIDGE_TOKEN}`,
+        Authorization: `Secret ${env.TRPC_TOKEN}`,
       },
     }),
   ],
