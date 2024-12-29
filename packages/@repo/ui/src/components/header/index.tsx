@@ -2,6 +2,8 @@
 
 import * as React from "react"
 
+import wwwConfig from "@repo/config/site/www/index.ts"
+
 import { Button } from "~/components/button"
 import {
   CommandDialog,
@@ -25,6 +27,7 @@ import type { WithRequired } from "~/types/utils"
 interface NavItem {
   label: string
   href: string
+  mfe?: boolean
   external?: boolean
   icon?:
     | { type: "lucide"; name: LucideIconName }
@@ -42,26 +45,29 @@ export const headerNavItems: HeaderNavItems = {
   main: [
     {
       label: "Home",
-      href: "/",
+      href: wwwConfig.url,
+      mfe: true,
     },
     {
       label: "Docs",
-      href: "/docs",
+      href: `${wwwConfig.url}/docs`,
+      mfe: true,
     },
     {
       label: "Dashboard",
-      href: "/dashboard/guilds",
+      href: `${wwwConfig.url}/dashboard/guilds`,
+      mfe: true,
     },
     {
       label: "Invite",
-      href: "/redirect/invite",
+      href: `${wwwConfig.url}/redirect/invite`,
       external: true,
     },
   ],
   icons: [
     {
       label: "GitHub",
-      href: "/redirect/github",
+      href: `${wwwConfig.url}/redirect/github`,
       external: true,
       icon: {
         type: "simple",
@@ -70,7 +76,7 @@ export const headerNavItems: HeaderNavItems = {
     },
     {
       label: "Discord",
-      href: "/redirect/discord",
+      href: `${wwwConfig.url}/redirect/discord`,
       external: true,
       icon: {
         type: "simple",
@@ -111,6 +117,7 @@ export function Header({ className, link: Link, ...props }: HeaderProps) {
               title={item.label}
               aria-label={item.label}
               external={item.external}
+              mfe={item.mfe}
               variant={"hover"}
               size={"sm"}
             >
@@ -130,7 +137,7 @@ export function Header({ className, link: Link, ...props }: HeaderProps) {
                 size={"icon"}
                 asChild
               >
-                <Link href={item.href} external={item.external}>
+                <Link href={item.href} external={item.external} mfe={item.mfe}>
                   {item.icon.type === "lucide" ? (
                     <LucideIcon name={item.icon.name} />
                   ) : (
@@ -208,6 +215,7 @@ function NavigationCombobox({ link: Link }: NavigationComboboxProps) {
                   label={item.label}
                   href={item.href}
                   external={item.external}
+                  mfe={item.mfe}
                   variant={"no-underline"}
                   onClick={onItemClick}
                 >
