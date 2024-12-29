@@ -8,12 +8,12 @@
       "outputs": [".phase/**"],
       "passThroughEnv": ["TURBO_*"],
       "env": [
+        "BRIDGE_*",
         "MONGODB_URI",
         "POSTGRES_URI",
         "DISCORD_*",
         "TWITCH_*",
         "AUTH_*",
-        "BRIDGE_*",
         "WEBHOOK_*"
       ]
     },
@@ -30,13 +30,12 @@
       "outputs": [".next/**", "!.next/cache/**"],
       "passThroughEnv": ["TURBO_*"],
       "env": [
+        "BRIDGE_*",
         "MONGODB_URI",
         "POSTGRES_URI",
         "DISCORD_*",
         "TWITCH_*",
-        "AUTH_*",
-        "BRIDGE_*",
-        "WEBHOOK_*"
+        "AUTH_*"
       ]
     },
     "www#build": {
@@ -44,15 +43,7 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
       "passThroughEnv": ["TURBO_*"],
-      "env": [
-        "MONGODB_URI",
-        "POSTGRES_URI",
-        "DISCORD_*",
-        "TWITCH_*",
-        "AUTH_*",
-        "BRIDGE_*",
-        "WEBHOOK_*"
-      ]
+      "env": ["BRIDGE_*", "DISCORD_*", "AUTH_*"]
     },
     "build": {
       "cache": true,
