@@ -1,11 +1,12 @@
 ---
+import "~/styles/prose.css"
+
 import Breadcrumbs from "~/components/astro/Breadcrumbs.astro"
+import Base from "~/components/astro/layouts/Base.astro"
 import { Header } from "~/components/react/header.tsx"
 import { Sidebar } from "~/components/react/sidebar.tsx"
 
 import { getSidebarNavItems } from "~/config/sidebar"
-
-import Base from "~/layouts/Base.astro"
 
 import type { Frontmatter } from "~/types/props"
 
@@ -21,22 +22,20 @@ const { title, description } = frontmatter
 ---
 
 <Base frontmatter={frontmatter}>
-  <Header client:idle />
+  <Header client:load />
   <main class="container flex h-full w-full gap-12">
     <aside
       class="h-screen-no-header sticky top-16 w-64 py-8 pr-6 max-md:hidden"
     >
-      <Sidebar pathname={pathname} items={navItems} client:idle />
+      <Sidebar pathname={pathname} items={navItems} client:load />
     </aside>
     <div class="w-full py-8">
       <Breadcrumbs />
-      <div class="mb-12">
-        <div class="mb-8 space-y-2">
-          <h1 class="text-4xl font-bold tracking-tight">{title}</h1>
-          <p class="text-muted-foreground text-balance text-lg">
-            {description}
-          </p>
-        </div>
+      <div class="prose mb-12">
+        <h1 class="text-4xl font-bold tracking-tight">{title}</h1>
+        <p class="text-muted-foreground text-balance text-lg">
+          {description}
+        </p>
         <slot />
       </div>
     </div>

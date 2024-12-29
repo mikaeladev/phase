@@ -60,6 +60,27 @@ export async function getSidebarNavItems(): Promise<SidebarNavItems> {
   return [
     {
       type: "category",
+      label: "Welcome",
+      children: [
+        {
+          type: "page",
+          label: "Introduction",
+          href: "/docs",
+        },
+        {
+          type: "page",
+          label: "Terms of Service",
+          href: "/docs/terms",
+        },
+        {
+          type: "page",
+          label: "Privacy Policy",
+          href: "/docs/privacy",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Discord Bot",
       children: parseEntries(botEntries),
     },

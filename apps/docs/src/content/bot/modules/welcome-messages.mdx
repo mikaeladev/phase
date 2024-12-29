@@ -1,0 +1,20 @@
+---
+title: "Welcome Messages"
+description: "Sends a customised welcome message to new members."
+---
+
+import { ModuleId } from "@repo/utils/modules"
+
+import ModuleVariables from "~/components/astro/ModuleVariables.astro"
+
+Welcome Messages allow you to customise the welcome message that members receive when they join your server. These messages show up as embeds in the channel you specify, and can include personalised welcome cards that give your server a bit more flair.
+
+## Variables
+
+Variables are a type of placeholder that you can use in various module configurations that are later swapped out for their actual values. For example, if you wanted to display the number of members in your server, you could use the `{memberCount}` variable.
+
+Currently, this module supports the following variables:
+
+<ModuleVariables moduleId={ModuleId.WelcomeMessages} />
+
+If you have any ideas for new variables, please let us know in our [Discord server](https://phasebot.xyz/redirect/discord)!
