@@ -14,14 +14,10 @@
     "@discordjs/core": "^2.0.0",
     "@discordjs/rest": "^2.4.0",
     "@hookform/resolvers": "^3.9.1",
-    "@mdx-js/loader": "^3.1.0",
-    "@mdx-js/react": "^3.1.0",
-    "@next/mdx": "^15.0.3",
+    "@repo/auth": "workspace:*",
     "@repo/config": "workspace:*",
-    "@repo/db": "workspace:*",
     "@repo/env": "workspace:*",
     "@repo/ui": "workspace:*",
-    "@repo/utils": "workspace:*",
     "@vercel/analytics": "^1.4.0",
     "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
@@ -39,9 +35,6 @@
   },
   "devDependencies": {
     "@total-typescript/ts-reset": "^0.6.1",
-    "@types/lodash.clonedeep": "^4.5.9",
-    "@types/mdx": "^2.0.13",
-    "@types/prismjs": "^1.26.5",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2"
   }

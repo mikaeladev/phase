@@ -1,4 +1,5 @@
 import dashConfig from "@repo/config/site/dash/index.ts"
+import docsConfig from "@repo/config/site/docs/index.ts"
 
 import { env } from "~/lib/env"
 
@@ -73,12 +74,12 @@ export default {
   async rewrites() {
     return [
       {
-        source: "/api/bridge/:endpoint*",
-        destination: `${env.BRIDGE_DOMAIN}/:endpoint*`,
-      },
-      {
         source: "/dashboard/:path*",
         destination: `${dashConfig.url}/:path*`,
+      },
+      {
+        source: "/docs/:path*",
+        destination: `${docsConfig.url}/:path*`,
       },
     ]
   },
