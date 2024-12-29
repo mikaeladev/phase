@@ -1202,6 +1202,7 @@ export default new BotEventBuilder()
                   .replace("Afk ", "AFK ")
               : change.key
 
+            // eslint-disable-next-line @typescript-eslint/no-base-to-string
             const formattedOldValue = change.old?.toString().length
               ? shouldWrapInCode
                 ? wrapText(
@@ -1211,6 +1212,7 @@ export default new BotEventBuilder()
                 : (change.old as number | string | boolean).toString()
               : null
 
+            // eslint-disable-next-line @typescript-eslint/no-base-to-string
             const formattedNewValue = change.new?.toString().length
               ? shouldWrapInCode
                 ? wrapText(
