@@ -2,10 +2,7 @@
 
 import { useQueryState } from "nuqs"
 
-import {
-  GuildCard,
-  GuildCardFallback,
-} from "~/components/guilds/guild-card"
+import { GuildCard, GuildCardFallback } from "~/components/guilds/guild-card"
 
 import type { DashboardGuild } from "~/app/guilds/page"
 

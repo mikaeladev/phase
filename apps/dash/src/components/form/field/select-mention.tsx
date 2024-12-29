@@ -1,4 +1,3 @@
-import { SelectMention } from "~/components/select/mention"
 import {
   FormControl,
   FormDescription,
@@ -7,6 +6,7 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/form"
+import { SelectMention } from "~/components/select/mention"
 
 import type { Control, FieldPath, FieldValues } from "react-hook-form"
 

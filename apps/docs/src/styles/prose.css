@@ -35,7 +35,7 @@
 }
 
 .prose p {
-  @apply leading-7 mt-6 first-of-type:mt-0;
+  @apply mt-6 leading-7 first-of-type:mt-0;
 }
 
 .prose ul {

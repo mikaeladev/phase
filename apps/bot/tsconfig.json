@@ -6,6 +6,6 @@
     "outDir": ".phase",
     "incremental": true,
     "baseUrl": ".",
-    "paths": { "~/*": ["src/*"] },
+    "paths": { "~/*": ["src/*"] }
   }
 }

@@ -1,4 +1,3 @@
-import { SelectRole } from "~/components/select/role"
 import {
   FormControl,
   FormDescription,
@@ -7,6 +6,7 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/form"
+import { SelectRole } from "~/components/select/role"
 
 import type { Control, FieldPath, FieldValues } from "react-hook-form"
 

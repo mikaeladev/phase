@@ -1,4 +1,3 @@
-import { SelectChannel } from "~/components/select/channel"
 import {
   FormControl,
   FormDescription,
@@ -7,6 +6,7 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/form"
+import { SelectChannel } from "~/components/select/channel"
 
 import type { AllowedChannelTypes } from "~/components/channel-icons"
 import type { Control, FieldPath, FieldValues } from "react-hook-form"
