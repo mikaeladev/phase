@@ -1,0 +1,13 @@
+{
+  "extends": "@repo/config/typescript/nextjs.json",
+  "exclude": [".next"],
+  "include": [
+    ".next/types/**/*.ts",
+    "src/**/*",
+    "eslint.config.js",
+    "next-env.d.ts",
+    "next.config.ts",
+    "postcss.config.cjs",
+    "tailwind.config.ts"
+  ]
+}

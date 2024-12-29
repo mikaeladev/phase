@@ -1,21 +1,11 @@
-import createMDX from "@next/mdx"
+import dashConfig from "@repo/config/site/dash/index.ts"
 
 import { env } from "~/lib/env"
 
 import type { NextConfig } from "next"
 
-const config: NextConfig = {
+export default {
   transpilePackages: ["@repo/ui"],
-  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
-  experimental: { mdxRs: true },
-  async rewrites() {
-    return [
-      {
-        source: "/api/bridge/:endpoint*",
-        destination: `${env.BRIDGE_DOMAIN}/:endpoint*`,
-      },
-    ]
-  },
   async redirects() {
     return [
       {
@@ -70,30 +60,26 @@ const config: NextConfig = {
         // terms page
         source: "/terms",
         destination: "/docs/terms",
-        permanent: true,
+        permanent: false,
       },
       {
         // privacy page
         source: "/privacy",
         destination: "/docs/privacy",
-        permanent: true,
-      },
-      {
-        // dashboard page
-        source: "/dashboard",
-        destination: "/dashboard/guilds",
-        permanent: false,
-      },
-      {
-        // dashboard page
-        source: "/dashboard/modules",
-        destination: "/dashboard/guilds",
         permanent: false,
       },
     ]
   },
-}
-
-const withMDX = createMDX()
-
-export default withMDX(config)
+  async rewrites() {
+    return [
+      {
+        source: "/api/bridge/:endpoint*",
+        destination: `${env.BRIDGE_DOMAIN}/:endpoint*`,
+      },
+      {
+        source: "/dashboard/:path*",
+        destination: `${dashConfig.url}/:path*`,
+      },
+    ]
+  },
+} satisfies NextConfig

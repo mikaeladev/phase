@@ -1,10 +1,10 @@
+import siteConfig from "@repo/config/site/www/index.ts"
+
 import { Button } from "@repo/ui/button"
 import { Header } from "@repo/ui/header"
 import { LucideIcon } from "@repo/ui/lucide-icon"
 import { OrbitingDots } from "@repo/ui/orbiting-dots"
 import { Link } from "~/components/link"
-
-import { siteConfig } from "~/config/site"
 
 export default function Home() {
   return (

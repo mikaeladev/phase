@@ -1,11 +1,10 @@
 import "~/styles/globals.css"
 
-import siteConfig from "@repo/config/site/www/index.ts"
+import dashConfig from "@repo/config/site/dash/index.ts"
 import { Analytics } from "@vercel/analytics/react"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
-
-import { Toaster } from "~/components/sonner"
+import { NuqsAdapter } from "nuqs/adapters/next/pages"
 
 import { cn } from "~/lib/utils"
 
@@ -13,34 +12,34 @@ import type { LayoutProps } from "~/types/props"
 import type { Metadata, Viewport } from "next"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title: { default: siteConfig.title, template: `%s - ${siteConfig.title}` },
-  description: siteConfig.description,
-  authors: siteConfig.developer,
-  creator: siteConfig.developer.name,
-  keywords: siteConfig.keywords,
+  metadataBase: new URL(dashConfig.url),
+  title: { default: dashConfig.title, template: `%s - ${dashConfig.title}` },
+  description: dashConfig.description,
+  authors: dashConfig.developer,
+  creator: dashConfig.developer.name,
+  keywords: dashConfig.keywords,
   icons: {
-    apple: siteConfig.images.apple.toString(),
+    apple: dashConfig.images.apple.toString(),
   },
   openGraph: {
-    url: siteConfig.url,
-    title: siteConfig.title,
-    description: siteConfig.description,
-    siteName: siteConfig.title,
+    url: dashConfig.url,
+    title: dashConfig.title,
+    description: dashConfig.description,
+    siteName: dashConfig.title,
     type: "website",
     locale: "en_GB",
     images: {
-      url: siteConfig.images.logo.toString(),
+      url: dashConfig.images.logo.toString(),
       width: 512,
       height: 512,
-      alt: siteConfig.title,
+      alt: dashConfig.title,
     },
   },
   twitter: {
     card: "summary",
-    title: siteConfig.title,
-    description: siteConfig.description,
-    images: siteConfig.images.logo.toString(),
+    title: dashConfig.title,
+    description: dashConfig.description,
+    images: dashConfig.images.logo.toString(),
   },
 } satisfies Metadata
 
@@ -59,8 +58,7 @@ export default function RootLayout({ children }: LayoutProps) {
           GeistMono.variable,
         )}
       >
-        {children}
-        <Toaster />
+        <NuqsAdapter>{children}</NuqsAdapter>
         <Analytics />
       </body>
     </html>
