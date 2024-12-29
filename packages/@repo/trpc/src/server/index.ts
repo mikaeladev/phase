@@ -1,6 +1,6 @@
 import { BotPlugin } from "@phasejs/core/client"
 
-import { getEnv } from "@repo/env"
+import { bot } from "@repo/env"
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch"
 
 import { createContext } from "~/server/context"
@@ -21,7 +21,7 @@ export function bridgeServerPlugin(config: BridgeServerPluginConfig) {
     trigger: "ready",
     version: version as BotPluginVersion,
     onLoad: (phase) => {
-      const env = getEnv("bot")
+      const env = bot()
 
       Bun.serve({
         port: env.BRIDGE_PORT,

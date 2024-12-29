@@ -1,3 +1,3 @@
-import { getEnv } from "@repo/env"
+import { www } from "@repo/env"
 
-export const env = getEnv("www")
+export const env = www()

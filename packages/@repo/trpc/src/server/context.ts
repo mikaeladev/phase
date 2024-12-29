@@ -1,11 +1,11 @@
 import type { Database } from "@repo/db"
-import type { getEnv } from "@repo/env"
+import type { bot } from "@repo/env"
 import type { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch"
 import type { DjsClient } from "~/types/bot"
 
 interface CreateContextParams extends FetchCreateContextFnOptions {
   db: Database
-  env: ReturnType<typeof getEnv<"bot">>
+  env: ReturnType<typeof bot>
   client: DjsClient
 }
 
