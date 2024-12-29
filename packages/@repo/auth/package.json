@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "name": "@repo/auth",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "lint": "eslint ."
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "dependencies": {
+    "@repo/env": "workspace:*",
+    "@repo/trpc": "workspace:*",
+    "next-auth": "^5.0.0-beta.25"
+  },
+  "devDependencies": {
+    "discord-api-types": "^0.37.114"
+  },
+  "peerDependencies": {
+    "next": "^15.x.x"
+  }
+}
