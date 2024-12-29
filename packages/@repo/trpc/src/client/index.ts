@@ -8,7 +8,7 @@ export const env = www()
 export const client = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: env.TRPC_DOMAIN,
+      url: env.TRPC_URL,
       headers: {
         Authorization: `Secret ${env.TRPC_TOKEN}`,
       },

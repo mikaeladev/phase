@@ -4,7 +4,7 @@ import { z } from "zod"
 import { baseOptions } from "~/lib/constants"
 
 export function trpc(type: "client"): Readonly<{
-  TRPC_DOMAIN: string
+  TRPC_URL: string
   TRPC_TOKEN: string
 }>
 
@@ -18,7 +18,7 @@ export function trpc(type: "client" | "server") {
     return createEnv({
       ...baseOptions,
       server: {
-        TRPC_DOMAIN: z.string().url(),
+        TRPC_URL: z.string().url(),
         TRPC_TOKEN: z.string().base64().max(32),
       },
     })
