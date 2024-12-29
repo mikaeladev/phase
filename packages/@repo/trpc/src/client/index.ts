@@ -1,9 +1,9 @@
-import { dash } from "@repo/env"
+import { www } from "@repo/env"
 import { createTRPCClient, httpBatchLink } from "@trpc/client"
 
 import type { AppRouter } from "~/server/router"
 
-export const env = dash()
+export const env = www()
 
 export const client = createTRPCClient<AppRouter>({
   links: [
