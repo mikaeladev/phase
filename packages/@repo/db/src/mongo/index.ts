@@ -1,7 +1,6 @@
 import mongoose from "mongoose"
 
 import { afks } from "~/mongo/models/afks"
-import { analytics } from "~/mongo/models/analytics"
 import { configs } from "~/mongo/models/configs"
 import { giveaways } from "~/mongo/models/giveaways"
 import { guilds } from "~/mongo/models/guilds"
@@ -13,7 +12,6 @@ import { tags } from "~/mongo/models/tags"
 
 class DatabaseModels {
   readonly afks = afks
-  readonly analytics = analytics
   readonly configs = configs
   readonly giveaways = giveaways
   readonly guilds = guilds
