@@ -10,10 +10,12 @@ export const linkVariants = baseLinkVariants
 
 export interface LinkProps extends BaseLinkProps {}
 
-export function Link({ children, href, ...props }: LinkProps) {
+export function Link({ children, href, external, mfe, ...props }: LinkProps) {
+  const Comp = !mfe && !external ? "a" : NextLink
+
   return (
-    <BaseLink href={href} {...props}>
-      <NextLink href={href}>{children}</NextLink>
+    <BaseLink href={href} external={external} mfe={mfe} {...props}>
+      <Comp href={href}>{children}</Comp>
     </BaseLink>
   )
 }
