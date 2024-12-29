@@ -1,6 +1,3 @@
-import dashConfig from "@repo/config/site/dash/index.ts"
-import docsConfig from "@repo/config/site/docs/index.ts"
-
 import { env } from "~/lib/env"
 
 import type { NextConfig } from "next"
@@ -75,11 +72,11 @@ export default {
     return [
       {
         source: "/dashboard/:path*",
-        destination: `${dashConfig.url}/:path*`,
+        destination: `${env.DASH_URL}/:path*`,
       },
       {
         source: "/docs/:path*",
-        destination: `${docsConfig.url}/:path*`,
+        destination: `${env.DOCS_URL}/:path*`,
       },
     ]
   },
