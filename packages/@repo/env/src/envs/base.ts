@@ -4,13 +4,13 @@ import { z } from "zod"
 
 import { baseOptions } from "~/lib/constants"
 
-type BaseVariables<TExtends extends Record<string, unknown> = {}> = Readonly<
-  {
+type BaseVariables<TExtends extends Readonly<Record<string, unknown>> = {}> =
+  Readonly<{
     BASE_URL: string
     NODE_ENV: "development" | "production"
     SKIP_ENV_VALIDATION: boolean
-  } & TExtends
->
+  }> &
+    TExtends
 
 export function base(): BaseVariables
 export function base(host: "vercel"): BaseVariables<ReturnType<typeof vercel>>
