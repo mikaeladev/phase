@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { ChannelType } from "@discordjs/core/http-only"
+import { ChannelType } from "discord-api-types/v10"
 
 import {
   Combobox,

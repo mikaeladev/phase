@@ -7,9 +7,9 @@ import { withPlugins } from "~/components/richtext/shared/plugins"
 
 import { useDashboardContext } from "~/hooks/use-dashboard-context"
 
-import type { ChannelType } from "@discordjs/core/http-only"
 import type { RichTextFlags } from "~/components/richtext/shared/types"
 import type { GuildElementData } from "~/types/slate"
+import type { ChannelType } from "discord-api-types/v10"
 
 export function useEditor() {
   return React.useMemo(() => withPlugins(createEditor()), [])
