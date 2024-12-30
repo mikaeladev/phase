@@ -10,7 +10,6 @@
     "preview": "bun run build && bun run start"
   },
   "dependencies": {
-    "@discordjs/builders": "^1.9.0",
     "@discordjs/core": "^2.0.0",
     "@discordjs/rest": "^2.4.0",
     "@hookform/resolvers": "^3.9.1",

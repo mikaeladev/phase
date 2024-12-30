@@ -5,8 +5,6 @@ import { Analytics } from "@vercel/analytics/react"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
 
-import { Toaster } from "~/components/sonner"
-
 import { cn } from "~/lib/utils"
 
 import type { LayoutProps } from "~/types/props"
@@ -60,7 +58,6 @@ export default function RootLayout({ children }: LayoutProps) {
         )}
       >
         {children}
-        <Toaster />
         <Analytics />
       </body>
     </html>

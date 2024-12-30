@@ -5,6 +5,7 @@ import { use, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
+import { z } from "zod"
 
 import { Button } from "@repo/ui/button"
 import { Input } from "@repo/ui/input"
@@ -27,9 +28,16 @@ import {
 } from "~/components/form"
 
 import { createBugReport } from "./actions"
-import { formSchema } from "./schema"
 
-import type { FormValues } from "./schema"
+const formSchema = z.object({
+  subject: z.string().nonempty(),
+  urgency: z.enum(["low", "medium", "high"]),
+  body: z.string().nonempty(),
+  guildId: z.string().optional(),
+  channelId: z.string().optional(),
+})
+
+type FormValues = z.infer<typeof formSchema>
 
 export default function BugReportPage(
   props: Readonly<{ searchParams: Promise<Partial<FormValues>> }>,

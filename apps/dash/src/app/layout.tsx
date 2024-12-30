@@ -1,7 +1,6 @@
 import "~/styles/globals.css"
 
 import dashConfig from "@repo/config/site/dash/index.ts"
-import { Analytics } from "@vercel/analytics/react"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
 import { NuqsAdapter } from "nuqs/adapters/next/pages"
@@ -59,7 +58,6 @@ export default function RootLayout({ children }: LayoutProps) {
         )}
       >
         <NuqsAdapter>{children}</NuqsAdapter>
-        <Analytics />
       </body>
     </html>
   )
