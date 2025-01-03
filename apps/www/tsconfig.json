@@ -9,5 +9,9 @@
     "next.config.ts",
     "postcss.config.cjs",
     "tailwind.config.ts"
-  ]
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "~/*": ["./src/*"] }
+  }
 }
