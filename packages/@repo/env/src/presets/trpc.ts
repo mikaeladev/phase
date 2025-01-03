@@ -19,7 +19,7 @@ export function trpc(type: "client" | "server") {
       ...baseOptions,
       server: {
         TRPC_URL: z.string().url(),
-        TRPC_TOKEN: z.string().base64().max(32),
+        TRPC_TOKEN: z.string().base64().max(44),
       },
     })
   }
@@ -29,7 +29,7 @@ export function trpc(type: "client" | "server") {
       ...baseOptions,
       server: {
         TRPC_PORT: z.string().transform(Number),
-        TRPC_TOKEN: z.string().base64().max(32),
+        TRPC_TOKEN: z.string().base64().max(44),
       },
     })
   }
