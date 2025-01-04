@@ -7,7 +7,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@repo/ui/dropdown-menu"
-import { LucideIcon } from "@repo/ui/lucide-icon"
+import { Icon } from "@repo/ui/icon"
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  CopyIcon,
+  MoveIcon,
+  TrashIcon,
+} from "@repo/ui/lucide-icon"
 import {
   FormControl,
   FormDescription,
@@ -57,7 +64,7 @@ export function FormFieldArrayCard<
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button size={"icon"} variant={"outline"} aria-label="Move">
-                      <LucideIcon name="move" />
+                      <Icon icon={<MoveIcon />} />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
@@ -65,14 +72,14 @@ export function FormFieldArrayCard<
                       disabled={props.index === 0}
                       onClick={() => move(props.index, props.index - 1)}
                     >
-                      <LucideIcon name="chevron-up" />
+                      <Icon icon={<ChevronUpIcon />} />
                       Move up
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       disabled={props.index === fields.length - 1}
                       onClick={() => move(props.index, props.index + 1)}
                     >
-                      <LucideIcon name="chevron-down" />
+                      <Icon icon={<ChevronDownIcon />} />
                       Move down
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -83,7 +90,7 @@ export function FormFieldArrayCard<
                   aria-label="Duplicate"
                   onClick={() => append(field.value, { shouldFocus: true })}
                 >
-                  <LucideIcon name="copy" />
+                  <Icon icon={<CopyIcon />} />
                 </Button>
                 <Button
                   size={"icon"}
@@ -91,7 +98,7 @@ export function FormFieldArrayCard<
                   aria-label="Delete"
                   onClick={() => remove(props.index)}
                 >
-                  <LucideIcon name="trash" />
+                  <Icon icon={<TrashIcon />} />
                 </Button>
               </ButtonGroup>
             </div>

@@ -1,6 +1,7 @@
 import * as SelectPrimitive from "@radix-ui/react-select"
 
-import { LucideIcon } from "~/components/lucide-icon"
+import { Icon } from "~/components/icon"
+import { CheckIcon } from "~/components/lucide-icon"
 
 import { cn } from "~/lib/utils"
 
@@ -28,7 +29,7 @@ export function SelectTrigger({
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <LucideIcon name="chevrons-up-down" className="opacity-50" />
+        <Icon className="opacity-50" icon={<CheckIcon />} />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   )
@@ -94,7 +95,7 @@ export function SelectItem({ className, children, ...props }: SelectItemProps) {
     >
       <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
-          <LucideIcon name="check" className="size-3.5" />
+          <Icon className="size-3.5" icon={<CheckIcon />} />
         </SelectPrimitive.ItemIndicator>
       </span>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>

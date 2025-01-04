@@ -8,7 +8,8 @@ import {
   DialogDescription,
   DialogTitle,
 } from "~/components/dialog"
-import { LucideIcon } from "~/components/lucide-icon"
+import { Icon } from "~/components/icon"
+import { SearchIcon } from "~/components/lucide-icon"
 
 import { cn } from "~/lib/utils"
 
@@ -62,7 +63,7 @@ export function CommandInput({ className, ...props }: CommandInputProps) {
   return (
     // eslint-disable-next-line react/no-unknown-property
     <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
-      <LucideIcon name="search" className="mr-2 shrink-0 opacity-50" />
+      <Icon icon={<SearchIcon />} className="mr-2 shrink-0 opacity-50" />
       <CommandPrimitive.Input
         className={cn(
           "placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50",

@@ -2,7 +2,8 @@ import siteConfig from "@repo/config/site/www/index.ts"
 
 import { Button } from "@repo/ui/button"
 import { Header } from "@repo/ui/header"
-import { LucideIcon } from "@repo/ui/lucide-icon"
+import { Icon } from "@repo/ui/icon"
+import { ArrowRightIcon, PartyPopperIcon } from "@repo/ui/lucide-icon"
 import { OrbitingDots } from "@repo/ui/orbiting-dots"
 import { Link } from "~/components/link"
 
@@ -21,9 +22,9 @@ export default function Home() {
               variant={"no-underline"}
               className="bg-secondary/50 hover:bg-secondary hover:paused inline-flex animate-bounce items-center gap-3 rounded border px-3 py-1 font-mono text-sm font-medium shadow transition-colors"
             >
-              <LucideIcon name="party-popper" />
+              <Icon icon={<PartyPopperIcon />} />
               <span>Check out the latest updates!</span>
-              <LucideIcon name="arrow-right" />
+              <Icon icon={<ArrowRightIcon />} />
             </Link>
           </div>
           <div className="mb-12 space-y-4">

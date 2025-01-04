@@ -3,9 +3,8 @@
 import NextLink from "next/link"
 import { usePathname } from "next/navigation"
 
+import { Icon } from "@repo/ui/icon"
 import { Label } from "@repo/ui/label"
-import { LucideIcon } from "@repo/ui/lucide-icon"
-import { SimpleIcon } from "@repo/ui/simple-icon"
 import { Link, linkVariants } from "~/components/link"
 
 import { cn } from "~/lib/utils"
@@ -142,17 +141,10 @@ function NavigationItem(props: NavigationItemProps) {
             : "aria-selected:text-primary-foreground w-full items-center gap-2.5 py-2.5 before:-left-5 before:h-full before:w-[calc(100%+2.5rem)]",
         )}
       >
-        {props.icon.type === "lucide" ? (
-          <LucideIcon
-            name={props.icon.name}
-            className={cn(props.mobile ? "size-7 duration-200" : "z-10 size-6")}
-          />
-        ) : (
-          <SimpleIcon
-            name={props.icon.name}
-            className={cn(props.mobile ? "size-7 duration-200" : "z-10 size-6")}
-          />
-        )}
+        <Icon
+          icon={props.icon}
+          className={cn(props.mobile ? "size-7 duration-200" : "z-10 size-6")}
+        />
         <span
           className={cn(
             props.mobile

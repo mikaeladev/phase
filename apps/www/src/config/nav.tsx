@@ -1,20 +1,9 @@
-import type { LucideIconName } from "@repo/ui/lucide-icon"
-import type { SimpleIconName } from "@repo/ui/simple-icon"
-
-type NavItemIcon =
-  | {
-      type: "lucide"
-      name: LucideIconName
-    }
-  | {
-      type: "simple"
-      name: SimpleIconName
-    }
+import { DiscordIcon, GithubIcon } from "@repo/ui/simple-icon"
 
 export type NavItem = {
   label: string
   href: string
-  icon?: NavItemIcon
+  icon?: React.JSX.Element
   category?: string
   external?: boolean
   disabled?: boolean
@@ -42,19 +31,13 @@ export const mainPages: NavItem[] = [
   {
     label: "GitHub",
     href: "/redirect/github",
-    icon: {
-      type: "simple",
-      name: "github",
-    },
+    icon: <GithubIcon />,
     external: true,
   },
   {
     label: "Discord",
     href: "/redirect/discord",
-    icon: {
-      type: "simple",
-      name: "discord",
-    },
+    icon: <DiscordIcon />,
     external: true,
   },
 ]

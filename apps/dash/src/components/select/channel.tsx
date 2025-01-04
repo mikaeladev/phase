@@ -51,11 +51,14 @@ export function SelectChannel<
 
     if (channelType === "GuildCategory") {
       items.push(
-        ...categories.map((category) => ({
-          label: category.name,
-          value: category.id,
-          iconName: channelIcons[category.type],
-        })),
+        ...categories.map((category) => {
+          const ChannelIcon = channelIcons[category.type]
+          return {
+            label: category.name,
+            value: category.id,
+            icon: <ChannelIcon />,
+          }
+        }),
       )
     } else {
       for (const category of categories) {
@@ -68,14 +71,15 @@ export function SelectChannel<
           .sort((a, b) => a.position + b.position)
 
         items.push(
-          ...channels.map(
-            (channel): ComboboxItem => ({
+          ...channels.map((channel): ComboboxItem => {
+            const ChannelIcon = channelIcons[channel.type]
+            return {
               label: channel.name,
               value: channel.id,
               group: category.name,
-              iconName: channelIcons[channel.type],
-            }),
-          ),
+              icon: <ChannelIcon />,
+            }
+          }),
         )
       }
     }

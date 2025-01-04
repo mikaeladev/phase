@@ -1,8 +1,16 @@
 import { ChannelType } from "discord-api-types/v10"
 
-import { LucideIcon } from "@repo/ui/lucide-icon"
+import { Icon } from "@repo/ui/icon"
+import {
+  FolderIcon,
+  HashIcon,
+  ImageIcon,
+  MessagesSquareIcon,
+  NewspaperIcon,
+  Volume2Icon,
+} from "@repo/ui/lucide-icon"
 
-import type { LucideIconName, LucideIconProps } from "@repo/ui/lucide-icon"
+import type { IconProps } from "@repo/ui/icon"
 import type { APIChannel } from "discord-api-types/v10"
 
 export const AllowedChannelTypes = {
@@ -20,21 +28,21 @@ export type AllowedChannelType =
 
 export type AllowedAPIChannel = APIChannel & { type: AllowedChannelType }
 
-export const channelIcons: Record<AllowedChannelType, LucideIconName> = {
-  [ChannelType.GuildAnnouncement]: "newspaper",
-  [ChannelType.GuildCategory]: "folder",
-  [ChannelType.GuildForum]: "messages-square",
-  [ChannelType.GuildMedia]: "image",
-  [ChannelType.GuildStageVoice]: "volume-2",
-  [ChannelType.GuildText]: "hash",
-  [ChannelType.GuildVoice]: "volume-2",
+export const channelIcons: Record<AllowedChannelType, React.FC> = {
+  [ChannelType.GuildAnnouncement]: NewspaperIcon,
+  [ChannelType.GuildCategory]: FolderIcon,
+  [ChannelType.GuildForum]: MessagesSquareIcon,
+  [ChannelType.GuildMedia]: ImageIcon,
+  [ChannelType.GuildStageVoice]: Volume2Icon,
+  [ChannelType.GuildText]: HashIcon,
+  [ChannelType.GuildVoice]: Volume2Icon,
 }
 
-export interface ChannelIconProps extends Omit<LucideIconProps, "name"> {
+export interface ChannelIconProps extends Omit<IconProps, "icon"> {
   channelType: AllowedChannelType
 }
 
 export function ChannelIcon({ channelType, ...props }: ChannelIconProps) {
-  const iconName = channelIcons[channelType]
-  return <LucideIcon name={iconName} {...props} />
+  const ChannelIcon = channelIcons[channelType]
+  return <Icon icon={ChannelIcon} {...props} />
 }

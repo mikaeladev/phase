@@ -4,7 +4,8 @@ import * as React from "react"
 
 import { OTPInput, OTPInputContext } from "input-otp"
 
-import { LucideIcon } from "@repo/ui/lucide-icon"
+import { Icon } from "@repo/ui/icon"
+import { DotIcon } from "@repo/ui/lucide-icon"
 
 import { cn } from "~/lib/utils"
 
@@ -71,7 +72,7 @@ export interface InputOTPSeparatorProps
 export function InputOTPSeparator({ ...props }: InputOTPSeparatorProps) {
   return (
     <div role="separator" {...props}>
-      <LucideIcon name="dot" />
+      <Icon icon={<DotIcon />} />
     </div>
   )
 }

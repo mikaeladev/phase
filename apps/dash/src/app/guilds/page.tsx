@@ -5,7 +5,8 @@ import { auth } from "@repo/auth"
 import { client } from "@repo/trpc/client"
 
 import { Button } from "@repo/ui/button"
-import { LucideIcon } from "@repo/ui/lucide-icon"
+import { Icon } from "@repo/ui/icon"
+import { PlusIcon } from "@repo/ui/lucide-icon"
 import {
   GuildCardGrid,
   GuildCardGridFallback,
@@ -29,7 +30,7 @@ export default function GuildsPage() {
             <NextLink href={"/redirect/invite"}>
               <span className="hidden sm:inline">Add Guild</span>
               <span className="inline sm:hidden">Add</span>
-              <LucideIcon name="plus" />
+              <Icon icon={<PlusIcon />} />
             </NextLink>
           </Button>
         </div>

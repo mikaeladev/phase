@@ -1,7 +1,8 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion"
 
 import { Button } from "~/components/button"
-import { LucideIcon } from "~/components/lucide-icon"
+import { Icon } from "~/components/icon"
+import { ChevronDownIcon } from "~/components/lucide-icon"
 
 import { cn } from "~/lib/utils"
 
@@ -51,8 +52,8 @@ export function AccordionTrigger({
             variant={"ghost"}
             className="text-muted-foreground hover:text-foreground chevron-icon relative"
           >
-            <LucideIcon
-              name="chevron-down"
+            <Icon
+              icon={<ChevronDownIcon />}
               className="transition-transform duration-200"
             />
           </Button>

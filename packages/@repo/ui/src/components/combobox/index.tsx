@@ -11,19 +11,19 @@ import {
   CommandItem,
   CommandList,
 } from "~/components/command"
-import { LucideIcon } from "~/components/lucide-icon"
+import { Icon } from "~/components/icon"
+import { CheckIcon, ChevronsUpDownIcon } from "~/components/lucide-icon"
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/popover"
 
 import { cn } from "~/lib/utils"
 
-import type { LucideIconName } from "~/components/lucide-icon"
 import type { Arrayable, Optional } from "~/types/utils"
 
 export interface ComboboxItem {
   label: string
   value: string
   group?: string
-  iconName?: LucideIconName
+  icon?: React.JSX.Element
   colour?: `#${string}`
   disabled?: boolean
 }
@@ -87,7 +87,7 @@ export function ComboboxTrigger({
       {...props}
     >
       {children}
-      <LucideIcon name="chevrons-up-down" className="ml-2 opacity-50" />
+      <Icon icon={<ChevronsUpDownIcon />} className="ml-2 opacity-50" />
     </PopoverTrigger>
   )
 }
@@ -121,9 +121,7 @@ export function ComboboxValue({
               "--background-colour": (item.colour ?? `#f8f8f8`) + "40",
             }}
           >
-            {item.iconName && (
-              <LucideIcon name={item.iconName} className="size-3" />
-            )}
+            {item.icon && <Icon icon={item.icon} className="size-3" />}
             {item.label}
           </Badge>
         ))}
@@ -138,9 +136,7 @@ export function ComboboxValue({
       className="inline-flex items-center gap-1.5 text-[--text-colour]"
       style={{ "--text-colour": item.colour ?? `#f8f8f8` }}
     >
-      {item.iconName && (
-        <LucideIcon name={item.iconName} className="size-3.5" />
-      )}
+      {item.icon && <Icon icon={item.icon} className="size-3.5" />}
       <span>{item.label}</span>
     </div>
   )
@@ -279,12 +275,10 @@ export function ComboboxContent<
           className="min-w-0 gap-1.5 pr-8 text-[--text-colour]"
           style={{ "--text-colour": item.colour ?? `#f8f8f8` }}
         >
-          {item.iconName && (
-            <LucideIcon name={item.iconName} className="size-3.5" />
-          )}
+          {item.icon && <Icon icon={item.icon} className="size-3.5" />}
           <span className="truncate">{item.label}</span>
           <span className="absolute right-2">
-            {isSelected && <LucideIcon name="check" className="size-3.5" />}
+            {isSelected && <Icon icon={<CheckIcon />} className="size-3.5" />}
           </span>
         </CommandItem>
       )

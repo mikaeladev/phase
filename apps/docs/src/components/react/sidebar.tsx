@@ -1,6 +1,7 @@
 import { useState } from "react"
 
-import { LucideIcon } from "@repo/ui/lucide-icon"
+import { Icon } from "@repo/ui/icon"
+import { ChevronRightIcon } from "@repo/ui/lucide-icon"
 import { ScrollArea } from "@repo/ui/scroll-area"
 import { Link } from "~/components/react/link"
 
@@ -70,8 +71,8 @@ function SidebarSubcategory(props: SidebarSubcategoryProps) {
         <h5 className="text-muted-foreground hover:text-foreground text-sm transition-colors">
           {props.subcategory.label}
         </h5>
-        <LucideIcon
-          name="chevron-right"
+        <Icon
+          icon={<ChevronRightIcon />}
           className="opacity-75 transition-transform group-aria-expanded:rotate-90"
         />
       </button>

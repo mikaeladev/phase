@@ -8,6 +8,7 @@ import {
   ComboboxTrigger,
   ComboboxValue,
 } from "@repo/ui/combobox"
+import { AtSignIcon, LockIcon } from "@repo/ui/lucide-icon"
 
 import { useDashboardContext } from "~/hooks/use-dashboard-context"
 
@@ -42,13 +43,13 @@ export function SelectMention<
         group: "Server",
         label: "everyone",
         value: "@everyone",
-        iconName: "at-sign",
+        icon: <AtSignIcon />,
       },
       {
         group: "Server",
         label: "here",
         value: "@here",
-        iconName: "at-sign",
+        icon: <AtSignIcon />,
       },
     ]
 
@@ -68,7 +69,7 @@ export function SelectMention<
         value: `<@&${role.id}>`,
         disabled: isDisabled,
         colour: hexColour,
-        iconName: isDisabled ? "lock" : "at-sign",
+        icon: isDisabled ? <LockIcon /> : <AtSignIcon />,
       })
     }
 

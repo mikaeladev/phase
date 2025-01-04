@@ -1,7 +1,8 @@
 import Link from "next/link"
 
 import { Button } from "@repo/ui/button"
-import { LucideIcon } from "@repo/ui/lucide-icon"
+import { Icon } from "@repo/ui/icon"
+import { MessageCircleQuestionIcon, RotateCwIcon } from "@repo/ui/lucide-icon"
 
 export default function Page() {
   return (
@@ -18,13 +19,13 @@ export default function Page() {
       <div className="w-72 space-y-4 md:w-[336px]">
         <Button size={"lg"} className="w-full gap-2" asChild>
           <Link href={"/auth/signin"}>
-            <LucideIcon name="rotate-cw" />
+            <Icon icon={<RotateCwIcon />} />
             Attempt login again
           </Link>
         </Button>
         <Button variant="outline" size={"lg"} className="w-full gap-2" asChild>
           <Link href={"/redirect/discord"}>
-            <LucideIcon name="message-circle-question" />
+            <Icon icon={<MessageCircleQuestionIcon />} />
             Make a support ticket
           </Link>
         </Button>

@@ -109,6 +109,11 @@
       "import": "./dist/components/hover-card/index.js",
       "require": "./dist/components/hover-card/index.js"
     },
+    "./icon": {
+      "types": "./dist/components/icon/index.d.ts",
+      "import": "./dist/components/icon/index.js",
+      "require": "./dist/components/icon/index.js"
+    },
     "./input": {
       "types": "./dist/components/input/index.d.ts",
       "import": "./dist/components/input/index.js",

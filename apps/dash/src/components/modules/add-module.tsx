@@ -17,7 +17,8 @@ import {
   CredenzaTitle,
   CredenzaTrigger,
 } from "@repo/ui/credenza"
-import { LucideIcon } from "@repo/ui/lucide-icon"
+import { Icon } from "@repo/ui/icon"
+import { PlusIcon } from "@repo/ui/lucide-icon"
 import { ModuleTags } from "~/components/modules/module-tags"
 
 import type { ModuleId } from "@repo/utils/modules"
@@ -42,7 +43,7 @@ export function AddModule({ moduleDataArray, onSelect }: AddButtonProps) {
         >
           <span className="hidden sm:inline">Add Module</span>
           <span className="inline sm:hidden">Add</span>
-          <LucideIcon name="plus" />
+          <Icon icon={<PlusIcon />} />
         </Button>
       </CredenzaTrigger>
       <CredenzaContent
@@ -73,7 +74,7 @@ export function AddModule({ moduleDataArray, onSelect }: AddButtonProps) {
                       onSelect?.(moduleData.id)
                     }}
                   >
-                    <LucideIcon name="plus" />
+                    <Icon icon={<PlusIcon />} />
                   </Button>
                 </CardHeader>
                 <CardContent>

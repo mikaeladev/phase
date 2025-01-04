@@ -24,11 +24,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@repo/ui/dropdown-menu"
-import { LucideIcon } from "@repo/ui/lucide-icon"
+import { Icon } from "@repo/ui/icon"
+import {
+  EllipsisVerticalIcon,
+  EraserIcon,
+  RotateCcwIcon,
+  Trash2Icon,
+} from "@repo/ui/lucide-icon"
 import { BetaAlert } from "~/components/modules/beta-alert"
 import { ModuleTags } from "~/components/modules/module-tags"
 
-import type { LucideIconName } from "@repo/ui/lucide-icon"
 import type { ModuleDefinition, ModuleTag } from "@repo/utils/modules"
 import type { ModuleData } from "~/app/guilds/[id]/modules/page"
 
@@ -104,23 +109,23 @@ const moduleOptions = [
   {
     label: "Undo Changes",
     value: "undo",
-    iconName: "rotate-ccw",
+    icon: <RotateCcwIcon />,
     requiresDirty: true,
   },
   {
     label: "Clear Values",
     value: "reset",
-    iconName: "eraser",
+    icon: <EraserIcon />,
   },
   {
     label: "Remove Module",
     value: "remove",
-    iconName: "trash-2",
+    icon: <Trash2Icon />,
   },
 ] satisfies {
   label: string
   value: string
-  iconName?: LucideIconName
+  icon?: React.JSX.Element
   requiresDirty?: boolean
 }[]
 
@@ -140,7 +145,7 @@ function ConfigCardOptions({ moduleStatus, onSelect }: ConfigCardOptionsProps) {
           size={"icon"}
           className="absolute right-6 top-6 bg-transparent"
         >
-          <LucideIcon name="ellipsis-vertical" />
+          <Icon icon={<EllipsisVerticalIcon />} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -151,7 +156,7 @@ function ConfigCardOptions({ moduleStatus, onSelect }: ConfigCardOptionsProps) {
             disabled={option.requiresDirty && !isDirty}
             onSelect={() => onSelect(option.value)}
           >
-            <LucideIcon name={option.iconName} />
+            <Icon icon={option.icon} />
             {option.label}
           </DropdownMenuItem>
         ))}

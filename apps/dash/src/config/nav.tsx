@@ -1,22 +1,16 @@
+import {
+  ListIcon,
+  PackageIcon,
+  Settings2Icon,
+  SquareChevronRightIcon,
+} from "@repo/ui/lucide-icon"
+
 import { absoluteURL } from "~/lib/utils"
-
-import type { LucideIconName } from "@repo/ui/lucide-icon"
-import type { SimpleIconName } from "@repo/ui/simple-icon"
-
-type NavItemIcon =
-  | {
-      type: "lucide"
-      name: LucideIconName
-    }
-  | {
-      type: "simple"
-      name: SimpleIconName
-    }
 
 export type NavItem = {
   label: string
   href: string
-  icon?: NavItemIcon
+  icon?: React.JSX.Element
   category?: string
   external?: boolean
   disabled?: boolean
@@ -27,35 +21,23 @@ export const dashboardPages: NavItem[] = [
   {
     label: "Guilds",
     href: "/guilds",
-    icon: {
-      type: "lucide",
-      name: "list",
-    },
+    icon: <ListIcon />,
   },
   {
     label: "Modules",
     href: "/guilds/[id]/modules",
-    icon: {
-      type: "lucide",
-      name: "package",
-    },
+    icon: <PackageIcon />,
   },
   {
     label: "Commands",
     href: "/guilds/[id]/commands",
-    icon: {
-      type: "lucide",
-      name: "square-chevron-right",
-    },
+    icon: <SquareChevronRightIcon />,
     disabled: true,
   },
   {
     label: "Settings",
     href: "/guilds/[id]/settings",
-    icon: {
-      type: "lucide",
-      name: "settings-2",
-    },
+    icon: <Settings2Icon />,
     disabled: true,
   },
   // resources

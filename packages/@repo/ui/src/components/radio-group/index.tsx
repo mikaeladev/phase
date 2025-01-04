@@ -1,6 +1,7 @@
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 
-import { LucideIcon } from "~/components/lucide-icon"
+import { Icon } from "~/components/icon"
+import { CheckIcon } from "~/components/lucide-icon"
 
 import { cn } from "~/lib/utils"
 
@@ -29,7 +30,7 @@ export function RadioGroupItem({ className, ...props }: RadioGroupItemProps) {
       {...props}
     >
       <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-        <LucideIcon name="check" className="h-3.5 w-3.5" />
+        <Icon className="h-3.5 w-3.5" icon={<CheckIcon />} />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   )

@@ -13,28 +13,29 @@ import {
   CommandItem,
   CommandList,
 } from "~/components/command"
-import { LucideIcon } from "~/components/lucide-icon"
+import { Icon } from "~/components/icon"
+import {
+  ExternalLinkIcon,
+  ScrollTextIcon,
+  TelescopeIcon,
+} from "~/components/lucide-icon"
 import { Moon } from "~/components/moon"
-import { SimpleIcon } from "~/components/simple-icon"
+import { DiscordIcon, GithubIcon } from "~/components/simple-icon"
 
 import { cn } from "~/lib/utils"
 
 import type { BaseLink } from "~/components/base-link"
-import type { LucideIconName } from "~/components/lucide-icon"
-import type { SimpleIconName } from "~/components/simple-icon"
-import type { WithRequired } from "~/types/utils"
+import type { With } from "~/types/utils"
 
 interface NavItem {
   label: string
   href: string
   mfe?: boolean
   external?: boolean
-  icon?:
-    | { type: "lucide"; name: LucideIconName }
-    | { type: "simple"; name: SimpleIconName }
+  icon?: React.JSX.Element
 }
 
-interface NavItemWithIcon extends WithRequired<NavItem, "icon"> {}
+interface NavItemWithIcon extends With<NavItem, "icon"> {}
 
 export interface HeaderNavItems {
   main: NavItem[]
@@ -69,19 +70,13 @@ export const headerNavItems: HeaderNavItems = {
       label: "GitHub",
       href: `${wwwConfig.url}/redirect/github`,
       external: true,
-      icon: {
-        type: "simple",
-        name: "github",
-      },
+      icon: <GithubIcon />,
     },
     {
       label: "Discord",
       href: `${wwwConfig.url}/redirect/discord`,
       external: true,
-      icon: {
-        type: "simple",
-        name: "discord",
-      },
+      icon: <DiscordIcon />,
     },
   ],
 }
@@ -138,11 +133,7 @@ export function Header({ className, link: Link, ...props }: HeaderProps) {
                 asChild
               >
                 <Link href={item.href} external={item.external} mfe={item.mfe}>
-                  {item.icon.type === "lucide" ? (
-                    <LucideIcon name={item.icon.name} />
-                  ) : (
-                    <SimpleIcon name={item.icon.name} />
-                  )}
+                  <Icon icon={item.icon} />
                 </Link>
               </Button>
             ))}
@@ -192,7 +183,7 @@ function NavigationCombobox({ link: Link }: NavigationComboboxProps) {
         onClick={() => setOpen(!open)}
       >
         <span className="flex items-center gap-2">
-          <LucideIcon name="telescope" className="size-3.5" />
+          <Icon className="size-3.5" icon={<TelescopeIcon />} />
           Wanna explore?
         </span>
         <kbd className="bg-muted pointer-events-none absolute right-[4.333px] top-[4.333] hidden h-[26px] select-none items-center gap-1 rounded-sm px-2.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
@@ -219,8 +210,10 @@ function NavigationCombobox({ link: Link }: NavigationComboboxProps) {
                   variant={"no-underline"}
                   onClick={onItemClick}
                 >
-                  <LucideIcon
-                    name={item.external ? "external-link" : "scroll-text"}
+                  <Icon
+                    icon={
+                      item.external ? <ExternalLinkIcon /> : <ScrollTextIcon />
+                    }
                     className="mr-2"
                   />
                   {item.label}

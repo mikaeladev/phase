@@ -8,6 +8,7 @@ import {
   ComboboxTrigger,
   ComboboxValue,
 } from "@repo/ui/combobox"
+import { AtSignIcon, LockIcon } from "@repo/ui/lucide-icon"
 
 import { useDashboardContext } from "~/hooks/use-dashboard-context"
 
@@ -54,7 +55,7 @@ export function SelectRole<
         value: role.id,
         disabled: isDisabled,
         colour: hexColour,
-        iconName: isDisabled ? "lock" : "at-sign",
+        icon: isDisabled ? <LockIcon /> : <AtSignIcon />,
       })
     }
 

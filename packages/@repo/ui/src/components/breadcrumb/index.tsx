@@ -1,6 +1,7 @@
 import * as React from "react"
 
-import { LucideIcon } from "~/components/lucide-icon"
+import { Icon } from "~/components/icon"
+import { ChevronRightIcon, EllipsisIcon } from "~/components/lucide-icon"
 import { Slot } from "~/components/slot"
 
 import { cn } from "~/lib/utils"
@@ -91,7 +92,7 @@ export function BreadcrumbSeparator({
       className={cn("[&>svg]:size-3.5", className)}
       {...props}
     >
-      {children ?? <LucideIcon name="chevron-right" />}
+      {children ?? <Icon icon={<ChevronRightIcon />} />}
     </li>
   )
 }
@@ -110,7 +111,7 @@ export function BreadcrumbEllipsis({
       className={cn("flex h-9 w-9 items-center justify-center", className)}
       {...props}
     >
-      <LucideIcon name="ellipsis" />
+      <Icon icon={<EllipsisIcon />} />
       <span className="sr-only">More</span>
     </span>
   )

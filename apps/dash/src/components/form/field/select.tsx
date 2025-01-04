@@ -7,7 +7,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@repo/ui/dropdown-menu"
-import { LucideIcon } from "@repo/ui/lucide-icon"
+import { Icon } from "@repo/ui/icon"
+import { CheckIcon, ChevronsUpDownIcon } from "@repo/ui/lucide-icon"
 import {
   FormControl,
   FormDescription,
@@ -17,7 +18,6 @@ import {
   FormMessage,
 } from "~/components/form"
 
-import type { LucideIconName } from "@repo/ui/lucide-icon"
 import type { Control, FieldPath, FieldValues } from "react-hook-form"
 
 export interface FormFieldSelectProps<
@@ -33,7 +33,7 @@ export interface FormFieldSelectProps<
   items: {
     label: string
     value: string
-    iconName?: LucideIconName
+    icon?: React.JSX.Element
   }[]
 }
 
@@ -64,15 +64,13 @@ export function FormFieldSelect<
                     className="w-full justify-between gap-2 px-3 py-1.5 font-normal"
                   >
                     <span className="flex items-center gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0">
-                      {currentItem?.iconName && (
-                        <LucideIcon name={currentItem.iconName} />
-                      )}
+                      {currentItem?.icon && <Icon name={currentItem.icon} />}
                       {currentItem?.label ??
                         props.placeholder ??
                         "Select an item"}
                     </span>
-                    <LucideIcon
-                      name="chevrons-up-down"
+                    <Icon
+                      icon={<ChevronsUpDownIcon />}
                       className="opacity-50"
                     />
                   </Button>
@@ -84,11 +82,11 @@ export function FormFieldSelect<
                       onClick={() => field.onChange(item.value)}
                       className="flex items-center"
                     >
-                      {item.iconName && <LucideIcon name={item.iconName} />}
+                      {item.icon && <Icon name={item.icon} />}
                       {item.label}
                       {item.value === currentItem?.value && (
-                        <LucideIcon
-                          name="check"
+                        <Icon
+                          icon={<CheckIcon />}
                           className="absolute right-2 size-3.5"
                         />
                       )}

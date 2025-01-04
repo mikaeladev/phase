@@ -3,6 +3,7 @@
 import { ModuleId } from "@repo/utils/modules"
 import { useFormContext } from "react-hook-form"
 
+import { BotIcon, HeartIcon, UserRoundIcon } from "@repo/ui/lucide-icon"
 import { FormFieldArray } from "~/components/form/field/array"
 import { FormFieldArrayAppendButton } from "~/components/form/field/array-append-button"
 import { FormFieldArrayCard } from "~/components/form/field/array-card"
@@ -58,17 +59,17 @@ export const AutoRoles = () => {
                     {
                       label: "Everyone",
                       value: "everyone",
-                      iconName: "heart",
+                      icon: <HeartIcon />,
                     },
                     {
                       label: "Members",
                       value: "members",
-                      iconName: "user-round",
+                      icon: <UserRoundIcon />,
                     },
                     {
                       label: "Bots",
                       value: "bots",
-                      iconName: "bot",
+                      icon: <BotIcon />,
                     },
                   ]}
                 />
