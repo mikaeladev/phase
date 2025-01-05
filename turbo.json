@@ -8,6 +8,7 @@
       "outputs": [".phase/**"],
       "passThroughEnv": ["TURBO_*"],
       "env": [
+        "BASE_URL",
         "BRIDGE_*",
         "MONGODB_URI",
         "POSTGRES_URI",
@@ -22,7 +23,7 @@
       "dependsOn": ["^build"],
       "outputs": [".astro/**", "!.astro/cache/**"],
       "passThroughEnv": ["TURBO_*"],
-      "env": []
+      "env": ["BASE_URL"]
     },
     "dashboard#build": {
       "cache": true,
@@ -30,6 +31,7 @@
       "outputs": [".next/**", "!.next/cache/**"],
       "passThroughEnv": ["TURBO_*"],
       "env": [
+        "BASE_URL",
         "BRIDGE_*",
         "MONGODB_URI",
         "POSTGRES_URI",
@@ -43,13 +45,20 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
       "passThroughEnv": ["TURBO_*"],
-      "env": ["BRIDGE_*", "DISCORD_*", "AUTH_*"]
+      "env": [
+        "BASE_URL",
+        "DASH_URL",
+        "DOCS_URL",
+        "BRIDGE_*",
+        "DISCORD_*",
+        "AUTH_*"
+      ]
     },
     "build": {
       "cache": true,
       "dependsOn": ["^build"],
       "outputs": ["dist/**"],
-      "passThroughEnv": ["TURBO_*"]
+      "passThroughEnv": ["BASE_URL", "TURBO_*"]
     },
     "lint": {
       "cache": true,
