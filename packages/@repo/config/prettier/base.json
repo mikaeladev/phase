@@ -20,6 +20,7 @@
     "<BUILTIN_MODULES>",
     "",
     "^(astro(\/|:)(.*)$)|^(astro$)",
+    "^(vite/(.*)$)|^(vite$)",
     "^(next/(.*)$)|^(next$)",
     "^(react/(.*)$)|^(react$)",
     "^(@phasejs/(.*)$)|^(@phasejs$)",
