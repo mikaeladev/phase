@@ -2,7 +2,7 @@ import { Toaster } from "sonner"
 
 import type { LayoutProps } from "~/types/props"
 
-export function BugReportLayout(props: LayoutProps) {
+export default function BugReportLayout(props: LayoutProps) {
   return (
     <>
       {props.children}
