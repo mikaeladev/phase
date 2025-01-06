@@ -1,8 +1,8 @@
 ---
+import "~/styles/globals.css"
 import "~/styles/prose.css"
 
 import Breadcrumbs from "~/components/astro/Breadcrumbs.astro"
-import Base from "~/components/astro/layouts/Base.astro"
 import { Header } from "~/components/react/header.tsx"
 import { Sidebar } from "~/components/react/sidebar.tsx"
 
@@ -21,7 +21,24 @@ const { frontmatter } = Astro.props
 const { title, description } = frontmatter
 ---
 
-<Base frontmatter={frontmatter}>
+<html
+  lang="en"
+  style="color-scheme: dark"
+  class="bg-background text-foreground"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://phasebot.xyz/favicon.ico"
+    />
+    <title>{title} - Docs</title>
+  </head>
+  <body
+    class="flex min-h-screen w-full flex-col font-sans tracking-tighter antialiased"
+  >
   <Header client:load />
   <main class="container flex h-full w-full gap-12">
     <aside
@@ -40,4 +57,5 @@ const { title, description } = frontmatter
       </div>
     </div>
   </main>
-</Base>
+  </body>
+</html>
