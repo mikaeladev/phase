@@ -39,23 +39,23 @@ const { title, description } = frontmatter
   <body
     class="flex min-h-screen w-full flex-col font-sans tracking-tighter antialiased"
   >
-  <Header client:load />
-  <main class="container flex h-full w-full gap-12">
-    <aside
-      class="h-screen-no-header sticky top-16 w-64 py-8 pr-6 max-md:hidden"
-    >
-      <Sidebar pathname={pathname} items={navItems} client:load />
-    </aside>
-    <div class="w-full py-8">
-      <Breadcrumbs />
-      <div class="prose mb-12">
-        <h1 class="text-4xl font-bold tracking-tight">{title}</h1>
-        <p class="text-muted-foreground text-balance text-lg">
-          {description}
-        </p>
-        <slot />
+    <Header client:load />
+    <main class="container flex h-full w-full gap-12">
+      <aside
+        class="h-screen-no-header sticky top-16 w-64 py-8 pr-6 max-md:hidden"
+      >
+        <Sidebar pathname={pathname} items={navItems} client:load />
+      </aside>
+      <div class="w-full py-8">
+        {pathname !== "/" && <Breadcrumbs />}
+        <div class="prose mb-12">
+          <h1 class="text-4xl font-bold tracking-tight">{title}</h1>
+          <p class="text-muted-foreground text-balance text-lg">
+            {description}
+          </p>
+          <slot />
+        </div>
       </div>
-    </div>
-  </main>
+    </main>
   </body>
 </html>

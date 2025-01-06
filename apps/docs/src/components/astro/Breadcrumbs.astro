@@ -8,47 +8,37 @@ import {
 } from "@repo/ui/breadcrumb"
 import { Link } from "~/components/react/link"
 
-const { pathname } = Astro.url
+const pathnameParts = Astro.url.pathname.split("/").filter(Boolean)
 ---
 
 <Breadcrumb className="mb-4">
   <BreadcrumbList>
     <BreadcrumbLink asChild>
-      <Link href={"/"} variant={"no-underline"}>Home</Link>
+      <Link href={"/"} variant={"no-underline"}>Docs</Link>
     </BreadcrumbLink>
     <BreadcrumbSeparator />
     {
-      pathname
-        .split("/")
-        .filter(Boolean)
-        .map((part, index, parts) => {
-          if (part === "") return null
-
-          const partsLength = parts.length
-          const href = `/${parts.slice(0, index + 1).join("/")}/`
-
-          return (
-            <>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link
-                    href={href}
-                    variant={"no-underline"}
-                    class:list={[
-                      index + 1 === partsLength &&
-                        "text-foreground font-medium",
-                    ]}
-                  >
-                    {part
-                      .replaceAll("-", " ")
-                      .replace(/\b\w/g, (match) => match.toUpperCase())}
-                  </Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              {index + 1 !== partsLength && <BreadcrumbSeparator />}
-            </>
-          )
-        })
+      pathnameParts.map((part, index) => (
+        <>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link
+                href={`/${pathnameParts.slice(0, index + 1).join("/")}`}
+                variant={"no-underline"}
+                class:list={[
+                  index + 1 === pathnameParts.length &&
+                    "text-foreground font-medium",
+                ]}
+              >
+                {part
+                  .replaceAll("-", " ")
+                  .replace(/\b\w/g, (match) => match.toUpperCase())}
+              </Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          {index + 1 !== pathnameParts.length && <BreadcrumbSeparator />}
+        </>
+      ))
     }
   </BreadcrumbList>
 </Breadcrumb>

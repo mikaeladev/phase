@@ -12,9 +12,8 @@ process.env = loadEnv(process.env.NODE_ENV!, process.cwd(), "")
 await import("./src/lib/env")
 
 export default defineConfig({
-  base: "/docs",
-  cacheDir: ".astro/cache/astro",
-  integrations: [react(), tailwind({ applyBaseStyles: false }), mdx()],
   prefetch: true,
+  integrations: [mdx(), react(), tailwind({ applyBaseStyles: false })],
+  cacheDir: ".astro/cache/astro",
   vite: { cacheDir: ".astro/cache/vite" },
 })
