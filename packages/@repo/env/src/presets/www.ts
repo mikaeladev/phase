@@ -1,12 +1,12 @@
 import { createEnv } from "@t3-oss/env-core"
+import { z } from "zod"
 
 import { baseOptions } from "~/lib/constants"
 
-import { base } from "~/envs/base"
 import { authjs } from "~/presets/authjs"
+import { base } from "~/presets/base"
 import { discord } from "~/presets/discord"
 import { trpc } from "~/presets/trpc"
-import { z } from "zod"
 
 export function www() {
   return createEnv({
@@ -15,6 +15,6 @@ export function www() {
     server: {
       DASH_URL: z.string().url(),
       DOCS_URL: z.string().url(),
-    }
+    },
   })
 }
