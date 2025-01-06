@@ -58,7 +58,8 @@
       "cache": true,
       "dependsOn": ["^build"],
       "outputs": ["dist/**"],
-      "passThroughEnv": ["BASE_URL", "TURBO_*"]
+      "passThroughEnv": ["TURBO_*"],
+      "env": ["BASE_URL"]
     },
     "lint": {
       "cache": true,
