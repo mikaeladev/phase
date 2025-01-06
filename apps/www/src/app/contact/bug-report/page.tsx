@@ -39,13 +39,16 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>
 
-export default function BugReportPage(
-  props: Readonly<{ searchParams: Promise<Partial<FormValues>> }>,
-) {
+interface BugReportPageProps {
+  searchParams: Promise<Partial<FormValues>>
+}
+
+export default function BugReportPage(props: BugReportPageProps) {
   const searchParams = use(props.searchParams)
+
   const [status, setStatus] = useState<
-    "loading" | "success" | "error" | undefined
-  >()
+    "idle" | "loading" | "success" | "error"
+  >("idle")
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -54,7 +57,7 @@ export default function BugReportPage(
     },
   })
 
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = (data: FormValues) => {
     setStatus("loading")
 
     toast.promise(createBugReport(data), {
