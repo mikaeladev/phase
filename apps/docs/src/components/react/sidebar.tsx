@@ -20,7 +20,7 @@ export function Sidebar(props: SidebarProps) {
   return (
     <ScrollArea>
       {props.items.map((category) => (
-        <div key={category.label} className="mb-4 px-2">
+        <div key={category.label} className="mb-6 px-2">
           <h4 className="text-sm font-semibold leading-6">{category.label}</h4>
           <ul className="mt-1 flex flex-col space-y-2">
             {category.children.map(function mapChild(child) {
@@ -88,8 +88,8 @@ function SidebarLink(props: SidebarNavPage) {
     <Link
       href={props.href}
       label={props.label}
-      variant={"no-underline"}
-      className="text-muted-foreground hover:text-foreground group-data-[active='true']:text-foreground text-sm group-data-[active='true']:font-medium"
+      variant={"hover"}
+      className="group-data-[active='true']:text-foreground text-sm"
     >
       {props.label}
     </Link>
