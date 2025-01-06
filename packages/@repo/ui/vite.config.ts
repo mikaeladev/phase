@@ -1,11 +1,12 @@
 import fs from "node:fs/promises"
 import path from "path"
 
+import { defineConfig } from "vite"
+
 import reactPlugin from "@vitejs/plugin-react"
 import glob from "fast-glob"
 import prettier from "prettier"
 import preserveDirectivesPlugin from "rollup-preserve-directives"
-import { defineConfig } from "vite"
 import dtsPlugin from "vite-plugin-dts"
 import tsconfigPathsPlugin from "vite-tsconfig-paths"
 
@@ -30,7 +31,9 @@ export default defineConfig({
       entry: entries,
     },
     rollupOptions: {
-      external: ["react", "react/jsx-runtime", "react-dom"],
+      external: (id) =>
+        id.startsWith("@repo/config") ||
+        ["react", "react/jsx-runtime", "react-dom"].includes(id),
       output: {
         dir: "dist",
         entryFileNames: "components/[name]/index.js",
