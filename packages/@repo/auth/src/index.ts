@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 
 import siteConfig from "@repo/config/site/www/index.ts"
-import { www } from "@repo/env"
+import { authjs, discord, mergeEnvs } from "@repo/env"
 import { client } from "@repo/trpc/client"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
@@ -10,7 +10,7 @@ import DiscordProvider from "next-auth/providers/discord"
 import type { NextAuthResult, Profile, Session } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 
-const env = www()
+const env = mergeEnvs(authjs(), discord())
 
 const nextAuth = NextAuth({
   secret: env.AUTH_COOKIE_SECRET,
