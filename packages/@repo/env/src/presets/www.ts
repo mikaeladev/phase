@@ -16,5 +16,8 @@ export function www() {
       DASH_URL: z.string().url(),
       DOCS_URL: z.string().url(),
     },
+    client: {
+      NEXT_PUBLIC_BASE_URL: z.string().url(),
+    },
   })
 }

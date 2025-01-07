@@ -1,4 +1,5 @@
 import { createEnv } from "@t3-oss/env-core"
+import { z } from "zod"
 
 import { baseOptions } from "~/lib/constants"
 
@@ -20,5 +21,8 @@ export function dash() {
       twitch(),
       authjs(),
     ],
+    client: {
+      NEXT_PUBLIC_BASE_URL: z.string().url(),
+    },
   })
 }
