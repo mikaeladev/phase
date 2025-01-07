@@ -6,7 +6,7 @@
     "dev": "next dev --turbo --port 3001",
     "build": "next build",
     "lint": "next lint",
-    "start": "next start",
+    "start": "next start --port 3001",
     "preview": "bun run build && bun run start"
   },
   "dependencies": {
