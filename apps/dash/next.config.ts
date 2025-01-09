@@ -2,7 +2,7 @@ import type { NextConfig } from "next"
 
 export default {
   transpilePackages: ["@repo/ui"],
-  assetPrefix: "/dashboard-static",
+  assetPrefix: "/dashboard",
   async redirects() {
     return [
       {
