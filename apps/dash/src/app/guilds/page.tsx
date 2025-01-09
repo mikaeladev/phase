@@ -1,4 +1,3 @@
-import NextLink from "next/link"
 import { Suspense } from "react"
 
 import { auth } from "@repo/auth"
@@ -12,6 +11,8 @@ import {
   GuildCardGridFallback,
 } from "~/components/guilds/guild-card-grid"
 import { GuildCardSearch } from "~/components/guilds/guild-card-search"
+
+import { absoluteURL } from "~/lib/utils"
 
 export type DashboardGuild = Awaited<
   ReturnType<typeof client.guilds.getByAdminId.query>
@@ -27,11 +28,11 @@ export default function GuildsPage() {
         <div className="flex space-x-2">
           <GuildCardSearch />
           <Button className="gap-2" asChild>
-            <NextLink href={"/redirect/invite"}>
+            <a href={absoluteURL("/redirect/invite", false)}>
               <span className="hidden sm:inline">Add Guild</span>
               <span className="inline sm:hidden">Add</span>
               <Icon icon={<PlusIcon />} />
-            </NextLink>
+            </a>
           </Button>
         </div>
       </div>
