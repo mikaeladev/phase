@@ -47,7 +47,7 @@ const { title, description } = frontmatter
         <Sidebar pathname={pathname} items={navItems} client:load />
       </aside>
       <div class="w-full py-8">
-        {pathname !== "/" && <Breadcrumbs />}
+        <Breadcrumbs />
         <div class="prose mb-12">
           <h1 class="text-4xl font-bold tracking-tight">{title}</h1>
           <p class="text-muted-foreground text-balance text-lg">

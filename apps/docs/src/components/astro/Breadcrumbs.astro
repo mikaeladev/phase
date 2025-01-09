@@ -8,13 +8,15 @@ import {
 } from "@repo/ui/breadcrumb"
 import { Link } from "~/components/react/link"
 
-const pathnameParts = Astro.url.pathname.split("/").filter(Boolean)
+const pathnameParts = Astro.url.pathname.split("/").filter(Boolean).slice(1)
+
+if (!pathnameParts.length) return null
 ---
 
 <Breadcrumb className="mb-4">
   <BreadcrumbList>
     <BreadcrumbLink asChild>
-      <Link href={"/"} variant={"no-underline"}>Docs</Link>
+      <Link href={"/docs"} variant={"no-underline"}>Docs</Link>
     </BreadcrumbLink>
     <BreadcrumbSeparator />
     {
@@ -23,12 +25,13 @@ const pathnameParts = Astro.url.pathname.split("/").filter(Boolean)
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
               <Link
-                href={`/${pathnameParts.slice(0, index + 1).join("/")}`}
+                href={`/docs/${pathnameParts.slice(0, index + 1).join("/")}`}
                 variant={"no-underline"}
-                class:list={[
-                  index + 1 === pathnameParts.length &&
-                    "text-foreground font-medium",
-                ]}
+                className={
+                  pathnameParts.length === index + 1
+                    ? "text-foreground font-medium"
+                    : ""
+                }
               >
                 {part
                   .replaceAll("-", " ")
