@@ -13,6 +13,7 @@ const { env } = await import("./src/lib/env")
 
 export default defineConfig({
   // site stuff
+  base: "/docs",
   site: env.VERCEL ? `https://${env.VERCEL_URL}` : undefined,
   // astro stuff
   prefetch: true,
