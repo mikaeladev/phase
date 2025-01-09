@@ -70,9 +70,19 @@ export default {
   },
   async rewrites() {
     return [
+      // dashboard mfe
+      {
+        source: "/dashboard",
+        destination: `${env.DASH_URL}`,
+      },
       {
         source: "/dashboard/:path*",
         destination: `${env.DASH_URL}/:path*`,
+      },
+      // documentation mfe
+      {
+        source: "/docs",
+        destination: `${env.DOCS_URL}`,
       },
       {
         source: "/docs/:path*",
