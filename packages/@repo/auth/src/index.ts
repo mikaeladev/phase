@@ -17,7 +17,7 @@ const nextAuth = NextAuth({
   cookies: {
     sessionToken: {
       options: {
-        secure: process.env.NODE_ENV === "production",
+        secure: !!process.env.VERCEL,
       },
     },
   },
