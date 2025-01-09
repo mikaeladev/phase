@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "bun run --bun astro dev --port 3002",
     "build": "astro build",
-    "lint": "eslint .",
     "start": "astro preview --port 3002",
     "preview": "bun run build && bun run start"
   },
