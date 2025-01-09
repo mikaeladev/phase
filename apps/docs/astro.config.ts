@@ -9,10 +9,11 @@ import tailwind from "@astrojs/tailwind"
 process.env = loadEnv(process.env.NODE_ENV!, process.cwd(), "")
 
 // validates environment variables
-await import("./src/lib/env")
+const { env } = await import("./src/lib/env")
 
 export default defineConfig({
   prefetch: true,
+  site: env.VERCEL ? `https://${env.VERCEL_URL}` : undefined,
   integrations: [mdx(), react(), tailwind({ applyBaseStyles: false })],
   cacheDir: ".astro/cache/astro",
   vite: { cacheDir: ".astro/cache/vite" },
