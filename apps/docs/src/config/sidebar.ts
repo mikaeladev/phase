@@ -36,7 +36,7 @@ function parseEntries(entries: Entry[]) {
   const createChild = (entry: Entry): SidebarNavPage => ({
     type: "page" as const,
     label: entry.data.title,
-    href: `/${entry.collection}${entry.id === "/" ? "" : `/${entry.id}`}`,
+    href: `/docs/${entry.collection}${entry.id === "/" ? "" : `/${entry.id}`}`,
   })
 
   const children: SidebarNavCategoryChild[] = [
@@ -65,17 +65,17 @@ export async function getSidebarNavItems(): Promise<SidebarNavItems> {
         {
           type: "page",
           label: "Introduction",
-          href: "/",
+          href: "/docs",
         },
         {
           type: "page",
           label: "Terms of Service",
-          href: "/terms",
+          href: "/docs/terms",
         },
         {
           type: "page",
           label: "Privacy Policy",
-          href: "/privacy",
+          href: "/docs/privacy",
         },
       ],
     },
