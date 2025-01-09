@@ -12,9 +12,13 @@ process.env = loadEnv(process.env.NODE_ENV!, process.cwd(), "")
 const { env } = await import("./src/lib/env")
 
 export default defineConfig({
-  prefetch: true,
+  // site stuff
+  base: "/docs",
   site: env.VERCEL ? `https://${env.VERCEL_URL}` : undefined,
+  // astro stuff
+  prefetch: true,
   integrations: [mdx(), react(), tailwind({ applyBaseStyles: false })],
+  // cache stuff
   cacheDir: ".astro/cache/astro",
   vite: { cacheDir: ".astro/cache/vite" },
 })
