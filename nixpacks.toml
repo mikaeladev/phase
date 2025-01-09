@@ -13,4 +13,4 @@ cmds = ["bun run build:bot"]
 
 [start]
 runImage = "oven/bun:1.1.42"
-cmd = "bun run start:bot"
+cmd = "cd apps/bot && bun run start"
