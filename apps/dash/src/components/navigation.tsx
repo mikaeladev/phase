@@ -1,16 +1,17 @@
 "use client"
 
-import NextLink from "next/link"
 import { usePathname } from "next/navigation"
 
 import { Icon } from "@repo/ui/icon"
-import { Label } from "@repo/ui/label"
+import { labelVariants } from "@repo/ui/label"
 import { Link, linkVariants } from "~/components/link"
 
 import { cn } from "~/lib/utils"
 
 import type { NavItem } from "~/config/nav"
 import type { WithRequired } from "~/types/utils"
+
+// navigation //
 
 export interface DashboardNavigationProps {
   pages: NavItem[]
@@ -68,9 +69,9 @@ export function DashboardNavigation(props: DashboardNavigationProps) {
         </div>
         {categories.map(([category, items]) => (
           <div key={category} className="flex flex-col space-y-1.5">
-            <Label className="text-base uppercase" asChild>
-              <h4>{category}</h4>
-            </Label>
+            <h4 className={cn(labelVariants(), "text-base uppercase")}>
+              {category}
+            </h4>
             {items.map((item) => (
               <NavigationItem key={item.href} pathname={pathname} {...item} />
             ))}
@@ -118,61 +119,57 @@ export function DashboardNavigation(props: DashboardNavigationProps) {
   )
 }
 
+// navigation item //
+
 interface NavigationItemProps extends NavItem {
   pathname: string
   mobile?: boolean
 }
 
 function NavigationItem(props: NavigationItemProps) {
-  const Component = props.disabled ? "span" : props.external ? "a" : NextLink
+  if (!props.icon && props.mobile) return null
 
-  if (props.icon) {
-    return (
-      <Component
-        href={props.href}
-        title={props.label}
-        aria-label={props.label}
-        aria-selected={props.pathname === props.href}
-        aria-disabled={props.disabled}
-        className={cn(
+  const className = cn(
+    props.icon
+      ? [
           "before:bg-primary relative flex before:absolute before:rounded-full before:opacity-0 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 aria-selected:before:opacity-100",
           props.mobile
             ? "aria-selected:text-foreground justify-center before:-bottom-3 before:z-10 before:h-1 before:w-3.5"
             : "aria-selected:text-primary-foreground w-full items-center gap-2.5 py-2.5 before:-left-5 before:h-full before:w-[calc(100%+2.5rem)]",
-        )}
-      >
+        ]
+      : [linkVariants({ variant: "hover", size: "base" }), "font-normal"],
+  )
+
+  const onClick = (e: React.MouseEvent) => {
+    if (props.disabled) e.preventDefault()
+  }
+
+  return (
+    <Link
+      href={props.href}
+      label={props.label}
+      external={props.external}
+      disabled={props.disabled}
+      variant={"no-underline"}
+      className={className}
+      onClick={onClick}
+      aria-selected={props.pathname === props.href}
+      aria-disabled={props.disabled}
+    >
+      {props.icon && (
         <Icon
           icon={props.icon}
           className={cn(props.mobile ? "size-7 duration-200" : "z-10 size-6")}
         />
-        <span
-          className={cn(
-            props.mobile
-              ? "sr-only"
-              : "relative z-10 text-lg font-medium leading-none",
-          )}
-        >
-          {props.label}
-        </span>
-      </Component>
-    )
-  }
-
-  if (!props.mobile) {
-    return (
-      <Component
-        href={props.href}
-        title={props.label}
-        aria-label={props.label}
+      )}
+      <span
         className={cn(
-          linkVariants({ variant: "hover", size: "base" }),
-          "font-normal",
+          props.icon && "relative z-10 text-lg font-medium leading-none",
+          props.mobile && "sr-only",
         )}
       >
         {props.label}
-      </Component>
-    )
-  }
-
-  return null
+      </span>
+    </Link>
+  )
 }
