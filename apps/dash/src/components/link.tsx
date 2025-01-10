@@ -8,10 +8,19 @@ import type { BaseLinkProps } from "@repo/ui/base-link"
 
 export const linkVariants = baseLinkVariants
 
-export interface LinkProps extends BaseLinkProps {}
+export interface LinkProps extends BaseLinkProps {
+  disabled?: boolean
+}
 
-export function Link({ children, href, external, mfe, ...props }: LinkProps) {
-  const Comp = !mfe && !external ? "a" : NextLink
+export function Link({
+  disabled,
+  children,
+  href,
+  external,
+  mfe,
+  ...props
+}: LinkProps) {
+  const Comp = disabled ? "span" : !mfe && !external ? "a" : NextLink
 
   return (
     <BaseLink href={href} external={external} mfe={mfe} {...props}>
