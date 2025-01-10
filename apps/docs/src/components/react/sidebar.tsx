@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 import { Icon } from "@repo/ui/icon"
 import { ChevronRightIcon } from "@repo/ui/lucide-icon"
 import { ScrollArea } from "@repo/ui/scroll-area"
@@ -11,6 +9,8 @@ import type {
   SidebarNavSubcategory,
 } from "~/types/sidebar"
 
+// sidebar //
+
 interface SidebarProps {
   pathname: string
   items: SidebarNavItems
@@ -19,35 +19,39 @@ interface SidebarProps {
 export function Sidebar(props: SidebarProps) {
   return (
     <ScrollArea>
-      {props.items.map((category) => (
-        <div key={category.label} className="mb-6 px-2">
-          <h4 className="text-sm font-semibold leading-6">{category.label}</h4>
-          <ul className="mt-1 flex flex-col space-y-2">
-            {category.children.map(function mapChild(child) {
-              return child.type === "subcategory" ? (
-                <SidebarSubcategory
-                  key={child.label}
-                  pathname={props.pathname}
-                  subcategory={child}
-                >
-                  {child.children.map(mapChild)}
-                </SidebarSubcategory>
-              ) : (
-                <li
-                  key={child.href}
-                  className="group"
-                  data-active={props.pathname === child.href}
-                >
-                  <SidebarLink {...child} />
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      ))}
+      <nav className="space-y-6">
+        {props.items.map((category) => (
+          <div key={category.label} className="px-2">
+            <h4 className="text-sm font-semibold leading-6">
+              {category.label}
+            </h4>
+            <ul className="mt-1 flex flex-col space-y-2">
+              {category.children.map(function mapChild(child) {
+                return child.type === "subcategory" ? (
+                  <SidebarSubcategory
+                    key={child.label}
+                    pathname={props.pathname}
+                    subcategory={child}
+                  >
+                    {child.children.map(mapChild)}
+                  </SidebarSubcategory>
+                ) : (
+                  <SidebarLink
+                    key={child.href}
+                    pathname={props.pathname}
+                    page={child}
+                  />
+                )
+              })}
+            </ul>
+          </div>
+        ))}
+      </nav>
     </ScrollArea>
   )
 }
+
+// sidebar subcategory //
 
 interface SidebarSubcategoryProps {
   pathname: string
@@ -60,38 +64,48 @@ function SidebarSubcategory(props: SidebarSubcategoryProps) {
     (child) => child.href === props.pathname,
   )
 
-  const [expanded, setExpanded] = useState(startExpanded)
-
   return (
-    <li className="group" aria-expanded={expanded}>
-      <button
-        className="flex items-center gap-2"
-        onClick={() => setExpanded(!expanded)}
-      >
-        <h5 className="text-muted-foreground hover:text-foreground text-sm transition-colors">
-          {props.subcategory.label}
-        </h5>
-        <Icon
-          icon={<ChevronRightIcon />}
-          className="opacity-75 transition-transform group-aria-expanded:rotate-90"
-        />
-      </button>
-      <ul className="border-muted-foreground/25 my-2 ml-1 hidden flex-col border-l pl-3 group-aria-expanded:flex">
-        {props.children}
-      </ul>
+    <li>
+      <details className="group" open={startExpanded}>
+        <summary className="flex cursor-pointer items-center gap-2">
+          <span className="text-muted-foreground hover:text-foreground text-sm transition-colors">
+            {props.subcategory.label}
+          </span>
+          <Icon
+            icon={<ChevronRightIcon />}
+            className="opacity-75 transition-transform group-open:rotate-90"
+          />
+        </summary>
+        <ul className="border-muted-foreground/25 my-2 ml-1 flex flex-col border-l pl-3">
+          {props.children}
+        </ul>
+      </details>
     </li>
   )
 }
 
-function SidebarLink(props: SidebarNavPage) {
+// sidebar link //
+
+interface SidebarLinkProps {
+  pathname: string
+  page: SidebarNavPage
+}
+
+function SidebarLink(props: SidebarLinkProps) {
   return (
-    <Link
-      href={props.href}
-      label={props.label}
-      variant={"hover"}
-      className="group-data-[active='true']:text-foreground text-sm"
+    <li
+      key={props.page.href}
+      className="group"
+      data-active={props.pathname === props.page.href}
     >
-      {props.label}
-    </Link>
+      <Link
+        href={props.page.href}
+        label={props.page.label}
+        variant={"hover"}
+        className="group-data-[active='true']:text-foreground text-sm"
+      >
+        {props.page.label}
+      </Link>
+    </li>
   )
 }
