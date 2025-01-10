@@ -16,7 +16,11 @@ interface Props {
 
 const navItems = await getSidebarNavItems()
 
-const { pathname } = Astro.url
+// the base path isnt included on vercel for some reason
+const pathname = Astro.url.pathname.startsWith("/docs")
+  ? Astro.url.pathname
+  : `/docs${Astro.url.pathname}`
+
 const { frontmatter } = Astro.props
 const { title, description } = frontmatter
 ---
