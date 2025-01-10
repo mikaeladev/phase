@@ -18,7 +18,7 @@ export default function Home() {
         <section className="flex max-w-[980px] flex-col items-center md:py-12 md:pb-8 lg:py-24 lg:pb-20">
           <div className="hidden md:mb-6 md:block">
             <Link
-              href="/docs/changelog"
+              href="/docs/bot/changelog"
               variant={"no-underline"}
               className="bg-secondary/50 hover:bg-secondary hover:paused inline-flex animate-bounce items-center gap-3 rounded border px-3 py-1 font-mono text-sm font-medium shadow transition-colors"
             >
