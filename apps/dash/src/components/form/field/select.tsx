@@ -75,7 +75,7 @@ export function FormFieldSelect<
                     />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-[--radix-popper-anchor-width]">
+                <DropdownMenuContent className="w-(--radix-popper-anchor-width)">
                   {props.items.map((item) => (
                     <DropdownMenuItem
                       key={item.value}

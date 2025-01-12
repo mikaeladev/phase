@@ -1,13 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "@repo/config/tailwind/site.css";
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  code {
-    font-family: theme("fontFamily.mono");
-  }
-}
+@source "../../../../node_modules/@repo/ui/dist/**/*.js";

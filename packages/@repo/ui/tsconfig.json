@@ -1,10 +1,5 @@
 {
   "extends": "@repo/config/typescript/react.json",
   "exclude": ["dist"],
-  "include": [
-    "src/**/*",
-    "eslint.config.js",
-    "tailwind.config.ts",
-    "vite.config.ts"
-  ]
+  "include": ["src/**/*", "eslint.config.js", "vite.config.ts"]
 }

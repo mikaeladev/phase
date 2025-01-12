@@ -5,7 +5,7 @@ import { cn, cva } from "~/lib/utils"
 import type { VariantProps } from "class-variance-authority"
 
 const labelVariants = cva(
-  "text-sm font-semibold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+  "text-sm leading-none font-semibold peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
 )
 
 export interface LabelProps

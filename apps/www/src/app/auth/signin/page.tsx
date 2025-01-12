@@ -5,7 +5,7 @@ import { SignInMethods } from "~/app/auth/signin/components"
 export default function Page() {
   return (
     <>
-      <div className="text-balance text-center">
+      <div className="text-center text-balance">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
           Welcome back!
         </h1>

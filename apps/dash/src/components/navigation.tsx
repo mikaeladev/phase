@@ -41,7 +41,7 @@ export function DashboardNavigation(props: DashboardNavigationProps) {
   return (
     <nav className="sm:flex sm:h-screen sm:min-w-[20rem] sm:flex-col sm:justify-between sm:border-r sm:p-12">
       <div className="hidden sm:block sm:space-y-12">
-        <h3 className="text-4xl font-bold leading-none tracking-tighter">
+        <h3 className="text-4xl leading-none font-bold tracking-tighter">
           Phase
         </h3>
         <div className="space-y-1.5">
@@ -91,7 +91,7 @@ export function DashboardNavigation(props: DashboardNavigationProps) {
           </Link>
         </span>
       </div>
-      <div className="bg-background text-muted-foreground before:from-background relative flex w-screen justify-evenly border-t py-5 before:absolute before:top-[-25px] before:h-6 before:w-full before:bg-gradient-to-t before:to-transparent sm:hidden">
+      <div className="bg-background text-muted-foreground before:from-background relative flex w-screen justify-evenly border-t py-5 before:absolute before:top-[-25px] before:h-6 before:w-full before:bg-linear-to-t before:to-transparent sm:hidden">
         {iconNavItems.map((item) => {
           let disabled = item.disabled
           let href = item.href
@@ -149,7 +149,7 @@ function NavigationItem(props: NavigationItemProps) {
           className={cn(
             props.mobile
               ? "sr-only"
-              : "relative z-10 text-lg font-medium leading-none",
+              : "relative z-10 text-lg leading-none font-medium",
           )}
         >
           {props.label}

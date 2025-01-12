@@ -15,13 +15,12 @@ type ExportsField = Record<
   { types: string; import: string; require: string } | string
 >
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const entries: Record<string, string> = Object.fromEntries(
+const entries = Object.fromEntries(
   glob.sync("src/components/*/index.tsx").map((file) => {
     const name = file.split("/").slice(-2, -1)[0]
     return [name, path.resolve(__dirname, file)]
   }),
-)
+) as Record<string, string>
 
 export default defineConfig({
   build: {

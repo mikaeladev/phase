@@ -16,7 +16,7 @@ export function GuildCardSearch() {
     <div className="relative h-9 w-full">
       <Icon
         icon={<SearchIcon />}
-        className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2"
+        className="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2"
       />
       <Input
         className="pl-9"

@@ -78,7 +78,7 @@ function OtpLogin(props: { onLoadingChange: (value: boolean) => void }) {
         value={value}
         pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
         disabled={state === OTPState.Loading || state === OTPState.Success}
-        containerClassName="has-[:disabled]:opacity-100"
+        containerClassName="has-disabled:opacity-100"
         onChange={onValueChange}
       >
         <InputOTPGroup

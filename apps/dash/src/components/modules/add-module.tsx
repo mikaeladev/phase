@@ -68,7 +68,7 @@ export function AddModule({ moduleDataArray, onSelect }: AddButtonProps) {
                     aria-label={`Add ${moduleData.name}`}
                     variant={"outline"}
                     size={"icon"}
-                    className="absolute right-6 top-6 bg-transparent"
+                    className="absolute top-6 right-6 bg-transparent"
                     onClick={() => {
                       setIsOpen(false)
                       onSelect?.(moduleData.id)

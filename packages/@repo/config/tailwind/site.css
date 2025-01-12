@@ -1,0 +1,101 @@
+@import "./base.css";
+
+/* plugins */
+
+@plugin "tailwindcss-animate";
+
+/* fonts */
+
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* animations */
+
+@theme {
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-caret-blink: caret-blink 1.25s ease-out infinite;
+  --animate-jiggle: jiggle 0.2s infinite;
+  --animate-moon-twinkle: moon-twinkle 1s 1s forwards;
+  --animate-moon-shrink: moon-shrink 1s ease-in forwards;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  @keyframes caret-blink {
+    0%,
+    70%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes jiggle {
+    0% {
+      transform: rotate(-1deg);
+    }
+    50% {
+      transform: rotate(1deg);
+    }
+  }
+
+  @keyframes moon-twinkle {
+    0% {
+      width: 0px;
+      height: 0px;
+    }
+    65% {
+      width: 100px;
+      height: 100px;
+      transform: rotate(120deg);
+    }
+    100% {
+      width: 0px;
+      height: 0px;
+      transform: rotate(180deg);
+    }
+  }
+
+  @keyframes moon-shrink {
+    to {
+      width: 0px;
+      height: 0px;
+      filter: contrast(2.5);
+      transform: rotate(120deg);
+    }
+  }
+}
+
+/* utilities */
+
+@utility container {
+  width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-inline: auto;
+
+  @media (min-width: 1536px) {
+    max-width: 1400px;
+  }
+}

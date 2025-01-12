@@ -81,7 +81,7 @@ export function ComboboxTrigger({
   return (
     <PopoverTrigger
       className={cn(
-        "focus-visible:ring-ring border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex h-auto min-h-9 w-full items-center justify-between whitespace-nowrap rounded-md border px-3 py-1.5 text-sm font-normal shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
+        "focus-visible:ring-ring border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex h-auto min-h-9 w-full items-center justify-between rounded-md border px-3 py-1.5 text-sm font-normal whitespace-nowrap shadow-xs transition-colors focus-visible:ring-1 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
         className,
       )}
       {...props}
@@ -115,7 +115,7 @@ export function ComboboxValue({
           <Badge
             key={item.value}
             variant="secondary"
-            className="gap-1 bg-[--background-colour] py-px text-xs font-medium text-[--text-colour]"
+            className="gap-1 bg-(--background-colour) py-px text-xs font-medium text-(--text-colour)"
             style={{
               "--text-colour": item.colour ?? `#f8f8f8`,
               "--background-colour": (item.colour ?? `#f8f8f8`) + "40",
@@ -133,7 +133,7 @@ export function ComboboxValue({
 
   return (
     <div
-      className="inline-flex items-center gap-1.5 text-[--text-colour]"
+      className="inline-flex items-center gap-1.5 text-(--text-colour)"
       style={{ "--text-colour": item.colour ?? `#f8f8f8` }}
     >
       {item.icon && <Icon icon={item.icon} className="size-3.5" />}
@@ -272,7 +272,7 @@ export function ComboboxContent<
           keywords={[item.label]}
           disabled={item.disabled}
           onSelect={onCmdSelect}
-          className="min-w-0 gap-1.5 pr-8 text-[--text-colour]"
+          className="min-w-0 gap-1.5 pr-8 text-(--text-colour)"
           style={{ "--text-colour": item.colour ?? `#f8f8f8` }}
         >
           {item.icon && <Icon icon={item.icon} className="size-3.5" />}
@@ -304,7 +304,7 @@ export function ComboboxContent<
   return (
     <PopoverContent
       className={cn(
-        "max-h-[--radix-popover-content-available-height] w-[--radix-popover-trigger-width] p-0",
+        "max-h-(--radix-popover-content-available-height) w-(--radix-popover-trigger-width) p-0",
         className,
       )}
       {...props}

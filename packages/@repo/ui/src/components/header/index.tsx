@@ -89,7 +89,7 @@ export function Header({ className, link: Link, ...props }: HeaderProps) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 h-16 w-full border-b backdrop-blur-sm",
+        "sticky top-0 z-50 h-16 w-full border-b backdrop-blur-xs",
         className,
       )}
       {...props}
@@ -103,7 +103,7 @@ export function Header({ className, link: Link, ...props }: HeaderProps) {
             className="mr-6 flex items-center space-x-2"
           >
             <Moon className="h-5 w-5" />
-            <span className="font-bold leading-tight">Phase</span>
+            <span className="leading-tight font-bold">Phase</span>
           </Link>
           {headerNavItems.main.map((item) => (
             <Link
@@ -186,7 +186,7 @@ function NavigationCombobox({ link: Link }: NavigationComboboxProps) {
           <Icon className="size-3.5" icon={<TelescopeIcon />} />
           Wanna explore?
         </span>
-        <kbd className="bg-muted pointer-events-none absolute right-[4.333px] top-[4.333] hidden h-[26px] select-none items-center gap-1 rounded-sm px-2.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+        <kbd className="bg-muted pointer-events-none absolute top-[4.333] right-[4.333px] hidden h-[26px] items-center gap-1 rounded-sm px-2.5 font-mono text-[10px] font-medium opacity-100 select-none sm:flex">
           <span className="text-xs">⌘</span>K
         </kbd>
       </Button>

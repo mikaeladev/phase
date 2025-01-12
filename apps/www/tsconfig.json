@@ -7,8 +7,7 @@
     "eslint.config.js",
     "next-env.d.ts",
     "next.config.ts",
-    "postcss.config.cjs",
-    "tailwind.config.ts"
+    "postcss.config.cjs"
   ],
   "compilerOptions": {
     "baseUrl": ".",

@@ -42,7 +42,7 @@ export function AccordionTrigger({
         )}
       >
         <AccordionPrimitive.Trigger
-          className="focus-visible:ring-ring absolute left-0 top-0 h-full w-full focus-visible:outline-none focus-visible:ring-1 [&[data-state=open]~.chevron-icon>svg]:rotate-180"
+          className="focus-visible:ring-ring absolute top-0 left-0 h-full w-full focus-visible:ring-1 focus-visible:outline-hidden [&[data-state=open]~.chevron-icon>svg]:rotate-180"
           {...props}
         />
         {children}
@@ -78,7 +78,7 @@ export function AccordionContent({
       className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm"
       {...props}
     >
-      <div className={cn("pb-4 pt-0", className)}>{children}</div>
+      <div className={cn("pt-0 pb-4", className)}>{children}</div>
     </AccordionPrimitive.Content>
   )
 }

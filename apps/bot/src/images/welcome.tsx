@@ -45,17 +45,17 @@ export async function generateWelcomeCard(client: Client, member: GuildMember) {
 
   const element = (
     <div
-      style={tw`text-foreground relative flex h-full w-full items-center justify-center font-['Geist'] font-medium leading-5 tracking-tighter`}
+      style={tw`text-foreground relative flex h-full w-full items-center justify-center font-['Geist'] leading-5 font-medium tracking-tighter`}
     >
       {backgroundImage.startsWith("url(") ? (
         <img
           src={backgroundImage.replace("url(", "").replace(")", "")}
-          style={tw`absolute left-0 top-0 h-full w-full object-cover`}
+          style={tw`absolute top-0 left-0 h-full w-full object-cover`}
         />
       ) : (
         <div
           style={{
-            ...tw`absolute left-0 top-0 h-full w-full`,
+            ...tw`absolute top-0 left-0 h-full w-full`,
             backgroundImage,
           }}
         />
