@@ -8,11 +8,11 @@ export const moonVariants = cva(undefined, {
   variants: {
     animate: {
       true: "animate-spin [animation-duration:1.5s]",
-      false: "animate-none",
+      false: undefined,
     },
     variant: {
       default: undefined,
-      glow: "!shadow-glow-sm shadow-primary rounded-full",
+      glow: "shadow-glow-sm! shadow-primary rounded-full",
     },
   },
   defaultVariants: {

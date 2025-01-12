@@ -11,7 +11,6 @@
   "dependencies": {
     "@astrojs/mdx": "^4.0.3",
     "@astrojs/react": "^4.1.2",
-    "@astrojs/tailwind": "^5.1.4",
     "@fontsource/geist-mono": "^5.1.1",
     "@fontsource/geist-sans": "^5.1.0",
     "@repo/env": "workspace:*",
@@ -22,10 +21,9 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0-beta.9",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^4.0.0-beta.9"
   }
 }

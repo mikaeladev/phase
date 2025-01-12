@@ -31,7 +31,7 @@ export async function generateRankCard(props: RankCardProps) {
 
   const element = (
     <div
-      style={tw`text-foreground flex h-full w-full flex-col font-['Geist'] font-bold leading-5 tracking-tighter`}
+      style={tw`text-foreground flex h-full w-full flex-col font-['Geist'] leading-5 font-bold tracking-tighter`}
     >
       <div style={tw`relative flex h-80 w-full overflow-hidden rounded-t-3xl`}>
         {props.bannerImage.startsWith("url(") ? (
@@ -64,7 +64,7 @@ export async function generateRankCard(props: RankCardProps) {
         />
       </div>
       <div
-        style={tw`bg-background flex w-full flex-col gap-10 rounded-b-3xl px-16 pb-12 pt-6`}
+        style={tw`bg-background flex w-full flex-col gap-10 rounded-b-3xl px-16 pt-6 pb-12`}
       >
         <div style={tw`flex h-20 w-full justify-between`}>
           <div style={tw`flex flex-col items-start gap-1`}>

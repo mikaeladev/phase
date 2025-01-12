@@ -15,7 +15,7 @@ export function ChannelElementNode({
 }: ChannelElementNodeProps) {
   return (
     <span {...attributes} className="h-4 cursor-default">
-      <span className="text-foreground bg-foreground/25 whitespace-nowrap rounded-[4px] px-1">
+      <span className="text-foreground bg-foreground/25 rounded-[4px] px-1 whitespace-nowrap">
         <span className="mr-0.5 inline-block h-4 align-middle">
           <ChannelIcon
             channelType={element.data.type}

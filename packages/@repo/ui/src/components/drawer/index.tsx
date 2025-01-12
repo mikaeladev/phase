@@ -48,7 +48,7 @@ export function DrawerContent({
     <DrawerPortal>
       <DrawerOverlay />
       <DrawerPrimitive.Content className="bg-background fixed inset-x-0 bottom-0 z-50 flex max-h-[calc(100vh-6rem)] flex-col overflow-hidden rounded-t-xl border">
-        <div className="from-background via-background absolute top-0 z-50 h-10 w-full bg-gradient-to-b to-transparent">
+        <div className="from-background via-background absolute top-0 z-50 h-10 w-full bg-linear-to-b to-transparent">
           <div className="bg-muted mx-auto mt-3 h-2 w-[100px] rounded-full" />
         </div>
         <div
@@ -68,7 +68,7 @@ export interface DrawerHeaderProps
 export function DrawerHeader({ className, ...props }: DrawerHeaderProps) {
   return (
     <div
-      className={cn("grid gap-1.5 text-pretty pb-6 text-left", className)}
+      className={cn("grid gap-1.5 pb-6 text-left text-pretty", className)}
       {...props}
     />
   )
@@ -93,7 +93,7 @@ export function DrawerTitle({ className, ...props }: DrawerTitleProps) {
   return (
     <DrawerPrimitive.Title
       className={cn(
-        "text-base font-semibold leading-none tracking-tight",
+        "text-base leading-none font-semibold tracking-tight",
         className,
       )}
       {...props}

@@ -149,7 +149,7 @@ export function BaseRichtext({
         renderLeaf={renderLeaf}
         onKeyDown={onEditorKeyDown}
         className={cn(
-          "border-input bg-background focus-visible:ring-ring flex w-full flex-col rounded-md border px-3 py-2 text-sm tracking-tight shadow-sm read-only:cursor-not-allowed read-only:opacity-50 focus-visible:outline-none focus-visible:ring-1",
+          "border-input bg-background focus-visible:ring-ring flex w-full flex-col rounded-md border px-3 py-2 text-sm tracking-tight shadow-xs read-only:cursor-not-allowed read-only:opacity-50 focus-visible:ring-1 focus-visible:outline-hidden",
           className,
         )}
         {...props}

@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@config "@repo/config/tailwind/site.ts";
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  code {
+    font-family: var(--font-mono);
+  }
+}

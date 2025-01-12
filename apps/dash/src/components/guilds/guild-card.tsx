@@ -17,7 +17,7 @@ export function GuildCard(props: GuildCardProps) {
     <Card className="hover:border-muted-foreground relative transition-colors">
       <Link
         href={`/guilds/${props.guild.id}/modules`}
-        className="focus-visible:ring-ring absolute left-0 top-0 h-full w-full focus-visible:outline-none focus-visible:ring-1"
+        className="focus-visible:ring-ring absolute top-0 left-0 h-full w-full focus-visible:ring-1 focus-visible:outline-hidden"
       />
       <div className="flex flex-row items-center gap-4 p-6">
         <Avatar className="h-12 w-12 rounded-md border">

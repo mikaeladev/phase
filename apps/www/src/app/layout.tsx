@@ -49,14 +49,15 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html lang="en" style={{ colorScheme: "dark" }}>
-      <body
-        className={cn(
-          "bg-background text-foreground font-sans tracking-tighter antialiased",
-          GeistSans.variable,
-          GeistMono.variable,
-        )}
-      >
+    <html
+      lang="en"
+      className={cn(
+        "bg-background text-foreground scheme-dark",
+        GeistSans.variable,
+        GeistMono.variable,
+      )}
+    >
+      <body className="font-sans tracking-tighter antialiased">
         {children}
         <Analytics />
       </body>

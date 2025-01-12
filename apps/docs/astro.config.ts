@@ -3,7 +3,7 @@ import { loadEnv } from "vite"
 
 import mdx from "@astrojs/mdx"
 import react from "@astrojs/react"
-import tailwind from "@astrojs/tailwind"
+import tailwindcss from "@tailwindcss/vite"
 
 // loads environment variables
 process.env = loadEnv(process.env.NODE_ENV!, process.cwd(), "")
@@ -11,14 +11,16 @@ process.env = loadEnv(process.env.NODE_ENV!, process.cwd(), "")
 // validates environment variables
 const { env } = await import("./src/lib/env")
 
+const siteURL = env.VERCEL ? `https://${env.VERCEL_URL}` : undefined
+
 export default defineConfig({
-  // site stuff
   base: "/docs",
-  site: env.VERCEL ? `https://${env.VERCEL_URL}` : undefined,
-  // astro stuff
-  prefetch: true,
-  integrations: [mdx(), react(), tailwind({ applyBaseStyles: false })],
-  // cache stuff
   cacheDir: ".astro/cache/astro",
-  vite: { cacheDir: ".astro/cache/vite" },
+  integrations: [mdx(), react()],
+  prefetch: true,
+  site: siteURL,
+  vite: {
+    cacheDir: ".astro/cache/vite",
+    plugins: [tailwindcss()],
+  },
 })

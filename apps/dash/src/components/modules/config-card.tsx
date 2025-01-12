@@ -78,7 +78,7 @@ export function ConfigCard({
   return (
     <Credenza>
       <Card className={moduleCardVariants({ variant: moduleStatus })}>
-        <CredenzaTrigger className="focus-visible:ring-ring absolute left-0 top-0 h-full w-full focus-visible:outline-none focus-visible:ring-1" />
+        <CredenzaTrigger className="focus-visible:ring-ring absolute top-0 left-0 h-full w-full focus-visible:ring-1 focus-visible:outline-hidden" />
         <CardHeader className="gap-1.5 space-y-0">
           <CardTitle>{moduleData.name}</CardTitle>
           <ModuleTags tags={moduleData.tags} onSelect={onTagSelect} />
@@ -143,7 +143,7 @@ function ConfigCardOptions({ moduleStatus, onSelect }: ConfigCardOptionsProps) {
         <Button
           variant={"outline"}
           size={"icon"}
-          className="absolute right-6 top-6 bg-transparent"
+          className="absolute top-6 right-6 bg-transparent"
         >
           <Icon icon={<EllipsisVerticalIcon />} />
         </Button>

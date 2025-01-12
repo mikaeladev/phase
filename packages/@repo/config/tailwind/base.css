@@ -1,0 +1,73 @@
+/* colors */
+
+@theme {
+  --color-foreground: rgb(248 248 248);
+  --color-background: rgb(16 16 16);
+
+  --color-primary: rgb(248 248 248);
+  --color-primary-foreground: rgb(24 24 24);
+
+  --color-secondary: rgb(40 40 40);
+  --color-secondary-foreground: rgb(248 248 248);
+
+  --color-muted: rgb(40 40 40);
+  --color-muted-foreground: rgb(192 192 192);
+  --color-muted-background: rgb(8 8 8);
+
+  --color-accent: rgb(40 40 40);
+  --color-accent-foreground: rgb(248 248 248);
+
+  --color-destructive: rgb(171 58 58);
+  --color-destructive-foreground: rgb(248 248 248);
+
+  --color-popover: rgb(16 16 16);
+  --color-popover-foreground: rgb(248 248 248);
+
+  --color-card: rgb(16 16 16);
+  --color-card-foreground: rgb(248 248 248);
+
+  --color-border: rgb(40 40 40);
+  --color-input: rgb(40 40 40);
+  --color-ring: rgb(216 216 216);
+}
+
+/* rounding */
+
+@theme {
+  --radius-sm: 0.5rem;
+  --radius: 0.625rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.125rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+}
+
+/* shadows */
+
+@theme {
+  --shadow-glow-sm: 0 0 4px 0 var(--tw-shadow-color),
+    0 0 11px 0 var(--tw-shadow-color), 0 0 19px 0 var(--tw-shadow-color),
+    0 0 40px 0 var(--tw-shadow-color);
+
+  --shadow-glow-md: 0 0 4px 0 var(--tw-shadow-color),
+    0 0 11px 0 var(--tw-shadow-color), 0 0 19px 0 var(--tw-shadow-color),
+    0 0 40px 0 var(--tw-shadow-color), 0 0 80px 0 var(--tw-shadow-color);
+
+  --shadow-glow-lg: 0 0 4px 0 var(--tw-shadow-color),
+    0 0 11px 0 var(--tw-shadow-color), 0 0 19px 0 var(--tw-shadow-color),
+    0 0 40px 0 var(--tw-shadow-color), 0 0 80px 0 var(--tw-shadow-color),
+    0 0 120px 0 var(--tw-shadow-color);
+}
+
+/* base styles */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  code {
+    font-family: var(--font-mono);
+  }
+}

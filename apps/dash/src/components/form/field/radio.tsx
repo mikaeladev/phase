@@ -46,7 +46,7 @@ export function FormFieldRadio<
               {props.items.map((item) => (
                 <FormItem
                   key={item.value}
-                  className="flex items-center space-x-3 space-y-0"
+                  className="flex items-center space-y-0 space-x-3"
                 >
                   <FormControl>
                     <RadioGroupItem value={item.value} />

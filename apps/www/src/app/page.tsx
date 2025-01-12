@@ -10,7 +10,7 @@ import { Link } from "~/components/link"
 export default function Home() {
   return (
     <main className="grid min-h-screen grid-rows-[4rem_auto_4rem]">
-      <div className="fixed left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2">
+      <div className="fixed top-1/2 left-1/2 -z-10 -translate-x-1/2 -translate-y-1/2">
         <OrbitingDots size={"screen"} />
       </div>
       <Header link={Link} />
@@ -20,7 +20,7 @@ export default function Home() {
             <Link
               href="/docs/bot/changelog"
               variant={"no-underline"}
-              className="bg-secondary/50 hover:bg-secondary hover:paused inline-flex animate-bounce items-center gap-3 rounded border px-3 py-1 font-mono text-sm font-medium shadow transition-colors"
+              className="bg-secondary/50 hover:bg-secondary hover:paused inline-flex animate-bounce items-center gap-3 rounded border px-3 py-1 font-mono text-sm font-medium shadow-sm transition-colors"
             >
               <Icon icon={<PartyPopperIcon />} />
               <span>Check out the latest updates!</span>
@@ -28,10 +28,10 @@ export default function Home() {
             </Link>
           </div>
           <div className="mb-12 space-y-4">
-            <h1 className="text-balance text-center text-5xl font-bold leading-none tracking-tighter md:text-6xl lg:leading-[1.1]">
+            <h1 className="text-center text-5xl leading-none font-bold tracking-tighter text-balance md:text-6xl lg:leading-[1.1]">
               The all-in-one Discord bot
             </h1>
-            <p className="text-muted-foreground max-w-[750px] text-pretty text-center text-lg sm:text-xl md:text-balance">
+            <p className="text-muted-foreground max-w-[750px] text-center text-lg text-pretty sm:text-xl md:text-balance">
               {siteConfig.description}
             </p>
           </div>
@@ -59,9 +59,9 @@ export default function Home() {
           </div>
         </section>
       </div>
-      <footer className="h-16 sm:border-t sm:backdrop-blur-sm">
+      <footer className="h-16 sm:border-t sm:backdrop-blur-xs">
         <div className="container flex h-full items-center py-6 sm:py-0">
-          <p className="text-muted-foreground w-full text-balance text-center text-xs leading-loose sm:text-left sm:text-sm">
+          <p className="text-muted-foreground w-full text-center text-xs leading-loose text-balance sm:text-left sm:text-sm">
             Built by{" "}
             <Link
               href={"/redirect/developer"}

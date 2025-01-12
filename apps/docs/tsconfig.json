@@ -5,8 +5,6 @@
     ".astro/types.d.ts",
     "src/**/*",
     "eslint.config.js",
-    "astro.config.ts",
-    "postcss.config.cjs",
-    "tailwind.config.ts"
+    "astro.config.ts"
   ]
 }
