@@ -1,11 +1,15 @@
 ---
 import "~/styles/globals.css"
 
+import { ClientRouter } from "astro:transitions"
+
 import Breadcrumbs from "~/components/astro/Breadcrumbs.astro"
 import { Header } from "~/components/react/header.tsx"
 import { Sidebar } from "~/components/react/sidebar.tsx"
 
 import { getSidebarNavItems } from "~/config/sidebar"
+
+import { env } from "~/lib/env"
 
 import type { Frontmatter } from "~/types/props"
 
@@ -24,20 +28,21 @@ const { frontmatter } = Astro.props
 const { title, description } = frontmatter
 ---
 
-<html
-  lang="en"
-  style="color-scheme: dark"
-  class="bg-background text-foreground"
->
+<html lang="en" class="bg-background text-foreground scheme-dark">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="https://phasebot.xyz/favicon.ico"
-    />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" type="image/x-icon" href={`${env.BASE_URL}/favicon.ico`} />
+
     <title>{title} - Docs</title>
+
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f8f8f8" />
+
+    <ClientRouter />
   </head>
   <body
     class="flex min-h-screen w-full flex-col font-sans tracking-tighter antialiased"
