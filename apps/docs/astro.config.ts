@@ -11,14 +11,12 @@ process.env = loadEnv(process.env.NODE_ENV!, process.cwd(), "")
 // validates environment variables
 const { env } = await import("./src/lib/env")
 
-const siteURL = env.VERCEL ? `https://${env.VERCEL_URL}` : undefined
-
 export default defineConfig({
   base: "/docs",
   cacheDir: ".astro/cache/astro",
   integrations: [mdx(), react()],
   prefetch: true,
-  site: siteURL,
+  site: `${env.BASE_URL}/docs`,
   vite: {
     cacheDir: ".astro/cache/vite",
     plugins: [tailwindcss()],
