@@ -1,3 +1,5 @@
+import "~/lib/env"
+
 import type { NextConfig } from "next"
 
 export default {
