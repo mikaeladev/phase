@@ -3,6 +3,7 @@
 import * as React from "react"
 
 import wwwConfig from "@repo/config/site/www/index.ts"
+import { cn } from "@repo/utils/site"
 
 import { Button } from "~/components/button"
 import {
@@ -21,8 +22,6 @@ import {
 } from "~/components/lucide-icon"
 import { Moon } from "~/components/moon"
 import { DiscordIcon, GithubIcon } from "~/components/simple-icon"
-
-import { cn } from "~/lib/utils"
 
 import type { BaseLink } from "~/components/base-link"
 import type { With } from "~/types/utils"

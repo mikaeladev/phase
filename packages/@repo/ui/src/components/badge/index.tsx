@@ -1,6 +1,6 @@
-import { cn, cva } from "~/lib/utils"
+import { cn, cva } from "@repo/utils/site"
 
-import type { VariantProps } from "class-variance-authority"
+import type { VariantProps } from "@repo/utils/site"
 
 export const badgeVariants = cva(
   "focus:ring-ring inline-flex items-center rounded-[4px] border px-1.5 py-0.5 text-xs font-semibold transition-colors focus:ring-1 focus:ring-offset-1 focus:outline-hidden focus-visible:outline-hidden",

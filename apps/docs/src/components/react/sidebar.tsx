@@ -22,7 +22,7 @@ export function Sidebar(props: SidebarProps) {
       <nav className="space-y-6">
         {props.items.map((category) => (
           <div key={category.label} className="px-2">
-            <h4 className="text-sm font-semibold leading-6">
+            <h4 className="text-sm leading-6 font-semibold">
               {category.label}
             </h4>
             <ul className="mt-1 flex flex-col space-y-2">

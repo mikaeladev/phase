@@ -1,6 +1,5 @@
+import { cn } from "@repo/utils/site"
 import { Drawer as DrawerPrimitive } from "vaul"
-
-import { cn } from "~/lib/utils"
 
 export type DrawerProps = React.ComponentPropsWithRef<
   typeof DrawerPrimitive.Root

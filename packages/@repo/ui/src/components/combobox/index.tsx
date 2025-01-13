@@ -2,6 +2,8 @@
 
 import * as React from "react"
 
+import { cn } from "@repo/utils/site"
+
 import { Badge } from "~/components/badge"
 import {
   Command,
@@ -14,8 +16,6 @@ import {
 import { Icon } from "~/components/icon"
 import { CheckIcon, ChevronsUpDownIcon } from "~/components/lucide-icon"
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/popover"
-
-import { cn } from "~/lib/utils"
 
 import type { Arrayable, Optional } from "~/types/utils"
 

@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "@repo/utils/site"
 import { Command as CommandPrimitive } from "cmdk"
 
 import {
@@ -10,8 +11,6 @@ import {
 } from "~/components/dialog"
 import { Icon } from "~/components/icon"
 import { SearchIcon } from "~/components/lucide-icon"
-
-import { cn } from "~/lib/utils"
 
 import type { DialogProps } from "@radix-ui/react-dialog"
 

@@ -1,9 +1,8 @@
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
+import { cn } from "@repo/utils/site"
 
 import { Icon } from "~/components/icon"
 import { CheckIcon } from "~/components/lucide-icon"
-
-import { cn } from "~/lib/utils"
 
 export interface RadioGroupProps
   extends React.ComponentPropsWithRef<typeof RadioGroupPrimitive.Root> {}

@@ -1,10 +1,9 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion"
+import { cn } from "@repo/utils/site"
 
 import { Button } from "~/components/button"
 import { Icon } from "~/components/icon"
 import { ChevronDownIcon } from "~/components/lucide-icon"
-
-import { cn } from "~/lib/utils"
 
 export type AccordionProps = React.ComponentPropsWithRef<
   typeof AccordionPrimitive.Root

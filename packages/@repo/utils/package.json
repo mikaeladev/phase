@@ -9,11 +9,22 @@
     "lint": "eslint ."
   },
   "exports": {
+    "./site": {
+      "types": "./dist/site.d.ts",
+      "import": "./dist/site.js",
+      "require": "./dist/site.js"
+    },
     "./modules": {
       "types": "./dist/modules/index.d.ts",
       "import": "./dist/modules/index.js",
       "require": "./dist/modules/index.js"
     }
+  },
+  "dependencies": {
+    "@repo/env": "workspace:*",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.6.0"
   },
   "peerDependencies": {
     "discord.js": "^14.x.x"

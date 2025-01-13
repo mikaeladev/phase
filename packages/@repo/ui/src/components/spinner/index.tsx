@@ -1,4 +1,4 @@
-import { cn } from "~/lib/utils"
+import { cn } from "@repo/utils/site"
 
 export interface SpinnerProps extends React.ComponentPropsWithRef<"div"> {}
 

@@ -4,6 +4,7 @@ import * as React from "react"
 
 import { Collection } from "@discordjs/collection"
 import emojiData from "@emoji-mart/data/sets/15/twitter.json"
+import { cn } from "@repo/utils/site"
 import { useDebounce } from "@uidotdev/usehooks"
 import { init as emojiMartInit, SearchIndex } from "emoji-mart"
 
@@ -13,8 +14,6 @@ import { Label } from "~/components/label"
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/popover"
 import { ScrollArea } from "~/components/scroll-area"
 import { Spinner } from "~/components/spinner"
-
-import { cn } from "~/lib/utils"
 
 import type {
   Emoji as EmojiMartEmoji,

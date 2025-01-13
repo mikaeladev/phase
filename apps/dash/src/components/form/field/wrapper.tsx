@@ -1,8 +1,6 @@
-import { cva } from "class-variance-authority"
+import { cn, cva } from "~/lib/utils"
 
-import { cn } from "~/lib/utils"
-
-import type { VariantProps } from "class-variance-authority"
+import type { VariantProps } from "~/lib/utils"
 
 const wrapperVariants = cva("", {
   variants: {

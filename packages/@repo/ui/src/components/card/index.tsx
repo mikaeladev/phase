@@ -1,4 +1,4 @@
-import { cn } from "~/lib/utils"
+import { cn } from "@repo/utils/site"
 
 export interface CardProps extends React.ComponentPropsWithRef<"div"> {}
 

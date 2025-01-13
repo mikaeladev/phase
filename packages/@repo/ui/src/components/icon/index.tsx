@@ -1,6 +1,6 @@
-import { Slot } from "~/components/slot"
+import { cn } from "@repo/utils/site"
 
-import { cn } from "~/lib/utils"
+import { Slot } from "~/components/slot"
 
 import type { SlotProps } from "~/components/slot"
 import type { ExclusiveOr, Prettify } from "~/types/utils"

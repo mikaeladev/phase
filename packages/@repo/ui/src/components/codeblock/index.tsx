@@ -1,6 +1,6 @@
-import { cn, cva } from "~/lib/utils"
+import { cn, cva } from "@repo/utils/site"
 
-import type { VariantProps } from "class-variance-authority"
+import type { VariantProps } from "@repo/utils/site"
 
 export const codeblockVariants = cva(
   "text-foreground bg-muted/50 border font-mono text-sm",

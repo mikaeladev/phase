@@ -1,9 +1,9 @@
+import { cn, cva } from "@repo/utils/site"
+
 import { Slot } from "~/components/slot"
 
-import { cn, cva } from "~/lib/utils"
-
+import type { VariantProps } from "@repo/utils/site"
 import type { SlotProps } from "~/components/slot"
-import type { VariantProps } from "class-variance-authority"
 
 export const baseLinkVariants = cva("underline-offset-2 transition-colors", {
   variants: {

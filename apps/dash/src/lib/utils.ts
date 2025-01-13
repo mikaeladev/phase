@@ -1,17 +1,6 @@
-import dashConfig from "@repo/config/site/dash/index.ts"
-import siteConfig from "@repo/config/site/www/index.ts"
-import { clsx } from "clsx"
 import unsafeMs from "ms"
-import { twMerge } from "tailwind-merge"
 
-import type { ClassValue } from "clsx"
-
-export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs))
-
-export function absoluteURL(path: string, includeMFEBase = true) {
-  const domain = includeMFEBase ? dashConfig.url : siteConfig.url
-  return domain + path
-}
+export { cn, cva, absoluteURL, type VariantProps } from "@repo/utils/site"
 
 export const getOrdinal = (number: number): string => {
   if (number >= 11 && number <= 13) return number + "th"

@@ -1,7 +1,5 @@
 import React from "react"
 
-import { cva } from "class-variance-authority"
-
 import { Button } from "@repo/ui/button"
 import {
   Card,
@@ -33,6 +31,8 @@ import {
 } from "@repo/ui/lucide-icon"
 import { BetaAlert } from "~/components/modules/beta-alert"
 import { ModuleTags } from "~/components/modules/module-tags"
+
+import { cva } from "~/lib/utils"
 
 import type { ModuleDefinition, ModuleTag } from "@repo/utils/modules"
 import type { ModuleData } from "~/app/guilds/[id]/modules/page"

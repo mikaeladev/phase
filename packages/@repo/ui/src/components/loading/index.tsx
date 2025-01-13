@@ -1,7 +1,7 @@
+import { cn } from "@repo/utils/site"
+
 import { Moon } from "~/components/moon"
 import { OrbitingDots } from "~/components/orbiting-dots"
-
-import { cn } from "~/lib/utils"
 
 export interface LoadingProps extends React.ComponentPropsWithRef<"div"> {}
 

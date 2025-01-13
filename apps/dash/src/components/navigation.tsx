@@ -164,7 +164,7 @@ function NavigationItem(props: NavigationItemProps) {
       )}
       <span
         className={cn(
-          props.icon && "relative z-10 text-lg font-medium leading-none",
+          props.icon && "relative z-10 text-lg leading-none font-medium",
           props.mobile && "sr-only",
         )}
       >

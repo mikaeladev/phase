@@ -1,9 +1,8 @@
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
+import { cn } from "@repo/utils/site"
 
 import { Icon } from "~/components/icon"
 import { CheckIcon, ChevronRightIcon, DotIcon } from "~/components/lucide-icon"
-
-import { cn } from "~/lib/utils"
 
 export const DropdownMenu = DropdownMenuPrimitive.Root
 export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger

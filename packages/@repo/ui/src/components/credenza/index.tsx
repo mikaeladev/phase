@@ -2,6 +2,7 @@
 
 import * as React from "react"
 
+import { cn } from "@repo/utils/site"
 import { useMediaQuery } from "@uidotdev/usehooks"
 
 import {
@@ -24,8 +25,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "~/components/drawer"
-
-import { cn } from "~/lib/utils"
 
 interface BaseProps {
   children?: React.ReactNode

@@ -1,10 +1,10 @@
 import * as React from "react"
 
+import { cn } from "@repo/utils/site"
+
 import { Icon } from "~/components/icon"
 import { ChevronRightIcon, EllipsisIcon } from "~/components/lucide-icon"
 import { Slot } from "~/components/slot"
-
-import { cn } from "~/lib/utils"
 
 export interface BreadcrumbProps extends React.ComponentPropsWithRef<"nav"> {
   separator?: React.ReactNode
