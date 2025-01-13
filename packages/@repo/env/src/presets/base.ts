@@ -2,12 +2,12 @@ import { createEnv } from "@t3-oss/env-core"
 import { railway, vercel } from "@t3-oss/env-core/presets"
 import { z } from "zod"
 
-import { baseOptions } from "~/lib/constants"
+import { baseOptions, runtimeEnv } from "~/lib/constants"
 
 const baseURL =
-  process.env.BASE_URL ??
-  process.env.PUBLIC_BASE_URL ??
-  process.env.NEXT_PUBLIC_BASE_URL
+  runtimeEnv.BASE_URL ??
+  runtimeEnv.PUBLIC_BASE_URL ??
+  runtimeEnv.NEXT_PUBLIC_BASE_URL
 
 type BaseVariables<TExtends extends Readonly<Record<string, unknown>> = {}> =
   Readonly<{
