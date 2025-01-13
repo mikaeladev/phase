@@ -21,6 +21,7 @@ export function dash() {
       twitch(),
       authjs(),
     ],
+    clientPrefix: "NEXT_PUBLIC_",
     client: {
       NEXT_PUBLIC_BASE_URL: z.string().url(),
     },

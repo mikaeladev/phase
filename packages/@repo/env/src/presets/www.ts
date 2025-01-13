@@ -16,6 +16,7 @@ export function www() {
       DASH_URL: z.string().url(),
       DOCS_URL: z.string().url(),
     },
+    clientPrefix: "NEXT_PUBLIC_",
     client: {
       NEXT_PUBLIC_BASE_URL: z.string().url(),
     },

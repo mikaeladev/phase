@@ -298,6 +298,7 @@
         "@eslint/js": "^9.10.0",
         "@ianvs/prettier-plugin-sort-imports": "^4.4.0",
         "@next/eslint-plugin-next": "^15.1.2",
+        "@repo/env": "packages/@repo/env",
         "eslint-plugin-astro": "^1.3.1",
         "eslint-plugin-react": "^7.37.3",
         "eslint-plugin-react-hooks": "^5.0.0",
@@ -862,7 +863,7 @@
 
     "@repo/auth": ["@repo/auth@workspace:packages/@repo/auth", { "dependencies": { "@repo/env": "packages/@repo/env", "@repo/trpc": "packages/@repo/trpc", "next-auth": "^5.0.0-beta.25" }, "devDependencies": { "discord-api-types": "^0.37.114" }, "peerDependencies": { "next": "^15.x.x" } }],
 
-    "@repo/config": ["@repo/config@workspace:packages/@repo/config", { "dependencies": { "@eslint/js": "^9.10.0", "@ianvs/prettier-plugin-sort-imports": "^4.4.0", "@next/eslint-plugin-next": "^15.1.2", "eslint-plugin-astro": "^1.3.1", "eslint-plugin-react": "^7.37.3", "eslint-plugin-react-hooks": "^5.0.0", "globals": "^15.11.0", "prettier-plugin-astro": "^0.14.1", "prettier-plugin-tailwindcss": "^0.6.9", "tailwindcss-animate": "^1.0.7", "typescript-eslint": "^8.15.0" }, "devDependencies": { "@types/eslint__js": "^8.42.3" }, "peerDependencies": { "tailwindcss": "^4.0.0-beta.9" } }],
+    "@repo/config": ["@repo/config@workspace:packages/@repo/config", { "dependencies": { "@eslint/js": "^9.10.0", "@ianvs/prettier-plugin-sort-imports": "^4.4.0", "@next/eslint-plugin-next": "^15.1.2", "@repo/env": "packages/@repo/env", "eslint-plugin-astro": "^1.3.1", "eslint-plugin-react": "^7.37.3", "eslint-plugin-react-hooks": "^5.0.0", "globals": "^15.11.0", "prettier-plugin-astro": "^0.14.1", "prettier-plugin-tailwindcss": "^0.6.9", "tailwindcss-animate": "^1.0.7", "typescript-eslint": "^8.15.0" }, "devDependencies": { "@types/eslint__js": "^8.42.3" }, "peerDependencies": { "tailwindcss": "^4.0.0-beta.9" } }],
 
     "@repo/db": ["@repo/db@workspace:packages/@repo/db", { "dependencies": { "@repo/env": "packages/@repo/env", "@repo/utils": "packages/@repo/utils", "drizzle-orm": "^0.38.3", "mongoose": "^8.9.2", "pg": "^8.13.1", "zod": "^3.24.1" }, "devDependencies": { "@types/pg": "^8.11.10", "drizzle-kit": "^0.30.1" } }],
 

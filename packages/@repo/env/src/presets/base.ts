@@ -4,6 +4,11 @@ import { z } from "zod"
 
 import { baseOptions } from "~/lib/constants"
 
+const baseURL =
+  process.env.BASE_URL ??
+  process.env.PUBLIC_BASE_URL ??
+  process.env.NEXT_PUBLIC_BASE_URL
+
 type BaseVariables<TExtends extends Readonly<Record<string, unknown>> = {}> =
   Readonly<{
     BASE_URL: string
@@ -29,7 +34,7 @@ export function base(host?: "railway" | "vercel") {
     extends: extendsArr,
     server: {},
     shared: {
-      BASE_URL: z.string().url(),
+      BASE_URL: z.string().url().default(baseURL!),
       NODE_ENV: z.enum(["development", "production"]).default("development"),
       SKIP_ENV_VALIDATION: z.boolean().optional(),
     },
