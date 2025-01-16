@@ -194,11 +194,16 @@ export function ComboboxContent<
   }, [multiselect, propMultiselect, setMultiselect])
 
   React.useEffect(() => {
-    const oldSelected = selected
-    const newSelected = items.filter((item) => rawValue?.includes(item.value))
+    const oldSelectedIds = selected.map((item) => item.value)
+    const newSelectedIds = items
+      .filter((item) => rawValue?.includes(item.value))
+      .map((item) => item.value)
 
-    if (JSON.stringify(oldSelected) !== JSON.stringify(newSelected)) {
-      setSelected(newSelected)
+    if (
+      oldSelectedIds.length !== newSelectedIds.length ||
+      oldSelectedIds.some((id, index) => id !== newSelectedIds[index])
+    ) {
+      setSelected(items.filter((item) => rawValue?.includes(item.value)))
     }
   }, [items, rawValue, selected, setSelected])
 
