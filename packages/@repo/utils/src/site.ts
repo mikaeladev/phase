@@ -1,7 +1,6 @@
+import wwwConfig from "@repo/config/site/www/index.ts"
 import { clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-
-import { env } from "~/lib/env"
 
 import type { ClassValue } from "clsx"
 
@@ -11,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function absoluteURL(path: string, includeMFEBase = true) {
   const basePathname = includeMFEBase ? mfeBase() : ""
-  return new URL(`${basePathname}/${path}`, env.BASE_URL).href
+  return new URL(`${basePathname}/${path}`, wwwConfig.url).href
 }
 
 export function mfeName() {

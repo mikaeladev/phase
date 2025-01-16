@@ -1,9 +1,9 @@
 import { createEnv } from "@t3-oss/env-core"
 import { z } from "zod"
 
-import { baseOptions } from "~/lib/constants"
+import type { BaseOptions } from "~/lib/constants"
 
-export function authjs() {
+export function authjs(baseOptions: BaseOptions) {
   return createEnv({
     ...baseOptions,
     server: {

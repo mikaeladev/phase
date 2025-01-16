@@ -1,9 +1,9 @@
 import { createEnv } from "@t3-oss/env-core"
 import { z } from "zod"
 
-import { baseOptions } from "~/lib/constants"
+import type { BaseOptions } from "~/lib/constants"
 
-export function twitch() {
+export function twitch(baseOptions: BaseOptions) {
   return createEnv({
     ...baseOptions,
     server: {

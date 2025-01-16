@@ -16,7 +16,7 @@ export default defineConfig({
   cacheDir: ".astro/cache/astro",
   integrations: [mdx(), react()],
   prefetch: true,
-  site: `${env.BASE_URL}/docs`,
+  site: `${env.PUBLIC_BASE_URL}/docs`,
   vite: {
     cacheDir: ".astro/cache/vite",
     plugins: [tailwindcss()],

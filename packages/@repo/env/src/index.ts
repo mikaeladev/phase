@@ -1,12 +1,15 @@
+export * from "~/lib/constants"
+
+export * from "~/presets/apps/bot"
+export * from "~/presets/apps/dash"
+export * from "~/presets/apps/docs"
+export * from "~/presets/apps/www"
+
 export * from "~/presets/authjs"
 export * from "~/presets/base"
-export * from "~/presets/bot"
-export * from "~/presets/dash"
 export * from "~/presets/database"
 export * from "~/presets/discord"
-export * from "~/presets/docs"
 export * from "~/presets/trpc"
 export * from "~/presets/twitch"
-export * from "~/presets/www"
 
 export * from "~/merge"

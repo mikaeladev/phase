@@ -15,7 +15,7 @@ export default {
       {
         // dashboard oauth
         source: "/redirect/oauth",
-        destination: `https://discord.com/api/oauth2/authorize?client_id=${env.DISCORD_ID}&response_type=code&scope=identify&redirect_uri=${env.BASE_URL}/dashboard/guilds`,
+        destination: `https://discord.com/api/oauth2/authorize?client_id=${env.DISCORD_ID}&response_type=code&scope=identify&redirect_uri=${env.NEXT_PUBLIC_BASE_URL}/dashboard/guilds`,
         permanent: false,
       },
       {
@@ -27,7 +27,7 @@ export default {
       {
         // old donation redirect
         source: "/redirect/donate",
-        destination: `${env.BASE_URL}/redirect/buymeacoffee`,
+        destination: `${env.NEXT_PUBLIC_BASE_URL}/redirect/buymeacoffee`,
         permanent: false,
       },
       {

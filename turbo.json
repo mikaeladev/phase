@@ -30,7 +30,7 @@
       "dependsOn": ["^build"],
       "outputs": [".astro/**", "!.astro/cache/**"],
       "passThroughEnv": ["TURBO_*"],
-      "env": ["BASE_URL"]
+      "env": ["PUBLIC_BASE_URL"]
     },
     "dashboard#build": {
       "cache": true,
@@ -38,7 +38,7 @@
       "outputs": [".next/**", "!.next/cache/**"],
       "passThroughEnv": ["TURBO_*"],
       "env": [
-        "BASE_URL",
+        "NEXT_PUBLIC_BASE_URL",
         "TRPC_*",
         "MONGODB_URI",
         "POSTGRES_URI",
@@ -53,7 +53,7 @@
       "outputs": [".next/**", "!.next/cache/**"],
       "passThroughEnv": ["TURBO_*"],
       "env": [
-        "BASE_URL",
+        "NEXT_PUBLIC_BASE_URL",
         "DASH_URL",
         "DOCS_URL",
         "TRPC_*",
@@ -66,7 +66,7 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"],
       "passThroughEnv": ["TURBO_*"],
-      "env": ["BASE_URL"]
+      "env": []
     },
     "lint": {
       "cache": true,

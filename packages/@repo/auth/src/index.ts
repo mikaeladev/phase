@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 
-import siteConfig from "@repo/config/site/www/index.ts"
-import { authjs, discord, mergeEnvs } from "@repo/env"
+import wwwConfig from "@repo/config/site/www/index.ts"
+import { authjs, discord, mergeEnvs, nextBaseOptions } from "@repo/env"
 import { client } from "@repo/trpc/client"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
@@ -10,7 +10,7 @@ import DiscordProvider from "next-auth/providers/discord"
 import type { NextAuthResult, Profile, Session } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 
-const env = mergeEnvs(authjs(), discord())
+const env = mergeEnvs(authjs(nextBaseOptions), discord(nextBaseOptions))
 
 const nextAuth = NextAuth({
   secret: env.AUTH_COOKIE_SECRET,
@@ -81,7 +81,7 @@ const nextAuth = NextAuth({
         }
 
         return method === "GET"
-          ? NextResponse.redirect(`${siteConfig.url}/auth/signin`)
+          ? NextResponse.redirect(`${wwwConfig.url}/auth/signin`)
           : NextResponse.json("Missing user credentials", { status: 401 })
       }
 

@@ -1,27 +1,26 @@
 import { createEnv } from "@t3-oss/env-core"
 import { z } from "zod"
 
-import { baseOptions } from "~/lib/constants"
+import { nextBaseOptions } from "~/lib/constants"
 
 import { authjs } from "~/presets/authjs"
 import { base } from "~/presets/base"
 import { database } from "~/presets/database"
 import { discord } from "~/presets/discord"
-import { trpc } from "~/presets/trpc"
+import { trpcClient } from "~/presets/trpc"
 import { twitch } from "~/presets/twitch"
 
 export function dash() {
   return createEnv({
-    ...baseOptions,
+    ...nextBaseOptions,
     extends: [
-      base("vercel"),
-      trpc("client"),
-      database(),
-      discord(),
-      twitch(),
-      authjs(),
+      base(nextBaseOptions),
+      trpcClient(nextBaseOptions),
+      database(nextBaseOptions),
+      discord(nextBaseOptions),
+      twitch(nextBaseOptions),
+      authjs(nextBaseOptions),
     ],
-    clientPrefix: "NEXT_PUBLIC_",
     client: {
       NEXT_PUBLIC_BASE_URL: z.string().url(),
     },

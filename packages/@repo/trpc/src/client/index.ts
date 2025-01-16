@@ -1,9 +1,9 @@
-import { trpc } from "@repo/env"
+import { nextBaseOptions, trpcClient } from "@repo/env"
 import { createTRPCClient, httpBatchLink } from "@trpc/client"
 
 import type { AppRouter } from "~/server/router"
 
-export const env = trpc("client")
+export const env = trpcClient(nextBaseOptions)
 
 export const client = createTRPCClient<AppRouter>({
   links: [
