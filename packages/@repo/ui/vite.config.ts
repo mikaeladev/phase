@@ -22,6 +22,13 @@ const entries = Object.fromEntries(
   }),
 ) as Record<string, string>
 
+const externals = [
+  "@repo/config",
+  "@icons-pack/react-simple-icons",
+  "lucide-react",
+  "react",
+]
+
 export default defineConfig({
   build: {
     lib: {
@@ -31,16 +38,13 @@ export default defineConfig({
     },
     rollupOptions: {
       external: (id) =>
-        id.startsWith("@repo/config") ||
-        ["react", "react/jsx-runtime", "react-dom"].includes(id),
+        externals.includes(id) ||
+        externals.some((external) => id.startsWith(external + "/")),
       output: {
         dir: "dist",
         entryFileNames: "components/[name]/index.js",
         chunkFileNames: "chunks/[name]-[hash].js",
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-        },
+        globals: { react: "React" },
       },
     },
   },
