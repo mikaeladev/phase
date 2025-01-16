@@ -220,13 +220,11 @@
     "fast-glob": "^3.3.2",
     "lucide-react": "^0.468.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "vaul": "^1.1.2"
   },
   "devDependencies": {
     "@total-typescript/ts-reset": "^0.6.1",
     "@types/react": "^19.0.2",
-    "@types/react-dom": "^19.0.2",
     "@vitejs/plugin-react": "^4.3.4",
     "ajv": "^8.17.1",
     "rollup-preserve-directives": "^1.1.3",
