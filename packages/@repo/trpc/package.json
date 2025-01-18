@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@repo/trpc",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "tsup --watch",
@@ -21,11 +21,10 @@
     }
   },
   "dependencies": {
-    "@phasejs/core": "workspace:*",
     "@repo/env": "workspace:*",
     "@repo/utils": "workspace:*",
-    "@trpc/client": "^11.0.0-rc.648",
-    "@trpc/server": "^11.0.0-rc.648",
+    "@trpc/client": "^11.0.0-rc.700",
+    "@trpc/server": "^11.0.0-rc.700",
     "zod": "^3.23.8"
   },
   "devDependencies": {

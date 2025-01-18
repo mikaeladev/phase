@@ -6,13 +6,12 @@ import { Client, GatewayIntentBits, Options, Partials } from "discord.js"
 import { blacklistPlugin } from "@plugin/blacklist"
 import { musicPlugin } from "@plugin/music"
 import { voicePlugin } from "@plugin/voice"
-import { bridgeServerPlugin } from "@repo/trpc/server"
 
 import { blacklistOptions } from "~/lib/blacklist"
 import { botConfig } from "~/lib/config"
-import { db } from "~/lib/db"
 import { Emojis, emojiSyncPlugin } from "~/lib/emojis"
 import { env } from "~/lib/env"
+import { trpcPlugin } from "~/lib/trpc"
 
 import { ConfigStore } from "~/structures/stores/ConfigStore"
 import { GuildStore } from "~/structures/stores/GuildStore"
@@ -68,7 +67,7 @@ const phaseClient = new BotClient(djsClient, {
     voicePlugin(),
     musicPlugin(),
     emojiSyncPlugin(),
-    bridgeServerPlugin({ db }),
+    trpcPlugin(),
   ],
   stores: {
     config: new ConfigStore(),
