@@ -1,10 +1,10 @@
 import { SlashCommandAssertions } from "discord.js"
 
-import type { BotCommandOrSubcommandBody } from "@phasejs/core"
+import type { BotCommandBody } from "@phasejs/core"
 import type { LocalizationMap } from "discord.js"
 
 export class SharedBotCommandBuilderName {
-  declare protected body: BotCommandOrSubcommandBody
+  declare protected body: BotCommandBody
 
   /**
    * Sets the name of this command.

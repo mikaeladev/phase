@@ -9,7 +9,7 @@ import { SharedBotCommandBuilderDescription } from "./shared/SharedBotCommandBui
 import { SharedBotCommandBuilderName } from "./shared/SharedBotCommandBuilderName"
 import { SharedBotCommandBuilderOptions } from "./shared/SharedBotCommandBuilderOptions"
 
-import type { BotSubcommandBody, DjsClient } from "@phasejs/core"
+import type { BotCommandBody, DjsClient } from "@phasejs/core"
 
 export class BotSubcommandBuilder extends Mixin(
   SharedBotCommandBuilderBase,
@@ -17,7 +17,7 @@ export class BotSubcommandBuilder extends Mixin(
   SharedBotCommandBuilderDescription,
   SharedBotCommandBuilderOptions,
 ) {
-  declare protected body: BotSubcommandBody
+  declare protected body: BotCommandBody<true>
 
   constructor() {
     super()

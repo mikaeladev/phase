@@ -5,17 +5,18 @@ import type {
   RESTPostAPIChatInputApplicationCommandsJSONBody,
 } from "discord.js"
 
-export type BotCommandBody = Omit<
-  RESTPostAPIChatInputApplicationCommandsJSONBody,
-  "default_member_permissions" | "default_permission" | "nsfw" | "handler"
->
-export type BotSubcommandBody = Omit<
-  APIApplicationCommandSubcommandOption,
-  "required"
->
+export type BotCommandBody<TSubcommand extends boolean = boolean> =
+  TSubcommand extends false
+    ? Omit<
+        RESTPostAPIChatInputApplicationCommandsJSONBody,
+        "default_member_permissions" | "default_permission" | "nsfw" | "handler"
+      >
+    : Omit<APIApplicationCommandSubcommandOption, "required">
 
-export type BotCommandOrSubcommandBody = BotCommandBody | BotSubcommandBody
-export type BotCommandMetadata = { type: "command"; [key: string]: unknown }
+export interface BotCommandMetadata extends Record<string, unknown> {
+  type: "command"
+}
+
 export type BotCommandExecute = (
   interaction: ChatInputCommandInteraction,
 ) => unknown

@@ -12,7 +12,7 @@ import {
 
 import { resolveBuilder } from "~/lib/resolvers"
 
-import type { BotCommandOrSubcommandBody } from "@phasejs/core"
+import type { BotCommandBody } from "@phasejs/core"
 import type { BuilderOrBuilderFunction } from "~/types/builders"
 import type {
   APIApplicationCommandOption,
@@ -20,7 +20,7 @@ import type {
 } from "discord.js"
 
 export class SharedBotCommandBuilderOptions {
-  declare protected body: BotCommandOrSubcommandBody
+  declare protected body: BotCommandBody
 
   /**
    * Adds an attachment option.

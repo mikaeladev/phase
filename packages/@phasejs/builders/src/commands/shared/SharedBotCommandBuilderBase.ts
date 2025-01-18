@@ -1,16 +1,16 @@
 import type {
+  BotCommandBody,
   BotCommandExecute,
   BotCommandMetadata,
-  BotCommandOrSubcommandBody,
 } from "@phasejs/core"
 
 export class SharedBotCommandBuilderBase {
-  protected body: BotCommandOrSubcommandBody
+  protected body: BotCommandBody
   protected metadata: BotCommandMetadata
   protected execute: BotCommandExecute
 
   constructor() {
-    this.body = {} as BotCommandOrSubcommandBody
+    this.body = {} as BotCommandBody
     this.metadata = { type: "command" }
     this.execute = () => undefined
   }

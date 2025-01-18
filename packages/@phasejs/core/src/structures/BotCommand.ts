@@ -11,8 +11,6 @@ import type {
   BotCommandBody,
   BotCommandExecute,
   BotCommandMetadata,
-  BotCommandOrSubcommandBody,
-  BotSubcommandBody,
 } from "~/types/commands"
 import type {
   APIApplicationCommandOption,
@@ -22,31 +20,34 @@ import type {
 
 export class BotCommand {
   protected _client: DjsClient
-  protected _body: BotCommandOrSubcommandBody
+  protected _body: BotCommandBody
 
   public readonly parentName?: string
   public readonly groupName?: string
 
-  public readonly type: BotCommandOrSubcommandBody["type"]
-  public readonly name: BotCommandOrSubcommandBody["name"]
-  public readonly nameLocalisations: BotCommandOrSubcommandBody["name_localizations"]
-  public readonly description: BotCommandOrSubcommandBody["description"]
-  public readonly descriptionLocalisations: BotCommandOrSubcommandBody["description_localizations"]
-  public readonly options: BotCommandOrSubcommandBody["options"]
+  public readonly name: BotCommandBody["name"]
+  public readonly nameLocalisations: BotCommandBody["name_localizations"]
+  public readonly description: BotCommandBody["description"]
+  public readonly descriptionLocalisations: BotCommandBody["description_localizations"]
+  public readonly options: BotCommandBody["options"]
 
-  public readonly integrationTypes: BotCommandBody["integration_types"]
-  public readonly contexts: BotCommandBody["contexts"]
-  public readonly dmPermission: BotCommandBody["dm_permission"]
+  public readonly integrationTypes?: BotCommandBody<false>["integration_types"]
+  public readonly contexts?: BotCommandBody<false>["contexts"]
+  public readonly dmPermission?: BotCommandBody<false>["dm_permission"]
 
   public readonly metadata: BotCommandMetadata
   public readonly execute: BotCommandExecute
+
+  public get subcommand(): boolean {
+    return this.isSubcommandBody(this._body)
+  }
 
   constructor(
     client: DjsClient,
     params: {
       parentName?: string
       groupName?: string
-      body: BotCommandOrSubcommandBody
+      body: BotCommandBody
       metadata: BotCommandMetadata
       execute: BotCommandExecute
     },
@@ -62,7 +63,6 @@ export class BotCommand {
       }
     }
 
-    this.type = this._body.type
     this.name = this._body.name
     this.description = this._body.description
 
@@ -108,7 +108,7 @@ export class BotCommand {
   /**
    * Returns the command body as a JSON object.
    */
-  public toJSON(): BotCommandBody {
+  public toJSON(): BotCommandBody<false> {
     if (!this.isSubcommandBody(this._body)) {
       return this._body
     }
@@ -134,21 +134,19 @@ export class BotCommand {
     }
   }
 
-  private isSubcommandBody(
-    body: BotCommandOrSubcommandBody,
-  ): body is BotSubcommandBody {
+  private isSubcommandBody(body: BotCommandBody): body is BotCommandBody<true> {
     return this.parentName !== undefined
   }
 
   /**
-   * Compares two {@link BotCommand} bodies for equality.
+   * Compares two command bodies for equality.
    */
   static equals(a: BotCommandBody, b: BotCommandBody) {
     return isEqual(a, b)
   }
 
   /**
-   * Transforms an {@link ApplicationCommandOption} into a format compatible with the Discord API.
+   * Transforms a command option into a format compatible with the Discord API.
    */
   static transformOption<
     TReturn extends APIApplicationCommandOption = APIApplicationCommandOption,
@@ -210,10 +208,9 @@ export class BotCommand {
   }
 
   /**
-   * Transforms an {@link ApplicationCommand} into something that can be
-   * used in the Discord API.
+   * Transforms a command into a format compatible with the Discord API.
    */
-  static transformCommand(command: ApplicationCommand): BotCommandBody {
+  static transformCommand(command: ApplicationCommand): BotCommandBody<false> {
     const transformedCommand: BotCommandBody = {
       type: ApplicationCommandType.ChatInput,
       name: command.name,

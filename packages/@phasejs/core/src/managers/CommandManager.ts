@@ -44,8 +44,8 @@ export class CommandManager extends BaseManager {
 
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     phase.client.once("ready", async (client) => {
-      const localAPICommands = new Collection<string, BotCommandBody>()
-      const remoteAPICommands = new Collection<string, BotCommandBody>()
+      const localAPICommands = new Collection<string, BotCommandBody<false>>()
+      const remoteAPICommands = new Collection<string, BotCommandBody<false>>()
 
       // populate the local api command collection
       const localJSONCommands = this._commands.map((command) =>
@@ -64,7 +64,7 @@ export class CommandManager extends BaseManager {
         remoteAPICommands.set(transformedAppCommand.name, transformedAppCommand)
       }
 
-      const getCommandId = (localCommand: BotCommandBody) => {
+      const getCommandId = (localCommand: BotCommandBody<false>) => {
         return remoteAppCommands.find(
           (remoteCommand) => remoteCommand.name === localCommand.name,
         )?.id
