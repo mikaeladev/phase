@@ -21,9 +21,7 @@
   },
   "workspaces": [
     "apps/*",
-    "packages/@phasejs/*",
-    "packages/@plugin/*",
-    "packages/@repo/*"
+    "packages/*/*"
   ],
   "dependencies": {
     "@repo/config": "workspace:*",
