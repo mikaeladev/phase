@@ -92,7 +92,7 @@ const nextAuth = NextAuth({
 
 // exports //
 
-export type * from "~/types"
+export type {} from "~/types"
 
 export const auth: NextAuthResult["auth"] = nextAuth.auth
 export const signIn: NextAuthResult["signIn"] = nextAuth.signIn

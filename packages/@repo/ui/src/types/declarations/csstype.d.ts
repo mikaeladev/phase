@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/consistent-indexed-object-style */
 
-import type * as CSS from "csstype" // react depends on this
+import type {} from "react"
 
-declare module "csstype" {
+declare module "react" {
   // add css variable support
-  interface Properties extends CSS.Properties {
+  interface CSSProperties {
     [key: `--${string}`]: string | number
   }
 }

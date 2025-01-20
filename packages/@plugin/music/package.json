@@ -25,6 +25,7 @@
     "distube": "^5.0.4"
   },
   "peerDependencies": {
-    "discord.js": "^14.16.x"
+    "discord.js": "^14.16.x",
+    "@discordjs/voice": "^0.18.0"
   }
 }

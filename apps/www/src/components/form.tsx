@@ -2,12 +2,11 @@
 
 import * as React from "react"
 
+import { cn } from "@repo/utils/site"
 import { Controller, FormProvider, useFormContext } from "react-hook-form"
 
 import { Label } from "@repo/ui/label"
 import { Slot } from "@repo/ui/slot"
-
-import { cn } from "~/lib/utils"
 
 import type { ControllerProps, FieldPath, FieldValues } from "react-hook-form"
 

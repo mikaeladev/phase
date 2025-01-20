@@ -1,21 +1,20 @@
 "use client"
 
 import Link from "next/link"
-import React from "react"
+import * as React from "react"
 
-import { SiDiscord as DiscordLogoIcon } from "@icons-pack/react-simple-icons"
+import { cn } from "@repo/utils/site"
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
 
 import { Button } from "@repo/ui/button"
 import { Label } from "@repo/ui/label"
+import { DiscordIcon } from "@repo/ui/simple-icon"
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
 } from "~/components/auth/input-otp"
 import { OrSeparator } from "~/components/auth/or-separator"
-
-import { cn } from "~/lib/utils"
 
 import { signInWithDiscord, signInWithOTP } from "~/app/auth/actions"
 
@@ -132,7 +131,7 @@ function OAuthButton(props: { disabled: boolean }) {
       disabled={props.disabled}
       onClick={() => signInWithDiscord()}
     >
-      <DiscordLogoIcon className="h-5 w-5" />
+      <DiscordIcon className="h-5 w-5" />
       <span>Sign in with Discord</span>
     </Button>
   )

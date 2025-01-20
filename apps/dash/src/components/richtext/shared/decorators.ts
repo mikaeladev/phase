@@ -1,4 +1,4 @@
-import Prism from "prismjs"
+import * as Prism from "prismjs"
 import { Text } from "slate"
 
 import type { NodeEntry, Path, Range } from "slate"

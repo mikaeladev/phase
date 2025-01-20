@@ -1,9 +1,5 @@
-import type { StoreManager } from "@phasejs/core/managers"
-import type { BaseKVStore, BaseStore } from "@phasejs/core/stores"
 import type { Config, Guild, mongoose } from "@repo/db"
-import type { Client, Snowflake } from "discord.js"
-
-import type {} from "@phasejs/core/client"
+import type { Client, Collection, Snowflake } from "discord.js"
 
 type WithId<T> = T & { _id: mongoose.Types.ObjectId }
 
@@ -28,6 +24,12 @@ export interface Streamer {
     channelId: string
     mention?: string
   }[]
+}
+
+type StoreManager = { init(): Promise<StoreManager> }
+type BaseStore = { init(_client: Client): Promise<BaseStore> }
+type BaseKVStore<K, V> = Collection<K, V> & {
+  init(_client: Client): Promise<BaseKVStore<K, V>>
 }
 
 type ConfigStore = BaseStore & Config

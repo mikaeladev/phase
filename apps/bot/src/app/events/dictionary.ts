@@ -4,7 +4,7 @@ import { BotEventBuilder } from "@phasejs/builders"
 import { MessageFlags, Routes } from "discord.js"
 
 import ffmpegPath from "ffmpeg-static"
-import ffmpeg from "fluent-ffmpeg"
+import ffmpeg, { ffprobe, setFfmpegPath } from "fluent-ffmpeg"
 
 import { askDictionary, getPhonetic } from "~/lib/apis/dictionary"
 
@@ -76,7 +76,7 @@ export default new BotEventBuilder()
     }
   })
 
-ffmpeg.setFfmpegPath(ffmpegPath!)
+setFfmpegPath(ffmpegPath!)
 
 function downsampleBuffer(buffer: Buffer, targetLength: number): Buffer {
   const factor = Math.ceil(buffer.length / targetLength)
@@ -97,7 +97,7 @@ async function processAudioURL(url: string): Promise<{
   try {
     const { duration } = await new Promise<{ duration: number }>(
       (resolve, reject) => {
-        ffmpeg.ffprobe(url, (err: Error, data) => {
+        ffprobe(url, (err: Error, data) => {
           if (err) reject(err)
           resolve({ duration: data.format.duration ?? 0 })
         })

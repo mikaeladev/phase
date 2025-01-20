@@ -1,11 +1,13 @@
 import "~/styles/globals.css"
 
 import siteConfig from "@repo/config/site/www/index.ts"
+import { cn } from "@repo/utils/site"
 import { Analytics } from "@vercel/analytics/react"
+/* eslint-disable import-x/no-unresolved */
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
 
-import { cn } from "~/lib/utils"
+/* eslint-enable import-x/no-unresolved */
 
 import type { LayoutProps } from "~/types/props"
 import type { Metadata, Viewport } from "next"

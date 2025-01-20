@@ -2,12 +2,11 @@
 
 import * as React from "react"
 
+import { cn } from "@repo/utils/site"
 import { OTPInput, OTPInputContext } from "input-otp"
 
 import { Icon } from "@repo/ui/icon"
 import { DotIcon } from "@repo/ui/lucide-icon"
-
-import { cn } from "~/lib/utils"
 
 export type InputOTPProps = React.ComponentPropsWithRef<typeof OTPInput>
 

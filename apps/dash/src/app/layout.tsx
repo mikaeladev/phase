@@ -1,8 +1,10 @@
 import "~/styles/globals.css"
 
 import dashConfig from "@repo/config/site/dash/index.ts"
+/* eslint-disable import-x/no-unresolved */
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
+/* eslint-enable import-x/no-unresolved */
 import { NuqsAdapter } from "nuqs/adapters/next/pages"
 
 import { cn } from "~/lib/utils"

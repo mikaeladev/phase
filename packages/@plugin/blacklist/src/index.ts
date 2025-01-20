@@ -73,6 +73,7 @@ export * from "~/structures/Entry"
 
 export { blacklistPlugin, blacklistCheckCron, blacklistCheckEvent }
 
-export type * from "~/types/declarations/client"
-export type * from "~/types/declarations/events"
+export type {} from "~/types/declarations/client"
+export type {} from "~/types/declarations/events"
+
 export type * from "~/types/plugin"

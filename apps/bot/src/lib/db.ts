@@ -1,9 +1,9 @@
-import { Database, mongoose } from "@repo/db"
+import { Database } from "@repo/db"
 
 const db = new Database({
   autoIndex: true,
   debug: false,
 })
 
-export { db, mongoose }
-export type * from "@repo/db"
+export { db }
+export * from "@repo/db"

@@ -16,6 +16,7 @@
     "@repo/env": "workspace:*",
     "@repo/trpc": "workspace:*",
     "@repo/ui": "workspace:*",
+    "@repo/utils": "workspace:*",
     "@vercel/analytics": "^1.4.0",
     "geist": "^1.3.1",
     "input-otp": "^1.4.1",
