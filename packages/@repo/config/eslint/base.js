@@ -1,11 +1,29 @@
 import eslint from "@eslint/js"
+import importPlugin from "eslint-plugin-import-x"
 import globals from "globals"
 import tseslint from "typescript-eslint"
+
+const importPluginConfig = tseslint.config(
+  importPlugin.flatConfigs.recommended,
+  importPlugin.flatConfigs.typescript,
+  {
+    rules: {
+      "import-x/no-extraneous-dependencies": [
+        "error",
+        {
+          includeTypes: true,
+          packageDir: ["./", "../../", "../../../"],
+        },
+      ],
+    },
+  },
+)
 
 export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
+  ...importPluginConfig,
   {
     languageOptions: {
       parser: tseslint.parser,
