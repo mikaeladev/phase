@@ -2,7 +2,8 @@ import { BotCommand } from "@phasejs/core/client"
 import { ApplicationCommandType, ApplicationIntegrationType } from "discord.js"
 
 import { Mixin } from "ts-mixer"
-import { z } from "zod"
+
+import { COMMAND_BUILDER_TAG } from "~/lib/constants"
 
 import { SharedBotCommandBuilderBase } from "./shared/SharedBotCommandBuilderBase"
 import { SharedBotCommandBuilderDescription } from "./shared/SharedBotCommandBuilderDescription"
@@ -19,6 +20,8 @@ export class BotCommandBuilder extends Mixin(
   SharedBotCommandBuilderOptions,
 ) {
   declare protected body: BotCommandBody<false>
+
+  protected [COMMAND_BUILDER_TAG] = true
 
   constructor() {
     super()
@@ -106,21 +109,10 @@ export class BotCommandBuilder extends Mixin(
    * Checks if something is a command builder.
    */
   static isBuilder(thing: unknown): thing is BotCommandBuilder {
-    const schema = z
-      .object({
-        setName: z.function(),
-        setNameLocalisations: z.function(),
-        setDescription: z.function(),
-        setDescriptionLocalisations: z.function(),
-        setOptions: z.function(),
-        setMetadata: z.function(),
-        setExecute: z.function(),
-        setDMPermission: z.function(),
-        setContexts: z.function(),
-        setIntegrationTypes: z.function(),
-      })
-      .passthrough()
-
-    return schema.safeParse(thing).success
+    return (
+      typeof thing === "object" &&
+      thing !== null &&
+      COMMAND_BUILDER_TAG in thing
+    )
   }
 }

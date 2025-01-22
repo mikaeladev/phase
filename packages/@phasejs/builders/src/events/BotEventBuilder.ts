@@ -1,6 +1,6 @@
 import { BotEvent } from "@phasejs/core/client"
 
-import { z } from "zod"
+import { EVENT_BUILDER_TAG } from "~/lib/constants"
 
 import type { BotEventContextMap, BotEventName, DjsClient } from "@phasejs/core"
 
@@ -13,6 +13,8 @@ export class BotEventBuilder<
   private listenerType: BotEvent<TName, TContext>["listenerType"]
   private metadata: BotEvent<TName, TContext>["metadata"]
   private execute: BotEvent<TName, TContext>["execute"]
+
+  protected [EVENT_BUILDER_TAG] = true
 
   constructor() {
     this.name = undefined as never
@@ -102,16 +104,8 @@ export class BotEventBuilder<
    * Checks if something is an event builder.
    */
   static isBuilder(thing: unknown): thing is BotEventBuilder {
-    const schema = z
-      .object({
-        setName: z.function(),
-        setContext: z.function(),
-        setListenerType: z.function(),
-        setMetadata: z.function(),
-        setExecute: z.function(),
-      })
-      .passthrough()
-
-    return schema.safeParse(thing).success
+    return (
+      typeof thing === "object" && thing !== null && EVENT_BUILDER_TAG in thing
+    )
   }
 }

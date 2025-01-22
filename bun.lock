@@ -156,11 +156,10 @@
     },
     "packages/@phasejs/builders": {
       "name": "@phasejs/builders",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@phasejs/core": "packages/@phasejs/core",
         "ts-mixer": "^6.0.4",
-        "zod": "^3.23.8",
       },
       "peerDependencies": {
         "discord.js": "^14.16.x",
@@ -764,7 +763,7 @@
 
     "@panva/hkdf": ["@panva/hkdf@1.2.1", "", {}, "sha512-6oclG6Y3PiDFcoyk8srjLfVKyMfVCKJ27JwNPViuXziFpmdz+MZnZN/aKY0JGXgYuO/VghU0jcOAZgWXZ1Dmrw=="],
 
-    "@phasejs/builders": ["@phasejs/builders@workspace:packages/@phasejs/builders", { "dependencies": { "@phasejs/core": "packages/@phasejs/core", "ts-mixer": "^6.0.4", "zod": "^3.23.8" }, "peerDependencies": { "discord.js": "^14.16.x" } }],
+    "@phasejs/builders": ["@phasejs/builders@workspace:packages/@phasejs/builders", { "dependencies": { "@phasejs/core": "packages/@phasejs/core", "ts-mixer": "^6.0.4" }, "peerDependencies": { "discord.js": "^14.16.x" } }],
 
     "@phasejs/core": ["@phasejs/core@workspace:packages/@phasejs/core", { "dependencies": { "croner": "^8.1.2", "deepmerge-ts": "^7.1.3", "emittery": "^1.0.3", "lodash": "^4.17.21" }, "devDependencies": { "@types/lodash": "^4.17.13" }, "peerDependencies": { "discord.js": "^14.16.x" } }],
 

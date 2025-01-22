@@ -2,7 +2,8 @@ import { BotCommand } from "@phasejs/core/client"
 import { ApplicationCommandOptionType } from "discord.js"
 
 import { Mixin } from "ts-mixer"
-import { z } from "zod"
+
+import { SUBCOMMAND_BUILDER_TAG } from "~/lib/constants"
 
 import { SharedBotCommandBuilderBase } from "./shared/SharedBotCommandBuilderBase"
 import { SharedBotCommandBuilderDescription } from "./shared/SharedBotCommandBuilderDescription"
@@ -18,6 +19,8 @@ export class BotSubcommandBuilder extends Mixin(
   SharedBotCommandBuilderOptions,
 ) {
   declare protected body: BotCommandBody<true>
+
+  protected [SUBCOMMAND_BUILDER_TAG] = true
 
   constructor() {
     super()
@@ -70,22 +73,10 @@ export class BotSubcommandBuilder extends Mixin(
    * Checks if something is a subcommand builder.
    */
   static isBuilder(thing: unknown): thing is BotSubcommandBuilder {
-    const schema = z
-      .object({
-        setName: z.function(),
-        setNameLocalisations: z.function(),
-        setDescription: z.function(),
-        setDescriptionLocalisations: z.function(),
-        setOptions: z.function(),
-        setMetadata: z.function(),
-        setExecute: z.function(),
-        // these are not supported in subcommands
-        setDMPermission: z.never().optional(),
-        setContexts: z.never().optional(),
-        setIntegrationTypes: z.never().optional(),
-      })
-      .passthrough()
-
-    return schema.safeParse(thing).success
+    return (
+      typeof thing === "object" &&
+      thing !== null &&
+      SUBCOMMAND_BUILDER_TAG in thing
+    )
   }
 }

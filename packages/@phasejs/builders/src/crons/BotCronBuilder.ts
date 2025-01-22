@@ -1,6 +1,6 @@
 import { BotCron } from "@phasejs/core/client"
 
-import { z } from "zod"
+import { CRON_BUILDER_TAG } from "~/lib/constants"
 
 import type { BotCronExecute, DjsClient } from "@phasejs/core"
 
@@ -8,6 +8,8 @@ export class BotCronBuilder {
   private pattern: BotCron["pattern"]
   private metadata: BotCron["metadata"]
   private execute: BotCron["execute"]
+
+  protected [CRON_BUILDER_TAG] = true
 
   constructor() {
     this.pattern = undefined as never
@@ -69,14 +71,8 @@ export class BotCronBuilder {
    * Checks if something is a cron job builder.
    */
   static isBuilder(thing: unknown): thing is BotCronBuilder {
-    const schema = z
-      .object({
-        setPattern: z.function(),
-        setMetadata: z.function(),
-        setExecute: z.function(),
-      })
-      .passthrough()
-
-    return schema.safeParse(thing).success
+    return (
+      typeof thing === "object" && thing !== null && CRON_BUILDER_TAG in thing
+    )
   }
 }

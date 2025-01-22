@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@phasejs/builders",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "tsup --watch",
@@ -11,14 +11,12 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "default": "./dist/index.js"
     }
   },
   "dependencies": {
     "@phasejs/core": "workspace:*",
-    "ts-mixer": "^6.0.4",
-    "zod": "^3.23.8"
+    "ts-mixer": "^6.0.4"
   },
   "peerDependencies": {
     "discord.js": "^14.16.x"
