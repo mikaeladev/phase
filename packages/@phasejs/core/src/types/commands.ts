@@ -13,9 +13,7 @@ export type BotCommandBody<TSubcommand extends boolean = boolean> =
       >
     : Omit<APIApplicationCommandSubcommandOption, "required">
 
-export interface BotCommandMetadata extends Record<string, unknown> {
-  type: "command"
-}
+export interface BotCommandMetadata extends Record<string, unknown> {}
 
 export type BotCommandExecute = (
   interaction: ChatInputCommandInteraction,

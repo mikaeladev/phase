@@ -11,7 +11,7 @@ export class SharedBotCommandBuilderBase {
 
   constructor() {
     this.body = {} as BotCommandBody
-    this.metadata = { type: "command" }
+    this.metadata = {}
     this.execute = () => undefined
   }
 
@@ -19,7 +19,7 @@ export class SharedBotCommandBuilderBase {
    * Sets the metadata of this command.
    */
   public setMetadata(metadata: Omit<BotCommandMetadata, "type">) {
-    this.metadata = { type: "command", ...metadata }
+    this.metadata = metadata
     return this
   }
 

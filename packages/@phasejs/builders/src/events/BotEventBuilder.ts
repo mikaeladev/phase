@@ -20,7 +20,7 @@ export class BotEventBuilder<
     this.name = undefined as never
     this.context = undefined
     this.listenerType = "on"
-    this.metadata = { type: "event" }
+    this.metadata = {}
     this.execute = () => undefined
   }
 
@@ -58,7 +58,7 @@ export class BotEventBuilder<
   public setMetadata(
     metadata: Omit<BotEvent<TName, TContext>["metadata"], "type">,
   ) {
-    this.metadata = { type: "event", ...metadata }
+    this.metadata = metadata
     return this
   }
 
@@ -79,8 +79,8 @@ export class BotEventBuilder<
     return new BotEvent(client, {
       name: this.name,
       context: this.context,
-      listenerType: this.listenerType ?? "on",
-      metadata: this.metadata ?? { type: "event" },
+      listenerType: this.listenerType,
+      metadata: this.metadata,
       execute: this.execute,
     })
   }

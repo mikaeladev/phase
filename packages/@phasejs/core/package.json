@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@phasejs/core",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "type": "module",
   "scripts": {
     "dev": "tsup --watch",
@@ -11,23 +11,19 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "default": "./dist/index.js"
     },
     "./client": {
       "types": "./dist/client.d.ts",
-      "import": "./dist/client.js",
-      "require": "./dist/client.js"
+      "default": "./dist/client.js"
     },
     "./stores": {
       "types": "./dist/stores.d.ts",
-      "import": "./dist/stores.js",
-      "require": "./dist/stores.js"
+      "default": "./dist/stores.js"
     },
     "./managers": {
       "types": "./dist/managers/index.d.ts",
-      "import": "./dist/managers/index.js",
-      "require": "./dist/managers/index.js"
+      "default": "./dist/managers/index.js"
     }
   },
   "dependencies": {

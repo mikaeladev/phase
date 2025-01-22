@@ -27,9 +27,13 @@ export type BotEventExecuteArgs<
   : ClientEvents[TName]
 
 export type BotEventName = keyof ClientEvents
+
 export type BotEventContext = BotEventContextMap[BotEventName]
+
 export type BotEventListenerType = "on" | "once"
-export type BotEventMetadata = { type: "event"; [key: string]: unknown }
+
+export interface BotEventMetadata extends Record<string, unknown> {}
+
 export type BotEventExecute<
   TName extends BotEventName = BotEventName,
   TContext extends BotEventContextMap[TName] = BotEventContextMap[TName],

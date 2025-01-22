@@ -13,7 +13,7 @@ export class BotCronBuilder {
 
   constructor() {
     this.pattern = undefined as never
-    this.metadata = { type: "cron" }
+    this.metadata = {}
     this.execute = () => undefined
   }
 
@@ -29,7 +29,7 @@ export class BotCronBuilder {
    * Sets the metadata for the cron job.
    */
   public setMetadata(metadata: Omit<BotCron["metadata"], "type">) {
-    this.metadata = { type: "cron", ...metadata }
+    this.metadata = metadata
     return this
   }
 
