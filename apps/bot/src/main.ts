@@ -10,7 +10,6 @@ import { voicePlugin } from "@plugin/voice"
 import { blacklistOptions } from "~/lib/blacklist"
 import { botConfig } from "~/lib/config"
 import { Emojis, emojiSyncPlugin } from "~/lib/emojis"
-import { env } from "~/lib/env"
 import { trpcPlugin } from "~/lib/trpc"
 
 import { ConfigStore } from "~/structures/stores/ConfigStore"
@@ -76,10 +75,6 @@ const phaseClient = new BotClient(djsClient, {
     streamers: new StreamerStore(),
   },
 })
-
-// set the token early so stores can make api calls
-phaseClient.client.token = env.DISCORD_TOKEN
-phaseClient.client.rest.setToken(env.DISCORD_TOKEN)
 
 // start the client
 const app = await loadApp(phaseClient)

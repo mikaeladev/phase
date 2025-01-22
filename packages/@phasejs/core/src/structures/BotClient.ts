@@ -35,13 +35,19 @@ export class BotClient<TReady extends boolean = boolean> {
     this.emitter = new Emittery()
 
     this.client = client
-    this.client.phase = this
     this.plugins = options.plugins ?? []
 
     this.stores = new StoreManager(this, options.stores)
     this.commands = new CommandManager(this)
     this.crons = new CronManager(this)
     this.events = new EventManager(this)
+
+    this.client.phase = this
+
+    if (process.env.DISCORD_TOKEN) {
+      ;(this.client as DjsClient<false>).token = process.env.DISCORD_TOKEN
+      this.client.rest.setToken(process.env.DISCORD_TOKEN)
+    }
   }
 
   public isReady(): this is BotClient<true> {
