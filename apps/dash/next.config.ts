@@ -1,6 +1,4 @@
-import "~/lib/env"
-
-import www from "@repo/config/site/www/index.ts"
+import { env } from "~/lib/env"
 
 import type { NextConfig } from "next"
 
@@ -9,7 +7,7 @@ export default {
   basePath: "/dashboard",
   experimental: {
     serverActions: {
-      allowedOrigins: [www.url],
+      allowedOrigins: [env.NEXT_PUBLIC_BASE_URL],
     },
   },
 } satisfies NextConfig
