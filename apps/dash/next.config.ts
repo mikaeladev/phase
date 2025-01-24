@@ -7,7 +7,7 @@ export default {
   basePath: "/dashboard",
   experimental: {
     serverActions: {
-      allowedOrigins: [env.NEXT_PUBLIC_BASE_URL],
+      allowedOrigins: [env.NEXT_PUBLIC_BASE_URL.replace(/^https?:\/\//, "")],
     },
   },
 } satisfies NextConfig
