@@ -10,10 +10,15 @@ export interface JoinToCreate {
 }
 
 const joinToCreateSchema = new Schema<JoinToCreate>({
-  guild: { type: String, required: true },
-  channel: { type: String, required: true },
-  owner: { type: String, required: true },
-  createdAt: { type: Date, required: true, expires: "1d", default: Date.now },
+  guild: { type: Schema.Types.String, required: true },
+  channel: { type: Schema.Types.String, required: true },
+  owner: { type: Schema.Types.String, required: true },
+  createdAt: {
+    type: Schema.Types.Date,
+    required: true,
+    expires: "1d",
+    default: Date.now,
+  },
 })
 
 joinToCreateSchema.index({ guild: 1, channel: 1 })

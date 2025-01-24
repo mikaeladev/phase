@@ -1,5 +1,5 @@
 import { ModuleId } from "@repo/utils/modules"
-import mongoose from "mongoose"
+import { Schema } from "mongoose"
 
 import { defineModel } from "~/mongo/utils"
 
@@ -17,19 +17,19 @@ enum StatusType {
   MajorIssues = "dnd",
 }
 
-const statusSchema = new mongoose.Schema<Status>(
+const statusSchema = new Schema<Status>(
   {
     type: {
-      type: mongoose.SchemaTypes.String,
+      type: Schema.Types.String,
       enum: Object.values(StatusType),
       required: true,
     },
     text: {
-      type: mongoose.SchemaTypes.String,
+      type: Schema.Types.String,
       required: true,
     },
     reason: {
-      type: mongoose.SchemaTypes.String,
+      type: Schema.Types.String,
       required: false,
     },
   },
@@ -49,16 +49,16 @@ interface Blacklist {
   }[]
 }
 
-const blacklistSchema = new mongoose.Schema<Blacklist>(
+const blacklistSchema = new Schema<Blacklist>(
   {
     users: [
       {
         id: {
-          type: mongoose.SchemaTypes.String,
+          type: Schema.Types.String,
           required: true,
         },
         reason: {
-          type: mongoose.SchemaTypes.String,
+          type: Schema.Types.String,
           required: false,
         },
       },
@@ -66,11 +66,11 @@ const blacklistSchema = new mongoose.Schema<Blacklist>(
     guilds: [
       {
         id: {
-          type: mongoose.SchemaTypes.String,
+          type: Schema.Types.String,
           required: true,
         },
         reason: {
-          type: mongoose.SchemaTypes.String,
+          type: Schema.Types.String,
           required: false,
         },
       },
@@ -85,12 +85,12 @@ interface Killswitch {
   modules: ModuleId[]
 }
 
-const killswitchSchema = new mongoose.Schema<Killswitch>(
+const killswitchSchema = new Schema<Killswitch>(
   {
     modules: {
       type: [
         {
-          type: mongoose.SchemaTypes.String,
+          type: Schema.Types.String,
           enum: Object.values(ModuleId),
           required: true,
         },
@@ -109,11 +109,10 @@ export interface Config {
   killswitch: Killswitch
 }
 
-export const configs = defineModel(
-  "Configs",
-  new mongoose.Schema<Config>({
-    status: statusSchema,
-    blacklist: blacklistSchema,
-    killswitch: killswitchSchema,
-  }),
-)
+const configSchema = new Schema<Config>({
+  status: statusSchema,
+  blacklist: blacklistSchema,
+  killswitch: killswitchSchema,
+})
+
+export const configs = defineModel("Configs", configSchema)

@@ -1,21 +1,15 @@
-import mongoose from "mongoose"
+import { Schema } from "mongoose"
 
 import { defineModel } from "~/mongo/utils"
 
 export interface AFK {
-  /** The user's ID. */
   user: string
-  /** The user's reason for being AFK. */
   reason?: string
 }
 
-export const afks = defineModel(
-  "AFKs",
-  new mongoose.Schema<AFK>({
-    user: { type: String, required: true },
-    reason: { type: String },
-  }),
-  {
-    user: { unique: true },
-  },
-)
+const afkSchema = new Schema<AFK>({
+  user: { type: Schema.Types.String, required: true, unique: true },
+  reason: { type: Schema.Types.String },
+})
+
+export const afks = defineModel("AFKs", afkSchema)

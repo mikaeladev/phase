@@ -1,11 +1,11 @@
-import mongoose from "mongoose"
+import { Schema } from "mongoose"
 
 import { defineModel } from "~/mongo/utils"
 
 export interface Reminder {
-  name: string // lorem ipsum
   guild: string // 123456789012345678
   channel: string // 123456789012345678
+  name: string // lorem ipsum
   content: string // lorem ipsum dolor sit amet
   mention?: string // <@123456789012345678>
   delay: number // 60_000 -> 1 minute
@@ -14,26 +14,22 @@ export interface Reminder {
   scheduledAt: Date // 2023-07-01T00:01:00.000Z
 }
 
-export const reminders = defineModel(
-  "Reminders",
-  new mongoose.Schema<Reminder>({
-    name: { type: String, required: true },
-    guild: { type: String, required: true },
-    channel: { type: String, required: true },
-    content: { type: String, required: true },
-    mention: { type: String },
-    delay: { type: Number, required: true, min: 0 },
-    loop: { type: Boolean, default: false },
-    createdAt: { type: Date, default: Date.now },
-    scheduledAt: {
-      type: Date,
-      default: function () {
-        return new Date(Date.now() + this.delay)
-      },
+const reminderSchema = new Schema<Reminder>({
+  guild: { type: Schema.Types.String, required: true, index: true },
+  channel: { type: Schema.Types.String, required: true },
+  name: { type: Schema.Types.String, required: true },
+  content: { type: Schema.Types.String, required: true },
+  mention: { type: Schema.Types.String },
+  delay: { type: Schema.Types.Number, required: true, min: 0 },
+  loop: { type: Schema.Types.Boolean, default: false },
+  createdAt: { type: Schema.Types.Date, default: Date.now },
+  scheduledAt: {
+    type: Schema.Types.Date,
+    index: true,
+    default() {
+      return new Date(Date.now() + this.delay)
     },
-  }),
-  {
-    guild: true,
-    scheduledAt: true,
   },
-)
+})
+
+export const reminders = defineModel("Reminders", reminderSchema)

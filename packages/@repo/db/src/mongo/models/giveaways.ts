@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import { Schema } from "mongoose"
 
 import { defineModel } from "~/mongo/utils"
 
@@ -23,22 +23,16 @@ export interface Giveaway {
   duration: string
 }
 
-export const giveaways = defineModel(
-  "Giveaways",
-  new mongoose.Schema<Giveaway>({
-    id: { type: String, required: true },
-    expires: { type: String, required: true },
-    expired: { type: Boolean, required: true },
-    channel: { type: String, required: true },
-    created: { type: String, required: true },
-    host: { type: String, required: true },
-    winners: { type: Number, required: true },
-    prize: { type: String, required: true },
-    duration: { type: String, required: true },
-  }),
-  {
-    id: { unique: true },
-    expires: true,
-    expired: true,
-  },
-)
+const giveawaySchema = new Schema<Giveaway>({
+  id: { type: Schema.Types.String, required: true, unique: true },
+  expires: { type: Schema.Types.String, required: true, index: true },
+  expired: { type: Schema.Types.Boolean, required: true, index: true },
+  channel: { type: Schema.Types.String, required: true },
+  created: { type: Schema.Types.String, required: true },
+  host: { type: Schema.Types.String, required: true },
+  winners: { type: Schema.Types.Number, required: true },
+  prize: { type: Schema.Types.String, required: true },
+  duration: { type: Schema.Types.String, required: true },
+})
+
+export const giveaways = defineModel("Giveaways", giveawaySchema)

@@ -2,7 +2,7 @@ import { BaseStore } from "@phasejs/core/stores"
 
 import { db } from "~/lib/db"
 
-import type { Config, mongoose } from "~/lib/db"
+import type { Config, mongo } from "~/types/db"
 
 export class ConfigStore extends BaseStore implements Config {
   public readonly status!: Config["status"]
@@ -19,19 +19,16 @@ export class ConfigStore extends BaseStore implements Config {
 
     db.configs
       .watch([], { fullDocument: "updateLookup" })
-      .on(
-        "change",
-        (change: mongoose.mongo.ChangeStreamDocument<typeof configObj>) => {
-          if (!("documentKey" in change)) return
+      .on("change", (change: mongo.ChangeStreamDocument<typeof configObj>) => {
+        if (!("documentKey" in change)) return
 
-          if (change.operationType === "delete") {
-            throw new Error("Not implemented")
-          } else {
-            const fullDocument = change.fullDocument!
-            Reflect.set(this, "config", fullDocument)
-          }
-        },
-      )
+        if (change.operationType === "delete") {
+          throw new Error("Not implemented")
+        } else {
+          const fullDocument = change.fullDocument!
+          Reflect.set(this, "config", fullDocument)
+        }
+      })
 
     return this
   }

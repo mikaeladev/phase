@@ -18,7 +18,7 @@ import type {
   RESTPostAPIChannelMessageJSONBody,
 } from "@discordjs/core/http-only"
 import type { ModulesFormValuesOutput } from "~/types/dashboard"
-import type { GuildModules, mongoose, Reminder } from "~/types/db"
+import type { Document, GuildModules, Reminder } from "~/types/db"
 
 const discordREST = new REST().setToken(env.DISCORD_TOKEN)
 const discordAPI = new API(discordREST)
@@ -134,7 +134,7 @@ export async function handleAutoMessagesModule(
   guildId: string,
   messages: GuildModules[ModuleId.AutoMessages]["messages"],
 ) {
-  const docsToInsert: mongoose.Document<unknown, {}, Reminder>[] = []
+  const docsToInsert: Document<unknown, {}, Reminder>[] = []
 
   for (const message of messages) {
     docsToInsert.push(

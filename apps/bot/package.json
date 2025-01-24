@@ -47,6 +47,7 @@
     "tailwindcss": "^3.4.17"
   },
   "peerDependencies": {
-    "@distube/ytdl-core": "^4.15.8"
+    "@distube/ytdl-core": "^4.15.8",
+    "mongoose": "^8.9.5"
   }
 }

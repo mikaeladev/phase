@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import { connect, connection, ConnectionStates, disconnect } from "mongoose"
 
 import { afks } from "~/mongo/models/afks"
 import { configs } from "~/mongo/models/configs"
@@ -10,7 +10,14 @@ import { otps } from "~/mongo/models/otps"
 import { reminders } from "~/mongo/models/reminders"
 import { tags } from "~/mongo/models/tags"
 
-class DatabaseModels {
+interface DatabaseConfig {
+  autoIndex?: boolean
+  debug?: boolean
+}
+
+class Database implements Disposable {
+  #options: DatabaseConfig
+
   readonly afks = afks
   readonly configs = configs
   readonly giveaways = giveaways
@@ -20,40 +27,29 @@ class DatabaseModels {
   readonly otps = otps
   readonly reminders = reminders
   readonly tags = tags
-}
-
-interface DatabaseConfig {
-  autoIndex?: boolean
-  debug?: boolean
-}
-
-class Database extends DatabaseModels implements Disposable {
-  #options: DatabaseConfig
 
   constructor(config?: DatabaseConfig) {
-    super()
     this.#options = config ?? {}
   }
 
   async connect(uri: string) {
     this.#debug("Initialising database")
 
-    if (
-      mongoose.connection.readyState === mongoose.ConnectionStates.connected
-    ) {
+    if (connection.readyState === ConnectionStates.connected) {
       this.#debug("Reusing existing connection to MongoDB")
-    } else {
-      this.#debug("Connecting to MongoDB")
+      return this
+    }
 
-      try {
-        await mongoose.connect(uri, {
-          autoIndex: this.#options.autoIndex,
-        })
-        this.#debug("Connected to MongoDB")
-      } catch (error) {
-        this.#debug(`Failed to connect to MongoDB: ${error as Error}`)
-        throw error
-      }
+    this.#debug("Connecting to MongoDB")
+
+    try {
+      await connect(uri, {
+        autoIndex: this.#options.autoIndex,
+      })
+      this.#debug("Connected to MongoDB")
+    } catch (error) {
+      this.#debug(`Failed to connect to MongoDB: ${error as Error}`)
+      throw error
     }
 
     return this
@@ -61,7 +57,7 @@ class Database extends DatabaseModels implements Disposable {
 
   async disconnect() {
     try {
-      await mongoose.disconnect()
+      await disconnect()
       this.#debug("Disconnected from MongoDB")
     } catch (error) {
       this.#debug(`Failed to disconnect from MongoDB: ${error as Error}`)
@@ -81,7 +77,7 @@ class Database extends DatabaseModels implements Disposable {
   }
 }
 
-export { Database, mongoose }
+export { Database }
 
 export type * from "~/mongo/models/afks"
 export type * from "~/mongo/models/analytics"

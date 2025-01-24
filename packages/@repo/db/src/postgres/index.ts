@@ -1,15 +1,17 @@
 import { drizzle } from "drizzle-orm/node-postgres"
 
-import { env } from "~/lib/env"
-
 import * as schemas from "~/postgres/schemas"
+
+interface DatabaseConfig {
+  uri: string
+}
 
 export class Database {
   public readonly uri
   public readonly drizzle
 
-  constructor() {
-    this.uri = env.POSTGRES_URI
+  constructor(config: DatabaseConfig) {
+    this.uri = config.uri
     this.drizzle = this.init()
   }
 

@@ -2,12 +2,13 @@ import { BaseKVStore } from "@phasejs/core/stores"
 
 import { db } from "~/lib/db"
 
-import type { Guild, mongoose } from "~/lib/db"
+import type { Guild, mongo, Types } from "~/types/db"
 import type { Client, Snowflake } from "discord.js"
 
-type WithId<T> = T & { _id: mongoose.Types.ObjectId }
+type GuildDoc = Guild & { _id: Types.ObjectId }
+type GuildChangeStreamDoc = mongo.ChangeStreamDocument<GuildDoc>
 
-export class GuildStore extends BaseKVStore<Snowflake, WithId<Guild>> {
+export class GuildStore extends BaseKVStore<Snowflake, GuildDoc> {
   public async init(client: Client) {
     if (this._init) return this
 
@@ -19,9 +20,6 @@ export class GuildStore extends BaseKVStore<Snowflake, WithId<Guild>> {
     for (const guild of guildObjs) {
       this.set(guild.id, guild)
     }
-
-    type GuildObject = (typeof guildObjs)[number]
-    type GuildChangeStreamDoc = mongoose.mongo.ChangeStreamDocument<GuildObject>
 
     db.guilds
       .watch([], { fullDocument: "updateLookup" })

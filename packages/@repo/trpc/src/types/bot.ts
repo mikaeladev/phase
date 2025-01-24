@@ -1,7 +1,8 @@
-import type { Config, Guild, mongoose } from "@repo/db"
+import type { Config, Guild } from "@repo/db"
 import type { Client, Collection, Snowflake } from "discord.js"
+import type { Types } from "mongoose"
 
-type WithId<T> = T & { _id: mongoose.Types.ObjectId }
+type GuildDoc = Guild & { _id: Types.ObjectId }
 
 export interface Streamer {
   id: string
@@ -33,7 +34,7 @@ type BaseKVStore<K, V> = Collection<K, V> & {
 }
 
 type ConfigStore = BaseStore & Config
-type GuildStore = BaseKVStore<Snowflake, WithId<Guild>>
+type GuildStore = BaseKVStore<Snowflake, GuildDoc>
 type StreamersStore = BaseKVStore<string, Streamer>
 
 export interface DjsClient<T extends boolean = boolean> extends Client<T> {

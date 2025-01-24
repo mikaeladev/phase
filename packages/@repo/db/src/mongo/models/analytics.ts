@@ -2,10 +2,8 @@ import { Schema } from "mongoose"
 
 import { defineModel } from "~/mongo/utils"
 
-import type { Snowflake } from "~/mongo/types"
-
 export interface Analytics {
-  id: Snowflake
+  id: string
   enabled: boolean
   members: MemberAnalytics[]
   messages: MessageAnalytics[]

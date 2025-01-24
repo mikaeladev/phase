@@ -56,5 +56,8 @@
   },
   "overrides": {
     "discord-api-types": "$discord-api-types"
+  },
+  "peerDependencies": {
+    "mongoose": "^8.9.5"
   }
 }

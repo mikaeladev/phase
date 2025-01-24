@@ -31,7 +31,7 @@ import {
 
 import { EmbedBuilder } from "~/structures/builders"
 
-import type { GuildModules } from "~/lib/db"
+import type { GuildModules } from "~/types/db"
 import type {
   APIEmbedField,
   APIOverwrite,

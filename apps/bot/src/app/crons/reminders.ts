@@ -4,7 +4,7 @@ import { EmbedBuilder } from "discord.js"
 import { db } from "~/lib/db"
 import { PhaseColour } from "~/lib/enums"
 
-import type { mongoose, Reminder } from "~/lib/db"
+import type { AnyBulkWriteOperation, Reminder } from "~/types/db"
 import type { GuildTextBasedChannel, MessageCreateOptions } from "discord.js"
 
 export default new BotCronBuilder()
@@ -16,7 +16,7 @@ export default new BotCronBuilder()
       scheduledAt: { $lt: now },
     })
 
-    const reminderDocWriteOps: mongoose.AnyBulkWriteOperation<Reminder>[] = []
+    const reminderDocWriteOps: AnyBulkWriteOperation<Reminder>[] = []
 
     const reminderMessagesToSend: [
       GuildTextBasedChannel,
