@@ -1,4 +1,4 @@
-import { connect, connection, ConnectionStates, disconnect } from "mongoose"
+import mongoose from "mongoose"
 
 import { afks } from "~/mongo/models/afks"
 import { configs } from "~/mongo/models/configs"
@@ -35,7 +35,9 @@ class Database implements Disposable {
   async connect(uri: string) {
     this.#debug("Initialising database")
 
-    if (connection.readyState === ConnectionStates.connected) {
+    if (
+      mongoose.connection.readyState === mongoose.ConnectionStates.connected
+    ) {
       this.#debug("Reusing existing connection to MongoDB")
       return this
     }
@@ -43,7 +45,7 @@ class Database implements Disposable {
     this.#debug("Connecting to MongoDB")
 
     try {
-      await connect(uri, {
+      await mongoose.connect(uri, {
         autoIndex: this.#options.autoIndex,
       })
       this.#debug("Connected to MongoDB")
@@ -57,7 +59,7 @@ class Database implements Disposable {
 
   async disconnect() {
     try {
-      await disconnect()
+      await mongoose.disconnect()
       this.#debug("Disconnected from MongoDB")
     } catch (error) {
       this.#debug(`Failed to disconnect from MongoDB: ${error as Error}`)
