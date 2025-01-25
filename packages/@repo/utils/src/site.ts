@@ -1,8 +1,20 @@
 import wwwConfig from "@repo/config/site/www/index.ts"
 import { clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { extendTailwindMerge } from "tailwind-merge"
 
 import type { ClassValue } from "clsx"
+
+const twMerge = extendTailwindMerge({
+  extend: {
+    classGroups: {
+      shadow: [
+        {
+          "shadow-glow": ["sm", "md", "lg"],
+        },
+      ],
+    },
+  },
+})
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))

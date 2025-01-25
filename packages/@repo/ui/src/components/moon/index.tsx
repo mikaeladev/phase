@@ -10,7 +10,7 @@ export const moonVariants = cva(undefined, {
     },
     variant: {
       default: undefined,
-      glow: "shadow-glow-sm! shadow-primary rounded-full",
+      glow: "shadow-glow-sm shadow-primary rounded-full",
     },
   },
   defaultVariants: {
