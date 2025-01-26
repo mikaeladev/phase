@@ -2,7 +2,7 @@ import * as SelectPrimitive from "@radix-ui/react-select"
 import { cn } from "@repo/utils/site"
 
 import { Icon } from "~/components/icon"
-import { CheckIcon } from "~/components/lucide-icon"
+import { CheckIcon, ChevronsUpDownIcon } from "~/components/lucide-icon"
 
 export const Select = SelectPrimitive.Root
 
@@ -28,7 +28,7 @@ export function SelectTrigger({
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <Icon className="opacity-50" icon={<CheckIcon />} />
+        <Icon className="opacity-50" icon={<ChevronsUpDownIcon />} />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   )
