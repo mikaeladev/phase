@@ -10,8 +10,15 @@ export const linkVariants = baseLinkVariants
 
 export interface LinkProps extends BaseLinkProps {}
 
-export function Link({ children, href, external, mfe, ...props }: LinkProps) {
-  const Comp = !mfe && !external ? "a" : NextLink
+export function Link({
+  children,
+  href,
+  disabled,
+  external,
+  mfe,
+  ...props
+}: LinkProps) {
+  const Comp = disabled ? "span" : !mfe && !external ? "a" : NextLink
 
   return (
     <BaseLink href={href} external={external} mfe={mfe} {...props}>

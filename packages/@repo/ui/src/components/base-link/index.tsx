@@ -29,6 +29,7 @@ export interface BaseLinkProps
     Pick<SlotProps, "children"> {
   href: string
   label?: string
+  disabled?: boolean
   external?: boolean
   mfe?: boolean
 }
@@ -38,6 +39,7 @@ export function BaseLink({
   variant,
   size,
   label,
+  disabled: _,
   external,
   mfe,
   ...props
