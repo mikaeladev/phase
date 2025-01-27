@@ -3,9 +3,9 @@
 import { use, useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "@repo/utils/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import { z } from "zod"
 
 import { Button } from "@repo/ui/button"
 import { Input } from "@repo/ui/input"

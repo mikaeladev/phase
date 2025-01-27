@@ -1,6 +1,6 @@
 import { EmbedBuilder, roleMention } from "discord.js"
 
-import { z } from "zod"
+import { z } from "@repo/utils/zod"
 
 import { authRouter } from "~/server/router/auth"
 import { guildsRouter } from "~/server/router/guilds"
@@ -15,8 +15,8 @@ export const appRouter = router({
         subject: z.string(),
         urgency: z.enum(["low", "medium", "high"]),
         body: z.string(),
-        guildId: z.string().optional(),
-        channelId: z.string().optional(),
+        guildId: z.string().snowflake().optional(),
+        channelId: z.string().snowflake().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {

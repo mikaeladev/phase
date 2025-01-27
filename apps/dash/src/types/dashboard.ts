@@ -1,9 +1,9 @@
 import type { client } from "@repo/trpc/client"
 import type { ModuleId } from "@repo/utils/modules"
+import type { z } from "@repo/utils/zod"
 import type { GuildModules } from "~/types/db"
 import type { modulesSchema } from "~/validators/modules"
 import type { UseFormReturn } from "react-hook-form"
-import type { z } from "zod"
 
 export interface GuildModulesDataFields {
   [ModuleId.TwitchNotifications]: {

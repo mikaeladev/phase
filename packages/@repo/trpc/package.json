@@ -24,8 +24,7 @@
     "@repo/env": "workspace:*",
     "@repo/utils": "workspace:*",
     "@trpc/client": "^11.0.0-rc.700",
-    "@trpc/server": "^11.0.0-rc.700",
-    "zod": "^3.23.8"
+    "@trpc/server": "^11.0.0-rc.700"
   },
   "devDependencies": {
     "@repo/db": "workspace:*"

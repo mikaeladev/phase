@@ -2,10 +2,10 @@
 
 import { auth } from "@repo/auth"
 import { ModuleId } from "@repo/utils/modules"
+import { z } from "@repo/utils/zod"
 
 import { db } from "~/lib/db"
 import { env } from "~/lib/env"
-import { zod } from "~/lib/zod"
 
 import {
   handleAutoMessagesModule,
@@ -30,7 +30,7 @@ export async function updateModules(
   unsafeDirtyFields: ModuleId[],
 ) {
   const userId = (await auth())!.user.id
-  const guildId = zod.string().snowflake().parse(unsafeGuildId)
+  const guildId = z.string().snowflake().parse(unsafeGuildId)
 
   await db.connect(env.MONGODB_URI)
 

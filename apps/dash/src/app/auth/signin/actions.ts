@@ -1,7 +1,7 @@
 "use server"
 
 import { signIn } from "@repo/auth"
-import { z } from "zod"
+import { z } from "@repo/utils/zod"
 
 export async function signInWithDiscord() {
   await signIn("discord", { redirectTo: "/dashboard/guilds" })
