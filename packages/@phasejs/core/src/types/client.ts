@@ -10,8 +10,6 @@ import type { BotPrestart } from "~/types/prestart"
 import type { BotStore } from "~/types/stores"
 import type { Client } from "discord.js"
 
-import type {} from "discord.js"
-
 declare module "discord.js" {
   interface Client {
     phase: BotClient
