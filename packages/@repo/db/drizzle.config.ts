@@ -1,12 +1,14 @@
 import { defineConfig } from "drizzle-kit"
 
-import { env } from "~/lib/env"
+if (!process.env.POSTGRES_URI) {
+  throw new Error("POSTGRES_URI is not set.")
+}
 
 export default defineConfig({
   out: "./drizzle",
   schema: "./src/postgres/schemas/**/*",
   dialect: "postgresql",
   dbCredentials: {
-    url: env.POSTGRES_URI,
+    url: process.env.POSTGRES_URI,
   },
 })
