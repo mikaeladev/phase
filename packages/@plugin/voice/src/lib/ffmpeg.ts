@@ -1,6 +1,6 @@
 import ffmpegPath from "ffmpeg-static"
-import ffmpeg from "fluent-ffmpeg"
+import ffmpeg, { setFfmpegPath } from "fluent-ffmpeg"
 
-ffmpeg.setFfmpegPath(ffmpegPath!)
+setFfmpegPath(ffmpegPath!)
 
 export { ffmpeg }
