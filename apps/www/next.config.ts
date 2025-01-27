@@ -13,15 +13,10 @@ export default {
         permanent: false,
       },
       {
-        // dashboard oauth
-        source: "/redirect/oauth",
-        destination: `https://discord.com/api/oauth2/authorize?client_id=${env.DISCORD_ID}&response_type=code&scope=identify&redirect_uri=${env.NEXT_PUBLIC_BASE_URL}/dashboard/guilds`,
-        permanent: false,
-      },
-      {
         // bot invite
         source: "/redirect/invite",
-        destination: `https://discord.com/oauth2/authorize?client_id=${env.DISCORD_ID}&response_type=code&scope=bot%20applications.commands&permissions=17666911472`,
+        destination:
+          "https://discord.com/oauth2/authorize?client_id=1078305837245796483&response_type=code&scope=bot%20applications.commands&permissions=17666911472",
         permanent: false,
       },
       {

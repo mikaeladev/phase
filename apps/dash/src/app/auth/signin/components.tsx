@@ -16,7 +16,7 @@ import {
 } from "~/components/auth/input-otp"
 import { OrSeparator } from "~/components/auth/or-separator"
 
-import { signInWithDiscord, signInWithOTP } from "~/app/auth/actions"
+import { signInWithDiscord, signInWithOTP } from "./actions"
 
 export function SignInMethods() {
   const [isOAuthLoading, setIsOAuthLoading] = React.useState(false)

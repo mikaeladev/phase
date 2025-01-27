@@ -1,7 +1,6 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 
-import wwwConfig from "@repo/config/site/www/index.ts"
-import { authjs, discord, mergeEnvs, nextBaseOptions } from "@repo/env"
+import { dash } from "@repo/env"
 import { client } from "@repo/trpc/client"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
@@ -10,20 +9,22 @@ import DiscordProvider from "next-auth/providers/discord"
 import type { NextAuthResult, Profile, Session } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 
-const env = mergeEnvs(authjs(nextBaseOptions), discord(nextBaseOptions))
+const env = dash()
+const isProd = env.NEXT_PUBLIC_BASE_URL.startsWith("https")
 
 const nextAuth = NextAuth({
+  basePath: "/dashboard/auth/internal",
   secret: env.AUTH_COOKIE_SECRET,
   cookies: {
     sessionToken: {
       options: {
-        secure: !!process.env.VERCEL,
+        secure: isProd,
       },
     },
   },
   pages: {
-    signIn: "/auth/signin",
-    error: "/auth/error",
+    signIn: "/dashboard/auth/signin",
+    error: "/dashboard/auth/error",
   },
   providers: [
     DiscordProvider({
@@ -72,16 +73,16 @@ const nextAuth = NextAuth({
       return session
     },
     authorized({ request, auth }) {
-      const { method, nextUrl } = request
-      const { pathname } = nextUrl
+      const { method, url: urlString } = request
+      const url = new URL(urlString)
 
       if (!auth?.user) {
-        if (pathname === "/auth/signin") {
+        if (url.pathname === "/dashboard/auth/signin") {
           return NextResponse.next()
         }
 
         return method === "GET"
-          ? NextResponse.redirect(`${wwwConfig.url}/auth/signin`)
+          ? NextResponse.redirect(new URL("/dashboard/auth/signin", url))
           : NextResponse.json("Missing user credentials", { status: 401 })
       }
 
@@ -90,11 +91,37 @@ const nextAuth = NextAuth({
   },
 })
 
-// exports //
-
 export type {} from "~/types"
 
 export const auth: NextAuthResult["auth"] = nextAuth.auth
 export const signIn: NextAuthResult["signIn"] = nextAuth.signIn
 export const signOut: NextAuthResult["signOut"] = nextAuth.signOut
-export const handlers: NextAuthResult["handlers"] = nextAuth.handlers
+
+// base path bodge taken from here:
+// https://github.com/nextauthjs/next-auth/discussions/12160
+
+function rewriteRequest(request: NextRequest) {
+  const { headers, nextUrl } = request
+  const { protocol, host, pathname, search } = nextUrl
+
+  const detectedHost = headers.get("x-forwarded-host") ?? host
+  const detectedProtocol = headers.get("x-forwarded-proto") ?? protocol
+  const _protocol = detectedProtocol.endsWith(":")
+    ? detectedProtocol
+    : detectedProtocol + ":"
+
+  const url = new URL(
+    `${_protocol}//${detectedHost}/dashboard${pathname}${search}`,
+  )
+
+  return new NextRequest(url, request)
+}
+
+export const handlers: NextAuthResult["handlers"] = {
+  async GET(request) {
+    return await nextAuth.handlers.GET(rewriteRequest(request))
+  },
+  async POST(request) {
+    return await nextAuth.handlers.POST(rewriteRequest(request))
+  },
+}

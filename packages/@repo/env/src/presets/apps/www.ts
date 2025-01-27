@@ -3,20 +3,13 @@ import { z } from "zod"
 
 import { nextBaseOptions } from "~/lib/constants"
 
-import { authjs } from "~/presets/authjs"
 import { base } from "~/presets/base"
-import { discord } from "~/presets/discord"
 import { trpcClient } from "~/presets/trpc"
 
 export function www() {
   return createEnv({
     ...nextBaseOptions,
-    extends: [
-      base(nextBaseOptions),
-      trpcClient(nextBaseOptions),
-      discord(nextBaseOptions),
-      authjs(nextBaseOptions),
-    ],
+    extends: [base(nextBaseOptions), trpcClient(nextBaseOptions)],
     server: {
       DASH_URL: z.string().url(),
       DOCS_URL: z.string().url(),
