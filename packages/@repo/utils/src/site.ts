@@ -22,7 +22,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function absoluteURL(path: string, includeMFEBase = true) {
   const basePathname = includeMFEBase ? mfeBase() : ""
-  return new URL(`${basePathname}/${path}`, wwwConfig.url).href
+  return new URL(`${basePathname}${path}`, wwwConfig.url).href
 }
 
 export function mfeName() {
