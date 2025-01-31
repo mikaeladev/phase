@@ -139,6 +139,11 @@
       "import": "./dist/components/moon/index.js",
       "require": "./dist/components/moon/index.js"
     },
+    "./not-found": {
+      "types": "./dist/components/not-found/index.d.ts",
+      "import": "./dist/components/not-found/index.js",
+      "require": "./dist/components/not-found/index.js"
+    },
     "./orbiting-dots": {
       "types": "./dist/components/orbiting-dots/index.d.ts",
       "import": "./dist/components/orbiting-dots/index.js",
