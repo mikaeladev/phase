@@ -24,6 +24,7 @@ const entries = Object.fromEntries(
 
 const externals = [
   "@repo/config",
+  "@repo/utils",
   "@icons-pack/react-simple-icons",
   "lucide-react",
   "react",
