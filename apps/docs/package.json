@@ -9,21 +9,24 @@
     "preview": "bun run build && bun run start"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.3",
-    "@astrojs/react": "^4.1.2",
+    "@astrojs/mdx": "^4.0.8",
+    "@astrojs/react": "^4.2.0",
     "@fontsource/geist-mono": "^5.1.1",
     "@fontsource/geist-sans": "^5.1.0",
     "@repo/env": "workspace:*",
     "@repo/ui": "workspace:*",
     "@repo/utils": "workspace:*",
-    "astro": "^5.1.2",
+    "astro": "^5.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.0.0-beta.9",
-    "@types/react": "^19.0.2",
-    "@types/react-dom": "^19.0.2",
-    "tailwindcss": "^4.0.0-beta.9"
+    "@tailwindcss/vite": "^4.0.2",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "tailwindcss": "^4.0.2"
+  },
+  "peerDependencies": {
+    "vite": "^6"
   }
 }
