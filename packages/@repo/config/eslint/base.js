@@ -15,6 +15,12 @@ const importPluginConfig = tseslint.config(
           packageDir: ["./", "../../", "../../../"],
         },
       ],
+      "import-x/no-unresolved": [
+        "error",
+        {
+          ignore: ["^astro(:\\w+)?$"],
+        },
+      ],
     },
   },
 )
