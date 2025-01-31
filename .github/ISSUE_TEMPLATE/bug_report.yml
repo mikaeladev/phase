@@ -16,7 +16,8 @@ body:
     id: expected_behaviour
     attributes:
       label: "Expected behaviour"
-      description: "A clear and concise description of what you expected to happen."
+      description:
+        "A clear and concise description of what you expected to happen."
       placeholder: "Expected behaviour here"
     validations:
       required: true
@@ -25,7 +26,8 @@ body:
     id: current_behaviour
     attributes:
       label: "Current behaviour"
-      description: "A clear and concise description of what is currently happening."
+      description:
+        "A clear and concise description of what is currently happening."
       placeholder: "Current behaviour here"
     validations:
       required: true
@@ -47,7 +49,8 @@ body:
     id: screenshots
     attributes:
       label: "Screenshots"
-      description: "If applicable, add screenshots to help explain your problem."
+      description:
+        "If applicable, add screenshots to help explain your problem."
       placeholder: "Add a link to screenshots or images here"
 
   - type: textarea
