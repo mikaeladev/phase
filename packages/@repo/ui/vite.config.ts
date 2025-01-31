@@ -56,6 +56,7 @@ export default defineConfig({
       include: [
         "src/components/*/index.tsx",
         "src/types/declarations/**/*.d.ts",
+        "src/types/utils.ts",
       ],
     }),
     {

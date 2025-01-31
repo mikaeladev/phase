@@ -1,6 +1,6 @@
 import "~/styles/globals.css"
 
-import siteConfig from "@repo/config/site/www/index.ts"
+import wwwConfig from "@repo/config/site/www/index.ts"
 import { cn } from "@repo/utils/site"
 import { Analytics } from "@vercel/analytics/react"
 /* eslint-disable import-x/no-unresolved */
@@ -13,53 +13,58 @@ import type { LayoutProps } from "~/types/props"
 import type { Metadata, Viewport } from "next"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title: { default: siteConfig.title, template: `%s - ${siteConfig.title}` },
-  description: siteConfig.description,
-  authors: siteConfig.developer,
-  creator: siteConfig.developer.name,
-  keywords: siteConfig.keywords,
+  metadataBase: new URL(wwwConfig.url),
+  title: {
+    default: wwwConfig.title,
+    template: `%s - ${wwwConfig.title}`,
+  },
+  description: wwwConfig.description,
+  authors: wwwConfig.developer,
+  creator: wwwConfig.developer.name,
+  keywords: wwwConfig.keywords,
   icons: {
-    apple: siteConfig.images.apple.toString(),
+    icon: wwwConfig.images.favicon,
+    apple: wwwConfig.images.apple,
+    shortcut: wwwConfig.images.logo,
   },
   openGraph: {
-    url: siteConfig.url,
-    title: siteConfig.title,
-    description: siteConfig.description,
-    siteName: siteConfig.title,
+    url: wwwConfig.url,
+    title: wwwConfig.title,
+    description: wwwConfig.description,
+    siteName: wwwConfig.title,
     type: "website",
     locale: "en_GB",
     images: {
-      url: siteConfig.images.logo.toString(),
+      url: wwwConfig.images.logo,
+      alt: wwwConfig.title,
       width: 512,
       height: 512,
-      alt: siteConfig.title,
     },
   },
   twitter: {
     card: "summary",
-    title: siteConfig.title,
-    description: siteConfig.description,
-    images: siteConfig.images.logo.toString(),
+    title: wwwConfig.title,
+    description: wwwConfig.description,
+    images: wwwConfig.images.logo,
   },
-} satisfies Metadata
+}
 
 export const viewport: Viewport = {
   colorScheme: "dark",
-  themeColor: "#f8f8f8", // used in rich embeds
-} satisfies Viewport
+  themeColor: "#f8f8f8",
+  initialScale: 1,
+  maximumScale: 1,
+}
 
 export default function RootLayout({ children }: LayoutProps) {
+  const geistFonts = [GeistSans.variable, GeistMono.variable]
+
   return (
     <html
       lang="en"
-      className={cn(
-        "bg-background text-foreground scheme-dark",
-        GeistSans.variable,
-        GeistMono.variable,
-      )}
+      className={cn("bg-background text-foreground scheme-dark", geistFonts)}
     >
-      <body className="font-sans tracking-tighter antialiased">
+      <body className="flex min-h-screen flex-col font-sans tracking-tighter antialiased">
         {children}
         <Analytics />
       </body>
