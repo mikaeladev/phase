@@ -1,16 +1,14 @@
-import { getCollection } from "astro:content"
+import { getCollection } from "~/lib/content"
 
+import type { AnyCollectionEntry } from "~/lib/content"
 import type {
   SidebarNavCategoryChild,
   SidebarNavItems,
   SidebarNavPage,
 } from "~/types/sidebar"
-import type { AnyEntryMap } from "astro:content"
 
-type Entry = AnyEntryMap[keyof AnyEntryMap][string]
-
-function parseEntries(entries: Entry[]) {
-  const pageEntries: Entry[] = []
+function parseEntries(entries: AnyCollectionEntry[]) {
+  const pageEntries: AnyCollectionEntry[] = []
 
   const subcategoryMap = entries.reduce(
     (acc, entry) => {
@@ -27,13 +25,14 @@ function parseEntries(entries: Entry[]) {
 
       return acc
     },
-    {} as Record<string, Entry[]>,
+    {} as Record<string, AnyCollectionEntry[]>,
   )
 
-  const compareEntries = (a: Entry, b: Entry) =>
-    (a.data.navOptions?.priority ?? 0) - (b.data.navOptions?.priority ?? 0)
+  const compareEntries = (a: AnyCollectionEntry, b: AnyCollectionEntry) =>
+    (a.data.metadata?.sidebarPriority ?? 0) -
+    (b.data.metadata?.sidebarPriority ?? 0)
 
-  const createChild = (entry: Entry): SidebarNavPage => ({
+  const createChild = (entry: AnyCollectionEntry): SidebarNavPage => ({
     type: "page" as const,
     label: entry.data.title,
     href: `/docs/${entry.collection}${entry.id === "/" ? "" : `/${entry.id}`}`,
