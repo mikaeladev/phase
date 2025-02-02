@@ -60,20 +60,28 @@ interface SidebarSubcategoryProps {
 }
 
 function SidebarSubcategory(props: SidebarSubcategoryProps) {
-  const startExpanded = props.subcategory.children.some(
-    (child) => child.href === props.pathname,
-  )
+  const startExpanded =
+    props.subcategory.href === props.pathname ||
+    props.subcategory.children.some((child) => child.href === props.pathname)
 
   return (
     <li>
       <details className="group" open={startExpanded}>
-        <summary className="flex cursor-pointer items-center gap-2">
-          <span className="text-muted-foreground hover:text-foreground text-sm transition-colors">
+        <summary
+          className="group flex cursor-pointer items-center gap-2"
+          data-active={props.pathname === props.subcategory.href}
+        >
+          <Link
+            href={props.subcategory.href}
+            label={props.subcategory.label}
+            variant={"hover"}
+            className="group-data-[active='true']:text-foreground text-sm"
+          >
             {props.subcategory.label}
-          </span>
+          </Link>
           <Icon
             icon={<ChevronRightIcon />}
-            className="opacity-75 transition-transform group-open:rotate-90"
+            className="opacity-75 transition-transform group-group-open:rotate-90"
           />
         </summary>
         <ul className="border-muted-foreground/25 my-2 ml-1 flex flex-col border-l pl-3">

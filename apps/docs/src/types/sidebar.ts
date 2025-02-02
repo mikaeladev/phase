@@ -7,6 +7,7 @@ export interface SidebarNavCategory {
 export interface SidebarNavSubcategory {
   type: "subcategory"
   label: string
+  href: string
   children: SidebarNavPage[]
 }
 

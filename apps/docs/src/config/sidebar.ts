@@ -45,7 +45,11 @@ function parseEntries(entries: AnyCollectionEntry[]) {
       label: key
         .replace(/-/g, " ")
         .replace(/\b\w/g, (char) => char.toUpperCase()),
-      children: entries.sort(compareEntries).map(createChild),
+      href: `/docs/${entries[0]!.collection}/${key}`,
+      children: entries
+        .filter((entry) => entry.id !== `${key}/`)
+        .sort(compareEntries)
+        .map(createChild),
     })),
   ]
 
