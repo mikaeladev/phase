@@ -29,8 +29,8 @@ function parseEntries(entries: AnyCollectionEntry[]) {
   )
 
   const compareEntries = (a: AnyCollectionEntry, b: AnyCollectionEntry) =>
-    (a.data.metadata?.sidebarPriority ?? 0) -
-    (b.data.metadata?.sidebarPriority ?? 0)
+    (a.data.metadata?.sidebarPriority ?? Infinity) -
+    (b.data.metadata?.sidebarPriority ?? Infinity)
 
   const createChild = (entry: AnyCollectionEntry): SidebarNavPage => ({
     type: "page" as const,
