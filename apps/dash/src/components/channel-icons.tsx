@@ -38,11 +38,11 @@ export const channelIcons: Record<AllowedChannelType, React.FC> = {
   [ChannelType.GuildVoice]: Volume2Icon,
 }
 
-export interface ChannelIconProps extends Omit<IconProps, "icon"> {
+export interface ChannelIconProps extends Omit<IconProps, "icon" | "children"> {
   channelType: AllowedChannelType
 }
 
 export function ChannelIcon({ channelType, ...props }: ChannelIconProps) {
   const ChannelIcon = channelIcons[channelType]
-  return <Icon icon={ChannelIcon} {...props} />
+  return <Icon icon={<ChannelIcon />} {...props} />
 }
