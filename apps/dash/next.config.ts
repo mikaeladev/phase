@@ -1,18 +1,16 @@
-import { env } from "~/lib/env"
+import wwwConfig from "@repo/config/site/www/index.ts"
 
 import type { NextConfig } from "next"
+
+const protocolRegex = /^https?:\/\//
+const proxyOrigin = wwwConfig.url.replace(protocolRegex, "")
 
 export default {
   transpilePackages: ["@repo/ui"],
   basePath: "/dashboard",
   experimental: {
     serverActions: {
-      // uses getter to allow linting in CI where env is not set
-      get allowedOrigins() {
-        const protocolRegex = /^https?:\/\//
-        const proxyOrigin = env.NEXT_PUBLIC_BASE_URL.replace(protocolRegex, "")
-        return [proxyOrigin]
-      },
+      allowedOrigins: [proxyOrigin],
     },
   },
 } satisfies NextConfig

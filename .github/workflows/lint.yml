@@ -16,6 +16,7 @@ jobs:
       TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       SKIP_ENV_VALIDATION: true
+      BASE_URL: https://phasebot.xyz
 
     steps:
       - name: Checkout code
