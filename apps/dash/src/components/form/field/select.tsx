@@ -64,7 +64,7 @@ export function FormFieldSelect<
                     className="w-full justify-between gap-2 px-3 py-1.5 font-normal"
                   >
                     <span className="flex items-center gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0">
-                      {currentItem?.icon && <Icon name={currentItem.icon} />}
+                      {currentItem?.icon && <Icon icon={currentItem.icon} />}
                       {currentItem?.label ??
                         props.placeholder ??
                         "Select an item"}
@@ -82,7 +82,7 @@ export function FormFieldSelect<
                       onClick={() => field.onChange(item.value)}
                       className="flex items-center"
                     >
-                      {item.icon && <Icon name={item.icon} />}
+                      {item.icon && <Icon icon={item.icon} />}
                       {item.label}
                       {item.value === currentItem?.value && (
                         <Icon
