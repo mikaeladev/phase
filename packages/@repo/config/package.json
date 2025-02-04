@@ -6,6 +6,18 @@
   "exports": {
     "./*": "./*",
     "./prettier": "./prettier/base.json",
+    "./site/dash": {
+      "import": "./site/dash/index.ts",
+      "require": "./site/dash/index.cts"
+    },
+    "./site/docs": {
+      "import": "./site/docs/index.ts",
+      "require": "./site/docs/index.cts"
+    },
+    "./site/www": {
+      "import": "./site/www/index.ts",
+      "require": "./site/www/index.cts"
+    },
     "./typescript": "./typescript/base.json",
     "./typescript/*": "./typescript/*"
   },
