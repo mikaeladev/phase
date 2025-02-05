@@ -99,3 +99,82 @@
     max-width: 1400px;
   }
 }
+
+/* components */
+
+@layer components {
+  .prose h1:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) h1 {
+    @apply my-2 scroll-m-20 text-4xl font-bold tracking-tight;
+  }
+
+  .prose h2:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) h2 {
+    @apply mt-12 scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0;
+  }
+
+  .prose h3:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) h3 {
+    @apply mt-8 scroll-m-20 text-xl font-semibold tracking-tight;
+  }
+
+  .prose h4:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) h4 {
+    @apply mt-8 scroll-m-20 text-lg font-semibold tracking-tight;
+  }
+
+  .prose h5:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) h5 {
+    @apply mt-8 scroll-m-20 text-lg font-semibold tracking-tight;
+  }
+
+  .prose h6:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) h6 {
+    @apply mt-8 scroll-m-20 text-base font-semibold tracking-tight;
+  }
+
+  .prose hr:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) hr {
+    @apply my-4 md:my-8;
+  }
+
+  .prose img:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) img {
+    @apply rounded-md;
+  }
+
+  .prose a:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) a {
+    @apply font-medium underline underline-offset-2;
+  }
+
+  .prose p:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) p {
+    @apply mt-6 leading-7 first-of-type:mt-0;
+  }
+
+  .prose ul:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) ul {
+    @apply my-6 ml-6 list-disc;
+  }
+
+  .prose ol:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) ol {
+    @apply my-6 ml-6 list-decimal;
+  }
+
+  .prose li:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) li {
+    @apply mt-2;
+  }
+
+  .prose blockquote:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) blockquote {
+    @apply text-muted-foreground mt-6 border-l-2 pl-6;
+  }
+
+  .prose code:not(:has(.no-prose)),
+  .prose :not(:has(.no-prose)) code {
+    @apply text-foreground bg-muted/50 mx-[0.25ch] inline-block rounded-[4px] border px-1 font-mono text-sm;
+  }
+}
