@@ -51,15 +51,15 @@ export default {
       },
       {
         // terms page
-        source: "/terms",
-        destination: "/docs/terms",
-        permanent: false,
+        source: "/docs/terms",
+        destination: "/terms",
+        permanent: true,
       },
       {
         // privacy page
-        source: "/privacy",
-        destination: "/docs/privacy",
-        permanent: false,
+        source: "/docs/privacy",
+        destination: "/privacy",
+        permanent: true,
       },
     ]
   },
