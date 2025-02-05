@@ -4,12 +4,11 @@ import { Button } from "@repo/ui/button"
 import { Icon } from "@repo/ui/icon"
 import { ArrowRightIcon, PartyPopperIcon } from "@repo/ui/lucide-icon"
 import { OrbitingDots } from "@repo/ui/orbiting-dots"
-import { HeaderFooterLayout } from "~/components/layouts"
 import { Link } from "~/components/link"
 
 export default function HomePage() {
   return (
-    <HeaderFooterLayout className="container grid place-items-center">
+    <div className="container grid grow place-items-center">
       <div className="fixed top-1/2 left-1/2 -z-10 -translate-x-1/2 -translate-y-1/2">
         <OrbitingDots size={"screen"} />
       </div>
@@ -56,6 +55,6 @@ export default function HomePage() {
           </Button>
         </div>
       </section>
-    </HeaderFooterLayout>
+    </div>
   )
 }

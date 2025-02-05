@@ -1,5 +1,4 @@
 import { NotFound } from "@repo/ui/not-found"
-import { HeaderOnlyLayout } from "~/components/layouts"
 
 import type { Metadata } from "next"
 
@@ -10,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function NotFoundPage() {
   return (
-    <HeaderOnlyLayout className="grid place-content-center">
+    <div className="grid grow place-items-center">
       <NotFound />
-    </HeaderOnlyLayout>
+    </div>
   )
 }
