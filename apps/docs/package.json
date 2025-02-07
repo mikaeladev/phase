@@ -11,8 +11,6 @@
   "dependencies": {
     "@astrojs/mdx": "^4.0.8",
     "@astrojs/react": "^4.2.0",
-    "@fontsource/geist-mono": "^5.1.1",
-    "@fontsource/geist-sans": "^5.1.0",
     "@repo/env": "workspace:*",
     "@repo/ui": "workspace:*",
     "@repo/utils": "workspace:*",

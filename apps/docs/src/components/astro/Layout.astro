@@ -46,6 +46,44 @@ const { title, description } = frontmatter
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f8f8f8" />
 
+    <link
+      as="font"
+      rel="preload"
+      type="font/woff2"
+      href="/docs/fonts/geist-sans.woff2"
+      crossorigin=""
+    />
+    <link
+      as="font"
+      rel="preload"
+      type="font/woff2"
+      href="/docs/fonts/geist-mono.woff2"
+      crossorigin=""
+    />
+
+    <style>
+      @font-face {
+        font-family: "Geist Sans";
+        src: url("/docs/fonts/geist-sans.woff2") format("woff2");
+        font-weight: 100 900;
+        font-display: swap;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Geist Mono";
+        src: url("/docs/fonts/geist-mono.woff2") format("woff2");
+        font-weight: 100 900;
+        font-display: swap;
+        font-style: normal;
+      }
+
+      :root {
+        --font-geist-sans: "Geist Sans", sans-serif;
+        --font-geist-mono: "Geist Mono", monospace;
+      }
+    </style>
+
     <ClientRouter />
   </head>
   <body

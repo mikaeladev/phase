@@ -2,16 +2,3 @@
 @import "@repo/config/tailwind/site.css";
 
 @source "../../../../node_modules/@repo/ui/dist/**/*.js";
-
-@layer base {
-  @import "@fontsource/geist-mono/400.css";
-  @import "@fontsource/geist-sans/400.css";
-  @import "@fontsource/geist-sans/500.css";
-  @import "@fontsource/geist-sans/600.css";
-  @import "@fontsource/geist-sans/700.css";
-
-  :root {
-    --font-geist-sans: "Geist Sans", sans-serif;
-    --font-geist-mono: "Geist Mono", monospace;
-  }
-}
