@@ -1,0 +1,88 @@
+---
+import { Icon } from "@repo/ui/icon"
+import { ChevronRightIcon } from "@repo/ui/lucide-icon"
+import { Link } from "~/components/react/link"
+
+import { getSidebarNavItems } from "~/config/sidebar"
+
+import type { SidebarNavSubcategory } from "~/types/sidebar"
+
+// the base path isnt included on vercel for some reason
+const pathname = Astro.url.pathname.startsWith("/docs")
+  ? Astro.url.pathname
+  : `/docs${Astro.url.pathname}`
+
+const navItems = await getSidebarNavItems()
+
+function startExpanded(subcategory: SidebarNavSubcategory) {
+  return (
+    subcategory.href === pathname ||
+    subcategory.children.some((child) => child.href === pathname)
+  )
+}
+---
+
+<nav class="space-y-6">
+  {
+    navItems.map((category) => (
+      <div class="px-2">
+        <h4 class="text-sm leading-6 font-semibold">{category.label}</h4>
+        <ul class="mt-1 flex flex-col space-y-2">
+          {category.children.map((child) =>
+            child.type === "subcategory" ? (
+              <li>
+                <details class="group" open={startExpanded(child)}>
+                  <summary
+                    class="group flex cursor-pointer items-center gap-2"
+                    data-active={pathname === child.href}
+                  >
+                    <Link
+                      href={child.href}
+                      label={child.label}
+                      variant={"hover"}
+                      className="group-data-[active='true']:text-foreground text-sm"
+                    >
+                      {child.label}
+                    </Link>
+                    <Icon
+                      icon={ChevronRightIcon}
+                      className="opacity-75 transition-transform group-group-open:rotate-90"
+                    />
+                  </summary>
+                  <ul class="my-2 ml-px flex flex-col">
+                    {child.children.map((page) => (
+                      <li
+                        class="group data-[active='true']:border-muted-foreground border-l"
+                        data-active={pathname === page.href}
+                      >
+                        <Link
+                          href={page.href}
+                          label={page.label}
+                          variant={"hover"}
+                          className="group-data-[active='true']:text-foreground pl-3 text-sm"
+                        >
+                          {page.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
+            ) : (
+              <li class="group" data-active={pathname === child.href}>
+                <Link
+                  href={child.href}
+                  label={child.label}
+                  variant={"hover"}
+                  className="group-data-[active='true']:text-foreground text-sm"
+                >
+                  {child.label}
+                </Link>
+              </li>
+            )
+          )}
+        </ul>
+      </div>
+    ))
+  }
+</nav>
