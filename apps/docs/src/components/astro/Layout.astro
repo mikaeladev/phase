@@ -3,6 +3,8 @@ import "~/styles/globals.css"
 
 import { ClientRouter } from "astro:transitions"
 
+import docsConfig from "@repo/config/site/docs"
+
 import Breadcrumbs from "~/components/astro/Breadcrumbs.astro"
 import { Header } from "~/components/react/header.tsx"
 import { Sidebar } from "~/components/react/sidebar.tsx"
@@ -31,20 +33,16 @@ const { title, description } = frontmatter
 <html lang="en" class="bg-background text-foreground scheme-dark">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href={`${env.PUBLIC_BASE_URL}/favicon.ico`}
-    />
-
-    <title>{title} - Docs</title>
 
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f8f8f8" />
+
+    <link rel="icon" type="image/x-icon" href={docsConfig.images.favicon} />
+
+    <title>{title} - {docsConfig.title}</title>
 
     <link
       as="font"
