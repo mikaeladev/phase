@@ -1,9 +1,12 @@
 ---
 import "~/styles/globals.css"
 
+import { color } from "bun"
+
 import { ClientRouter } from "astro:transitions"
 
 import docsConfig from "@repo/config/site/docs"
+import { SEO } from "astro-seo"
 
 import Breadcrumbs from "~/components/astro/Breadcrumbs.astro"
 import Header from "~/components/astro/Header.astro"
@@ -21,31 +24,74 @@ const { title, description } = frontmatter
 
 <html lang="en" class="bg-background text-foreground scheme-dark">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-
-    <meta name="title" content={title} />
-    <meta name="description" content={description} />
-    <meta name="theme-color" content="#f8f8f8" />
-
-    <link rel="icon" type="image/x-icon" href={docsConfig.images.favicon} />
-
-    <title>{title} - {docsConfig.title}</title>
-
-    <link
-      as="font"
-      rel="preload"
-      type="font/woff2"
-      href="/docs/fonts/geist-sans.woff2"
-      crossorigin=""
-    />
-    <link
-      as="font"
-      rel="preload"
-      type="font/woff2"
-      href="/docs/fonts/geist-mono.woff2"
-      crossorigin=""
+    <SEO
+      charset="utf-8"
+      title={title}
+      titleTemplate={`%s - ${docsConfig.title}`}
+      description={description}
+      twitter={{
+        card: "summary",
+        title: docsConfig.title,
+        description: docsConfig.description,
+        image: docsConfig.images.logo.href,
+      }}
+      openGraph={{
+        basic: {
+          type: "website",
+          url: docsConfig.url,
+          title: docsConfig.title,
+          image: docsConfig.images.logo.href,
+        },
+        image: {
+          url: docsConfig.images.logo.href,
+          alt: docsConfig.title,
+          width: 512,
+          height: 512,
+        },
+        optional: {
+          siteName: docsConfig.title,
+          description: docsConfig.description,
+        },
+      }}
+      extend={{
+        link: [
+          {
+            rel: "icon",
+            type: "image/x-icon",
+            href: docsConfig.images.favicon.href,
+          },
+          {
+            as: "font",
+            rel: "preload",
+            type: "font/woff2",
+            href: "/docs/fonts/geist-sans.woff2",
+            crossorigin: "",
+          },
+          {
+            as: "font",
+            rel: "preload",
+            type: "font/woff2",
+            href: "/docs/fonts/geist-mono.woff2",
+            crossorigin: "",
+          },
+        ],
+        meta: [
+          {
+            name: "viewport",
+            content: "width=device-width, initial-scale=1",
+          },
+          {
+            name: "theme-color",
+            media: "(prefers-color-scheme: dark)",
+            content: color("rgb(16 16 16)", "hex")!,
+          },
+          {
+            name: "theme-color",
+            media: "(prefers-color-scheme: light)",
+            content: color("rgb(248 248 248)", "hex")!,
+          },
+        ],
+      }}
     />
 
     <style>

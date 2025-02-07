@@ -3,6 +3,7 @@ import { loadEnv } from "vite"
 
 import mdx from "@astrojs/mdx"
 import react from "@astrojs/react"
+import sitemap from "@astrojs/sitemap"
 import tailwindcss from "@tailwindcss/vite"
 
 // loads environment variables
@@ -14,7 +15,7 @@ const { env } = await import("./src/lib/env")
 export default defineConfig({
   base: "/docs",
   cacheDir: ".astro/cache/astro",
-  integrations: [mdx(), react()],
+  integrations: [mdx(), react(), sitemap()],
   prefetch: true,
   site: `${env.PUBLIC_BASE_URL}/docs`,
   vite: {

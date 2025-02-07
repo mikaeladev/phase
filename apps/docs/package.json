@@ -4,17 +4,19 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --bun astro dev --port 3002",
-    "build": "astro build",
-    "start": "astro preview --port 3002",
+    "build": "bun run --bun astro build",
+    "start": "bun run --bun astro preview --port 3002",
     "preview": "bun run build && bun run start"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.8",
     "@astrojs/react": "^4.2.0",
+    "@astrojs/sitemap": "^3.2.1",
     "@repo/env": "workspace:*",
     "@repo/ui": "workspace:*",
     "@repo/utils": "workspace:*",
     "astro": "^5.2.3",
+    "astro-seo": "^0.8.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
