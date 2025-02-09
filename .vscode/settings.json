@@ -4,7 +4,7 @@
   "bun.debugTerminal.enabled": true,
   "bun.debugTerminal.stopOnEntry": false,
 
-  // language stuff
+  // ts/js stuff
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.preferences.importModuleSpecifier": "non-relative",
@@ -12,6 +12,11 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.preferences.quoteStyle": "double",
+
+  // yaml stuff
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-issue-config.json": "/.github/ISSUE_TEMPLATE/config.yml"
+  },
 
   // tailwind stuff
   "css.lint.unknownAtRules": "ignore",
