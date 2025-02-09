@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/config/typescript",
+  "extends": "@repo/style/typescript",
   "include": [
     "src/**/*",
     "drizzle.config.ts",

@@ -4,7 +4,7 @@
     "": {
       "name": "phase",
       "dependencies": {
-        "@repo/config": "workspace:*",
+        "@repo/style": "workspace:*",
         "turbo": "^2.3.3",
       },
       "devDependencies": {
@@ -112,6 +112,7 @@
         "@astrojs/mdx": "^4.0.8",
         "@astrojs/react": "^4.2.0",
         "@astrojs/sitemap": "^3.2.1",
+        "@repo/config": "workspace:*",
         "@repo/env": "workspace:*",
         "@repo/ui": "workspace:*",
         "@repo/utils": "workspace:*",
@@ -305,22 +306,7 @@
       "name": "@repo/config",
       "version": "0.0.0",
       "dependencies": {
-        "@eslint/js": "^9.10.0",
-        "@ianvs/prettier-plugin-sort-imports": "^4.4.0",
-        "@next/eslint-plugin-next": "^15.1.2",
-        "eslint-import-resolver-typescript": "^3.7.0",
-        "eslint-plugin-astro": "^1.3.1",
-        "eslint-plugin-import-x": "^4.6.1",
-        "eslint-plugin-react": "^7.37.3",
-        "eslint-plugin-react-hooks": "^5.0.0",
-        "globals": "^15.11.0",
-        "prettier-plugin-astro": "^0.14.1",
-        "prettier-plugin-tailwindcss": "^0.6.9",
         "tailwindcss-animate": "^1.0.7",
-        "typescript-eslint": "^8.15.0",
-      },
-      "devDependencies": {
-        "@types/eslint__js": "^8.42.3",
       },
       "peerDependencies": {
         "tailwindcss": "^4.0.0-beta.9",
@@ -351,6 +337,32 @@
     "packages/@repo/form": {
       "name": "@repo/form",
       "version": "0.1.0",
+    },
+    "packages/@repo/style": {
+      "name": "@repo/style",
+      "version": "0.0.0",
+      "dependencies": {
+        "@eslint/js": "^9.10.0",
+        "@ianvs/prettier-plugin-sort-imports": "^4.4.0",
+        "@next/eslint-plugin-next": "^15.1.2",
+        "eslint-import-resolver-typescript": "^3.7.0",
+        "eslint-plugin-astro": "^1.3.1",
+        "eslint-plugin-import-x": "^4.6.1",
+        "eslint-plugin-react": "^7.37.3",
+        "eslint-plugin-react-hooks": "^5.0.0",
+        "globals": "^15.11.0",
+        "prettier-plugin-astro": "^0.14.1",
+        "prettier-plugin-tailwindcss": "^0.6.9",
+        "typescript-eslint": "^8.15.0",
+      },
+      "devDependencies": {
+        "@types/eslint__js": "^8.42.3",
+      },
+      "peerDependencies": {
+        "eslint": "^9.18.0",
+        "prettier": "^3.4.2",
+        "typescript": "^5.7.3",
+      },
     },
     "packages/@repo/trpc": {
       "name": "@repo/trpc",
@@ -389,6 +401,7 @@
         "@radix-ui/react-select": "^2.1.3",
         "@radix-ui/react-slot": "^1.1.1",
         "@radix-ui/react-switch": "^1.1.2",
+        "@repo/config": "workspace:*",
         "@repo/utils": "workspace:*",
         "@uidotdev/usehooks": "^2.4.1",
         "change-case": "^5.4.4",
@@ -417,6 +430,7 @@
       "name": "@repo/utils",
       "version": "0.0.0",
       "dependencies": {
+        "@repo/config": "workspace:*",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "tailwind-merge": "^2.6.0",
@@ -896,6 +910,8 @@
     "@repo/env": ["@repo/env@workspace:packages/@repo/env"],
 
     "@repo/form": ["@repo/form@workspace:packages/@repo/form"],
+
+    "@repo/style": ["@repo/style@workspace:packages/@repo/style"],
 
     "@repo/trpc": ["@repo/trpc@workspace:packages/@repo/trpc"],
 

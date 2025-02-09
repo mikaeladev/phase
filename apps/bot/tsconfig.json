@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/config/typescript/base.json",
+  "extends": "@repo/style/typescript",
   "exclude": [".phase"],
   "include": ["src/**/*", "scripts/**/*", "eslint.config.js"],
   "compilerOptions": {

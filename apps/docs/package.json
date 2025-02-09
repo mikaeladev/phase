@@ -12,6 +12,7 @@
     "@astrojs/mdx": "^4.0.8",
     "@astrojs/react": "^4.2.0",
     "@astrojs/sitemap": "^3.2.1",
+    "@repo/config": "workspace:*",
     "@repo/env": "workspace:*",
     "@repo/ui": "workspace:*",
     "@repo/utils": "workspace:*",

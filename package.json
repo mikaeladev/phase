@@ -3,7 +3,7 @@
   "name": "phase",
   "type": "module",
   "packageManager": "bun@1.2.0",
-  "prettier": "@repo/config/prettier",
+  "prettier": "@repo/style/prettier",
   "scripts": {
     "format": "prettier --write .",
     "dev:bot": "turbo run dev --filter=bot",
@@ -24,7 +24,7 @@
     "packages/*/*"
   ],
   "dependencies": {
-    "@repo/config": "workspace:*",
+    "@repo/style": "workspace:*",
     "turbo": "^2.3.3"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/config/typescript/react.json",
+  "extends": "@repo/style/typescript/react.json",
   "exclude": ["dist"],
   "include": [
     ".astro/types.d.ts",

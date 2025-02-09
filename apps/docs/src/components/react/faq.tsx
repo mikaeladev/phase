@@ -20,7 +20,7 @@ const buymeacoffeeLink = (
 
 export function FAQ() {
   return (
-    <Accordion type="single" collapsible className="w-full no-prose">
+    <Accordion type="single" collapsible className="no-prose w-full">
       <AccordionItem value="item-1">
         <AccordionTrigger>How is Phase free?</AccordionTrigger>
         <AccordionContent>

@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/config/typescript",
+  "extends": "@repo/style/typescript",
   "include": ["src/**/*", "eslint.config.js", "postinstall.ts"],
   "compilerOptions": { "baseUrl": "." }
 }

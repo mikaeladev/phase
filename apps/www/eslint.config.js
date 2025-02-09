@@ -1,1 +1,1 @@
-export { default } from "@repo/config/eslint/nextjs.js"
+export { default } from "@repo/style/eslint/nextjs.js"

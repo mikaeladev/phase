@@ -217,6 +217,7 @@
     "@radix-ui/react-select": "^2.1.3",
     "@radix-ui/react-slot": "^1.1.1",
     "@radix-ui/react-switch": "^1.1.2",
+    "@repo/config": "workspace:*",
     "@repo/utils": "workspace:*",
     "@uidotdev/usehooks": "^2.4.1",
     "change-case": "^5.4.4",
