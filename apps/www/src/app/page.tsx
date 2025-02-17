@@ -1,4 +1,4 @@
-import siteConfig from "@repo/config/site/www/index.ts"
+import siteConfig from "@repo/config/site/www"
 
 import { Button } from "@repo/ui/button"
 import { Icon } from "@repo/ui/icon"

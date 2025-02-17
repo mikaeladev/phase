@@ -1,54 +1,54 @@
 import "~/styles/globals.css"
 
-import config from "@repo/config/site/www"
+import wwwConfig from "@repo/config/site/www"
 import { cn } from "@repo/utils/site"
 import { Analytics } from "@vercel/analytics/react"
 /* eslint-disable import-x/no-unresolved */
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
 
+/* eslint-enable import-x/no-unresolved */
+
 import { Footer } from "~/components/footer"
 import { Header } from "~/components/header"
-
-/* eslint-enable import-x/no-unresolved */
 
 import type { LayoutProps } from "~/types/props"
 import type { Metadata, Viewport } from "next"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(config.url),
+  metadataBase: new URL(wwwConfig.url),
   title: {
-    default: config.title,
-    template: `%s - ${config.title}`,
+    default: wwwConfig.title,
+    template: `%s - ${wwwConfig.title}`,
   },
-  description: config.description,
-  authors: config.developer,
-  creator: config.developer.name,
-  keywords: config.keywords,
+  description: wwwConfig.description,
+  authors: wwwConfig.developer,
+  creator: wwwConfig.developer.name,
+  keywords: wwwConfig.keywords,
   icons: {
-    icon: config.images.favicon,
-    apple: config.images.apple,
-    shortcut: config.images.logo,
+    icon: wwwConfig.images.favicon,
+    apple: wwwConfig.images.apple,
+    shortcut: wwwConfig.images.logo,
   },
   openGraph: {
-    url: config.url,
-    title: config.title,
-    description: config.description,
-    siteName: config.title,
+    url: wwwConfig.url,
+    title: wwwConfig.title,
+    description: wwwConfig.description,
+    siteName: wwwConfig.title,
     type: "website",
     locale: "en_GB",
     images: {
-      url: config.images.logo,
-      alt: config.title,
+      url: wwwConfig.images.logo,
+      alt: wwwConfig.title,
       width: 512,
       height: 512,
     },
   },
   twitter: {
     card: "summary",
-    title: config.title,
-    description: config.description,
-    images: config.images.logo,
+    title: wwwConfig.title,
+    description: wwwConfig.description,
+    images: wwwConfig.images.logo,
   },
 }
 

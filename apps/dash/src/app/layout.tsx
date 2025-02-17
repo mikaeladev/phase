@@ -1,6 +1,6 @@
 import "~/styles/globals.css"
 
-import dashConfig from "@repo/config/site/dash/index.ts"
+import dashConfig from "@repo/config/site/dash"
 /* eslint-disable import-x/no-unresolved */
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"

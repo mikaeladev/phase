@@ -1,4 +1,4 @@
-import wwwConfig from "@repo/config/site/www/index.ts"
+import wwwConfig from "@repo/config/site/www"
 import { clsx } from "clsx"
 import { extendTailwindMerge } from "tailwind-merge"
 
