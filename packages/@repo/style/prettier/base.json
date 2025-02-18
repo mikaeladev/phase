@@ -6,7 +6,8 @@
   "plugins": [
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-astro",
-    "prettier-plugin-tailwindcss"
+    "prettier-plugin-tailwindcss",
+    "prettier-plugin-packagejson"
   ],
   "overrides": [
     {
@@ -44,5 +45,19 @@
     "^[.]",
     "",
     "<TYPES>"
+  ],
+  "packageSortOrder": [
+    "private",
+    "name",
+    "version",
+    "type",
+    "prettier",
+    "scripts",
+    "exports",
+    "dependencies",
+    "devDependencies",
+    "peerDependencies",
+    "trustedDependencies",
+    "workspaces"
   ]
 }

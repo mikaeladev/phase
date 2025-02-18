@@ -4,13 +4,13 @@
   "version": "3.28.0",
   "type": "module",
   "scripts": {
+    "build": "bun run scripts/build.ts",
+    "dev": "NODE_ENV=development bun run --watch src/main.ts",
     "docker:build": "nixpacks build --name bot-image --current-dir ../../",
     "docker:start": "docker run -it --rm bot-image",
-    "dev": "NODE_ENV=development bun run --watch src/main.ts",
-    "build": "bun run scripts/build.ts",
-    "start": "NODE_ENV=production bun run --smol .phase/src/main.js",
+    "lint": "eslint .",
     "preview": "bun run build && bun run start",
-    "lint": "eslint ."
+    "start": "NODE_ENV=production bun run --smol .phase/src/main.js"
   },
   "dependencies": {
     "@octokit/rest": "^20.1.1",

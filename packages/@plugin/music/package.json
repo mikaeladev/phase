@@ -4,8 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "tsup --watch",
     "build": "tsup",
+    "dev": "tsup --watch",
     "lint": "eslint ."
   },
   "exports": {
@@ -25,7 +25,7 @@
     "distube": "^5.0.4"
   },
   "peerDependencies": {
-    "discord.js": "^14.16.x",
-    "@discordjs/voice": "^0.18.0"
+    "@discordjs/voice": "^0.18.0",
+    "discord.js": "^14.16.x"
   }
 }

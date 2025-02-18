@@ -1,11 +1,11 @@
 {
-  "type": "module",
+  "private": true,
   "name": "@phasejs/image",
   "version": "0.0.0",
-  "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "tsup --watch",
     "build": "tsup",
+    "dev": "tsup --watch",
     "lint": "eslint ."
   },
   "exports": {

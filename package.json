@@ -2,27 +2,22 @@
   "private": true,
   "name": "phase",
   "type": "module",
-  "packageManager": "bun@1.2.0",
   "prettier": "@repo/style/prettier",
   "scripts": {
-    "format": "prettier --write .",
-    "dev:bot": "turbo run dev --filter=bot",
-    "dev:site": "turbo run dev --filter='./apps/*'",
-    "start:bot": "cd apps/bot && bun run start",
-    "start:site": "turbo run start --filter='./apps/*'",
     "build": "turbo run build",
     "build:bot": "turbo run build --filter=bot",
-    "build:site": "turbo run build --filter='./apps/*'",
     "build:packages": "turbo run build --filter='./packages/*/*'",
+    "build:site": "turbo run build --filter='./apps/*'",
+    "dev:bot": "turbo run dev --filter=bot",
+    "dev:site": "turbo run dev --filter='./apps/*'",
+    "format": "prettier --write .",
     "lint": "turbo run lint",
     "lint:bot": "turbo run lint --filter=bot",
+    "lint:packages": "turbo run lint --filter='./packages/*/*'",
     "lint:site": "turbo run lint --filter='./apps/*'",
-    "lint:packages": "turbo run lint --filter='./packages/*/*'"
+    "start:bot": "cd apps/bot && bun run start",
+    "start:site": "turbo run start --filter='./apps/*'"
   },
-  "workspaces": [
-    "apps/*",
-    "packages/*/*"
-  ],
   "dependencies": {
     "@repo/style": "workspace:*",
     "turbo": "^2.3.3"
@@ -43,5 +38,9 @@
     "protobufjs",
     "sharp",
     "sodium-native"
+  ],
+  "workspaces": [
+    "apps/*",
+    "packages/*/*"
   ]
 }

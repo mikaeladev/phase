@@ -13,6 +13,14 @@
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.preferences.quoteStyle": "double",
 
+  // json stuff
+  "json.schemas": [
+    {
+      "url": "https://cdn.jsdelivr.net/npm/tsup/schema.json",
+      "fileMatch": ["package.json", "tsup.config.json"]
+    }
+  ],
+
   // yaml stuff
   "yaml.schemas": {
     "https://json.schemastore.org/github-issue-config.json": "/.github/ISSUE_TEMPLATE/config.yml"

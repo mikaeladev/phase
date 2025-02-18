@@ -22,6 +22,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "globals": "^15.11.0",
     "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-packagejson": "^2.5.8",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "typescript-eslint": "^8.15.0"
   },

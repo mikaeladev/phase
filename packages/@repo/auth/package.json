@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "tsup --watch",
     "build": "tsup",
+    "dev": "tsup --watch",
     "lint": "eslint ."
   },
   "exports": {

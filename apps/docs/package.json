@@ -3,10 +3,10 @@
   "name": "docs",
   "type": "module",
   "scripts": {
-    "dev": "bun run --bun astro dev --port 3002",
     "build": "bun run --bun astro build",
-    "start": "bun run --bun astro preview --port 3002",
-    "preview": "bun run build && bun run start"
+    "dev": "bun run --bun astro dev --port 3002",
+    "preview": "bun run build && bun run start",
+    "start": "bun run --bun astro preview --port 3002"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.8",
