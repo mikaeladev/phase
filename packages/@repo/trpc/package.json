@@ -32,5 +32,17 @@
   "peerDependencies": {
     "discord.js": "^14.x.x",
     "mongoose": "^8.9.5"
+  },
+  "tsup": {
+    "clean": true,
+    "dts": true,
+    "minify": true,
+    "splitting": false,
+    "sourcemap": true,
+    "format": "esm",
+    "entry": [
+      "./src/client/index.ts",
+      "./src/server/index.ts"
+    ]
   }
 }

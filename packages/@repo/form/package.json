@@ -14,5 +14,16 @@
       "import": "./dist/index.js",
       "require": "./dist/index.js"
     }
+  },
+  "tsup": {
+    "clean": true,
+    "dts": true,
+    "minify": true,
+    "splitting": true,
+    "sourcemap": true,
+    "format": "esm",
+    "entry": [
+      "./src/index.ts"
+    ]
   }
 }

@@ -18,5 +18,16 @@
   "dependencies": {
     "@phasejs/builders": "workspace:*",
     "@phasejs/core": "workspace:*"
+  },
+  "tsup": {
+    "clean": true,
+    "dts": true,
+    "minify": true,
+    "splitting": true,
+    "sourcemap": true,
+    "format": "esm",
+    "entry": [
+      "./src/index.ts"
+    ]
   }
 }

@@ -31,5 +31,17 @@
   },
   "peerDependencies": {
     "discord.js": "^14.x.x"
+  },
+  "tsup": {
+    "clean": true,
+    "dts": true,
+    "minify": true,
+    "splitting": true,
+    "sourcemap": true,
+    "format": "esm",
+    "entry": [
+      "./src/*.ts",
+      "./src/*/index.ts"
+    ]
   }
 }

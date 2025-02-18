@@ -1,10 +1,5 @@
 {
   "extends": "@repo/style/typescript",
-  "include": [
-    "src/**/*",
-    "drizzle.config.ts",
-    "eslint.config.js",
-    "tsup.config.ts"
-  ],
+  "include": ["src/**/*", "drizzle.config.ts", "eslint.config.js"],
   "compilerOptions": { "baseUrl": "." }
 }

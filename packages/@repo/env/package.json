@@ -17,5 +17,16 @@
   "dependencies": {
     "@t3-oss/env-core": "^0.11.1",
     "zod": "^3.23.8"
+  },
+  "tsup": {
+    "clean": true,
+    "dts": true,
+    "minify": true,
+    "splitting": true,
+    "sourcemap": true,
+    "format": "esm",
+    "entry": [
+      "./src/index.ts"
+    ]
   }
 }
