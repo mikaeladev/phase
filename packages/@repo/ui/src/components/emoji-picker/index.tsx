@@ -3,7 +3,6 @@
 import * as React from "react"
 
 import { Collection } from "@discordjs/collection"
-import emojiData from "@emoji-mart/data/sets/15/twitter.json"
 import { cn } from "@repo/utils/site"
 import { useDebounce } from "@uidotdev/usehooks"
 import { init as emojiMartInit, SearchIndex } from "emoji-mart"
@@ -16,19 +15,19 @@ import { ScrollArea } from "~/components/scroll-area"
 import { Spinner } from "~/components/spinner"
 
 import type {
-  Emoji as EmojiMartEmoji,
-  Skin as EmojiSkin,
-} from "@emoji-mart/data"
+  Emoji,
+  EmojiMartData,
+  EmojiMartEmoji,
+  EmojiMartSheet,
+} from "./emoji-types"
 
-type EmojiId = keyof typeof emojiData.emojis
+const emojiDataPromise = fetch(
+  "https://cdn.jsdelivr.net/npm/@emoji-mart/data@1.2.1/sets/15/twitter.json",
+).then((res) => res.json() as Promise<EmojiMartData>)
 
-interface Emoji {
-  id: string
-  name: string
-  skin: EmojiSkin
-}
+// emoji picker component //
 
-export interface EmojiPickerProps {
+interface EmojiPickerComponentProps {
   size?: "default" | "fill"
   disabled?: boolean
   name?: string
@@ -43,7 +42,7 @@ function EmojiPickerComponent({
   value,
   size,
   ...props
-}: EmojiPickerProps) {
+}: EmojiPickerComponentProps) {
   const [open, setOpen] = React.useState(false)
 
   const [searchTerm, setSearchTerm] = React.useState("")
@@ -51,15 +50,18 @@ function EmojiPickerComponent({
 
   const [searchResults, setSearchResults] = React.useState<Emoji[]>([])
 
+  // load emoji data
+  const emojiData = React.use(emojiDataPromise)
+
   // initialise emoji mart
   React.use(emojiMartInit({ data: emojiData }))
 
   // a collection of emojis
   const emojis = React.useMemo(() => {
-    const emojis = new Collection<EmojiId, Emoji>()
+    const emojis = new Collection<string, Emoji>()
 
     for (const emoji of Object.values(emojiData.emojis)) {
-      emojis.set(emoji.id as EmojiId, {
+      emojis.set(emoji.id, {
         id: emoji.id,
         name: emoji.name,
         skin: emoji.skins[0]!,
@@ -67,7 +69,7 @@ function EmojiPickerComponent({
     }
 
     return emojis
-  }, [])
+  }, [emojiData])
 
   // the emoji to show when nothing is selected
   const fallbackEmoji = emojis.get("crescent_moon")!
@@ -134,6 +136,7 @@ function EmojiPickerComponent({
         >
           <EmojiPickerEmoji
             emoji={selectedEmoji}
+            sheet={emojiData.sheet}
             isPlaceholder={onChange && !value}
             className="size-5"
           />
@@ -181,6 +184,7 @@ function EmojiPickerComponent({
                           <EmojiPickerEmoji
                             key={emoji.id}
                             emoji={emoji}
+                            sheet={emojiData.sheet}
                             aria-hidden={isHidden}
                             onClick={onClick}
                             role="button"
@@ -199,31 +203,35 @@ function EmojiPickerComponent({
   )
 }
 
-export function EmojiPickerFallback({ size }: EmojiPickerProps) {
+// emoji picker fallback //
+
+interface EmojiPickerFallbackProps extends EmojiPickerComponentProps {}
+
+function EmojiPickerFallback({ size }: EmojiPickerFallbackProps) {
   return (
     <Button
       variant="outline"
       size={size === "fill" ? "default" : "icon"}
-      className={cn("gap-2", size === "fill" && "w-full")}
+      className={cn(size === "fill" && "w-full justify-start gap-2")}
       disabled
     >
-      <Spinner className="size-5" />
+      <Spinner className="size-4" />
       {size === "fill" && <span>Loading ...</span>}
     </Button>
   )
 }
 
-export function EmojiPicker(props: EmojiPickerProps) {
-  return <EmojiPickerComponent {...props} />
-}
+// emoji picker emoji //
 
 interface EmojiPickerEmojiProps extends React.HTMLAttributes<HTMLDivElement> {
   emoji: Emoji
+  sheet: EmojiMartSheet
   isPlaceholder?: boolean
 }
 
 function EmojiPickerEmoji({
   emoji,
+  sheet,
   className,
   isPlaceholder,
   ...props
@@ -248,10 +256,22 @@ function EmojiPickerEmoji({
         className={cn("block size-3/4", isPlaceholder && "opacity-50")}
         style={{
           backgroundImage: `url("https://cdn.jsdelivr.net/npm/emoji-datasource-twitter@15.0.0/img/twitter/sheets-256/64.png")`,
-          backgroundSize: `${100 * emojiData.sheet.cols}% ${100 * emojiData.sheet.rows}%`,
-          backgroundPosition: `${(100 / (emojiData.sheet.cols - 1)) * emoji.skin.x!}% ${(100 / (emojiData.sheet.rows - 1)) * emoji.skin.y!}%`,
+          backgroundSize: `${100 * sheet.cols}% ${100 * sheet.rows}%`,
+          backgroundPosition: `${(100 / (sheet.cols - 1)) * emoji.skin.x!}% ${(100 / (sheet.rows - 1)) * emoji.skin.y!}%`,
         }}
       />
     </div>
+  )
+}
+
+// emoji picker //
+
+export interface EmojiPickerProps extends EmojiPickerComponentProps {}
+
+export function EmojiPicker(props: EmojiPickerProps) {
+  return (
+    <React.Suspense fallback={<EmojiPickerFallback size={props.size} />}>
+      <EmojiPickerComponent {...props} />
+    </React.Suspense>
   )
 }

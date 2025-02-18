@@ -202,7 +202,6 @@
   },
   "dependencies": {
     "@discordjs/collection": "^2.1.1",
-    "@emoji-mart/data": "^1.2.1",
     "@icons-pack/react-simple-icons": "^10.2.0",
     "@radix-ui/react-accordion": "^1.2.2",
     "@radix-ui/react-avatar": "^1.1.2",
