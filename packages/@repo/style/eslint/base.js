@@ -25,11 +25,16 @@ const importPluginConfig = tseslint.config(
   },
 )
 
+const ignoresConfig = tseslint.config({
+  ignores: ["dist/", "node_modules/", ".astro/", ".next/", ".phase/"],
+})
+
 export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
   ...importPluginConfig,
+  ...ignoresConfig,
   {
     languageOptions: {
       parser: tseslint.parser,
@@ -63,15 +68,5 @@ export default tseslint.config(
         { checksVoidReturn: { attributes: false } },
       ],
     },
-  },
-  {
-    ignores: [
-      ".astro",
-      ".next/",
-      ".phase/",
-      "dist/",
-      "node_modules/",
-      "tsup.config.ts",
-    ],
   },
 )
