@@ -1,9 +1,6 @@
 import { cn, cva } from "@repo/utils/site"
 
-import { Slot } from "~/components/slot"
-
 import type { VariantProps } from "@repo/utils/site"
-import type { SlotProps } from "~/components/slot"
 
 export const baseLinkVariants = cva("underline-offset-2 transition-colors", {
   variants: {
@@ -25,8 +22,8 @@ export const baseLinkVariants = cva("underline-offset-2 transition-colors", {
 
 export interface BaseLinkProps
   extends VariantProps<typeof baseLinkVariants>,
-    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "children">,
-    Pick<SlotProps, "children"> {
+    React.ComponentPropsWithRef<"a"> {
+  anchor: React.ElementType<{ href?: string }, "a">
   href: string
   label?: string
   disabled?: boolean
@@ -35,21 +32,23 @@ export interface BaseLinkProps
 }
 
 export function BaseLink({
+  anchor: Anchor,
   className,
   variant,
   size,
   label,
-  disabled: _,
   external,
   mfe,
   ...props
 }: BaseLinkProps) {
+  const isExternal = !mfe && external
+
   return (
-    <Slot
+    <Anchor
       title={label}
       aria-label={label}
-      target={!mfe && external ? "_blank" : undefined}
-      rel={!mfe && external ? "noreferrer" : undefined}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noreferrer" : undefined}
       className={cn(baseLinkVariants({ variant, size, className }))}
       {...props}
     />

@@ -4,14 +4,15 @@ import type { BaseLinkProps } from "@repo/ui/base-link"
 
 export const linkVariants = baseLinkVariants
 
-export interface LinkProps extends BaseLinkProps {}
+export interface LinkProps extends Omit<BaseLinkProps, "anchor"> {}
 
-export function Link({ children, href, external, mfe, ...props }: LinkProps) {
+export function Link({ href, ...props }: LinkProps) {
   return (
-    <BaseLink href={href} external={external} mfe={mfe} {...props}>
-      <a href={href} data-astro-prefetch={!mfe && !external}>
-        {children}
-      </a>
-    </BaseLink>
+    <BaseLink
+      anchor={"a"}
+      href={props.disabled ? "javascript:void(0)" : href}
+      data-astro-prefetch={!props.mfe && !props.external}
+      {...props}
+    />
   )
 }

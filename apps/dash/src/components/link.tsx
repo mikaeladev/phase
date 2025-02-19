@@ -8,21 +8,19 @@ import type { BaseLinkProps } from "@repo/ui/base-link"
 
 export const linkVariants = baseLinkVariants
 
-export interface LinkProps extends BaseLinkProps {}
+export interface LinkProps extends Omit<BaseLinkProps, "anchor"> {}
 
-export function Link({
-  children,
-  href,
-  disabled,
-  external,
-  mfe,
-  ...props
-}: LinkProps) {
-  const Comp = disabled ? "span" : !mfe && !external ? "a" : NextLink
+export function Link({ href, ...props }: LinkProps) {
+  const Anchor =
+    props.disabled || (!props.mfe && props.external)
+      ? "a"
+      : (NextLink as BaseLinkProps["anchor"])
 
   return (
-    <BaseLink href={href} external={external} mfe={mfe} {...props}>
-      <Comp href={href}>{children}</Comp>
-    </BaseLink>
+    <BaseLink
+      anchor={Anchor}
+      href={props.disabled ? "javascript:void(0)" : href}
+      {...props}
+    />
   )
 }

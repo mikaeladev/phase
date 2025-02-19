@@ -22,10 +22,9 @@ import {
 import { Moon } from "~/components/moon"
 import { DiscordIcon, GithubIcon } from "~/components/simple-icon"
 
-import { useWithProps } from "~/hooks/use-with-props"
-
 import type { VariantProps } from "@repo/utils/site"
-import type { BaseLink, BaseLinkProps } from "~/components/base-link"
+import type { BaseLinkProps } from "~/components/base-link"
+import type { IconPropsWithIconComponentProp } from "~/components/icon"
 import type { With } from "~/types/utils"
 
 // nav items //
@@ -55,13 +54,13 @@ const navItems: NavigationComboboxItem[] = [
     label: "Discord",
     href: "/redirect/discord",
     external: true,
-    icon: <DiscordIcon />,
+    icon: DiscordIcon,
   },
   {
     label: "GitHub",
     href: "/redirect/github",
     external: true,
-    icon: <GithubIcon />,
+    icon: GithubIcon,
   },
 ].map((item) => ({ ...item, href: absoluteURL(item.href, false) }))
 
@@ -82,7 +81,7 @@ export const headerVariants = cva(
 export interface HeaderProps
   extends With<VariantProps<typeof headerVariants>, "position">,
     React.ComponentPropsWithRef<"header"> {
-  link: typeof BaseLink
+  link: React.FC<Omit<BaseLinkProps, "anchor">>
 }
 
 export function Header({
@@ -91,8 +90,6 @@ export function Header({
   link: Link,
   ...props
 }: HeaderProps) {
-  const HeaderLink = useHeaderLink(Link)
-
   return (
     <header className={cn(headerVariants({ position }), className)} {...props}>
       <div className="container flex h-full items-center">
@@ -110,7 +107,9 @@ export function Header({
             {navItems
               .filter((item) => !item.icon)
               .map((item) => (
-                <HeaderLink key={item.href} {...item} />
+                <Link key={item.href} variant={"hover"} size={"sm"} {...item}>
+                  {item.label}
+                </Link>
               ))}
           </nav>
         </div>
@@ -120,43 +119,22 @@ export function Header({
             {navItems
               .filter((i): i is NavigationComboboxItemWithIcon => !!i.icon)
               .map(({ icon, ...item }) => (
-                <HeaderLink key={item.href} {...item} iconOnly>
-                  <Icon icon={icon} />
-                </HeaderLink>
+                <Button
+                  key={item.href}
+                  variant={"outline"}
+                  size={"icon"}
+                  asChild
+                >
+                  <Link {...item}>
+                    <Icon icon={icon} />
+                  </Link>
+                </Button>
               ))}
           </nav>
         </div>
       </div>
     </header>
   )
-}
-
-// header link //
-
-interface HeaderLinkProps extends Omit<BaseLinkProps, "variant" | "size"> {
-  link: typeof BaseLink
-  iconOnly?: boolean
-}
-
-function HeaderLink({
-  link: Link,
-  iconOnly,
-  children,
-  ...props
-}: HeaderLinkProps) {
-  return iconOnly ? (
-    <Button variant={"outline"} size={"icon"} asChild>
-      <Link {...props}>{children ?? props.label}</Link>
-    </Button>
-  ) : (
-    <Link variant={"hover"} size={"sm"} {...props}>
-      {children ?? props.label}
-    </Link>
-  )
-}
-
-function useHeaderLink(link: typeof BaseLink) {
-  return useWithProps(HeaderLink, { link })
 }
 
 // navigation combobox //
@@ -166,13 +144,13 @@ interface NavigationComboboxItem {
   href: string
   mfe?: boolean
   external?: boolean
-  icon?: React.JSX.Element
+  icon?: IconPropsWithIconComponentProp["icon"]
 }
 
 type NavigationComboboxItemWithIcon = With<NavigationComboboxItem, "icon">
 
 interface NavigationComboboxProps {
-  link: typeof BaseLink
+  link: React.FC<Omit<BaseLinkProps, "anchor">>
   items: NavigationComboboxItem[]
 }
 
@@ -230,8 +208,7 @@ function NavigationCombobox({ link: Link, items }: NavigationComboboxProps) {
           <CommandGroup heading="Main Links">
             {items.map((item) => {
               const icon =
-                item.icon ??
-                (item.external ? <ExternalLinkIcon /> : <ScrollTextIcon />)
+                item.icon ?? (item.external ? ExternalLinkIcon : ScrollTextIcon)
 
               return (
                 <CommandItem key={item.href} value={item.label} asChild>
