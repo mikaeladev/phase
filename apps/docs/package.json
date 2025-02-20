@@ -4,9 +4,9 @@
   "type": "module",
   "scripts": {
     "build": "bun run --bun astro build",
-    "dev": "bun run --bun astro dev --port 3002",
+    "dev": "bun run --bun astro dev",
     "preview": "bun run build && bun run start",
-    "start": "bun run --bun astro preview --port 3002"
+    "start": "bun run --bun astro preview"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.8",

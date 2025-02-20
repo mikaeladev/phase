@@ -18,6 +18,9 @@ export default defineConfig({
   integrations: [mdx(), react(), sitemap()],
   prefetch: true,
   site: `${env.PUBLIC_BASE_URL}/docs`,
+  server: {
+    port: env.PORT,
+  },
   vite: {
     cacheDir: ".astro/cache/vite",
     plugins: [tailwindcss()],
