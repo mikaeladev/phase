@@ -26,6 +26,7 @@ const externals = [
   "@repo/config",
   "@repo/utils",
   "@icons-pack/react-simple-icons",
+  "cmdk",
   "lucide-react",
   "react",
 ]
