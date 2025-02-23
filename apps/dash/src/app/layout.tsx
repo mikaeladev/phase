@@ -14,13 +14,18 @@ import type { Metadata, Viewport } from "next"
 
 export const metadata: Metadata = {
   metadataBase: new URL(dashConfig.url),
-  title: { default: dashConfig.title, template: `%s - ${dashConfig.title}` },
+  title: {
+    default: dashConfig.title,
+    template: `%s - ${dashConfig.title}`,
+  },
   description: dashConfig.description,
   authors: dashConfig.developer,
   creator: dashConfig.developer.name,
   keywords: dashConfig.keywords,
   icons: {
-    apple: dashConfig.images.apple.toString(),
+    icon: dashConfig.images.favicon,
+    apple: dashConfig.images.apple,
+    shortcut: dashConfig.images.logo,
   },
   openGraph: {
     url: dashConfig.url,
@@ -30,34 +35,34 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_GB",
     images: {
-      url: dashConfig.images.logo.toString(),
+      url: dashConfig.images.logo,
+      alt: dashConfig.title,
       width: 512,
       height: 512,
-      alt: dashConfig.title,
     },
   },
   twitter: {
     card: "summary",
     title: dashConfig.title,
     description: dashConfig.description,
-    images: dashConfig.images.logo.toString(),
+    images: dashConfig.images.logo,
   },
-} satisfies Metadata
+}
 
 export const viewport: Viewport = {
   colorScheme: "dark",
-  themeColor: "#f8f8f8", // used in rich embeds
-} satisfies Viewport
+  themeColor: "#f8f8f8",
+  initialScale: 1,
+  maximumScale: 1,
+}
 
 export default function RootLayout({ children }: LayoutProps) {
+  const geistFonts = [GeistSans.variable, GeistMono.variable]
+
   return (
     <html
       lang="en"
-      className={cn(
-        "bg-background text-foreground scheme-dark",
-        GeistSans.variable,
-        GeistMono.variable,
-      )}
+      className={cn("bg-background text-foreground scheme-dark", geistFonts)}
     >
       <body className="font-sans tracking-tighter antialiased">
         <NuqsAdapter>{children}</NuqsAdapter>
