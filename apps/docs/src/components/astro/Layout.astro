@@ -1,8 +1,6 @@
 ---
 import "~/styles/globals.css"
 
-import { color } from "bun"
-
 import { ClientRouter } from "astro:transitions"
 
 import docsConfig from "@repo/config/site/docs"
@@ -82,13 +80,13 @@ const { title, description } = frontmatter
           },
           {
             name: "theme-color",
-            media: "(prefers-color-scheme: dark)",
-            content: color("rgb(16 16 16)", "hex")!,
+            media: "(prefers-color-scheme: light)",
+            content: "#101010",
           },
           {
             name: "theme-color",
-            media: "(prefers-color-scheme: light)",
-            content: color("rgb(248 248 248)", "hex")!,
+            media: "(prefers-color-scheme: dark)",
+            content: "#f8f8f8",
           },
         ],
       }}
