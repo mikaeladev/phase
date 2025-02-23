@@ -1,46 +1,9 @@
 import cloneDeep from "lodash.clonedeep"
-import { Editor, Element, Range, Text } from "slate"
+import { Editor, Range } from "slate"
 
-import type {
-  RichTextEditor,
-  RichTextFlags,
-  RichTextRootElement,
-} from "~/components/richtext/shared/types"
+import type { RichtextEditor, RichtextFlags } from "./index"
 import type { BasePoint } from "slate"
 import type { ReactEditor } from "slate-react"
-
-// default flags //
-
-export const defaultRichTextFlags = {
-  input: {
-    decorations: true,
-    variables: true,
-  },
-  textarea: {
-    decorations: true,
-    mentions: true,
-    channels: true,
-    variables: true,
-  },
-} satisfies Record<string, RichTextFlags>
-
-// type guards //
-
-export function isText(descendant: unknown): descendant is Text {
-  return Text.isText(descendant)
-}
-
-export function isElement(descendant: unknown): descendant is Element {
-  return Element.isElement(descendant)
-}
-
-export function isRootElement(
-  descendant: unknown,
-): descendant is RichTextRootElement {
-  return isElement(descendant) && descendant.type === "text"
-}
-
-// current word and range functions //
 
 const getLeftChar = (editor: ReactEditor, point: BasePoint) => {
   const end = Range.end(editor.selection!)
@@ -71,8 +34,8 @@ const getRightChar = (editor: ReactEditor, point: BasePoint) => {
 }
 
 export const getCurrentWord = (
-  editor: RichTextEditor,
-  flags: RichTextFlags,
+  editor: RichtextEditor,
+  flags: RichtextFlags,
 ) => {
   const { selection } = editor
   if (!selection) return undefined

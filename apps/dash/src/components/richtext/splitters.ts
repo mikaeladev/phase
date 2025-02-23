@@ -1,19 +1,27 @@
-import type {
-  RichTextFlags,
-  RichTextTransform,
-} from "~/components/richtext/shared/types"
+import type { RichtextFlags } from "./index"
 import type { GuildElementData } from "~/types/slate"
-import type { Element } from "slate"
+import type { Element, Path, Range, Text } from "slate"
+
+export type InlineElementSplitter = (
+  path: Path,
+  node: Text,
+) => { element: Element; range: Range; offset: number }[]
 
 const transformationRegex =
   /(?<!\\)<@!?(\d+)>|(?<!\\)<@&(\d+)>|(?<!\\)@(everyone|here)|(?<!\\)<#(\d+)>/g
 
-export function createTransformer(
-  flags: RichTextFlags,
+/**
+ * Creates a function that splits inline elements into their own nodes.
+ *
+ * @param flags - The editor flags.
+ * @param guildData - The guild data.
+ **/
+export function createInlineElementSplitter(
+  flags: RichtextFlags,
   guildData: GuildElementData,
 ) {
-  const transform: RichTextTransform = (path, node) => {
-    const results: ReturnType<RichTextTransform> = []
+  const splitInlineElements: InlineElementSplitter = (path, node) => {
+    const results: ReturnType<InlineElementSplitter> = []
 
     let match
 
@@ -90,5 +98,5 @@ export function createTransformer(
     return results
   }
 
-  return transform
+  return splitInlineElements
 }

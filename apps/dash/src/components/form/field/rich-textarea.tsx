@@ -6,7 +6,7 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/form"
-import { RichTextarea } from "~/components/richtext/textarea"
+import { Richtext } from "~/components/richtext"
 
 import type { Control, FieldPath, FieldValues } from "react-hook-form"
 
@@ -35,7 +35,11 @@ export function FormFieldRichTextarea<
         <FormItem>
           <FormLabel>{props.label}</FormLabel>
           <FormControl>
-            <RichTextarea placeholder={props.placeholder} {...field} />
+            <Richtext
+              variant={"textarea"}
+              placeholder={props.placeholder}
+              {...field}
+            />
           </FormControl>
           <FormDescription>{props.description}</FormDescription>
           <FormMessage />

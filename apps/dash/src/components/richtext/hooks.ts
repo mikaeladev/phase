@@ -1,21 +1,14 @@
 import * as React from "react"
 
-import { createEditor } from "slate"
-
 import { AllowedChannelTypes } from "~/components/channel-icons"
-import { withPlugins } from "~/components/richtext/shared/plugins"
 
 import { useDashboardContext } from "~/hooks/use-dashboard-context"
 
-import type { RichTextFlags } from "~/components/richtext/shared/types"
+import type { RichtextFlags } from "./index"
 import type { GuildElementData } from "~/types/slate"
 import type { ChannelType } from "discord-api-types/v10"
 
-export function useEditor() {
-  return React.useMemo(() => withPlugins(createEditor()), [])
-}
-
-export function useGuildData(flags: RichTextFlags) {
+export function useGuildData(flags: RichtextFlags) {
   const dashboard = useDashboardContext(!flags.channels && !flags.mentions)
 
   const guildData: GuildElementData = React.useMemo(
