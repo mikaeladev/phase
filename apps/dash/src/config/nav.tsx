@@ -32,13 +32,11 @@ export const dashboardPages: NavItem[] = [
     label: "Commands",
     href: "/guilds/[id]/commands",
     icon: <SquareChevronRightIcon />,
-    disabled: true,
   },
   {
     label: "Settings",
     href: "/guilds/[id]/settings",
     icon: <Settings2Icon />,
-    disabled: true,
   },
   // resources
   {

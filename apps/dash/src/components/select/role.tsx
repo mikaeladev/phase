@@ -35,12 +35,13 @@ export function SelectRole<
   placeholder = "Select a role",
   ...props
 }: SelectRoleProps<TMultiselect, TValue>) {
-  const dashboard = useDashboardContext()
+  const dashboardData = useDashboardContext()
+  const guildData = React.use(dashboardData.guild)
 
   const items = React.useMemo(() => {
     const items: ComboboxItem[] = []
 
-    const roles = dashboard.guild.roles
+    const roles = guildData.roles
     const sortedRoles = roles.sort((a, b) => b.position - a.position)
 
     for (const role of sortedRoles) {
@@ -60,7 +61,7 @@ export function SelectRole<
     }
 
     return items
-  }, [dashboard.guild.roles])
+  }, [guildData.roles])
 
   return (
     <Combobox>

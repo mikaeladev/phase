@@ -6,16 +6,16 @@ import type { DashboardData } from "~/types/dashboard"
 
 export const DashboardContext = React.createContext<DashboardData | null>(null)
 
-type UseDashboardContextReturn<T extends boolean | undefined = undefined> =
-  T extends true ? DashboardData | undefined : DashboardData
+export function useDashboardContext(): DashboardData
+export function useDashboardContext(
+  noThrow?: boolean,
+): DashboardData | undefined
 
-export const useDashboardContext = <T extends boolean | undefined = undefined>(
-  noThrow?: T,
-): UseDashboardContextReturn<T> => {
-  const dashboardContext = React.useContext(DashboardContext)
+export function useDashboardContext(noThrow?: boolean) {
+  const dashboardContext = React.use(DashboardContext)
 
   if (!dashboardContext) {
-    if (noThrow) return undefined as UseDashboardContextReturn<T>
+    if (noThrow) return undefined
 
     throw new Error(
       "useDashboardContext has to be used within <DashboardContext.Provider>",

@@ -37,10 +37,11 @@ export function SelectChannel<
   placeholder = "Select a channel",
   ...props
 }: SelectChannelProps<TMultiselect, TValue>) {
-  const dashboard = useDashboardContext()
+  const dashboardData = useDashboardContext()
+  const guildData = React.use(dashboardData.guild)
 
   const items = React.useMemo(() => {
-    const categories = dashboard.guild.channels
+    const categories = guildData.channels
       .filter(
         (channel) =>
           (channel.type as ChannelType) === ChannelType.GuildCategory,
@@ -62,7 +63,7 @@ export function SelectChannel<
       )
     } else {
       for (const category of categories) {
-        const channels = dashboard.guild.channels
+        const channels = guildData.channels
           .filter(
             (channel) =>
               channel.parentId === category.id &&
@@ -85,7 +86,7 @@ export function SelectChannel<
     }
 
     return items
-  }, [channelType, dashboard.guild.channels])
+  }, [channelType, guildData.channels])
 
   return (
     <Combobox>

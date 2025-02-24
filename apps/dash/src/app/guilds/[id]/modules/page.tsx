@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useMemo, useState } from "react"
+import * as React from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ModuleDefinitions } from "@repo/utils/modules"
@@ -38,13 +38,14 @@ export type ModuleData<T extends ModuleId = ModuleId> = {
 } & { config: ModulesFormValuesInput[T] }
 
 export default function ModulesPage() {
-  const [filter, setFilter] = useState<FilterOption["value"]>("none")
-
   const dashboardData = useDashboardContext()
+  const guildData = React.use(dashboardData.guild)
+
+  const [filter, setFilter] = React.useState<FilterOption["value"]>("none")
 
   const defaultFormValues = getDefaultValues(
-    dashboardData.guild.id,
-    dashboardData.guild.modules ?? {},
+    guildData.id,
+    guildData.modules ?? {},
   )
 
   const form = useForm<ModulesFormValuesInput>({
@@ -59,7 +60,7 @@ export default function ModulesPage() {
   const dirtyFieldNames = keys(dirtyFields) as ModuleId[]
   const invalidFieldNames = keys(formState.errors) as ModuleId[]
 
-  const moduleDataArray: ModuleData[] = useMemo(() => {
+  const moduleDataArray: ModuleData[] = React.useMemo(() => {
     const modulesArray = Object.values(ModuleDefinitions).map((value) => ({
       config: formFields[value.id],
       ...value,
@@ -71,7 +72,7 @@ export default function ModulesPage() {
     })
   }, [formFields, filter])
 
-  const onModuleAdd = useCallback(
+  const onModuleAdd = React.useCallback(
     (moduleId: ModuleId) => {
       const moduleConfig = ModuleDefinitions[moduleId]
       if (!moduleConfig) return
@@ -90,16 +91,16 @@ export default function ModulesPage() {
     [form],
   )
 
-  const onSubmit = useCallback(
+  const onSubmit = React.useCallback(
     async (data: ModulesFormValuesOutput) => {
-      const id = dashboardData.guild.id
+      const id = guildData.id
 
       const updatedModules = await updateModules(id, data, dirtyFieldNames)
       const updatedDefaultValues = getDefaultValues(id, updatedModules)
 
       form.reset(updatedDefaultValues)
     },
-    [form, dirtyFieldNames, dashboardData.guild.id],
+    [form, dirtyFieldNames, guildData.id],
   ) as Parameters<typeof form.handleSubmit>[0]
 
   return (

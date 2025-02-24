@@ -9,12 +9,13 @@ import type { GuildElementData } from "~/types/slate"
 import type { ChannelType } from "discord-api-types/v10"
 
 export function useGuildData(flags: RichtextFlags) {
-  const dashboard = useDashboardContext(!flags.channels && !flags.mentions)
+  const dashboardData = useDashboardContext(!flags.channels && !flags.mentions)
+  const guildData = React.use(dashboardData!.guild)
 
-  const guildData: GuildElementData = React.useMemo(
+  const guildElementData: GuildElementData = React.useMemo(
     () => ({
       channels:
-        dashboard?.guild.channels
+        guildData.channels
           .filter(
             (channel) =>
               AllowedChannelTypes.GuildCategory !==
@@ -39,7 +40,7 @@ export function useGuildData(flags: RichtextFlags) {
           type: "here",
           colour: "#f8f8f8",
         },
-        ...(dashboard?.guild.roles.map((role) => ({
+        ...(guildData.roles.map((role) => ({
           id: role.id,
           name: role.name,
           type: "role" as const,
@@ -50,8 +51,8 @@ export function useGuildData(flags: RichtextFlags) {
         })) ?? []),
       ],
     }),
-    [dashboard?.guild.channels, dashboard?.guild.roles],
+    [guildData.channels, guildData.roles],
   )
 
-  return guildData
+  return guildElementData
 }

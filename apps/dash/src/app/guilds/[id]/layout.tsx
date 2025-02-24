@@ -6,6 +6,7 @@ import { client } from "@repo/trpc/client"
 import { ClientOnly } from "~/components/client-only"
 import { DashboardProvider } from "~/components/context"
 
+import type { DashboardData } from "~/types/dashboard"
 import type { LayoutProps } from "~/types/props"
 
 interface GuildLayoutProps extends LayoutProps {
@@ -18,23 +19,24 @@ export default async function GuildLayout({
 }: GuildLayoutProps) {
   const session = (await auth())!
 
-  const userId = session.user.id
   const guildId = (await params).id
+  const adminId = session.user.id
 
-  const guildData = await client.guilds.getById.query({
-    guildId,
-    adminId: userId,
-  })
+  const guildDataPromise = client.guilds.getById
+    .query({ guildId, adminId })
+    .then((data) => {
+      if (!data) redirect("/guilds")
+      return data
+    })
 
-  if (!guildData) {
-    redirect("/guilds")
+  const dashboardData: DashboardData = {
+    session,
+    guild: guildDataPromise,
   }
 
   return (
     <ClientOnly>
-      <DashboardProvider value={{ guild: guildData }}>
-        {children}
-      </DashboardProvider>
+      <DashboardProvider value={dashboardData}>{children}</DashboardProvider>
     </ClientOnly>
   )
 }

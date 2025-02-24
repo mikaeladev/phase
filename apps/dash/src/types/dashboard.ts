@@ -1,3 +1,4 @@
+import type { Session } from "@repo/auth"
 import type { client } from "@repo/trpc/client"
 import type { ModuleId } from "@repo/utils/modules"
 import type { z } from "@repo/utils/zod"
@@ -38,5 +39,6 @@ type DashboardGuildData = Exclude<
 >
 
 export interface DashboardData {
-  guild: DashboardGuildData
+  session: Session
+  guild: Promise<DashboardGuildData>
 }

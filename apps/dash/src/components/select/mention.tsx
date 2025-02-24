@@ -35,7 +35,8 @@ export function SelectMention<
   placeholder = "Select a mention",
   ...props
 }: SelectMentionProps<TMultiselect, TValue>) {
-  const dashboard = useDashboardContext()
+  const dashboardData = useDashboardContext()
+  const guildData = React.use(dashboardData.guild)
 
   const items = React.useMemo(() => {
     const items: ComboboxItem[] = [
@@ -53,7 +54,7 @@ export function SelectMention<
       },
     ]
 
-    const roles = dashboard.guild.roles
+    const roles = guildData.roles
     const sortedRoles = roles.sort((a, b) => b.position - a.position)
 
     for (const role of sortedRoles) {
@@ -74,7 +75,7 @@ export function SelectMention<
     }
 
     return items
-  }, [dashboard.guild.roles])
+  }, [guildData.roles])
 
   return (
     <Combobox>
