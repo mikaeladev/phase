@@ -6,7 +6,7 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import DiscordProvider from "next-auth/providers/discord"
 
-import type { NextAuthResult, Profile, Session } from "next-auth"
+import type { NextAuthResult, Profile, Session, User } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 
 const env = dash()
@@ -92,6 +92,8 @@ const nextAuth = NextAuth({
 })
 
 export type {} from "~/types"
+
+export type { JWT, Profile, Session, User }
 
 export const auth: NextAuthResult["auth"] = nextAuth.auth
 export const signIn: NextAuthResult["signIn"] = nextAuth.signIn
