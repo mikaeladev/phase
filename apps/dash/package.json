@@ -3,11 +3,12 @@
   "name": "dashboard",
   "type": "module",
   "scripts": {
-    "build": "bun run --env-file .env.development next build",
+    "build": "next build",
     "dev": "bun run --env-file .env.development next dev --turbo",
-    "lint": "bun run --env-file .env.development next lint",
-    "preview": "bun run build && bun run start",
-    "start": "bun run --env-file .env.development next start"
+    "dev-build": "bun run --env-file .env.development turbo run build",
+    "dev-start": "bun run --env-file .env.development next start",
+    "lint": "next lint",
+    "start": "next start"
   },
   "dependencies": {
     "@discordjs/core": "^2.0.0",
