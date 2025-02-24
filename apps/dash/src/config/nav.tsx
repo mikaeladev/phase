@@ -7,14 +7,16 @@ import {
 
 import { absoluteURL } from "~/lib/utils"
 
-export type NavItem = {
-  label: string
-  href: string
-  icon?: React.JSX.Element
-  category?: string
-  external?: boolean
-  disabled?: boolean
-}
+import type { ExclusiveOr, Prettify, With } from "~/types/utils"
+
+export type NavItem = Prettify<
+  {
+    label: string
+    href: string
+    external?: boolean
+    disabled?: boolean
+  } & ExclusiveOr<{ icon: React.JSX.Element }, { category: string }>
+>
 
 export const dashboardPages: NavItem[] = [
   // pages
@@ -69,3 +71,17 @@ export const dashboardPages: NavItem[] = [
     external: true,
   },
 ]
+
+export const dashboardPagesWithIcons = dashboardPages.filter(
+  (item) => !!item.icon,
+)
+
+export const dashboardPagesByCategory = dashboardPages.reduce(
+  (acc, item: NavItem) => {
+    if (!item.category) return acc
+    if (!acc[item.category]) acc[item.category] = []
+    acc[item.category]!.push(item)
+    return acc
+  },
+  {} as Record<string, With<NavItem, "category">[]>,
+)
