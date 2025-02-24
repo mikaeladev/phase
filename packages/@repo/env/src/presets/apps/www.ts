@@ -11,7 +11,6 @@ export function www() {
     ...nextBaseOptions,
     extends: [base(nextBaseOptions), trpcClient(nextBaseOptions)],
     server: {
-      PORT: z.union([z.string().transform((v) => parseInt(v)), z.number()]),
       DASH_URL: z.string().url(),
       DOCS_URL: z.string().url(),
     },

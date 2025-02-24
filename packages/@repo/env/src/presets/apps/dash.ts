@@ -21,9 +21,6 @@ export function dash() {
       twitch(nextBaseOptions),
       authjs(nextBaseOptions),
     ],
-    server: {
-      PORT: z.union([z.string().transform((v) => parseInt(v)), z.number()]),
-    },
     client: {
       NEXT_PUBLIC_BASE_URL: z.string().url(),
     },

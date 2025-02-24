@@ -19,7 +19,7 @@ export default defineConfig({
   prefetch: true,
   site: `${env.PUBLIC_BASE_URL}/docs`,
   server: {
-    port: env.PORT,
+    port: Number(process.env.PORT!),
   },
   vite: {
     cacheDir: ".astro/cache/vite",
