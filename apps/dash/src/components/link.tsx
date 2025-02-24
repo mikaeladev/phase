@@ -17,10 +17,6 @@ export function Link({ href, ...props }: LinkProps) {
       : (NextLink as BaseLinkProps["anchor"])
 
   return (
-    <BaseLink
-      anchor={Anchor}
-      href={props.disabled ? "javascript:void(0)" : href}
-      {...props}
-    />
+    <BaseLink anchor={Anchor} href={props.disabled ? "#" : href} {...props} />
   )
 }

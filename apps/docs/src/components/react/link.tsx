@@ -10,7 +10,7 @@ export function Link({ href, ...props }: LinkProps) {
   return (
     <BaseLink
       anchor={"a"}
-      href={props.disabled ? "javascript:void(0)" : href}
+      href={props.disabled ? "#" : href}
       data-astro-prefetch={!props.mfe && !props.external}
       {...props}
     />
