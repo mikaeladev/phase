@@ -19,7 +19,8 @@
     }
   },
   "dependencies": {
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "yaml": "^2.7.0"
   },
   "peerDependencies": {
     "tailwindcss": "^4.0.0"

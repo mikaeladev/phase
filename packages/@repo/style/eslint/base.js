@@ -1,11 +1,12 @@
 import eslint from "@eslint/js"
-import importPlugin from "eslint-plugin-import-x"
+import eslintPluginImport from "eslint-plugin-import-x"
+import eslintPluginYml from "eslint-plugin-yml"
 import globals from "globals"
 import tseslint from "typescript-eslint"
 
 const importPluginConfig = tseslint.config(
-  importPlugin.flatConfigs.recommended,
-  importPlugin.flatConfigs.typescript,
+  eslintPluginImport.flatConfigs.recommended,
+  eslintPluginImport.flatConfigs.typescript,
   {
     rules: {
       "import-x/no-extraneous-dependencies": [
@@ -33,6 +34,7 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
+  ...eslintPluginYml.configs["flat/recommended"],
   ...importPluginConfig,
   ...ignoresConfig,
   {
