@@ -28,5 +28,8 @@
 
   // tailwind stuff
   "css.lint.unknownAtRules": "ignore",
-  "tailwindCSS.experimental.classRegex": ["tw`([^`]*)"]
+  "tailwindCSS.experimental.classRegex": [
+    ["cn\\(((?:[^()]|\\([^()]*\\))*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["cva\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ]
 }
