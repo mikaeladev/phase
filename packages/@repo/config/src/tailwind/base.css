@@ -46,18 +46,19 @@
 /* shadows */
 
 @theme {
-  --shadow-glow-sm: 0 0 4px 0 var(--tw-shadow-color),
-    0 0 11px 0 var(--tw-shadow-color), 0 0 19px 0 var(--tw-shadow-color),
-    0 0 40px 0 var(--tw-shadow-color);
+  --shadow-glow-sm:
+    0 0 4px 0 var(--tw-shadow-color), 0 0 11px 0 var(--tw-shadow-color),
+    0 0 19px 0 var(--tw-shadow-color), 0 0 40px 0 var(--tw-shadow-color);
 
-  --shadow-glow-md: 0 0 4px 0 var(--tw-shadow-color),
-    0 0 11px 0 var(--tw-shadow-color), 0 0 19px 0 var(--tw-shadow-color),
-    0 0 40px 0 var(--tw-shadow-color), 0 0 80px 0 var(--tw-shadow-color);
+  --shadow-glow-md:
+    0 0 4px 0 var(--tw-shadow-color), 0 0 11px 0 var(--tw-shadow-color),
+    0 0 19px 0 var(--tw-shadow-color), 0 0 40px 0 var(--tw-shadow-color),
+    0 0 80px 0 var(--tw-shadow-color);
 
-  --shadow-glow-lg: 0 0 4px 0 var(--tw-shadow-color),
-    0 0 11px 0 var(--tw-shadow-color), 0 0 19px 0 var(--tw-shadow-color),
-    0 0 40px 0 var(--tw-shadow-color), 0 0 80px 0 var(--tw-shadow-color),
-    0 0 120px 0 var(--tw-shadow-color);
+  --shadow-glow-lg:
+    0 0 4px 0 var(--tw-shadow-color), 0 0 11px 0 var(--tw-shadow-color),
+    0 0 19px 0 var(--tw-shadow-color), 0 0 40px 0 var(--tw-shadow-color),
+    0 0 80px 0 var(--tw-shadow-color), 0 0 120px 0 var(--tw-shadow-color);
 }
 
 /* base styles */
