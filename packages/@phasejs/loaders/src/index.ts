@@ -15,7 +15,7 @@ import type { AppManifest } from "~/types/manifest"
 // load app //
 
 export async function loadApp(phase: BotClient, paths?: AppManifest) {
-  if (!paths) paths = await analyseApp()
+  paths ??= await analyseApp()
 
   const prestart = paths.prestart
     ? await loadPrestart(paths.prestart)
