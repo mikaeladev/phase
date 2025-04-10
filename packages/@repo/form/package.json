@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@repo/form",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "build": "tsup",
@@ -11,9 +11,11 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "default": "./dist/index.js"
     }
+  },
+  "dependencies": {
+    "@repo/utils": "workspace:*"
   },
   "tsup": {
     "clean": true,
