@@ -79,7 +79,7 @@ export const dashboardPagesWithIcons = dashboardPages.filter(
 export const dashboardPagesByCategory = dashboardPages.reduce(
   (acc, item: NavItem) => {
     if (!item.category) return acc
-    if (!acc[item.category]) acc[item.category] = []
+    acc[item.category] ??= []
     acc[item.category]!.push(item)
     return acc
   },
