@@ -5,7 +5,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/form"
+} from "@repo/ui/form"
 import { SelectChannel } from "~/components/select/channel"
 
 import type { AllowedChannelTypes } from "~/components/channel-icons"

@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { ModuleDefinitions } from "@repo/utils/modules"
 import { useForm } from "react-hook-form"
 
-import { Form } from "~/components/form"
+import { Form } from "@repo/ui/form"
 import { ActionBar } from "~/components/modules/action-bar"
 import { AddModule } from "~/components/modules/add-module"
 import { ConfigCard, ConfigCardStatus } from "~/components/modules/config-card"

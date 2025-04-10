@@ -7,6 +7,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@repo/ui/dropdown-menu"
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@repo/ui/form"
 import { Icon } from "@repo/ui/icon"
 import {
   ChevronDownIcon,
@@ -15,13 +22,6 @@ import {
   MoveIcon,
   TrashIcon,
 } from "@repo/ui/lucide-icon"
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "~/components/form"
 import { useFormFieldArrayContext } from "~/components/form/field/array"
 
 import type { Control, FieldPath, FieldValues } from "react-hook-form"

@@ -85,7 +85,6 @@
         "prismjs": "^1.29.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "react-hook-form": "^7.53.2",
         "sharp": "^0.33.5",
         "slate": "^0.110.2",
         "slate-history": "^0.109.0",
@@ -104,6 +103,7 @@
       },
       "peerDependencies": {
         "mongoose": "^8.9.5",
+        "react-hook-form": "^7.54.2",
       },
     },
     "apps/docs": {
@@ -147,7 +147,6 @@
         "postcss": "^8.4.49",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "react-hook-form": "^7.53.2",
         "sonner": "^1.7.0",
       },
       "devDependencies": {
@@ -156,6 +155,9 @@
         "@types/react": "^19.0.2",
         "@types/react-dom": "^19.0.2",
         "tailwindcss": "^4.0.0",
+      },
+      "peerDependencies": {
+        "react-hook-form": "^7.54.2",
       },
     },
     "packages/@phasejs/builders": {
@@ -337,7 +339,10 @@
     },
     "packages/@repo/form": {
       "name": "@repo/form",
-      "version": "0.1.0",
+      "version": "0.0.0",
+      "dependencies": {
+        "@repo/utils": "workspace:*",
+      },
     },
     "packages/@repo/style": {
       "name": "@repo/style",
@@ -413,6 +418,7 @@
         "fast-glob": "^3.3.2",
         "lucide-react": "^0.468.0",
         "react": "^19.0.0",
+        "react-hook-form": "^7.54.2",
         "vaul": "^1.1.2",
       },
       "devDependencies": {

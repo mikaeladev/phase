@@ -5,7 +5,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/form"
+} from "@repo/ui/form"
 import { SelectRole } from "~/components/select/role"
 
 import type { Control, FieldPath, FieldValues } from "react-hook-form"

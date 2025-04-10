@@ -2,12 +2,11 @@
 
 import * as React from "react"
 
+import { cn } from "@repo/utils/site"
 import { Controller, FormProvider, useFormContext } from "react-hook-form"
 
-import { Label } from "@repo/ui/label"
-import { Slot } from "@repo/ui/slot"
-
-import { cn } from "~/lib/utils"
+import { Label } from "~/components/label"
+import { Slot } from "~/components/slot"
 
 import type { ControllerProps, FieldPath, FieldValues } from "react-hook-form"
 
@@ -36,8 +35,8 @@ export function FormField<
 }
 
 export const useFormField = () => {
-  const fieldContext = React.useContext(FormFieldContext)
-  const itemContext = React.useContext(FormItemContext)
+  const fieldContext = React.use(FormFieldContext)
+  const itemContext = React.use(FormItemContext)
   const { getFieldState, formState } = useFormContext()
 
   const fieldState = getFieldState(fieldContext.name, formState)

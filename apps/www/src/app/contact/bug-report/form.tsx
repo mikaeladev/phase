@@ -8,6 +8,15 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 import { Button } from "@repo/ui/button"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@repo/ui/form"
 import { Input } from "@repo/ui/input"
 import {
   Select,
@@ -17,15 +26,6 @@ import {
   SelectValue,
 } from "@repo/ui/select"
 import { Textarea } from "@repo/ui/textarea"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/form"
 import { Toaster } from "~/components/toaster"
 
 const bugReportFormSchema = z.object({

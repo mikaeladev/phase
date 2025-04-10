@@ -5,7 +5,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/form"
+} from "@repo/ui/form"
 import { SelectMention } from "~/components/select/mention"
 
 import type { Control, FieldPath, FieldValues } from "react-hook-form"

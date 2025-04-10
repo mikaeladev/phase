@@ -7,8 +7,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@repo/ui/dropdown-menu"
-import { Icon } from "@repo/ui/icon"
-import { CheckIcon, ChevronsUpDownIcon } from "@repo/ui/lucide-icon"
 import {
   FormControl,
   FormDescription,
@@ -16,7 +14,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/form"
+} from "@repo/ui/form"
+import { Icon } from "@repo/ui/icon"
+import { CheckIcon, ChevronsUpDownIcon } from "@repo/ui/lucide-icon"
 
 import type { Control, FieldPath, FieldValues } from "react-hook-form"
 

@@ -5,7 +5,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/form"
+} from "@repo/ui/form"
 import { Richtext } from "~/components/richtext"
 
 import type { Control, FieldPath, FieldValues } from "react-hook-form"

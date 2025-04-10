@@ -1,4 +1,3 @@
-import { RadioGroup, RadioGroupItem } from "@repo/ui/radio-group"
 import {
   FormControl,
   FormDescription,
@@ -6,7 +5,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/form"
+} from "@repo/ui/form"
+import { RadioGroup, RadioGroupItem } from "@repo/ui/radio-group"
 
 import type { Control, FieldPath, FieldValues } from "react-hook-form"
 

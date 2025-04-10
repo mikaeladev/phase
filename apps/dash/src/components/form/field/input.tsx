@@ -1,4 +1,3 @@
-import { Input } from "@repo/ui/input"
 import {
   FormControl,
   FormDescription,
@@ -6,7 +5,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/form"
+} from "@repo/ui/form"
+import { Input } from "@repo/ui/input"
 
 import type { Control, FieldPath, FieldValues } from "react-hook-form"
 
