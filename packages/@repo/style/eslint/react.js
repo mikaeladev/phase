@@ -1,5 +1,4 @@
 import reactPlugin from "eslint-plugin-react"
-// @ts-expect-error no types
 import hooksPlugin from "eslint-plugin-react-hooks"
 import globals from "globals"
 import tseslint from "typescript-eslint"
