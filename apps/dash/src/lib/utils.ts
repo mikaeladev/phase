@@ -1,5 +1,7 @@
 import unsafeMs from "ms"
 
+import type { StringValue } from "ms"
+
 export { cn, cva, absoluteURL, type VariantProps } from "@repo/utils/site"
 
 export const getOrdinal = (number: number): string => {
@@ -84,25 +86,37 @@ export function parseHiddenContent(content: string) {
 }
 
 /**
+ * The options to format with.
+ */
+export type MsOptions = { long: boolean }
+
+/**
  * A safe version of `ms` that returns undefined if the value is invalid.
  *
- * @param value The value to parse or format.
- * @returns The parsed or formatted value.
+ * @param value The value to parse.
  */
-export function safeMs<T extends string | number>(
-  value: T,
-  options?: T extends number ? { long: boolean } : never,
-) {
-  let parsedValue: string | number | undefined
+export function safeMs(value: string): number | undefined
+
+/**
+ * A safe version of `ms` that returns undefined if the value is invalid.
+ *
+ * @param value The value to format.
+ * @param options The options to format with.
+ */
+export function safeMs(value: number, options?: MsOptions): string | undefined
+
+export function safeMs(value: string | number, options?: MsOptions) {
+  let parsedValue: number | string | undefined
 
   try {
-    parsedValue =
-      typeof value === "string" ? unsafeMs(value) : unsafeMs(value, options)
+    if (typeof value === "string") {
+      parsedValue = unsafeMs(value as StringValue)
+    } else {
+      parsedValue = unsafeMs(value, options)
+    }
   } catch {
     parsedValue = undefined
   }
 
-  return parsedValue as unknown as T extends string
-    ? number | undefined
-    : string | undefined
+  return parsedValue
 }
