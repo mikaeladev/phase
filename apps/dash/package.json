@@ -7,7 +7,7 @@
     "dev": "bun run --env-file .env.development next dev --turbo",
     "dev-build": "bun run --env-file .env.development turbo run build",
     "dev-start": "bun run --env-file .env.development next start",
-    "lint": "next lint",
+    "lint": "SKIP_ENV_VALIDATION=true next lint",
     "start": "next start"
   },
   "dependencies": {

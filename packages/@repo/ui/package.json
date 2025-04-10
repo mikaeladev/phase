@@ -6,7 +6,7 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite build --watch",
-    "lint": "eslint ."
+    "lint": "SKIP_ENV_VALIDATION=true eslint ."
   },
   "exports": {
     "./accordion": {

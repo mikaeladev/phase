@@ -9,7 +9,7 @@
     "drizzle:push": "bun run --env-file=.env.local drizzle-kit push",
     "drizzle:studio": "bun run --env-file=.env.local drizzle-kit studio",
     "genkey": "bun run src/mongo/genkey.ts",
-    "lint": "eslint ."
+    "lint": "SKIP_ENV_VALIDATION=true eslint ."
   },
   "exports": {
     ".": {

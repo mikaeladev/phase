@@ -8,7 +8,7 @@
     "dev": "NODE_ENV=development bun run --watch src/main.ts",
     "docker:build": "nixpacks build --name bot-image --current-dir ../../",
     "docker:start": "docker run -it --rm bot-image",
-    "lint": "eslint .",
+    "lint": "SKIP_ENV_VALIDATION=true eslint .",
     "preview": "bun run build && bun run start",
     "start": "NODE_ENV=production bun run --smol .phase/src/main.js"
   },
