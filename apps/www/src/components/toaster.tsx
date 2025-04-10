@@ -1,4 +1,3 @@
-import { cn } from "@repo/utils/site"
 import { Toaster as Sonner } from "sonner"
 
 import { Icon } from "@repo/ui/icon"
@@ -14,7 +13,6 @@ import { Spinner } from "@repo/ui/spinner"
 export function Toaster() {
   return (
     <Sonner
-      cn={cn}
       theme="dark"
       toastOptions={{
         className:
