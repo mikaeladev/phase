@@ -1,4 +1,6 @@
-import { default as unsafeMs } from "ms"
+import unsafeMs from "ms"
+
+import type { StringValue } from "ms"
 
 /**
  * The options to format with.
@@ -25,7 +27,7 @@ export function safeMs(value: string | number, options?: MsOptions) {
 
   try {
     if (typeof value === "string") {
-      parsedValue = unsafeMs(value)
+      parsedValue = unsafeMs(value as StringValue)
     } else {
       parsedValue = unsafeMs(value, options)
     }

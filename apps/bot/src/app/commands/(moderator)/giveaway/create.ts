@@ -1,9 +1,8 @@
 import { BotSubcommandBuilder } from "@phasejs/builders"
 
-import ms from "ms"
-
 import { db } from "~/lib/db"
 import { Emojis } from "~/lib/emojis"
+import { safeMs } from "~/lib/ms"
 import { dateToTimestamp } from "~/lib/utils/formatting"
 
 import { MessageBuilder } from "~/structures/builders/MessageBuilder"
@@ -37,9 +36,17 @@ export default new BotSubcommandBuilder()
   .setExecute(async (interaction) => {
     const message = await interaction.deferReply({ fetchReply: true })
 
+    const durationString = interaction.options.getString("duration", true)
+    const duration = safeMs(durationString)
+
+    if (!duration) {
+      return await interaction.editReply(
+        new MessageBuilder().setContent(`Invalid duration: ${durationString}`),
+      )
+    }
+
     const prize = interaction.options.getString("prize", true)
     const winners = interaction.options.getInteger("winners", true)
-    const duration = ms(interaction.options.getString("duration", true))
     const host = interaction.member as GuildMember
     const expires = new Date(Date.now() + duration)
 
