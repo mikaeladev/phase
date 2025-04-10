@@ -20,7 +20,7 @@
     "chalk": "^5.3.0"
   },
   "peerDependencies": {
-    "discord.js": "^14.16.x"
+    "discord.js": "^14"
   },
   "tsup": {
     "clean": true,

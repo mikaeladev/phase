@@ -19,7 +19,7 @@
     "@phasejs/core": "workspace:*"
   },
   "peerDependencies": {
-    "discord.js": "^14.16.x"
+    "discord.js": "^14.18.0"
   },
   "tsup": {
     "clean": true,

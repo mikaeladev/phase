@@ -23,15 +23,15 @@
   "dependencies": {
     "@repo/env": "workspace:*",
     "@repo/utils": "workspace:*",
-    "@trpc/client": "^11.0.0-rc.700",
-    "@trpc/server": "^11.0.0-rc.700"
+    "@trpc/client": "^11.0.4",
+    "@trpc/server": "^11.0.4"
   },
   "devDependencies": {
     "@repo/db": "workspace:*"
   },
   "peerDependencies": {
-    "discord.js": "^14.x.x",
-    "mongoose": "^8.9.5"
+    "discord.js": "^14.18.0",
+    "mongoose": "^8.13.2"
   },
   "tsup": {
     "clean": true,

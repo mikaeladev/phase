@@ -20,10 +20,10 @@
     "next-auth": "^5.0.0-beta.25"
   },
   "devDependencies": {
-    "discord-api-types": "^0.37.114"
+    "discord-api-types": "^0.37.119"
   },
   "peerDependencies": {
-    "next": "^15.x.x"
+    "next": "^15.3.0"
   },
   "tsup": {
     "clean": true,

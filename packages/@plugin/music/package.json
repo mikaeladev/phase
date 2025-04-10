@@ -17,16 +17,16 @@
   },
   "dependencies": {
     "@distube/youtube": "^1.0.4",
-    "@distube/ytdl-core": "^4.15.9",
+    "@distube/ytdl-core": "^4.16.8",
     "@phasejs/core": "workspace:*"
   },
   "devDependencies": {
     "@plugin/voice": "workspace:*",
-    "distube": "^5.0.4"
+    "distube": "^5.0.7"
   },
   "peerDependencies": {
     "@discordjs/voice": "^0.18.0",
-    "discord.js": "^14.16.x"
+    "discord.js": "^14.18.0"
   },
   "tsup": {
     "clean": true,

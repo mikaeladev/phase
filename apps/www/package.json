@@ -11,29 +11,29 @@
     "start": "next start"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.9.1",
+    "@hookform/resolvers": "^3.10.0",
     "@repo/config": "workspace:*",
     "@repo/env": "workspace:*",
     "@repo/trpc": "workspace:*",
     "@repo/ui": "workspace:*",
     "@repo/utils": "workspace:*",
-    "@vercel/analytics": "^1.4.0",
+    "@vercel/analytics": "^1.5.0",
     "geist": "^1.3.1",
-    "input-otp": "^1.4.1",
-    "next": "^15.1.4",
-    "postcss": "^8.4.49",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "sonner": "^1.7.0"
+    "input-otp": "^1.4.2",
+    "next": "^15.3.0",
+    "postcss": "^8.5.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "sonner": "^1.7.4"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.0.0-beta.9",
+    "@tailwindcss/postcss": "^4.1.3",
     "@total-typescript/ts-reset": "^0.6.1",
-    "@types/react": "^19.0.2",
-    "@types/react-dom": "^19.0.2",
-    "tailwindcss": "^4.0.0"
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.2",
+    "tailwindcss": "^4.1.3"
   },
   "peerDependencies": {
-    "react-hook-form": "^7.54.2"
+    "react-hook-form": "^7"
   }
 }
