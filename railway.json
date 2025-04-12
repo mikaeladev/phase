@@ -9,6 +9,7 @@
       "bun.lock",
       "bunfig.toml",
       "package.json",
+      "railpack.json",
       "railway.json",
       "turbo.json"
     ]
