@@ -50,8 +50,10 @@
     }
   },
   "deploy": {
-    "base": { "image": "oven/bun:1.2.9" },
-    "startCommand": "bun run start:bot",
-    "inputs": [{ "step": "build" }]
+    "inputs": [
+      { "image": "oven/bun:1.2.9" },
+      { "step": "build" }
+    ],
+    "startCommand": "bun run start:bot"
   }
 }
