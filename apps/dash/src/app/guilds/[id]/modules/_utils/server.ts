@@ -6,11 +6,12 @@ import {
 } from "@discordjs/core/http-only"
 import { REST } from "@discordjs/rest"
 import { ModuleId } from "@repo/utils/modules"
+import { ms } from "@repo/utils/ms"
 
 import { db } from "~/lib/db"
 import { env } from "~/lib/env"
 import { twitchClient } from "~/lib/twitch"
-import { createHiddenContent, parseHiddenContent, safeMs } from "~/lib/utils"
+import { createHiddenContent, parseHiddenContent } from "~/lib/utils"
 
 import type {
   APIButtonComponentWithCustomId,
@@ -42,7 +43,7 @@ export async function parseModuleData(
         channel: message.channel,
         message: message.content,
         mention: message.mention,
-        interval: safeMs(message.interval)!,
+        interval: ms(message.interval)!,
       })),
     }
   }
@@ -50,7 +51,7 @@ export async function parseModuleData(
   if (formDataIs(ModuleId.BumpReminders, formData)) {
     return {
       ...formData,
-      time: safeMs(formData.time)!,
+      time: ms(formData.time)!,
     }
   }
 

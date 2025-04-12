@@ -12,7 +12,7 @@ export type MsOptions = { long: boolean }
  *
  * @param value The value to parse.
  */
-export function safeMs(value: string): number | undefined
+export function ms(value: string): number | undefined
 
 /**
  * A safe version of `ms` that returns undefined if the value is invalid.
@@ -20,9 +20,9 @@ export function safeMs(value: string): number | undefined
  * @param value The value to format.
  * @param options The options to format with.
  */
-export function safeMs(value: number, options?: MsOptions): string | undefined
+export function ms(value: number, options?: MsOptions): string | undefined
 
-export function safeMs(value: string | number, options?: MsOptions) {
+export function ms(value: string | number, options?: MsOptions) {
   let parsedValue: number | string | undefined
 
   try {

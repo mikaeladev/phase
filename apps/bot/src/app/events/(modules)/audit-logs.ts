@@ -19,9 +19,9 @@ import {
 } from "discord.js"
 
 import { ModuleId } from "@repo/utils/modules"
+import { ms } from "@repo/utils/ms"
 import { capitalCase } from "change-case"
 import dedent from "dedent"
-import ms from "ms"
 
 import {
   dateToTimestamp,

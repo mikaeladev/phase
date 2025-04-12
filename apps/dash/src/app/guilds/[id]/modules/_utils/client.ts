@@ -1,6 +1,5 @@
 import { ModuleId } from "@repo/utils/modules"
-
-import { safeMs } from "~/lib/utils"
+import { ms } from "@repo/utils/ms"
 
 import type {
   GuildModulesWithData,
@@ -139,13 +138,13 @@ export function getDefaultValues(
       ...data,
       messages: data.messages.map((msg) => ({
         ...msg,
-        interval: safeMs(msg.interval, { long: true })!,
+        interval: ms(msg.interval, { long: true })!,
         content: msg.message,
       })),
     }),
     [ModuleId.BumpReminders]: (data) => ({
       ...data,
-      time: safeMs(data.time, { long: true })!,
+      time: ms(data.time, { long: true })!,
     }),
     [ModuleId.ReactionRoles]: (data) => ({
       ...data,

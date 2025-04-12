@@ -1,7 +1,6 @@
 import { ModuleId } from "@repo/utils/modules"
+import { ms } from "@repo/utils/ms"
 import { z } from "@repo/utils/zod"
-
-import { safeMs } from "~/lib/utils"
 
 function moduleSchema<T extends Record<string, Zod.ZodType>>(schema: T) {
   return z.object({ enabled: z.boolean(), ...schema })
@@ -35,7 +34,7 @@ export const autoMessagesSchema = moduleSchema({
         .string()
         .nonempty("Interval is required")
         .max(100, "Interval cannot be longer than 100 characters")
-        .refine(safeMs, "Invalid interval format"),
+        .refine(ms, "Invalid interval format"),
     })
     .array()
     .max(10),
@@ -56,7 +55,7 @@ export const bumpRemindersSchema = moduleSchema({
     .string()
     .nonempty("Time is required")
     .max(100, "Time cannot be longer than 100 characters")
-    .refine(safeMs, "Invalid time format"),
+    .refine(ms, "Invalid time format"),
   initialMessage: z
     .string()
     .nonempty("Initial message is required")

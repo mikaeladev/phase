@@ -1,7 +1,7 @@
 import { BotSubcommandBuilder } from "@phasejs/builders"
 import { ChannelType, PermissionFlagsBits } from "discord.js"
 
-import ms from "ms"
+import { ms } from "@repo/utils/ms"
 
 import { BotErrorMessage } from "~/structures/BotError"
 import { MessageBuilder } from "~/structures/builders/MessageBuilder"

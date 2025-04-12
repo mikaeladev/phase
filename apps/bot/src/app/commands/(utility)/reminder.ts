@@ -1,9 +1,10 @@
 import { BotCommandBuilder } from "@phasejs/builders"
 import { EmbedBuilder } from "discord.js"
 
+import { ms } from "@repo/utils/ms"
+
 import { db } from "~/lib/db"
 import { PhaseColour } from "~/lib/enums"
-import { safeMs } from "~/lib/ms"
 
 import { BotErrorMessage } from "~/structures/BotError"
 
@@ -27,7 +28,7 @@ export default new BotCommandBuilder()
     const message = interaction.options.getString("message", true)
     const delay = interaction.options.getString("delay", true)
 
-    const msDelay = safeMs(delay)
+    const msDelay = ms(delay)
 
     if (!msDelay) {
       return void interaction.reply(
@@ -50,7 +51,7 @@ export default new BotCommandBuilder()
           .setColor(PhaseColour.Primary)
           .setTitle("Reminder Set")
           .setDescription("You'll be pinged when the reminder is sent.")
-          .setFooter({ text: `Duration: ${safeMs(msDelay, { long: true })}` }),
+          .setFooter({ text: `Duration: ${ms(msDelay, { long: true })}` }),
       ],
     })
   })

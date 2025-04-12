@@ -17,7 +17,7 @@ module.exports = {
       if (process.env.SKIP_ENV_VALIDATION) {
         return "http://localhost:3000"
       }
-      
+
       throw new Error(
         "'BASE_URL', 'NEXT_PUBLIC_BASE_URL', or 'PUBLIC_BASE_URL' must be set.",
       )

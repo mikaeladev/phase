@@ -1,8 +1,9 @@
 import { BotSubcommandBuilder } from "@phasejs/builders"
 
+import { ms } from "@repo/utils/ms"
+
 import { db } from "~/lib/db"
 import { Emojis } from "~/lib/emojis"
-import { safeMs } from "~/lib/ms"
 import { dateToTimestamp } from "~/lib/utils/formatting"
 
 import { MessageBuilder } from "~/structures/builders/MessageBuilder"
@@ -37,7 +38,7 @@ export default new BotSubcommandBuilder()
     const message = await interaction.deferReply({ fetchReply: true })
 
     const durationString = interaction.options.getString("duration", true)
-    const duration = safeMs(durationString)
+    const duration = ms(durationString)
 
     if (!duration) {
       return await interaction.editReply(
