@@ -22,10 +22,24 @@
     }
   },
   "steps": {
+    "copy": {
+      "inputs": [{ "step": "packages:mise" }],
+      "commands": [
+        { "src": "apps/bot", "dest": "apps/bot" },
+        { "src": "packages", "dest": "packages" },
+        { "src": "scripts", "dest": "scripts" },
+        { "src": "bunfig.toml", "dest": "bunfig.toml" },
+        { "src": "package.json", "dest": "package.json" },
+        { "src": "turbo.json", "dest": "turbo.json" }
+      ]
+    },
     "install": {
       "caches": ["bun-install"],
-      "commands": ["cd /app && bun install --frozen-lockfile"],
-      "inputs": [{ "step": "packages:mise" }],
+      "inputs": [{ "step": "copy" }],
+      "commands": [
+        { "path": "node_modules/.bin" },
+        { "cmd": "bun install --frozen-lockfile" }
+      ],
       "variables": {
         "CI": "true",
         "NODE_ENV": "production"
@@ -33,8 +47,8 @@
     },
     "build": {
       "caches": ["node-modules", "turbo-repo"],
-      "commands": ["cd /app && bun run build:bot"],
       "inputs": [{ "step": "install" }],
+      "commands": [{ "cmd": "bun run build:bot" }],
       "secrets": ["*"]
     }
   },
