@@ -33,23 +33,13 @@
     },
     "build": {
       "caches": ["node-modules", "turbo-repo"],
-      "commands": ["...", "bun run build:bot"],
-      "inputs": [
-        {
-          "step": "install",
-          "include": ["."]
-        }
-      ],
+      "commands": ["cd /app && bun run build:bot"],
+      "inputs": [{ "step": "install" }],
       "secrets": ["*"]
     }
   },
   "deploy": {
     "startCommand": "bun run start:bot",
-    "inputs": [
-      {
-        "step": "build",
-        "include": ["."]
-      }
-    ]
+    "inputs": [{ "step": "build" }]
   }
 }
