@@ -28,6 +28,7 @@
         { "src": "apps/bot", "dest": "apps/bot" },
         { "src": "packages", "dest": "packages" },
         { "src": "scripts", "dest": "scripts" },
+        { "src": "bun.lock", "dest": "bun.lock" },
         { "src": "bunfig.toml", "dest": "bunfig.toml" },
         { "src": "package.json", "dest": "package.json" },
         { "src": "turbo.json", "dest": "turbo.json" }
