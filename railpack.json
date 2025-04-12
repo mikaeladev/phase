@@ -37,10 +37,7 @@
     "install": {
       "caches": ["bun-install"],
       "inputs": [{ "step": "copy" }],
-      "commands": [
-        { "path": "node_modules/.bin" },
-        { "cmd": "bun install --frozen-lockfile" }
-      ],
+      "commands": [{ "path": "node_modules/.bin" }, { "cmd": "bun install" }],
       "variables": {
         "CI": "true",
         "NODE_ENV": "production"
