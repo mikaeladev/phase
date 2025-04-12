@@ -1,11 +1,10 @@
 {
   "$schema": "https://schema.railpack.com",
-  "buildAptPackages": ["build-essential"],
+  "buildAptPackages": ["build-essential python3"],
   "provider": "node",
   "packages": {
     "node": "20",
-    "bun": "1.2.9",
-    "python": "3.10"
+    "bun": "1.2.9"
   },
   "caches": {
     "bun-install": {
