@@ -25,7 +25,12 @@
     "install": {
       "caches": ["bun-install"],
       "commands": ["bun install --frozen-lockfile"],
-      "inputs": [{ "step": "packages:mise" }],
+      "inputs": [
+        {
+          "step": "packages:mise",
+          "include": ["."]
+        }
+      ],
       "variables": {
         "CI": "true",
         "NODE_ENV": "production"
@@ -34,11 +39,22 @@
     "build": {
       "caches": ["node-modules", "turbo-repo"],
       "commands": ["...", "bun run build:bot"],
-      "inputs": [{ "step": "install" }],
+      "inputs": [
+        {
+          "step": "install",
+          "include": ["."]
+        }
+      ],
       "secrets": ["*"]
     }
   },
   "deploy": {
-    "startCommand": "bun run start:bot"
+    "startCommand": "bun run start:bot",
+    "inputs": [
+      {
+        "step": "build",
+        "include": ["."]
+      }
+    ]
   }
 }
