@@ -3,11 +3,15 @@
   "buildAptPackages": ["build-essential", "python3"],
   "provider": "node",
   "steps": {
+    "check": {
+      "commands": ["bunx ls"]
+    },
     "install": {
       "commands": ["bun install"]
     },
     "build": {
-      "commands": ["bun run build:bot"]
+      "inputs": [{ "step": "install" }],
+      "commands": ["...", "bun run build:bot"]
     }
   },
   "deploy": {
