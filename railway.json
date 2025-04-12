@@ -2,7 +2,17 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "RAILPACK",
-    "watchPatterns": ["/apps/bot", "/packages/**"]
+    "watchPatterns": [
+      "/apps/bot",
+      "/packages/**",
+      "/scripts/**",
+      "bun.lock",
+      "bunfig.toml",
+      "package.json",
+      "railway.json",
+      "railpack.json",
+      "turbo.json"
+    ]
   },
   "deploy": {
     "runtime": "V2",
