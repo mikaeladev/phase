@@ -1,0 +1,44 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "buildAptPackages": ["build-essential"],
+  "provider": "node",
+  "packages": {
+    "node": "20",
+    "bun": "1.2.9",
+    "python": "3.10"
+  },
+  "caches": {
+    "bun-install": {
+      "directory": "/root/.bun/install/cache",
+      "type": "shared"
+    },
+    "node-modules": {
+      "directory": "/app/node_modules/.cache",
+      "type": "shared"
+    },
+    "turbo-repo": {
+      "directory": "/app/.turbo/cache",
+      "type": "shared"
+    }
+  },
+  "steps": {
+    "install": {
+      "caches": ["bun-install"],
+      "commands": ["bun install --frozen-lockfile"],
+      "inputs": [{ "step": "packages:mise" }],
+      "variables": {
+        "CI": "true",
+        "NODE_ENV": "production"
+      }
+    },
+    "build": {
+      "caches": ["node-modules", "turbo-repo"],
+      "commands": ["...", "bun run build:bot"],
+      "inputs": [{ "step": "install" }],
+      "secrets": ["*"]
+    }
+  },
+  "deploy": {
+    "startCommand": "bun run start:bot"
+  }
+}

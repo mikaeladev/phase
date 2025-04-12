@@ -2,12 +2,10 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "RAILPACK",
-    "buildCommand": "bun run build:bot",
     "watchPatterns": [
       "/apps/bot",
       "/packages/**",
       "/scripts/**",
-      ".env.production",
       "bun.lock",
       "bunfig.toml",
       "package.json",
@@ -20,7 +18,6 @@
     "numReplicas": 1,
     "sleepApplication": false,
     "restartPolicyMaxRetries": 10,
-    "restartPolicyType": "ALWAYS",
-    "startCommand": "bun run start:bot"
+    "restartPolicyType": "ALWAYS"
   }
 }
