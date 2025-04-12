@@ -24,13 +24,8 @@
   "steps": {
     "install": {
       "caches": ["bun-install"],
-      "commands": ["bun install --frozen-lockfile"],
-      "inputs": [
-        {
-          "step": "packages:mise",
-          "include": ["."]
-        }
-      ],
+      "commands": ["cd /app && bun install --frozen-lockfile"],
+      "inputs": [{ "step": "packages:mise" }],
       "variables": {
         "CI": "true",
         "NODE_ENV": "production"
