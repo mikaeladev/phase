@@ -51,8 +51,20 @@
   },
   "deploy": {
     "inputs": [
-      { "image": "oven/bun:1.2.9" },
-      { "step": "build" }
+      {
+        "step": "packages:mise",
+        "include": [
+          "/mise/shims",
+          "/mise/installs",
+          "/usr/local/bin/mise",
+          "/etc/mise/config.toml",
+          "/root/.local/state/mise"
+        ]
+      },
+      {
+        "step": "build",
+        "include": ["."]
+      }
     ],
     "startCommand": "bun run start:bot"
   }
