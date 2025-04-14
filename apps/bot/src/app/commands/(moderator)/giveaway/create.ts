@@ -35,7 +35,8 @@ export default new BotSubcommandBuilder()
   )
   .setMetadata({ dmPermission: false })
   .setExecute(async (interaction) => {
-    const message = await interaction.deferReply({ fetchReply: true })
+    const response = await interaction.deferReply({ withResponse: true })
+    const message = response.resource!.message!
 
     const durationString = interaction.options.getString("duration", true)
     const duration = ms(durationString)

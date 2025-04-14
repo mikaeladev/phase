@@ -48,10 +48,12 @@ export default new BotSubcommandBuilder()
 
     const connect4 = new Connect4(interaction.client, [player1, player2])
 
-    const message = await interaction.reply({
-      fetchReply: true,
-      ...createMessage(connect4),
-    })
+    const message = (
+      await interaction.reply({
+        withResponse: true,
+        ...createMessage(connect4),
+      })
+    ).resource!.message!
 
     await attachInteractionListener(connect4, message)
   })

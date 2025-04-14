@@ -169,11 +169,13 @@ export default new BotSubcommandBuilder()
           })
 
       if (interaction.isChatInputCommand()) {
-        const gameMessage = await interaction.reply({
-          content,
-          components,
-          fetchReply: true,
-        })
+        const gameMessage = (
+          await interaction.reply({
+            content,
+            components,
+            withResponse: true,
+          })
+        ).resource!.message!
 
         await awaitMessageComponent(gameMessage)
       } else {
