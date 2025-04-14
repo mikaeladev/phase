@@ -1,89 +1,54 @@
-import { $, build, write } from "bun"
-import { existsSync, rmSync, statSync } from "node:fs"
+import { $, build } from "bun"
+import { exists, rm } from "node:fs/promises"
 import { join } from "node:path"
 
-import { analyseApp } from "@phasejs/loaders"
+import { resolveRootDir, scanApp } from "@phasejs/loaders"
 
 import chalk from "chalk"
 
 import { dependencies } from "../package.json"
 
-// main //
-
 async function main() {
   console.log(chalk.bold.whiteBright(`☽ Building Phase`))
 
-  // clean up
-  cleanup()
+  if (await exists(".phase")) {
+    console.log(chalk.grey(`- Cleaning up ...`))
 
-  // run the steps
-  await typecheck()
-  await lint()
-  await bundle()
-
-  console.log(`  `)
-  console.log(`${chalk.bold.greenBright(`✓`)} Build complete!`)
-}
-
-await main()
-
-// helpers //
-
-function remove(path: string) {
-  if (!existsSync(path)) return
-  const stats = statSync(path)
-  rmSync(path, { recursive: stats.isDirectory() })
-}
-
-function cleanup() {
-  if (!existsSync(".phase")) return
-
-  remove(".phase/src")
-  remove(".phase/assets")
-  remove(".phase/chunks")
-  remove(".phase/app-build-manifest.json")
-}
-
-async function cmdExists(cmd: string) {
-  try {
-    await $`${cmd} -v`.quiet()
-    return true
-  } catch {
-    return false
+    void Promise.all([
+      rm(".phase/src", { recursive: true, force: true }),
+      rm(".phase/assets", { recursive: true, force: true }),
+      rm(".phase/chunks", { recursive: true, force: true }),
+      rm(".phase/app-build-manifest.json", { force: true }),
+    ])
   }
-}
 
-// steps //
-
-async function typecheck() {
-  if (!(await cmdExists("tsc"))) return
   console.log(chalk.grey(`- Validating types ...`))
+
   await $`tsc --noEmit`
-}
 
-async function lint() {
-  if (!(await cmdExists("eslint"))) return
   console.log(chalk.grey(`- Linting code ...`))
-  await $`eslint .`
-}
 
-async function bundle() {
+  await $`eslint .`
+
   console.log(chalk.grey(`- Generating bundle ...`))
 
-  const outDir = join(process.cwd(), ".phase")
+  const appConfig = { rootDir: "src" }
+  const rootDirPath = resolveRootDir(appConfig)
 
-  const entrypoints = Object.values({ ...(await analyseApp()) })
-    .filter(Boolean)
-    .flat()
+  const app = await scanApp(appConfig)
 
-  const externals = Object.keys(dependencies)
+  const entrypoints = Object.values(app).reduce<string[]>((acc, value) => {
+    if (!value) return acc
+    if (typeof value === "string") return [...acc, join(rootDirPath, value)]
+    return [...acc, ...value.map((path) => join(rootDirPath, path))]
+  }, [])
 
   const output = await build({
     target: "bun",
-    outdir: outDir,
+    outdir: ".phase",
     entrypoints: ["src/main.ts", ...entrypoints],
     sourcemap: "external",
-    external: [...externals],
+    external: Object.keys(dependencies),
     splitting: true,
     minify: true,
     naming: {
@@ -97,11 +62,8 @@ async function bundle() {
     throw new AggregateError(output.logs, "Build failed")
   }
 
-  const buildDir = join(outDir, "src")
-  const buildPaths = await analyseApp(buildDir)
-
-  await write(
-    ".phase/app-build-manifest.json",
-    JSON.stringify(buildPaths, null, 2),
-  )
+  console.log(`  `)
+  console.log(`${chalk.bold.greenBright(`✓`)} Build complete!`)
 }
+
+await main()

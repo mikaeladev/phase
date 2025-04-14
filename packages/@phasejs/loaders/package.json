@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@phasejs/loaders",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "build": "tsup",
@@ -11,13 +11,13 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "default": "./dist/index.js"
     }
   },
   "dependencies": {
     "@phasejs/builders": "workspace:*",
-    "@phasejs/core": "workspace:*"
+    "@phasejs/core": "workspace:*",
+    "fast-glob": "^3.3.3"
   },
   "tsup": {
     "clean": true,
