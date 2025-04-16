@@ -29,6 +29,7 @@ const externals = [
   "cmdk",
   "lucide-react",
   "react",
+  "react-hook-form",
 ]
 
 export default defineConfig({
