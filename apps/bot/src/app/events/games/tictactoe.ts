@@ -1,4 +1,5 @@
 import { BotEventBuilder } from "@phasejs/builders"
+import { bold } from "discord.js"
 
 import {
   TicTacToe,
@@ -25,7 +26,9 @@ export default new BotEventBuilder()
     } catch (error) {
       if (!Error.isError(error)) throw error
       if (error.message !== TicTacToeErrorMessages.InvalidMove) throw error
-      return void interaction.editReply(error.message)
+      return void interaction.editReply(
+        `${bold(error.message)}\n${String(error.cause)}`,
+      )
     }
 
     const message = tictactoe.message.createMessage()
