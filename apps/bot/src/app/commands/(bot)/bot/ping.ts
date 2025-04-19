@@ -1,9 +1,9 @@
 import { BotSubcommandBuilder } from "@phasejs/builders"
 import { inlineCode, time } from "discord.js"
 
-import { MessageBuilder } from "~/structures/builders/MessageBuilder"
-
 import mongoose from "mongoose"
+
+import { MessageBuilder } from "~/structures/builders/MessageBuilder"
 
 export default new BotSubcommandBuilder()
   .setName("ping")
