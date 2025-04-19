@@ -61,7 +61,7 @@ export class TicTacToe {
   }
 
   public makeMove(index: number, playerId: TicTacToePlayer["id"]) {
-    if (!this.players.some((player) => player.id === playerId)) {
+    if (!this.getPlayerById(playerId)) {
       throw new Error(TicTacToeErrorMessages.InvalidMove, {
         cause: "You are not a player in this game.",
       })
@@ -92,6 +92,10 @@ export class TicTacToe {
     }
 
     this.board[index] = this.currentPlayer.marker
+  }
+
+  public getPlayerById(id: string) {
+    return this.players.find((player) => player.id === id)!
   }
 
   public getPlayerByMarker(marker: TicTacToePlayerMarker) {
