@@ -124,4 +124,4 @@ export const Emojis = {
   get Users() {
     return emojiSync.emojis.users
   },
-}
+} as const

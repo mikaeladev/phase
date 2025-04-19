@@ -1,3 +1,10 @@
+// unions //
+
+export type Awaitable<T> = T | Promise<T>
+export type Nullable<T> = T | null
+
+// strings //
+
 export type SnakeToCamel<S extends string> = S extends `${infer T}_${infer U}`
   ? `${T}${Capitalize<SnakeToCamel<U>>}`
   : S
@@ -17,4 +24,13 @@ export type ChannelTypeName<S extends string> = TrimTrailingSpaces<
     : PascalToSentence<S>
 >
 
-export type Awaitable<T> = T | Promise<T>
+// arrays //
+
+export type TupleOf<
+  T,
+  N extends number,
+  R extends T[] = [],
+> = R["length"] extends N ? R : TupleOf<T, N, [T, ...R]>
+
+export type ValueOf<T extends object | Array<unknown>> =
+  T extends Array<infer U> ? U : T[keyof T]
