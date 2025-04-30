@@ -24,7 +24,10 @@ export default new BotSubcommandBuilder()
       .setDescription("How many winners you want to reroll.")
       .setRequired(false),
   )
-  .setMetadata({ dmPermission: false })
+  .setMetadata({
+    dmPermission: false,
+    requiredUserPermissions: ["ManageGuild"],
+  })
   .setExecute(async (interaction) => {
     await interaction.deferReply({
       ephemeral: true,

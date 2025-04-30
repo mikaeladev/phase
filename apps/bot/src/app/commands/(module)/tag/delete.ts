@@ -7,12 +7,16 @@ import { BotErrorMessage } from "~/structures/BotError"
 export default new BotSubcommandBuilder()
   .setName("delete")
   .setDescription("Deletes a tag.")
-  .addStringOption((option) =>
-    option
+  .addStringOption((option) => {
+    return option
       .setName("name")
       .setDescription("The name of the tag.")
-      .setRequired(true),
-  )
+      .setRequired(true)
+  })
+  .setMetadata({
+    dmPermission: false,
+    requiredUserPermissions: ["ManageMessages"],
+  })
   .setExecute(async (interaction) => {
     await interaction.deferReply({ ephemeral: true })
 

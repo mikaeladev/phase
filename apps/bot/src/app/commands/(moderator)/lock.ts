@@ -11,20 +11,25 @@ export default new BotCommandBuilder()
   .setName("lock")
   .setDescription("Locks and unlocks a channel.")
   .setDMPermission(false)
-  .addBooleanOption((option) =>
-    option
+  .addBooleanOption((option) => {
+    return option
       .setName("state")
       .setDescription("The state of the channel lock.")
-      .setRequired(true),
-  )
-  .addRoleOption((option) =>
-    option
+      .setRequired(true)
+  })
+  .addRoleOption((option) => {
+    return option
       .setName("role")
       .setDescription(
         "Specify a role to lock access for (defaults to @everyone).",
       )
-      .setRequired(false),
-  )
+      .setRequired(false)
+  })
+  .setMetadata({
+    dmPermission: false,
+    requiredBotPermissions: ["ManageChannels"],
+    requiredUserPermissions: ["ModerateMembers"],
+  })
   .setExecute(async (interaction) => {
     const channel = interaction.channel as GuildChannel
     const state = interaction.options.getBoolean("state", true)

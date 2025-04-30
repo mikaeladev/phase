@@ -1,10 +1,10 @@
-import { BaseStore } from "@phasejs/core/stores"
+import { BaseBotStore } from "@phasejs/stores"
 
 import { db } from "~/lib/db"
 
 import type { Config, mongo } from "~/types/db"
 
-export class ConfigStore extends BaseStore implements Config {
+export class ConfigStore extends BaseBotStore implements Config {
   public readonly status!: Config["status"]
   public readonly blacklist!: Config["blacklist"]
   public readonly killswitch!: Config["killswitch"]

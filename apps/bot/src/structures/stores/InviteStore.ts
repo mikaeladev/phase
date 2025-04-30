@@ -1,4 +1,4 @@
-import { BaseKVStore } from "@phasejs/core/stores"
+import { BaseBotKVStore } from "@phasejs/stores"
 
 import type { Collection, Snowflake } from "discord.js"
 
@@ -16,7 +16,7 @@ export interface TrackedInvite {
 
 export type TrackedInviteCollection = Collection<string, TrackedInvite>
 
-export class InviteStore extends BaseKVStore<
+export class InviteStore extends BaseBotKVStore<
   Snowflake,
   TrackedInviteCollection
 > {}

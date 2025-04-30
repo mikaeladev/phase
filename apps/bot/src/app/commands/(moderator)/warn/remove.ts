@@ -14,12 +14,22 @@ import type { GuildMember, GuildTextBasedChannel } from "discord.js"
 export default new BotSubcommandBuilder()
   .setName("remove")
   .setDescription("Unwarns a member.")
-  .addUserOption((option) =>
-    option.setName("member").setDescription("Who to unwarn.").setRequired(true),
-  )
-  .addStringOption((option) =>
-    option.setName("reason").setDescription("Add a reason.").setRequired(false),
-  )
+  .addUserOption((option) => {
+    return option
+      .setName("member")
+      .setDescription("Who to unwarn.")
+      .setRequired(true)
+  })
+  .addStringOption((option) => {
+    return option
+      .setName("reason")
+      .setDescription("Add a reason.")
+      .setRequired(false)
+  })
+  .setMetadata({
+    dmPermission: false,
+    requiredUserPermissions: ["ModerateMembers"],
+  })
   .setExecute(async (interaction) => {
     const member = interaction.options.getMember("member") as GuildMember | null
     const reason = interaction.options.getString("reason", false) ?? undefined

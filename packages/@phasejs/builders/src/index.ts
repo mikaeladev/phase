@@ -1,15 +1,9 @@
-// builders
-
-export * from "~/commands/BotCommandBuilder"
-export * from "~/commands/BotSubcommandBuilder"
-export * from "~/events/BotEventBuilder"
-export * from "~/crons/BotCronBuilder"
-
-// utils
+export * from "~/structures/commands/BotCommandBuilder"
+export * from "~/structures/commands/BotSubcommandBuilder"
+export * from "~/structures/events/BotEventBuilder"
+export * from "~/structures/crons/BotCronBuilder"
 
 export * from "~/lib/constants"
 export * from "~/lib/resolvers"
-
-// types
 
 export type * from "~/types/builders"

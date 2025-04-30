@@ -33,7 +33,10 @@ export default new BotSubcommandBuilder()
       .setDescription("How long the giveaway will last (e.g. 1m, 1h, 1d).")
       .setRequired(true),
   )
-  .setMetadata({ dmPermission: false })
+  .setMetadata({
+    dmPermission: false,
+    requiredUserPermissions: ["ManageGuild"],
+  })
   .setExecute(async (interaction) => {
     const response = await interaction.deferReply({ withResponse: true })
     const message = response.resource!.message!

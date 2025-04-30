@@ -16,12 +16,17 @@ export default new BotCommandBuilder()
     "Deletes the channel and creates an exact copy with no messages.",
   )
   .setDMPermission(false)
-  .addStringOption((option) =>
-    option
+  .addStringOption((option) => {
+    return option
       .setName("reason")
       .setDescription("The reason for the scrub.")
-      .setRequired(false),
-  )
+      .setRequired(false)
+  })
+  .setMetadata({
+    dmPermission: false,
+    requiredBotPermissions: ["ManageChannels"],
+    requiredUserPermissions: ["ManageChannels"],
+  })
   .setExecute(async (interaction) => {
     if (interaction.channel?.isThread()) {
       void interaction.reply(

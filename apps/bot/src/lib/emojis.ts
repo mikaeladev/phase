@@ -25,13 +25,16 @@ import {
 import type { BotEmoji, BotEmojiType } from "@plugin/emoji-sync"
 import type { BunFile } from "bun"
 
-async function defineEmoji<TName extends string>(name: TName, file: BunFile) {
-  const type = file.type.replace("image/", "") as BotEmojiType
-  const data = Buffer.from(await file.arrayBuffer())
-  return { name, type, data }
-}
+export const emojiSync = new EmojiSync(async () => {
+  const defineEmoji = async <TName extends string>(
+    name: TName,
+    file: BunFile,
+  ) => {
+    const type = file.type.replace("image/", "") as BotEmojiType
+    const data = Buffer.from(await file.arrayBuffer())
+    return { name, type, data }
+  }
 
-async function loadEmojis() {
   return {
     connect4Empty: await defineEmoji("connect4_empty", connect4EmptyFile),
     connect4Player1: await defineEmoji("connect4_player1", connect4Player1File),
@@ -53,9 +56,7 @@ async function loadEmojis() {
     transfer: await defineEmoji("transfer", transferFile),
     users: await defineEmoji("users", usersFile),
   } as const satisfies Record<string, BotEmoji>
-}
-
-export const emojiSync = new EmojiSync(loadEmojis)
+})
 
 export const emojiSyncPlugin = emojiSync.plugin.bind(emojiSync)
 

@@ -118,7 +118,7 @@ export class BotErrorMessage extends MessageBuilder {
 
   static unknown(data: Parameters<typeof generateBugReportURL>[0]) {
     return new this({
-      title: "Unknown error",
+      title: `Unknown error: "${data.error.message}"`,
       description: `Something went wrong, and we don't know why. To make sure this doesn't happen again, please [send this bug report](${generateBugReportURL(data)}).`,
       footer: {
         text: `The report has been filled in for you, so all you have to do is send it.`,

@@ -1,5 +1,0 @@
-export * from "~/structures/BotClient"
-export * from "~/structures/BotCommand"
-export * from "~/structures/BotCron"
-export * from "~/structures/BotEvent"
-export * from "~/structures/BotPlugin"

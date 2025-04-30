@@ -2,7 +2,7 @@ import type {
   BotPluginLoadFunction,
   BotPluginLoadTrigger,
   BotPluginVersion,
-} from "~/types/plugin"
+} from "~/types/plugins"
 
 export class BotPlugin<
   TTrigger extends BotPluginLoadTrigger = BotPluginLoadTrigger,

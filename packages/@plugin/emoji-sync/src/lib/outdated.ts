@@ -1,6 +1,6 @@
 import { isSameEmoji } from "~/lib/compare"
 
-import type { BotClient } from "@phasejs/core/client"
+import type { BotClient } from "@phasejs/core"
 import type { BotEmoji, BotEmojiWithId } from "~/types/emojis"
 import type { OutdatedBotEmojis } from "~/types/outdated"
 

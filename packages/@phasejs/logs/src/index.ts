@@ -1,11 +1,10 @@
-import { BotPlugin } from "@phasejs/core/client"
+import { BotPlugin } from "@phasejs/core"
 
 import chalk from "chalk"
 
 import { version as pkgVersion } from "~/../package.json"
 
-import type { BotPluginVersion } from "@phasejs/core"
-import type { BotClient } from "@phasejs/core/client"
+import type { BotClient, BotPluginVersion } from "@phasejs/core"
 
 export interface LogsPluginOptions {
   name: string

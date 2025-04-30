@@ -1,4 +1,4 @@
-export { version } from "package.json"
+export { version } from "~/../package.json"
 
 export const COMMAND_BUILDER_TAG = Symbol("COMMAND_BUILDER_TAG")
 export const SUBCOMMAND_BUILDER_TAG = Symbol("SUBCOMMAND_BUILDER_TAG")

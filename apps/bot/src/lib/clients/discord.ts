@@ -1,19 +1,8 @@
-import { GatewayIntentBits, Options, Partials } from "discord.js"
+import { Client, GatewayIntentBits, Options, Partials } from "discord.js"
 
 import { Emojis } from "~/lib/emojis"
 
-import { version } from "~/../package.json"
-
-import type { ClientOptions } from "discord.js"
-
-export interface BotConfig extends ClientOptions {
-  name: string
-  version: string
-}
-
-export const botConfig = {
-  name: "Phase",
-  version: version,
+export const discordClient = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
@@ -51,4 +40,4 @@ export const botConfig = {
       },
     },
   }),
-} as const satisfies BotConfig
+})

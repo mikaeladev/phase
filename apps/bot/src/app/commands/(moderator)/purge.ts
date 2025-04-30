@@ -7,20 +7,25 @@ export default new BotCommandBuilder()
   .setName("purge")
   .setDescription("Bulk deletes recent messages.")
   .setDMPermission(false)
-  .addIntegerOption((option) =>
-    option
+  .addIntegerOption((option) => {
+    return option
       .setName("limit")
       .setDescription("The number of messages to fetch (max 100).")
       .setMaxValue(100)
       .setMinValue(1)
-      .setRequired(true),
-  )
-  .addUserOption((option) =>
-    option
+      .setRequired(true)
+  })
+  .addUserOption((option) => {
+    return option
       .setName("author")
       .setDescription("The author of the messages.")
-      .setRequired(false),
-  )
+      .setRequired(false)
+  })
+  .setMetadata({
+    dmPermission: false,
+    requiredBotPermissions: ["ManageMessages"],
+    requiredUserPermissions: ["ManageMessages"],
+  })
   .setExecute(async (interaction) => {
     await interaction.deferReply({ ephemeral: true })
 

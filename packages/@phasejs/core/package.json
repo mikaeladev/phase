@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@phasejs/core",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "type": "module",
   "scripts": {
     "build": "tsup",
@@ -12,18 +12,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./client": {
-      "types": "./dist/client.d.ts",
-      "default": "./dist/client.js"
-    },
-    "./stores": {
-      "types": "./dist/stores.d.ts",
-      "default": "./dist/stores.js"
-    },
-    "./managers": {
-      "types": "./dist/managers/index.d.ts",
-      "default": "./dist/managers/index.js"
     }
   },
   "dependencies": {
@@ -46,11 +34,7 @@
     "sourcemap": true,
     "format": "esm",
     "entry": [
-      "./src/index.ts",
-      "./src/client.ts",
-      "./src/stores.ts",
-      "./src/builders/index.ts",
-      "./src/managers/index.ts"
+      "./src/index.ts"
     ]
   }
 }

@@ -1,11 +1,11 @@
 import { BotCronBuilder, BotEventBuilder } from "@phasejs/builders"
-import { BotPlugin } from "@phasejs/core/client"
+import { BotPlugin } from "@phasejs/core"
 
 import { version } from "~/lib/utils"
 
 import { Blacklist } from "~/structures/Blacklist"
 
-import type { BotEvent } from "@phasejs/core/client"
+import type { BotEvent } from "@phasejs/core"
 import type { BlacklistPluginOptions } from "~/types/plugin"
 
 const blacklistCheckEvent = new BotEventBuilder()
@@ -58,8 +58,8 @@ function blacklistPlugin(options: BlacklistPluginOptions) {
       ])
 
       // add cron and event
-      phase.crons.create(blacklistCheckCron.build(phase.client))
-      phase.events.create(blacklistCheckEvent.build(phase.client) as BotEvent)
+      phase.crons.create(blacklistCheckCron.build(phase))
+      phase.events.create(blacklistCheckEvent.build(phase) as BotEvent)
     },
   })
 }

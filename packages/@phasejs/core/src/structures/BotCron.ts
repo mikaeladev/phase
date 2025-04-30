@@ -1,15 +1,15 @@
 import { Cron } from "croner"
 
-import type { DjsClient } from "~/types/client"
-import type {
-  BotCronExecute,
-  BotCronMetadata,
-  BotCronPattern,
-} from "~/types/crons"
+import { Base } from "~/structures/abstracts/Base"
 
-export class BotCron {
+import type { BotClient } from "~/structures/BotClient"
+import type { BotCronExecute, BotCronPattern } from "~/types/crons"
+
+export interface BotCronMetadata extends Record<string, unknown> {}
+export interface BotCronContext extends Record<string, unknown> {}
+
+export class BotCron extends Base {
   protected _init = false
-  protected _client: DjsClient
   protected _cron: Cron | undefined
 
   public readonly pattern: BotCronPattern
@@ -17,14 +17,14 @@ export class BotCron {
   public readonly execute: BotCronExecute
 
   constructor(
-    client: DjsClient,
+    phase: BotClient,
     params: {
       pattern: BotCronPattern
       metadata: BotCronMetadata
       execute: BotCronExecute
     },
   ) {
-    this._client = client
+    super(phase)
 
     this.pattern = params.pattern
     this.metadata = params.metadata
@@ -43,11 +43,16 @@ export class BotCron {
 
     this._cron = new Cron(this.pattern, async () => {
       try {
-        if (!this._client.isReady()) {
+        if (!this.phase.isReady()) {
           throw new Error("Client is not ready.")
         }
 
-        await this.execute(this._client)
+        const ctx = await this.phase.contextCreators.crons({
+          cron: this,
+          phase: this.phase,
+        })
+
+        await this.execute(this.phase.client, ctx)
       } catch (error) {
         console.error(`Error occurred in '${this.pattern}' cron:`)
         console.error(error)

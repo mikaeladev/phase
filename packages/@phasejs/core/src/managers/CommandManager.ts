@@ -2,7 +2,7 @@ import { ChatInputCommandInteraction, Collection } from "discord.js"
 
 import { deepmergeCustom } from "deepmerge-ts"
 
-import { BaseManager } from "~/managers/BaseManager"
+import { Base } from "~/structures/abstracts/Base"
 import { BotCommand } from "~/structures/BotCommand"
 
 import type { BotClient } from "~/structures/BotClient"
@@ -28,7 +28,7 @@ const mergeCommands = deepmergeCustom({
   },
 })
 
-export class CommandManager extends BaseManager {
+export class CommandManager extends Base {
   protected _commands: Collection<string, BotCommand>
   protected _middleware?: BotCommandMiddleware
 
@@ -224,15 +224,16 @@ export class CommandManager extends BaseManager {
     if (!command) return
 
     try {
+      const ctx = await this.phase.contextCreators.commands({
+        command,
+        phase: this.phase,
+      })
+
       if (this._middleware) {
-        return await this._middleware(
-          interaction,
-          command.execute,
-          command.metadata,
-        )
+        return await this._middleware(interaction, ctx, command.execute)
       }
 
-      return await command.execute(interaction)
+      return await command.execute(interaction, ctx)
     } catch (error) {
       console.error(`Error occurred in '${name}' command:`)
       console.error(error)

@@ -11,13 +11,11 @@
   "exports": {
     "./client": {
       "types": "./dist/client/index.d.ts",
-      "import": "./dist/client/index.js",
-      "require": "./dist/client/index.js"
+      "default": "./dist/client/index.js"
     },
     "./server": {
       "types": "./dist/server/index.d.ts",
-      "import": "./dist/server/index.js",
-      "require": "./dist/server/index.js"
+      "default": "./dist/server/index.js"
     }
   },
   "dependencies": {
@@ -27,6 +25,8 @@
     "@trpc/server": "^11.0.4"
   },
   "devDependencies": {
+    "@phasejs/core": "workspace:*",
+    "@phasejs/stores": "workspace:*",
     "@repo/db": "workspace:*"
   },
   "peerDependencies": {

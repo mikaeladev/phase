@@ -18,7 +18,7 @@ export class SharedBotCommandBuilderBase {
   /**
    * Sets the metadata of this command.
    */
-  public setMetadata(metadata: Omit<BotCommandMetadata, "type">) {
+  public setMetadata(metadata: BotCommandMetadata) {
     this.metadata = metadata
     return this
   }

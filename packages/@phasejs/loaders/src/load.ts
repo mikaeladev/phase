@@ -7,7 +7,7 @@ import {
 } from "~/loaders"
 import { scanApp } from "~/scan"
 
-import type { BotClient } from "@phasejs/core/client"
+import type { BotClient } from "@phasejs/core"
 import type { AppConfig } from "~/types/app"
 
 async function possiblyLoadPrestart(
@@ -32,9 +32,9 @@ export async function loadApp(phase: BotClient, config: AppConfig = {}) {
   const [prestart, middlewares, commands, crons, events] = await Promise.all([
     possiblyLoadPrestart(paths.prestart, config),
     possiblyLoadMiddleware(paths.middleware, config),
-    loadCommands(phase.client, paths.commands, config),
-    loadCrons(phase.client, paths.crons, config),
-    loadEvents(phase.client, paths.events, config),
+    loadCommands(phase, paths.commands, config),
+    loadCrons(phase, paths.crons, config),
+    loadEvents(phase, paths.events, config),
   ])
 
   return {

@@ -1,15 +1,12 @@
 import { BotSubcommandBuilder } from "@phasejs/builders"
-import { ChannelType, PermissionFlagsBits } from "discord.js"
+import { ChannelType } from "discord.js"
 
 import { ms } from "@repo/utils/ms"
 
 import { BotErrorMessage } from "~/structures/BotError"
 import { MessageBuilder } from "~/structures/builders/MessageBuilder"
 
-import type {
-  ApplicationCommandOptionAllowedChannelTypes,
-  GuildMember,
-} from "discord.js"
+import type { ApplicationCommandOptionAllowedChannelTypes } from "discord.js"
 
 const channelTypes = [
   ChannelType.GuildVoice,
@@ -38,42 +35,17 @@ export default new BotSubcommandBuilder()
       .setDescription("The reason for the mute.")
       .setRequired(false)
   })
-  .setMetadata({ dmPermission: false })
+  .setMetadata({
+    dmPermission: false,
+    requiredBotPermissions: ["MuteMembers"],
+    requiredUserPermissions: ["MuteMembers"],
+  })
   .setExecute(async (interaction) => {
     await interaction.deferReply()
-
-    const executor = interaction.guild!.members.resolve(interaction.user)!
 
     const vc = interaction.options.getChannel("channel", true, channelTypes)
     const exclude = interaction.options.getRole("exclude")
     const reason = interaction.options.getString("reason")
-
-    const isMod = (member: GuildMember) => {
-      return member.permissions.has(PermissionFlagsBits.MuteMembers)
-    }
-
-    // check if the user has the required permissions
-    if (!isMod(executor)) {
-      return void interaction.editReply(
-        BotErrorMessage.userMissingPermission("MuteMembers"),
-      )
-    }
-
-    // check if the bot has the required permissions
-    if (
-      !interaction
-        .guild!.members.me!.permissionsIn(vc)
-        .has(PermissionFlagsBits.MuteMembers)
-    ) {
-      const isChannelSpecific =
-        interaction.guild?.members.me?.permissions.has(
-          PermissionFlagsBits.MuteMembers,
-        ) === true
-
-      return void interaction.editReply(
-        BotErrorMessage.botMissingPermission("MuteMembers", isChannelSpecific),
-      )
-    }
 
     // check if the voice channel is empty
     if (vc.members.size === 0) {
@@ -84,7 +56,7 @@ export default new BotSubcommandBuilder()
 
     const excludedMembers = exclude
       ? vc.members.filter((member) => member.roles.cache.has(exclude.id))
-      : vc.members.filter((member) => isMod(member))
+      : vc.members.filter((member) => member.permissions.has("MuteMembers"))
 
     const membersToMute = vc.members
       .filter((member) => !excludedMembers.has(member.id))

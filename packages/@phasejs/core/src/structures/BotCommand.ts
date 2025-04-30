@@ -6,20 +6,20 @@ import {
 
 import { isEqual, isNil } from "lodash"
 
-import type { DjsClient } from "~/types/client"
-import type {
-  BotCommandBody,
-  BotCommandExecute,
-  BotCommandMetadata,
-} from "~/types/commands"
+import { Base } from "~/structures/abstracts/Base"
+
+import type { BotClient } from "~/structures/BotClient"
+import type { BotCommandBody, BotCommandExecute } from "~/types/commands"
 import type {
   APIApplicationCommandOption,
   ApplicationCommand,
   ApplicationCommandOptionData,
 } from "discord.js"
 
-export class BotCommand {
-  protected _client: DjsClient
+export interface BotCommandMetadata extends Record<string, unknown> {}
+export interface BotCommandContext extends Record<string, unknown> {}
+
+export class BotCommand extends Base {
   protected _body: BotCommandBody
 
   public readonly parentName?: string
@@ -43,7 +43,7 @@ export class BotCommand {
   }
 
   constructor(
-    client: DjsClient,
+    phase: BotClient,
     params: {
       parentName?: string
       groupName?: string
@@ -52,7 +52,8 @@ export class BotCommand {
       execute: BotCommandExecute
     },
   ) {
-    this._client = client
+    super(phase)
+
     this._body = params.body
 
     if (params.parentName) {
@@ -134,7 +135,9 @@ export class BotCommand {
     }
   }
 
-  private isSubcommandBody(body: BotCommandBody): body is BotCommandBody<true> {
+  private isSubcommandBody(
+    _body: BotCommandBody,
+  ): _body is BotCommandBody<true> {
     return this.parentName !== undefined
   }
 

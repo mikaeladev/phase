@@ -1,13 +1,9 @@
-import type { Database } from "@repo/db"
-import type { bot } from "@repo/env"
 import type { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch"
-import type { DjsClient } from "~/types/bot"
+import type { RequestHandlerConfig } from "~/server"
 
-interface CreateContextParams extends FetchCreateContextFnOptions {
-  db: Database
-  env: ReturnType<typeof bot>
-  client: DjsClient
-}
+interface CreateContextParams
+  extends FetchCreateContextFnOptions,
+    RequestHandlerConfig {}
 
 export function createContext(params: CreateContextParams) {
   const headers = params.req.headers
@@ -20,7 +16,7 @@ export function createContext(params: CreateContextParams) {
   return {
     db: params.db,
     env: params.env,
-    client: params.client,
+    phase: params.phase,
     isAuthorized,
   }
 }

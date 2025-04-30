@@ -1,4 +1,4 @@
-import type { BotClient } from "@phasejs/core/client"
+import type { BotClient } from "@phasejs/core"
 import type { Entry } from "~/structures/Entry"
 import type { Snowflake } from "discord.js"
 

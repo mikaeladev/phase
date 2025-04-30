@@ -1,6 +1,6 @@
 import type { BotClient } from "~/structures/BotClient"
 
-export abstract class BaseManager {
+export abstract class Base {
   public readonly phase: BotClient
 
   constructor(phase: BotClient) {

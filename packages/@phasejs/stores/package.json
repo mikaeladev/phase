@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "name": "@phasejs/stores",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "SKIP_ENV_VALIDATION=true eslint ."
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "dependencies": {
+    "@phasejs/core": "workspace:*",
+    "ts-mixer": "^6.0.4"
+  },
+  "peerDependencies": {
+    "discord.js": "^14.18.0"
+  },
+  "tsup": {
+    "clean": true,
+    "dts": true,
+    "minify": true,
+    "splitting": true,
+    "sourcemap": true,
+    "format": "esm",
+    "entry": [
+      "./src/index.ts"
+    ]
+  }
+}

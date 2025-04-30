@@ -1,10 +1,8 @@
-import { BaseKVStore } from "@phasejs/core/stores"
+import { BaseBotKVStore } from "@phasejs/stores"
 
 import { ModuleId } from "@repo/utils/modules"
 
 import { twitchAPI } from "~/lib/clients/twitch"
-
-import type { Client } from "discord.js"
 
 export interface StreamerUser {
   id: string
@@ -36,14 +34,12 @@ export interface Streamer extends StreamerUser {
   notifications: StreamerNotification[]
 }
 
-export class StreamerStore extends BaseKVStore<string, Streamer> {
-  private client!: Client
+export class StreamerStore extends BaseBotKVStore<string, Streamer> {
   private userCache!: Map<string, StreamerUser>
 
-  public async init(client: Client) {
+  public async init() {
     if (this._init) return this
 
-    this.client = client
     this.userCache = new Map()
 
     // populate the store with the streamers
@@ -58,7 +54,7 @@ export class StreamerStore extends BaseKVStore<string, Streamer> {
     if (this.size > 0) this.clear()
 
     // get all guilds with twitch notifications enabled
-    const guildDocs = this.client.stores.guilds
+    const guildDocs = this.phase.client.stores.guilds
       .filter((g) => g.modules?.[ModuleId.TwitchNotifications]?.enabled)
       .values()
 

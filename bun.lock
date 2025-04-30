@@ -25,6 +25,7 @@
         "@phasejs/image": "workspace:*",
         "@phasejs/loaders": "workspace:*",
         "@phasejs/logs": "workspace:*",
+        "@phasejs/stores": "workspace:*",
         "@plugin/blacklist": "workspace:*",
         "@plugin/emoji-sync": "workspace:*",
         "@plugin/music": "workspace:*",
@@ -160,7 +161,7 @@
     },
     "packages/@phasejs/builders": {
       "name": "@phasejs/builders",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "dependencies": {
         "@phasejs/core": "workspace:*",
         "ts-mixer": "^6.0.4",
@@ -171,7 +172,7 @@
     },
     "packages/@phasejs/core": {
       "name": "@phasejs/core",
-      "version": "0.19.0",
+      "version": "0.20.0",
       "dependencies": {
         "croner": "^8.1.2",
         "deepmerge-ts": "^7.1.5",
@@ -201,7 +202,7 @@
     },
     "packages/@phasejs/loaders": {
       "name": "@phasejs/loaders",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@phasejs/builders": "workspace:*",
         "@phasejs/core": "workspace:*",
@@ -217,6 +218,17 @@
       },
       "peerDependencies": {
         "discord.js": "^14",
+      },
+    },
+    "packages/@phasejs/stores": {
+      "name": "@phasejs/stores",
+      "version": "0.1.0",
+      "dependencies": {
+        "@phasejs/core": "workspace:*",
+        "ts-mixer": "^6.0.4",
+      },
+      "peerDependencies": {
+        "discord.js": "^14.18.0",
       },
     },
     "packages/@plugin/blacklist": {
@@ -382,6 +394,8 @@
         "@trpc/server": "^11.0.4",
       },
       "devDependencies": {
+        "@phasejs/core": "workspace:*",
+        "@phasejs/stores": "workspace:*",
         "@repo/db": "workspace:*",
       },
       "peerDependencies": {
@@ -828,6 +842,8 @@
     "@phasejs/loaders": ["@phasejs/loaders@workspace:packages/@phasejs/loaders"],
 
     "@phasejs/logs": ["@phasejs/logs@workspace:packages/@phasejs/logs"],
+
+    "@phasejs/stores": ["@phasejs/stores@workspace:packages/@phasejs/stores"],
 
     "@pkgjs/parseargs": ["@pkgjs/parseargs@0.11.0", "", {}, "sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg=="],
 

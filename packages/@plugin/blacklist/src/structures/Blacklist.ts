@@ -2,7 +2,7 @@ import { Collection } from "discord.js"
 
 import { Entry, EntryType } from "~/structures/Entry"
 
-import type { BotClient } from "@phasejs/core/client"
+import type { BotClient } from "@phasejs/core"
 import type { EntryCreateOptions, EntryEditOptions } from "~/structures/Entry"
 import type { Guild, Snowflake } from "discord.js"
 

@@ -1,40 +1,36 @@
-import type { DjsClient } from "~/types/client"
+import { Base } from "~/structures/abstracts/Base"
+
+import type { BotClient } from "~/structures/BotClient"
 import type {
-  BotEventContextMap,
   BotEventExecute,
-  BotEventExecuteArgs,
+  BotEventExecuteArgsMap,
   BotEventListenerType,
-  BotEventMetadata,
   BotEventName,
 } from "~/types/events"
 
-export class BotEvent<
-  TName extends BotEventName = BotEventName,
-  TContext extends BotEventContextMap[TName] = BotEventContextMap[TName],
-> {
+export interface BotEventMetadata extends Record<string, unknown> {}
+export interface BotEventContext extends Record<string, unknown> {}
+
+export class BotEvent<TName extends BotEventName = BotEventName> extends Base {
   protected _init = false
-  protected _client: DjsClient
 
   public readonly name: TName
-  public readonly context: TContext | undefined
   public readonly listenerType: BotEventListenerType
   public readonly metadata: BotEventMetadata
-  public readonly execute: BotEventExecute<TName, TContext>
+  public readonly execute: BotEventExecute<TName>
 
   constructor(
-    client: DjsClient,
+    phase: BotClient,
     params: {
       name: TName
-      context: TContext | undefined
       listenerType: BotEventListenerType
       metadata: BotEventMetadata
-      execute: BotEventExecute<TName, TContext>
+      execute: BotEventExecute<TName>
     },
   ) {
-    this._client = client
+    super(phase)
 
     this.name = params.name
-    this.context = params.context
     this.listenerType = params.listenerType
     this.metadata = params.metadata
     this.execute = params.execute
@@ -50,20 +46,30 @@ export class BotEvent<
       throw new Error("Event has already been initialised.")
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    this._client[this.listenerType](this.name, async (...args) => {
-      const executeArgs = args as BotEventExecuteArgs<TName, TContext>
+    this.phase.client[this.listenerType](this.name, (...args) => {
+      void (async () => {
+        const ctx = await this.phase.contextCreators.events({
+          event: this as unknown as BotEvent,
+          phase: this.phase,
+        })
 
-      try {
-        await this.execute(this._client, ...executeArgs)
-      } catch (error) {
-        console.error(`Error occurred in '${this.name}' event:`)
-        console.error(error)
-      } finally {
-        if (this.listenerType === "once") {
-          this.destroy()
+        const executeArgs = [
+          this.phase.client,
+          ...args,
+          ctx,
+        ] as BotEventExecuteArgsMap[TName]
+
+        try {
+          await this.execute(...executeArgs)
+        } catch (error) {
+          console.error(`Error occurred in '${this.name}' event:`)
+          console.error(error)
+        } finally {
+          if (this.listenerType === "once") {
+            this.destroy()
+          }
         }
-      }
+      })()
     })
 
     this._init = true
@@ -74,7 +80,7 @@ export class BotEvent<
    * Destroys the event listener.
    */
   public destroy() {
-    this._client.removeListener(this.name, this.execute)
+    this.phase.client.removeListener(this.name, this.execute)
     this._init = false
     return this
   }

@@ -1,18 +1,20 @@
-import { BaseKVStore } from "@phasejs/core/stores"
+import { BaseBotKVStore } from "@phasejs/stores"
 
 import { db } from "~/lib/db"
 
 import type { Guild, mongo, Types } from "~/types/db"
-import type { Client, Snowflake } from "discord.js"
+import type { Snowflake } from "discord.js"
 
 type GuildDoc = Guild & { _id: Types.ObjectId }
 type GuildChangeStreamDoc = mongo.ChangeStreamDocument<GuildDoc>
 
-export class GuildStore extends BaseKVStore<Snowflake, GuildDoc> {
-  public async init(client: Client) {
+export class GuildStore extends BaseBotKVStore<Snowflake, GuildDoc> {
+  public async init() {
     if (this._init) return this
 
-    const guildIds = (await client.guilds.fetch()).map((guild) => guild.id)
+    const guildIds = (await this.phase.client.guilds.fetch()).map(
+      (guild) => guild.id,
+    )
 
     const guildDocs = await db.guilds.find({ id: { $in: guildIds } })
     const guildObjs = guildDocs.map((doc) => doc.toObject())
@@ -29,7 +31,7 @@ export class GuildStore extends BaseKVStore<Snowflake, GuildDoc> {
         if (change.operationType === "delete") {
           const guildId =
             change.fullDocumentBeforeChange?.id ??
-            this.find(
+            this.values().find(
               (guildDoc) =>
                 guildDoc._id.toString() === change.documentKey._id.toString(),
             )?.id

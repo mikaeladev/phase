@@ -1,4 +1,4 @@
-import { BotCommand } from "@phasejs/core/client"
+import { BotCommand } from "@phasejs/core"
 import { ApplicationCommandType, ApplicationIntegrationType } from "discord.js"
 
 import { Mixin } from "ts-mixer"
@@ -10,7 +10,7 @@ import { SharedBotCommandBuilderDescription } from "./shared/SharedBotCommandBui
 import { SharedBotCommandBuilderName } from "./shared/SharedBotCommandBuilderName"
 import { SharedBotCommandBuilderOptions } from "./shared/SharedBotCommandBuilderOptions"
 
-import type { BotCommandBody, DjsClient } from "@phasejs/core"
+import type { BotClient, BotCommandBody } from "@phasejs/core"
 import type { InteractionContextType } from "discord.js"
 
 export class BotCommandBuilder extends Mixin(
@@ -59,8 +59,8 @@ export class BotCommandBuilder extends Mixin(
   /**
    * Builds the command.
    */
-  public build(client: DjsClient) {
-    return new BotCommand(client, {
+  public build(phase: BotClient) {
+    return new BotCommand(phase, {
       body: this.body,
       metadata: this.metadata,
       execute: this.execute,

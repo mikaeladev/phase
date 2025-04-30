@@ -1,10 +1,11 @@
+import type { BotClient } from "@phasejs/core"
+import type { BaseBotKVStore, BaseBotStore } from "@phasejs/stores"
 import type { Config, Guild } from "@repo/db"
-import type { Client, Collection, Snowflake } from "discord.js"
+import type { Snowflake } from "discord.js"
 import type { Types } from "mongoose"
 
 type GuildDoc = Guild & { _id: Types.ObjectId }
-
-export interface Streamer {
+type Streamer = {
   id: string
   username: string
   displayName: string
@@ -27,20 +28,18 @@ export interface Streamer {
   }[]
 }
 
-type StoreManager = { init(): Promise<StoreManager> }
-type BaseStore = { init(_client: Client): Promise<BaseStore> }
-type BaseKVStore<K, V> = Collection<K, V> & {
-  init(_client: Client): Promise<BaseKVStore<K, V>>
-}
+type ConfigStore = BaseBotStore & Config
+type GuildStore = BaseBotKVStore<Snowflake, GuildDoc>
+type StreamersStore = BaseBotKVStore<string, Streamer>
 
-type ConfigStore = BaseStore & Config
-type GuildStore = BaseKVStore<Snowflake, GuildDoc>
-type StreamersStore = BaseKVStore<string, Streamer>
+// currently unused
+type InviteStore = BaseBotKVStore
 
-export interface DjsClient<T extends boolean = boolean> extends Client<T> {
-  stores: StoreManager & {
+export type BotClientWithStores = BotClient<true> & {
+  stores: {
     config: ConfigStore
     guilds: GuildStore
+    invites: InviteStore
     streamers: StreamersStore
   }
 }

@@ -5,12 +5,12 @@ import { appRouter } from "~/server/router"
 
 import type { Database } from "@repo/db"
 import type { bot } from "@repo/env"
-import type { DjsClient } from "~/types/bot"
+import type { BotClientWithStores } from "~/types/bot"
 
 export interface RequestHandlerConfig {
   db: Database
   env: ReturnType<typeof bot>
-  client: DjsClient
+  phase: BotClientWithStores
 }
 
 export function createRequestHandler(

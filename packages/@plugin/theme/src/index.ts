@@ -1,4 +1,4 @@
-import { BotPlugin } from "@phasejs/core/client"
+import { BotPlugin } from "@phasejs/core"
 
 import { pluginVersion } from "~/lib/utils"
 

@@ -26,9 +26,9 @@ export const authRouter = router({
   revokeToken: privateProcedure
     .input(z.object({ token: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      const client = ctx.client
+      const { phase } = ctx
 
-      await client.rest.post(Routes.oauth2TokenRevocation(), {
+      await phase.client.rest.post(Routes.oauth2TokenRevocation(), {
         auth: false,
         passThroughBody: true,
         body: makeURLSearchParams({

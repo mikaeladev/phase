@@ -8,12 +8,18 @@ import {
 import { commandPartsReplaceRegex } from "~/lib/constants"
 import { loadFile } from "~/lib/utils"
 
-import type { BotMiddleware, BotPrestart, DjsClient } from "@phasejs/core"
-import type { BotCommand, BotCron, BotEvent } from "@phasejs/core/client"
+import type {
+  BotClient,
+  BotCommand,
+  BotCron,
+  BotEvent,
+  BotMiddleware,
+  BotPrestart,
+} from "@phasejs/core"
 import type { AppConfig } from "~/types/app"
 
 export async function loadCommands(
-  client: DjsClient,
+  phase: BotClient,
   paths: string[],
   config: AppConfig,
 ): Promise<BotCommand[]> {
@@ -37,8 +43,8 @@ export async function loadCommands(
     const groupName = commandParts.length > 2 ? commandParts[1] : undefined
 
     const command = BotSubcommandBuilder.isBuilder(builder)
-      ? builder.build(client, { parentName, groupName })
-      : builder.build(client)
+      ? builder.build(phase, { parentName, groupName })
+      : builder.build(phase)
 
     commands.push(command)
   }
@@ -47,7 +53,7 @@ export async function loadCommands(
 }
 
 export async function loadCrons(
-  client: DjsClient,
+  phase: BotClient,
   paths: string[],
   config: AppConfig,
 ): Promise<BotCron[]> {
@@ -62,7 +68,7 @@ export async function loadCrons(
       continue
     }
 
-    const cron = builder.build(client)
+    const cron = builder.build(phase)
     crons.push(cron)
   }
 
@@ -70,7 +76,7 @@ export async function loadCrons(
 }
 
 export async function loadEvents(
-  client: DjsClient,
+  phase: BotClient,
   paths: string[],
   config: AppConfig,
 ): Promise<BotEvent[]> {
@@ -85,7 +91,7 @@ export async function loadEvents(
       continue
     }
 
-    const event = builder.build(client)
+    const event = builder.build(phase)
     events.push(event)
   }
 

@@ -18,9 +18,9 @@ type PanelAction = "name" | "users" | "lock" | "mute" | "transfer" | "delete"
 
 export default new BotEventBuilder()
   .setName("interactionCreate")
-  .setContext("Guild")
   .setExecute(async (client, interaction) => {
     if (
+      !interaction.inGuild() ||
       (!interaction.isButton() &&
         !interaction.isUserSelectMenu() &&
         !interaction.isModalSubmit()) ||

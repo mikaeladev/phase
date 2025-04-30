@@ -9,22 +9,28 @@ import { BotErrorMessage } from "~/structures/BotError"
 export default new BotSubcommandBuilder()
   .setName("set")
   .setDescription("Sets a users rank data.")
-  .addUserOption((option) =>
-    option.setName("user").setDescription("Specify a user.").setRequired(true),
-  )
-  .addIntegerOption((option) =>
-    option
+  .addUserOption((option) => {
+    return option
+      .setName("user")
+      .setDescription("Specify a user.")
+      .setRequired(true)
+  })
+  .addIntegerOption((option) => {
+    return option
       .setName("level")
       .setDescription("Set a new level rank for the user.")
-      .setRequired(true),
-  )
-  .addIntegerOption((option) =>
-    option
+      .setRequired(true)
+  })
+  .addIntegerOption((option) => {
+    return option
       .setName("xp")
       .setDescription("Set a new xp rank for the user.")
-      .setRequired(true),
-  )
-  .setMetadata({ dmPermission: false })
+      .setRequired(true)
+  })
+  .setMetadata({
+    dmPermission: false,
+    requiredUserPermissions: ["ManageGuild"],
+  })
   .setExecute(async (interaction) => {
     const user = interaction.options.getUser("user", true)
     const level = interaction.options.getInteger("level", true)

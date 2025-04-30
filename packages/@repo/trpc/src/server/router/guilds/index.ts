@@ -20,11 +20,11 @@ export const guildsRouter = router({
   getById: privateProcedure
     .input(z.object({ guildId: z.string(), adminId: z.string().optional() }))
     .query(async ({ ctx, input }) => {
-      const { client } = ctx
+      const { phase } = ctx
       const { guildId, adminId } = input
 
-      const dbGuild = client.stores.guilds.get(guildId)
-      const djsGuild = client.guilds.cache.get(guildId)
+      const dbGuild = phase.stores.guilds.get(guildId)
+      const djsGuild = phase.client.guilds.cache.get(guildId)
 
       if (
         !dbGuild ||
@@ -77,7 +77,7 @@ export const guildsRouter = router({
 
         for (let i = 0; i < guildModule.streamers.length; i++) {
           const id = guildModule.streamers[i]!.id
-          const name = client.stores.streamers.get(id)?.username
+          const name = phase.stores.streamers.get(id)?.username
           if (name) streamerNames[i] = name
         }
 
@@ -98,14 +98,14 @@ export const guildsRouter = router({
   getByAdminId: privateProcedure
     .input(z.object({ adminId: z.string() }))
     .query(({ ctx, input }) => {
-      const { client } = ctx
+      const { phase } = ctx
       const { adminId } = input
 
-      const dbGuildIds = client.stores.guilds
+      const dbGuildIds = phase.stores.guilds
         .filter((guild) => guild.admins.includes(adminId))
         .map((guild) => guild.id)
 
-      const guilds = client.guilds.cache
+      const guilds = phase.client.guilds.cache
         .filter((guild) => dbGuildIds.includes(guild.id))
         .map((guild) => ({
           id: guild.id,

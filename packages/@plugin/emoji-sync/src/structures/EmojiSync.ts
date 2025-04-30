@@ -1,4 +1,4 @@
-import { BotPlugin } from "@phasejs/core/client"
+import { BotPlugin } from "@phasejs/core"
 
 import { getOutdatedEmojis } from "~/lib/outdated"
 import { syncEmojis } from "~/lib/sync"

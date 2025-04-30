@@ -15,7 +15,10 @@ export default new BotSubcommandBuilder()
       .setDescription("The ID of the giveaway.")
       .setRequired(true),
   )
-  .setMetadata({ dmPermission: false })
+  .setMetadata({
+    dmPermission: false,
+    requiredUserPermissions: ["ManageGuild"],
+  })
   .setExecute(async (interaction) => {
     await interaction.deferReply({
       ephemeral: true,

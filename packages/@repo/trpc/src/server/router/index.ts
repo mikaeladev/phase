@@ -20,12 +20,12 @@ export const appRouter = router({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      const { client } = ctx
+      const { phase } = ctx
 
       const channelId = "1263379108453158922"
       const roleId = "1078441789985411172"
 
-      const channel = client.channels.cache.get(channelId)
+      const channel = phase.client.channels.cache.get(channelId)
       if (!channel || channel.isDMBased() || !channel.isSendable()) return
 
       try {

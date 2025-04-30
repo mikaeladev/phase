@@ -1,4 +1,4 @@
-import { BotPlugin } from "@phasejs/core/client"
+import { BotPlugin } from "@phasejs/core"
 
 import { createRequestHandler } from "@repo/trpc/server"
 
@@ -10,11 +10,11 @@ export function trpcPlugin() {
     name: "TRPC",
     trigger: "ready",
     version: "0.0.0",
-    onLoad({ client }) {
+    onLoad(phase) {
       Bun.serve({
         port: env.TRPC_PORT,
         fetch(req) {
-          return createRequestHandler(req, { db, env, client })
+          return createRequestHandler(req, { db, env, phase })
         },
       })
     },

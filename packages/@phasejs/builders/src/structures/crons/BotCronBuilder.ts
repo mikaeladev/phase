@@ -1,8 +1,8 @@
-import { BotCron } from "@phasejs/core/client"
+import { BotCron } from "@phasejs/core"
 
 import { CRON_BUILDER_TAG } from "~/lib/constants"
 
-import type { BotCronExecute, DjsClient } from "@phasejs/core"
+import type { BotClient, BotCronExecute, BotCronMetadata } from "@phasejs/core"
 
 export class BotCronBuilder {
   private pattern: BotCron["pattern"]
@@ -28,7 +28,7 @@ export class BotCronBuilder {
   /**
    * Sets the metadata for the cron job.
    */
-  public setMetadata(metadata: Omit<BotCron["metadata"], "type">) {
+  public setMetadata(metadata: BotCronMetadata) {
     this.metadata = metadata
     return this
   }
@@ -44,10 +44,10 @@ export class BotCronBuilder {
   /**
    * Builds the cron job.
    */
-  public build(client: DjsClient): BotCron {
+  public build(phase: BotClient): BotCron {
     if (!this.pattern) throw new Error("Pattern not specified.")
 
-    return new BotCron(client, {
+    return new BotCron(phase, {
       pattern: this.pattern,
       metadata: this.metadata,
       execute: this.execute,
@@ -70,9 +70,9 @@ export class BotCronBuilder {
   /**
    * Checks if something is a cron job builder.
    */
-  static isBuilder(thing: unknown): thing is BotCronBuilder {
+  static isBuilder(value: unknown): value is BotCronBuilder {
     return (
-      typeof thing === "object" && thing !== null && CRON_BUILDER_TAG in thing
+      typeof value === "object" && value !== null && CRON_BUILDER_TAG in value
     )
   }
 }

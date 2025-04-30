@@ -1,41 +1,33 @@
-import { BotClient } from "@phasejs/core/client"
+import { BotClient } from "@phasejs/core"
 import { loadApp } from "@phasejs/loaders"
 import { logsPlugin } from "@phasejs/logs"
-import { Client } from "discord.js"
+import { storesPlugin } from "@phasejs/stores"
 
 import { blacklistPlugin } from "@plugin/blacklist"
 import { musicPlugin } from "@plugin/music"
 import { voicePlugin } from "@plugin/voice"
 
-import { blacklistOptions } from "~/lib/blacklist"
-import { botConfig } from "~/lib/config"
+import { blacklistConfig } from "~/lib/blacklist"
+import { discordClient } from "~/lib/clients/discord"
 import { emojiSyncPlugin } from "~/lib/emojis"
+import { logsConfig } from "~/lib/logs"
+import { storesConfig } from "~/lib/stores"
 import { trpcPlugin } from "~/lib/trpc"
 
-import { ConfigStore } from "~/structures/stores/ConfigStore"
-import { GuildStore } from "~/structures/stores/GuildStore"
-import { InviteStore } from "~/structures/stores/InviteStore"
-import { StreamerStore } from "~/structures/stores/StreamerStore"
+import { contextCreators } from "~/context"
 
-// create the underlying discord.js client
-const djsClient = new Client(botConfig)
-
-// create the phasejs client wrapper
-const phaseClient = new BotClient(djsClient, {
+// create the phasejs client
+const phaseClient = new BotClient(discordClient, {
+  contextCreators,
   plugins: [
-    logsPlugin(botConfig),
+    logsPlugin(logsConfig),
+    storesPlugin(storesConfig),
+    blacklistPlugin(blacklistConfig),
+    emojiSyncPlugin(),
     voicePlugin(),
     musicPlugin(),
-    blacklistPlugin(blacklistOptions),
-    emojiSyncPlugin(),
     trpcPlugin(),
   ],
-  stores: {
-    config: new ConfigStore(),
-    guilds: new GuildStore(),
-    invites: new InviteStore(),
-    streamers: new StreamerStore(),
-  },
 })
 
 // start the client
