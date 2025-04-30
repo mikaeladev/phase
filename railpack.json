@@ -4,7 +4,7 @@
   "provider": "node",
   "packages": {
     "node": "20",
-    "bun": "1.2.9"
+    "bun": "1.2.11"
   },
   "caches": {
     "bun-install": {
