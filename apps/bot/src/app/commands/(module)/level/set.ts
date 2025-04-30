@@ -31,12 +31,12 @@ export default new BotSubcommandBuilder()
     dmPermission: false,
     requiredUserPermissions: ["ManageGuild"],
   })
-  .setExecute(async (interaction) => {
+  .setExecute(async (interaction, ctx) => {
     const user = interaction.options.getUser("user", true)
     const level = interaction.options.getInteger("level", true)
     const xp = interaction.options.getInteger("xp", true)
 
-    const guildDoc = interaction.client.stores.guilds.get(interaction.guildId!)
+    const guildDoc = ctx.phase.stores.guilds.get(interaction.guildId!)
 
     if (!guildDoc?.modules?.[ModuleId.Levels]?.enabled) {
       return void interaction.reply(

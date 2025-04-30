@@ -4,10 +4,10 @@ import { ModuleId } from "@repo/utils/modules"
 
 export default new BotEventBuilder()
   .setName("guildMemberUpdate")
-  .setExecute(async (client, oldMember, newMember) => {
+  .setExecute(async (_, oldMember, newMember, ctx) => {
     if (!oldMember.pending || (oldMember.pending && newMember.pending)) return
 
-    const guildDoc = client.stores.guilds.get(newMember.guild.id)
+    const guildDoc = ctx.phase.stores.guilds.get(newMember.guild.id)
     const autoRolesModule = guildDoc?.modules?.[ModuleId.AutoRoles]
 
     if (!autoRolesModule?.enabled) return

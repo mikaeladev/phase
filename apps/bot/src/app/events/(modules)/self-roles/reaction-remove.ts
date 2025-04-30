@@ -9,7 +9,7 @@ import { updateRoles } from "./_utils"
 
 export default new BotEventBuilder()
   .setName("messageReactionRemove")
-  .setExecute(async (_, reaction, user) => {
+  .setExecute(async (_, reaction, user, __, ctx) => {
     const reactionMessage = reaction.message.partial
       ? await reaction.message.fetch()
       : reaction.message
@@ -17,7 +17,7 @@ export default new BotEventBuilder()
     if (!reactionMessage.inGuild()) return
     if (reactionMessage.author.id !== reaction.client.user.id) return
 
-    const guildDoc = reaction.client.stores.guilds.get(reactionMessage.guildId)
+    const guildDoc = ctx.phase.stores.guilds.get(reactionMessage.guildId)
     const moduleData = guildDoc?.modules?.[ModuleId.SelfRoles]
 
     if (!moduleData?.enabled) return

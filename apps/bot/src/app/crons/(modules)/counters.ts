@@ -4,8 +4,8 @@ import { ModuleDefinitions, ModuleId } from "@repo/utils/modules"
 
 export default new BotCronBuilder()
   .setPattern("*/10 * * * *")
-  .setExecute(async (client) => {
-    const guildDocs = client.stores.guilds
+  .setExecute(async (client, ctx) => {
+    const guildDocs = ctx.phase.stores.guilds
       .filter(
         (guildDoc) =>
           client.guilds.cache.has(guildDoc.id) &&

@@ -15,7 +15,7 @@ import { MessageBuilder } from "~/structures/builders/MessageBuilder"
 
 export default new BotEventBuilder()
   .setName("interactionCreate")
-  .setExecute(async (_, interaction) => {
+  .setExecute(async (_, interaction, ctx) => {
     const { client } = interaction
 
     if (
@@ -26,7 +26,7 @@ export default new BotEventBuilder()
       return
     }
 
-    const guildDoc = client.stores.guilds.get(interaction.guildId)
+    const guildDoc = ctx.phase.stores.guilds.get(interaction.guildId)
     const moduleConfig = guildDoc?.modules?.[ModuleId.Tickets]
 
     if (!moduleConfig?.enabled) {

@@ -25,12 +25,12 @@ export default new BotSubcommandBuilder()
       ),
   )
   .setMetadata({ dmPermission: false })
-  .setExecute(async (interaction) => {
+  .setExecute(async (interaction, ctx) => {
     await interaction.deferReply({ ephemeral: true })
 
     const moduleId = interaction.options.getString("module", true)
 
-    const guildDoc = interaction.client.stores.guilds.get(interaction.guildId!)!
+    const guildDoc = ctx.phase.stores.guilds.get(interaction.guildId!)!
     const guildAdminIds = guildDoc.admins ?? []
 
     if (!guildAdminIds.includes(interaction.user.id)) {
@@ -66,7 +66,7 @@ export default new BotSubcommandBuilder()
           commandName: "config toggle",
           channelId: interaction.channelId,
           guildId: interaction.guildId!,
-        }).toJSON(),
+        }),
       )
     }
 

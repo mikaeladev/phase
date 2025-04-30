@@ -14,10 +14,10 @@ export default new BotSubcommandBuilder()
   .setName("login")
   .setDescription("Generates a dashboard login code.")
   .setMetadata({ dmPermission: false })
-  .setExecute(async (interaction) => {
+  .setExecute(async (interaction, ctx) => {
     await interaction.deferReply({ ephemeral: true })
 
-    const guildDoc = interaction.client.stores.guilds.get(interaction.guildId!)
+    const guildDoc = ctx.phase.stores.guilds.get(interaction.guildId!)
 
     if (!guildDoc?.admins.includes(interaction.user.id)) {
       const errorMessage = BotErrorMessage.userNotAdmin()

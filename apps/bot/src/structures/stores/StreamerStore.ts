@@ -54,7 +54,7 @@ export class StreamerStore extends BaseBotKVStore<string, Streamer> {
     if (this.size > 0) this.clear()
 
     // get all guilds with twitch notifications enabled
-    const guildDocs = this.phase.client.stores.guilds
+    const guildDocs = this.phase.stores.guilds
       .filter((g) => g.modules?.[ModuleId.TwitchNotifications]?.enabled)
       .values()
 

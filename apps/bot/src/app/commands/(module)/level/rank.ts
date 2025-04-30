@@ -14,10 +14,10 @@ export default new BotSubcommandBuilder()
     option.setName("user").setDescription("Specify a user.").setRequired(false),
   )
   .setMetadata({ dmPermission: false })
-  .setExecute(async (interaction) => {
+  .setExecute(async (interaction, ctx) => {
     const user = interaction.options.getUser("user", false) ?? interaction.user
 
-    const guildDoc = interaction.client.stores.guilds.get(interaction.guildId!)
+    const guildDoc = ctx.phase.stores.guilds.get(interaction.guildId!)
 
     if (!guildDoc?.modules?.[ModuleId.Levels]?.enabled) {
       return void interaction.reply(

@@ -18,7 +18,7 @@ type PanelAction = "name" | "users" | "lock" | "mute" | "transfer" | "delete"
 
 export default new BotEventBuilder()
   .setName("interactionCreate")
-  .setExecute(async (client, interaction) => {
+  .setExecute(async (client, interaction, ctx) => {
     if (
       !interaction.inGuild() ||
       (!interaction.isButton() &&
@@ -37,7 +37,7 @@ export default new BotEventBuilder()
       await interaction.deferReply({ ephemeral: true })
     }
 
-    const guildDoc = client.stores.guilds.get(interaction.guildId)
+    const guildDoc = ctx.phase.stores.guilds.get(interaction.guildId)
     const moduleConfig = guildDoc?.modules?.[ModuleId.JoinToCreates]
 
     if (!moduleConfig?.enabled) {

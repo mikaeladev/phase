@@ -13,7 +13,7 @@ import type { Client, GuildMember } from "discord.js"
 
 export async function generateWelcomeCard(client: Client, member: GuildMember) {
   const guild = member.guild
-  const guildDoc = client.stores.guilds.get(guild.id)
+  const guildDoc = client.phase.stores.guilds.get(guild.id)
 
   if (!guildDoc) {
     throw new Error("Guild not found in the database")

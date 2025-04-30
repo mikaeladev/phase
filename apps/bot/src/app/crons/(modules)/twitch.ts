@@ -7,15 +7,15 @@ import { MessageBuilder } from "~/structures/builders"
 
 export default new BotCronBuilder()
   .setPattern("* * * * *")
-  .setExecute(async (client) => {
+  .setExecute(async (client, ctx) => {
     // get a before snapshot of the streamers store
-    const oldStreamers = client.stores.streamers.clone()
+    const oldStreamers = ctx.phase.stores.streamers.clone()
 
     // refresh the streamers store
-    await client.stores.streamers.refreshStreamers()
+    await ctx.phase.stores.streamers.refreshStreamers()
 
     // loop through the streamers store
-    for (const [id, streamer] of client.stores.streamers) {
+    for (const [id, streamer] of ctx.phase.stores.streamers) {
       // cross-reference the stream status with the old values
       const isLiveNow = !!streamer.stream
       const wasLiveBefore = !!oldStreamers.get(id)?.stream

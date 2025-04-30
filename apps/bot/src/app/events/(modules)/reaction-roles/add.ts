@@ -4,10 +4,10 @@ import { ModuleId } from "@repo/utils/modules"
 
 export default new BotEventBuilder()
   .setName("messageReactionAdd")
-  .setExecute(async (client, reaction, user) => {
+  .setExecute(async (_, reaction, user, __, ctx) => {
     if (user.bot || !reaction.message.inGuild()) return
 
-    const guildDoc = client.stores.guilds.get(reaction.message.guildId)
+    const guildDoc = ctx.phase.stores.guilds.get(reaction.message.guildId)
     const moduleData = guildDoc?.modules?.[ModuleId.ReactionRoles]
 
     if (

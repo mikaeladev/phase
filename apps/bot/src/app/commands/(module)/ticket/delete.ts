@@ -12,8 +12,8 @@ export default new BotSubcommandBuilder()
   .setName("delete")
   .setDescription("Deletes a ticket.")
   .setMetadata({ dmPermission: false })
-  .setExecute(async (interaction) => {
-    const guildDoc = interaction.client.stores.guilds.get(interaction.guildId!)
+  .setExecute(async (interaction, ctx) => {
+    const guildDoc = ctx.phase.stores.guilds.get(interaction.guildId!)
     const ticketModule = guildDoc?.modules?.[ModuleId.Tickets]
 
     if (!ticketModule?.enabled) {

@@ -7,10 +7,10 @@ const verificationGate = GuildFeature.MemberVerificationGateEnabled
 
 export default new BotEventBuilder()
   .setName("guildMemberAdd")
-  .setExecute(async (client, member) => {
+  .setExecute(async (_, member, ctx) => {
     if (member.guild.features.includes(verificationGate)) return
 
-    const guildDoc = client.stores.guilds.get(member.guild.id)
+    const guildDoc = ctx.phase.stores.guilds.get(member.guild.id)
     const autoRolesModule = guildDoc?.modules?.[ModuleId.AutoRoles]
 
     if (!autoRolesModule?.enabled) return

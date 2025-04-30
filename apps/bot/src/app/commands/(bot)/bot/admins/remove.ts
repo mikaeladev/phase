@@ -7,49 +7,34 @@ import { BotErrorMessage } from "~/structures/BotError"
 export default new BotSubcommandBuilder()
   .setName("remove")
   .setDescription("Revokes a member's dashboard access.")
-  .addUserOption((option) =>
-    option
+  .addUserOption((option) => {
+    return option
       .setName("user")
       .setDescription("The member to remove.")
-      .setRequired(true),
-  )
-  .setExecute(async (interaction) => {
-    await interaction.deferReply({
-      ephemeral: true,
-    })
+      .setRequired(true)
+  })
+  .setMetadata({ dmPermission: false })
+  .setExecute(async (interaction, ctx) => {
+    await interaction.deferReply({ ephemeral: true })
 
-    if (!interaction.guild) {
-      void interaction.editReply(BotErrorMessage.serverOnlyCommand().toJSON())
-      return
-    }
-
-    if (interaction.guild.ownerId !== interaction.user.id) {
-      void interaction.editReply(BotErrorMessage.userNotOwner().toJSON())
-      return
+    if (interaction.guild?.ownerId !== interaction.user.id) {
+      return void interaction.editReply(BotErrorMessage.userNotOwner())
     }
 
     const user = interaction.options.getUser("user", true)
 
     if (user.id === interaction.user.id) {
-      void interaction.editReply(
-        new BotErrorMessage(
-          "You can't remove yourself from the dashboard.",
-        ).toJSON(),
+      return void interaction.editReply(
+        new BotErrorMessage("You can't remove yourself from the dashboard."),
       )
-
-      return
     }
 
-    const guildDoc = interaction.client.stores.guilds.get(interaction.guildId!)!
+    const guildDoc = ctx.phase.stores.guilds.get(interaction.guild.id)
 
-    if (!guildDoc.admins.includes(user.id)) {
-      void interaction.editReply(
-        new BotErrorMessage(
-          `<@${user.id}> does not have dashboard access.`,
-        ).toJSON(),
+    if (!guildDoc?.admins.includes(user.id)) {
+      return void interaction.editReply(
+        new BotErrorMessage(`<@${user.id}> does not have dashboard access.`),
       )
-
-      return
     }
 
     await db.guilds.updateOne(

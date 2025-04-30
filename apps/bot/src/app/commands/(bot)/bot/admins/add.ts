@@ -7,49 +7,34 @@ import { BotErrorMessage } from "~/structures/BotError"
 export default new BotSubcommandBuilder()
   .setName("add")
   .setDescription("Grants a member dashboard access.")
-  .addUserOption((option) =>
-    option
+  .addUserOption((option) => {
+    return option
       .setName("user")
       .setDescription("The member to add.")
-      .setRequired(true),
-  )
-  .setExecute(async (interaction) => {
-    await interaction.deferReply({
-      ephemeral: true,
-    })
+      .setRequired(true)
+  })
+  .setMetadata({ dmPermission: false })
+  .setExecute(async (interaction, ctx) => {
+    await interaction.deferReply({ ephemeral: true })
 
-    if (!interaction.guild) {
-      void interaction.editReply(BotErrorMessage.serverOnlyCommand().toJSON())
-      return
-    }
-
-    if (interaction.guild.ownerId !== interaction.user.id) {
-      void interaction.editReply(BotErrorMessage.userNotOwner().toJSON())
-      return
+    if (interaction.guild?.ownerId !== interaction.user.id) {
+      return void interaction.editReply(BotErrorMessage.userNotOwner())
     }
 
     const user = interaction.options.getUser("user", true)
 
-    const guildDoc = interaction.client.stores.guilds.get(interaction.guildId!)!
+    const guildDoc = ctx.phase.stores.guilds.get(interaction.guild.id)!
 
     if (user.bot) {
-      void interaction.editReply(
-        new BotErrorMessage(
-          `<@${user.id}> is a bot, not a regular user.`,
-        ).toJSON(),
+      return void interaction.editReply(
+        new BotErrorMessage(`<@${user.id}> is a bot, not a regular user.`),
       )
-
-      return
     }
 
     if (guildDoc.admins.includes(user.id)) {
-      void interaction.editReply(
-        new BotErrorMessage(
-          `<@${user.id}> already has dashboard access.`,
-        ).toJSON(),
+      return void interaction.editReply(
+        new BotErrorMessage(`<@${user.id}> already has dashboard access.`),
       )
-
-      return
     }
 
     await db.guilds.updateOne(

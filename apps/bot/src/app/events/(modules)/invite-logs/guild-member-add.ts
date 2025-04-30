@@ -10,11 +10,11 @@ import { getUsedInvite, hasRequiredGuildPermissions, mapInvite } from "./_utils"
 
 export default new BotEventBuilder()
   .setName("guildMemberAdd")
-  .setExecute(async (client, member) => {
+  .setExecute(async (_, member, ctx) => {
     const guild = member.guild
     if (!hasRequiredGuildPermissions(guild)) return
 
-    const inviteStore = client.stores.invites.get(guild.id)
+    const inviteStore = ctx.phase.stores.invites.get(guild.id)
     if (!inviteStore) return
 
     // compare the old invites with the new invites to see which invite was used
@@ -29,11 +29,11 @@ export default new BotEventBuilder()
 
     // update the invite store with the new invite collection
 
-    client.stores.invites.set(guild.id, currentInvites.mapValues(mapInvite))
+    ctx.phase.stores.invites.set(guild.id, currentInvites.mapValues(mapInvite))
 
     // get the guild information
 
-    const guildDoc = client.stores.guilds.get(guild.id)!
+    const guildDoc = ctx.phase.stores.guilds.get(guild.id)!
 
     const moduleConfig = guildDoc.modules?.[ModuleId.AuditLogs]
     if (!moduleConfig?.enabled || !moduleConfig.channels.invites) return

@@ -8,9 +8,9 @@ export default new BotSubcommandBuilder()
   .setName("list")
   .setDescription("Lists the members that have dashboard access.")
   .setMetadata({ dmPermission: false })
-  .setExecute(async (interaction) => {
+  .setExecute(async (interaction, ctx) => {
     const guild = interaction.guild!
-    const guildDoc = interaction.client.stores.guilds.get(guild.id)!
+    const guildDoc = ctx.phase.stores.guilds.get(guild.id)!
 
     if (guild.ownerId !== interaction.user.id) {
       const errorMessage = BotErrorMessage.userNotOwner()

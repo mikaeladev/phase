@@ -15,10 +15,10 @@ const { variables: levelVariables } = ModuleDefinitions[ModuleId.Levels]
 
 export default new BotEventBuilder()
   .setName("messageCreate")
-  .setExecute(async (client, message) => {
+  .setExecute(async (_, message, ctx) => {
     if (!message.inGuild() || message.author.bot) return
 
-    const guildDoc = client.stores.guilds.get(message.guildId)
+    const guildDoc = ctx.phase.stores.guilds.get(message.guildId)
     const moduleConfig = guildDoc?.modules?.[ModuleId.Levels]
 
     if (!moduleConfig?.enabled) return

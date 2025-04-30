@@ -30,7 +30,7 @@ export default new BotSubcommandBuilder()
     dmPermission: false,
     requiredUserPermissions: ["ModerateMembers"],
   })
-  .setExecute(async (interaction) => {
+  .setExecute(async (interaction, ctx) => {
     const member = interaction.options.getMember("member") as GuildMember | null
     const reason = interaction.options.getString("reason", false) ?? undefined
 
@@ -39,7 +39,7 @@ export default new BotSubcommandBuilder()
       return
     }
 
-    const guildDoc = interaction.client.stores.guilds.get(interaction.guildId!)
+    const guildDoc = ctx.phase.stores.guilds.get(interaction.guildId!)
     const warningsModule = guildDoc?.modules?.[ModuleId.Warnings]
 
     if (!warningsModule?.enabled) {

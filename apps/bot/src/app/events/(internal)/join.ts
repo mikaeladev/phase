@@ -10,8 +10,8 @@ import { MessageBuilder } from "~/structures/builders"
 export default new BotEventBuilder()
   .setName("ready")
   .setListenerType("once")
-  .setExecute(async (client) => {
-    client.phase.emitter.on("blacklist.joinPrevented", async (entry) => {
+  .setExecute(async (client, _, ctx) => {
+    ctx.phase.emitter.on("blacklist.joinPrevented", async (entry) => {
       const alertMessage = new MessageBuilder().setEmbeds((embed) => {
         return embed
           .setColor("Destructive")
@@ -38,7 +38,7 @@ export default new BotEventBuilder()
       }
     })
 
-    client.phase.emitter.on("blacklist.joinSuccess", async (guild) => {
+    ctx.phase.emitter.on("blacklist.joinSuccess", async (guild) => {
       const guildId = guild.id
       const ownerId = guild.ownerId
       const owner = await guild.fetchOwner().catch(() => null)

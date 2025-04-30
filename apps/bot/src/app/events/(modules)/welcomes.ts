@@ -10,8 +10,8 @@ import { MessageBuilder } from "~/structures/builders/MessageBuilder"
 
 export default new BotEventBuilder()
   .setName("guildMemberAdd")
-  .setExecute(async (client, member) => {
-    const guildDoc = client.stores.guilds.get(member.guild.id)
+  .setExecute(async (client, member, ctx) => {
+    const guildDoc = ctx.phase.stores.guilds.get(member.guild.id)
     const moduleConfig = guildDoc?.modules?.[ModuleId.WelcomeMessages]
     const moduleDefinition = ModuleDefinitions[ModuleId.WelcomeMessages]
 

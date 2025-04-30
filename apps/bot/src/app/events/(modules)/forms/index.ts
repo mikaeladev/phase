@@ -25,7 +25,7 @@ import type { BaseGuildTextChannel } from "discord.js"
 
 export default new BotEventBuilder()
   .setName("interactionCreate")
-  .setExecute(async (client, interaction) => {
+  .setExecute(async (_, interaction, ctx) => {
     if (
       (!interaction.isButton() &&
         !interaction.isModalSubmit() &&
@@ -101,7 +101,7 @@ export default new BotEventBuilder()
 
       // the module config from the database
 
-      const guildDoc = client.stores.guilds.get(interaction.guildId)
+      const guildDoc = ctx.phase.stores.guilds.get(interaction.guildId)
       const moduleConfig = guildDoc?.modules?.[ModuleId.Forms]
 
       if (!moduleConfig?.enabled) {

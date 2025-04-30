@@ -10,10 +10,10 @@ import { db } from "~/lib/db"
  */
 export default new BotEventBuilder()
   .setName("channelDelete")
-  .setExecute(async (client, channel) => {
+  .setExecute(async (client, channel, ctx) => {
     if (channel.isDMBased()) return
 
-    const guildDoc = client.stores.guilds.get(channel.guildId)
+    const guildDoc = ctx.phase.stores.guilds.get(channel.guildId)
     const moduleConfig = guildDoc?.modules?.[ModuleId.JoinToCreates]
 
     if (!moduleConfig?.enabled) return

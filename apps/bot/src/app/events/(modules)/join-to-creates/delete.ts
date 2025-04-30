@@ -9,7 +9,7 @@ import { db } from "~/lib/db"
  */
 export default new BotEventBuilder()
   .setName("voiceStateUpdate")
-  .setExecute(async (client, oldVoice, newVoice) => {
+  .setExecute(async (_, oldVoice, newVoice, ctx) => {
     if (
       !oldVoice.channelId ||
       !oldVoice.member ||
@@ -18,7 +18,7 @@ export default new BotEventBuilder()
       return
     }
 
-    const guildDoc = client.stores.guilds.get(oldVoice.guild.id)
+    const guildDoc = ctx.phase.stores.guilds.get(oldVoice.guild.id)
     const moduleConfig = guildDoc?.modules?.[ModuleId.JoinToCreates]
 
     if (!moduleConfig?.enabled) return

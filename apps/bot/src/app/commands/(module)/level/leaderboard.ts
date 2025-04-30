@@ -28,8 +28,8 @@ export default new BotSubcommandBuilder()
       .setRequired(false)
   })
   .setMetadata({ dmPermission: false })
-  .setExecute(async (interaction) => {
-    const guildDoc = interaction.client.stores.guilds.get(interaction.guildId!)
+  .setExecute(async (interaction, ctx) => {
+    const guildDoc = ctx.phase.stores.guilds.get(interaction.guildId!)
     const moduleConfig = guildDoc?.modules?.[ModuleId.Levels]
 
     if (!moduleConfig) {

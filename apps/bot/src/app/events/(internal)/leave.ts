@@ -7,8 +7,8 @@ import { MessageBuilder } from "~/structures/builders"
 
 export default new BotEventBuilder()
   .setName("guildDelete")
-  .setExecute(async (client, guild) => {
-    const existsInDatabase = client.stores.guilds.has(guild.id)
+  .setExecute(async (_, guild, ctx) => {
+    const existsInDatabase = ctx.phase.stores.guilds.has(guild.id)
 
     // means the guild is blacklisted so was auto removed
     if (!existsInDatabase) return

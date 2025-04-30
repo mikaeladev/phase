@@ -8,10 +8,10 @@ import { MessageBuilder } from "~/structures/builders"
 
 export default new BotEventBuilder()
   .setName("messageCreate")
-  .setExecute(async (client, message) => {
+  .setExecute(async (_, message, ctx) => {
     if (message.interaction?.commandName !== "bump") return
 
-    const guildDoc = client.stores.guilds.get(message.guildId!)
+    const guildDoc = ctx.phase.stores.guilds.get(message.guildId!)
     const moduleConfig = guildDoc?.modules?.[ModuleId.BumpReminders]
 
     if (!guildDoc || !moduleConfig?.enabled) return
