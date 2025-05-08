@@ -37,15 +37,17 @@ export async function loadCommands(
       continue
     }
 
-    const commandParts = path.replace(commandPartsReplaceRegex, "").split("/")
+    if (BotSubcommandBuilder.isBuilder(builder)) {
+      const commandParts = path.replace(commandPartsReplaceRegex, "").split("/")
 
-    const parentName = commandParts.length > 0 ? commandParts[0] : undefined
-    const groupName = commandParts.length > 2 ? commandParts[1] : undefined
+      const parentName = commandParts.length > 0 ? commandParts[0] : undefined
+      const groupName = commandParts.length > 2 ? commandParts[1] : undefined
 
-    const command = BotSubcommandBuilder.isBuilder(builder)
-      ? builder.build(phase, { parentName, groupName })
-      : builder.build(phase)
+      if (parentName) builder.setParentName(parentName)
+      if (groupName) builder.setGroupName(groupName)
+    }
 
+    const command = builder.build(phase)
     commands.push(command)
   }
 

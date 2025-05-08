@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@phasejs/builders",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "scripts": {
     "build": "tsup",
@@ -14,11 +14,8 @@
       "default": "./dist/index.js"
     }
   },
-  "dependencies": {
-    "@phasejs/core": "workspace:*",
-    "ts-mixer": "^6.0.4"
-  },
   "peerDependencies": {
+    "@phasejs/core": "workspace:*",
     "discord.js": "^14.18.0"
   },
   "tsup": {

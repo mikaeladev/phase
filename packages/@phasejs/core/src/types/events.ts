@@ -5,7 +5,6 @@ import type { ClientEvents } from "discord.js"
 
 export type BotEvents = ClientEvents
 export type BotEventName = Prettify<keyof BotEvents>
-export type BotEventListenerType = "on" | "once"
 
 export type BotEventExecuteArgsMap = {
   [TName in BotEventName]: BotEvents[TName] extends []

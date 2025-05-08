@@ -4,12 +4,14 @@ import {
   ApplicationIntegrationType,
 } from "discord.js"
 
+import { deepmergeCustom } from "deepmerge-ts"
 import { isEqual, isNil } from "lodash"
 
 import { Base } from "~/structures/abstracts/Base"
 
 import type { BotClient } from "~/structures/BotClient"
 import type { BotCommandBody, BotCommandExecute } from "~/types/commands"
+import type { Optional } from "~/types/utils"
 import type {
   APIApplicationCommandOption,
   ApplicationCommand,
@@ -19,87 +21,40 @@ import type {
 export interface BotCommandMetadata extends Record<string, unknown> {}
 export interface BotCommandContext extends Record<string, unknown> {}
 
-export class BotCommand extends Base {
-  protected _body: BotCommandBody
+export interface BotCommandParams {
+  body: BotCommandBody
+  parentName?: string
+  groupName?: string
+  metadata: BotCommandMetadata
+  execute: BotCommandExecute
+}
 
-  public readonly parentName?: string
-  public readonly groupName?: string
+export class BotCommand
+  extends Base
+  implements Readonly<Omit<BotCommandParams, "body">>
+{
+  protected readonly _body: BotCommandBody
 
-  public readonly name: BotCommandBody["name"]
-  public readonly nameLocalisations: BotCommandBody["name_localizations"]
-  public readonly description: BotCommandBody["description"]
-  public readonly descriptionLocalisations: BotCommandBody["description_localizations"]
-  public readonly options: BotCommandBody["options"]
+  public readonly subcommand
+  public readonly parentName
+  public readonly groupName
+  public readonly metadata
+  public readonly execute
 
-  public readonly integrationTypes?: BotCommandBody<false>["integration_types"]
-  public readonly contexts?: BotCommandBody<false>["contexts"]
-  public readonly dmPermission?: BotCommandBody<false>["dm_permission"]
-
-  public readonly metadata: BotCommandMetadata
-  public readonly execute: BotCommandExecute
-
-  public get subcommand(): boolean {
-    return this.isSubcommandBody(this._body)
-  }
-
-  constructor(
-    phase: BotClient,
-    params: {
-      parentName?: string
-      groupName?: string
-      body: BotCommandBody
-      metadata: BotCommandMetadata
-      execute: BotCommandExecute
-    },
-  ) {
+  constructor(phase: BotClient, params: BotCommandParams) {
     super(phase)
 
-    this._body = params.body
+    this._body = BotCommand.cleanBody(params.body)
 
     if (params.parentName) {
+      this.subcommand = true
       this.parentName = params.parentName
 
       if (params.groupName) {
         this.groupName = params.groupName
       }
-    }
-
-    this.name = this._body.name
-    this.description = this._body.description
-
-    if ("name_localizations" in this._body) {
-      if (this._body.name_localizations) {
-        this.nameLocalisations = this._body.name_localizations
-      } else {
-        delete this._body.name_localizations
-      }
-    }
-
-    if ("description_localizations" in this._body) {
-      if (this._body.description_localizations) {
-        this.descriptionLocalisations = this._body.description_localizations
-      } else {
-        delete this._body.description_localizations
-      }
-    }
-
-    if ("options" in this._body) {
-      if (this._body.options) {
-        const transformedOptions = this._body.options.map((option) => {
-          return BotCommand.transformOption(option)
-        })
-
-        this._body.options = transformedOptions
-        this.options = transformedOptions
-      } else {
-        delete this._body.options
-      }
-    }
-
-    if (!this.isSubcommandBody(this._body)) {
-      this.integrationTypes = this._body.integration_types
-      this.contexts = this._body.contexts
-      this.dmPermission = this._body.dm_permission
+    } else {
+      this.subcommand = false
     }
 
     this.metadata = params.metadata
@@ -107,8 +62,72 @@ export class BotCommand extends Base {
   }
 
   /**
-   * Returns the command body as a JSON object.
+   * 1-32 character name. Command names must be all lowercase matching
+   * `^[-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}$`
    */
+  public get name(): BotCommandBody["name"] {
+    return this._body.name
+  }
+
+  /**
+   * Localisation dictionary for the name field. Values follow the same
+   * restrictions as name.
+   */
+  public get nameLocalisations(): BotCommandBody["name_localizations"] {
+    return this._body.name_localizations
+  }
+
+  /** 1-100 character description of the command. */
+  public get description(): BotCommandBody["description"] {
+    return this._body.description
+  }
+
+  /**
+   * Localisation dictionary for the description field. Values follow the same
+   * restrictions as description.
+   */
+  public get descriptionLocalisations(): BotCommandBody["description_localizations"] {
+    return this._body.description_localizations
+  }
+
+  /** The parameters for the command, max 25. */
+  public get options(): BotCommandBody["options"] {
+    return this._body.options
+  }
+
+  /**
+   * Installation context(s) where the command is available, only for
+   * globally-scoped commands. Defaults to `GUILD_INSTALL ([0])`.
+   */
+  public get integrationTypes(): Optional<
+    BotCommandBody<false>["integration_types"]
+  > {
+    if (this.isSubcommandBody(this._body)) return undefined
+    return this._body.integration_types
+  }
+
+  /**
+   * Interaction context(s) where the command can be used, only for
+   * globally-scoped commands. By default, all interaction context types
+   * included for new commands `[0,1,2]`.
+   */
+  public get contexts(): Optional<BotCommandBody<false>["contexts"]> {
+    if (this.isSubcommandBody(this._body)) return undefined
+    return this._body.contexts
+  }
+
+  /**
+   * Indicates whether the command is available in DMs with the app, only for
+   * globally-scoped commands. By default, commands are visible.
+   *
+   * @deprecated Use `contexts` instead.
+   */
+  public get dmPermission(): Optional<BotCommandBody<false>["dm_permission"]> {
+    if (this.isSubcommandBody(this._body)) return undefined
+    return this._body.dm_permission
+  }
+
+  /** Returns the command body as a JSON object. */
   public toJSON(): BotCommandBody<false> {
     if (!this.isSubcommandBody(this._body)) {
       return this._body
@@ -141,21 +160,45 @@ export class BotCommand extends Base {
     return this.parentName !== undefined
   }
 
-  /**
-   * Compares two command bodies for equality.
-   */
-  static equals(a: BotCommandBody, b: BotCommandBody) {
+  /** Compares two command bodies for equality. */
+  static equals(this: void, a: BotCommandBody, b: BotCommandBody) {
     return isEqual(a, b)
   }
 
+  /** Removes unnecessary properties from a command body. */
+  static cleanBody<T extends BotCommandBody>(this: void, body: T): T {
+    if ("name_localizations" in body) {
+      if (!body.name_localizations) {
+        delete body.name_localizations
+      }
+    }
+
+    if ("description_localizations" in body) {
+      if (!body.description_localizations) {
+        delete body.description_localizations
+      }
+    }
+
+    if ("options" in body) {
+      if (body.options) {
+        const options = body.options.map(BotCommand.transformOption)
+        body.options = options
+      } else {
+        delete body.options
+      }
+    }
+
+    return body
+  }
+
   /**
-   * Transforms a command option into a format compatible with the Discord API.
+   * Transforms an application command option object into a format compatible
+   * with the Discord API.
    */
-  static transformOption<
-    TReturn extends APIApplicationCommandOption = APIApplicationCommandOption,
-  >(
+  static transformOption(
+    this: void,
     option: ApplicationCommandOptionData | APIApplicationCommandOption,
-  ): TReturn {
+  ): APIApplicationCommandOption {
     const transformedOption: Record<string, unknown> = {
       type: option.type,
       name: option.name,
@@ -203,24 +246,28 @@ export class BotCommand extends Base {
 
     if ("options" in option && option.options) {
       transformedOption.options = option.options.map((opt) =>
-        this.transformOption(opt),
+        BotCommand.transformOption(opt),
       )
     }
 
-    return transformedOption as TReturn
+    return transformedOption as unknown as APIApplicationCommandOption
   }
 
   /**
-   * Transforms a command into a format compatible with the Discord API.
+   * Transforms an application command object into a format compatible with the
+   * Discord API.
    */
-  static transformCommand(command: ApplicationCommand): BotCommandBody<false> {
+  static transformCommand(
+    this: void,
+    command: ApplicationCommand,
+  ): BotCommandBody<false> {
     const transformedCommand: BotCommandBody = {
       type: ApplicationCommandType.ChatInput,
       name: command.name,
       description: command.description,
       options:
         command.options.map((option) =>
-          this.transformOption(option as ApplicationCommandOptionData),
+          BotCommand.transformOption(option as ApplicationCommandOptionData),
         ) ?? [],
       integration_types: command.integrationTypes ?? [
         ApplicationIntegrationType.GuildInstall,
@@ -243,4 +290,24 @@ export class BotCommand extends Base {
 
     return transformedCommand
   }
+
+  /** Merges 2 command bodies. */
+  static mergeCommands = deepmergeCustom({
+    mergeArrays(values, utils) {
+      const merged = new Map<unknown, unknown>()
+      values.flat().forEach((item) => {
+        if (typeof item === "object" && item !== null && "name" in item) {
+          const existingItem = merged.get(item.name)
+          if (existingItem) {
+            merged.set(item.name, utils.deepmerge(existingItem, item))
+          } else {
+            merged.set(item.name, item)
+          }
+        } else {
+          merged.set(item, item)
+        }
+      })
+      return Array.from(merged.values())
+    },
+  })
 }

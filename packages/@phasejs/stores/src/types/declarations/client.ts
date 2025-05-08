@@ -6,7 +6,7 @@ import type {} from "@phasejs/core"
 
 declare module "discord.js" {
   interface Client {
-    /** @deprecated access from `phase.stores` instead */
+    /** @deprecated Access from `phase.stores` instead */
     stores: BotStores
   }
 }

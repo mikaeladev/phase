@@ -14,9 +14,10 @@ import type { DjsClient } from "~/types/client"
 import type { BotCommandBody } from "~/types/commands"
 import type { BotContextCreators } from "~/types/context"
 import type { BotMiddleware } from "~/types/middleware"
+import type { BotPluginLoadTrigger } from "~/types/plugins"
 import type { BotPrestart } from "~/types/prestart"
 
-export interface BotClientOptions {
+export interface BotClientParams {
   plugins?: BotPlugin[]
   contextCreators?: BotContextCreators
 }
@@ -30,49 +31,47 @@ export interface BotClientInitParams {
 }
 
 export interface BotClientEvents {
-  ready: BotClient<true>
+  phaseInit: BotClient<false>
+  phaseStart: BotClient<false>
+  phaseReady: BotClient<true>
 
-  init: BotClient<false>
-  initCommand: BotCommand
-  initCron: BotCron
-  initEvent: BotEvent
-  initMiddleware: BotMiddleware
-  initPlugin: BotPlugin
+  commandCreate: BotCommand
+  commandDelete: BotCommand
+  commandExecute: BotCommand
+  commandSyncCreate: BotCommandBody<false>
+  commandSyncDelete: BotCommandBody<false>
+  commandSyncUpdate: BotCommandBody<false>
 
-  liveCommandCreate: BotCommandBody
-  liveCommandDelete: BotCommandBody
-  liveCommandUpdate: BotCommandBody
+  cronCreate: BotCron
+  cronDelete: BotCron
+  cronExecute: BotCron
 
-  commandRun: BotCommand
-  cronRun: BotCron
-  eventRun: BotEvent
-  prestartRun: BotPrestart
-  middlewareRun: BotMiddleware
+  eventCreate: BotEvent
+  eventDelete: BotEvent
+  eventExecute: BotEvent
 }
 
 export class BotClient<TReady extends boolean = boolean> {
   public readonly emitter: Emittery<BotClientEvents>
   public readonly client: DjsClient<TReady>
-
   public readonly plugins: BotPlugin[]
   public readonly contextCreators: BotContextCreators
 
+  public readonly middlewares: BotMiddleware = {}
   public readonly commands: CommandManager
   public readonly crons: CronManager
   public readonly events: EventManager
 
-  constructor(client: DjsClient<TReady>, options: BotClientOptions) {
+  constructor(client: DjsClient<TReady>, params: BotClientParams) {
     this.emitter = new Emittery()
     this.client = client
-
-    this.plugins = options.plugins ?? []
-    this.contextCreators = options.contextCreators ?? baseBotContextCreators
+    this.client.phase = this
+    this.plugins = params.plugins ?? []
+    this.contextCreators = params.contextCreators ?? baseBotContextCreators
 
     this.commands = new CommandManager(this)
     this.crons = new CronManager(this)
     this.events = new EventManager(this)
-
-    this.client.phase = this
 
     if (process.env.DISCORD_TOKEN) {
       this.setToken(process.env.DISCORD_TOKEN)
@@ -83,43 +82,31 @@ export class BotClient<TReady extends boolean = boolean> {
     return this.client.isReady()
   }
 
-  public async init(bot: BotClientInitParams): Promise<BotClient<true>> {
-    for (const plugin of this.plugins.filter((p) => p.trigger === "init")) {
-      await plugin.onLoad(this)
-      await this.emitter.emit("initPlugin", plugin)
+  public async init(params: BotClientInitParams): Promise<BotClient<true>> {
+    await this.initPlugins("init")
+    await this.emitter.emit("phaseInit", this as BotClient<false>)
+
+    if (params.middlewares) {
+      Reflect.set(this, "middlewares", params.middlewares)
     }
 
-    void this.emitter.emit("init", this as BotClient<false>)
-
-    if (bot.prestart) {
-      await bot.prestart((this as BotClient<false>).client)
-      void this.emitter.emit("prestartRun", bot.prestart)
+    if (params.prestart) {
+      await params.prestart((this as BotClient<false>).client)
     }
 
-    for (const plugin of this.plugins.filter((p) => p.trigger === "startup")) {
-      await plugin.onLoad(this)
-      await this.emitter.emit("initPlugin", plugin)
-    }
-
-    if (bot.middlewares) {
-      if (bot.middlewares.commands) this.commands.use(bot.middlewares.commands)
-      void this.emitter.emit("initMiddleware", bot.middlewares)
-    }
+    await this.initPlugins("startup")
+    await this.emitter.emit("phaseStart", this as BotClient<false>)
 
     await Promise.all([
-      ...bot.commands.map((command) => this.commands.create(command)),
-      ...bot.crons.map((cron) => this.crons.create(cron)),
-      ...bot.events.map((event) => this.events.create(event)),
+      ...params.commands.map((command) => this.commands.create(command)),
+      ...params.crons.map((cron) => this.crons.create(cron)),
+      ...params.events.map((event) => this.events.create(event)),
     ])
 
     await this.client.login()
 
-    for (const plugin of this.plugins.filter((p) => p.trigger === "ready")) {
-      await plugin.onLoad(this)
-      void this.emitter.emit("initPlugin", plugin)
-    }
-
-    void this.emitter.emit("ready", this as BotClient<true>)
+    await this.initPlugins("ready")
+    await this.emitter.emit("phaseReady", this as BotClient<true>)
 
     return this as BotClient<true>
   }
@@ -129,5 +116,13 @@ export class BotClient<TReady extends boolean = boolean> {
     const client = this.client as DjsClient<false>
     client.token = token
     client.rest.setToken(token)
+  }
+
+  private async initPlugins(trigger: BotPluginLoadTrigger) {
+    const plugins = this.plugins.filter((p) => p.trigger === trigger)
+
+    for (const plugin of plugins) {
+      await plugin.onLoad(this)
+    }
   }
 }

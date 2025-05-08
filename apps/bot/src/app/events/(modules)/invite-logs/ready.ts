@@ -1,4 +1,5 @@
 import { BotEventBuilder } from "@phasejs/builders"
+import { BotEventListenerType } from "@phasejs/core"
 
 import { ModuleId } from "@repo/utils/modules"
 
@@ -6,8 +7,8 @@ import { hasRequiredGuildPermissions, mapInvite } from "./_utils"
 
 export default new BotEventBuilder()
   .setName("ready")
-  .setListenerType("once")
-  .setExecute(async (client, __, ctx) => {
+  .setListenerType(BotEventListenerType.ONCE)
+  .setExecute(async (client, _, ctx) => {
     const guildDocs = ctx.phase.stores.guilds.filter((guildDoc) => {
       const moduleConfig = guildDoc.modules?.[ModuleId.AuditLogs]
       return (moduleConfig?.enabled && moduleConfig.channels.invites) ?? false

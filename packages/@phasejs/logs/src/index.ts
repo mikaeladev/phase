@@ -17,10 +17,10 @@ export function logsPlugin(options: LogsPluginOptions) {
   const success = chalk.bold.greenBright(`✓`)
 
   const startupLogs = (phase: BotClient) => {
-    let initTime: number | null = null
-    let readyTime: number | null = null
+    let initTime = 0
+    let readyTime = 0
 
-    void phase.emitter.once("init").then(() => {
+    void phase.emitter.once("phaseInit").then(() => {
       initTime = Date.now()
 
       const environment = chalk.grey(`${process.env.NODE_ENV}`)
@@ -38,37 +38,34 @@ export function logsPlugin(options: LogsPluginOptions) {
       )
 
       console.log(header)
-      console.log(`  • Environment: ${environment}`)
-      console.log(`  • Platform: ${platform}`)
-      console.log(`  • Runtime: ${runtime}`)
+      console.log(`• Environment: ${environment}`)
+      console.log(`• Platform: ${platform}`)
+      console.log(`• Runtime: ${runtime}`)
       console.log(`  `)
       console.log(`${wait} Starting up ...`)
     })
 
-    void phase.emitter.once("ready").then(() => {
+    void phase.emitter.once("phaseReady").then(() => {
       readyTime = Date.now()
 
-      const secondsToReady = (readyTime - initTime!) / 1000
+      const secondsToReady = (readyTime - initTime) / 1000
       const formattedReadyTime = chalk.grey(`(${secondsToReady.toFixed(2)}s)`)
 
       console.log(`${success} Ready! ${formattedReadyTime}`)
       console.log(`  `)
-
-      initTime = null
-      readyTime = null
     })
   }
 
   const liveCommandLogs = (phase: BotClient) => {
-    void phase.emitter.on("liveCommandCreate", ({ name }) => {
+    void phase.emitter.on("commandSyncCreate", ({ name }) => {
       console.log(`${notice} Created '${name}' command.`)
     })
 
-    void phase.emitter.on("liveCommandDelete", ({ name }) => {
+    void phase.emitter.on("commandSyncDelete", ({ name }) => {
       console.log(`${notice} Deleted '${name}' command.`)
     })
 
-    void phase.emitter.on("liveCommandUpdate", ({ name }) => {
+    void phase.emitter.on("commandSyncUpdate", ({ name }) => {
       console.log(`${notice} Updated '${name}' command.`)
     })
   }

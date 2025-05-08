@@ -1,4 +1,5 @@
 import { BotEventBuilder } from "@phasejs/builders"
+import { BotEventListenerType } from "@phasejs/core"
 
 import { EntryType } from "@plugin/blacklist"
 
@@ -9,7 +10,7 @@ import { MessageBuilder } from "~/structures/builders"
 
 export default new BotEventBuilder()
   .setName("ready")
-  .setListenerType("once")
+  .setListenerType(BotEventListenerType.ONCE)
   .setExecute(async (client, _, ctx) => {
     ctx.phase.emitter.on("blacklist.joinPrevented", async (entry) => {
       const alertMessage = new MessageBuilder().setEmbeds((embed) => {

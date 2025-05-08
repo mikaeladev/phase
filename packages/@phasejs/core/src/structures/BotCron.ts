@@ -8,40 +8,27 @@ import type { BotCronExecute, BotCronPattern } from "~/types/crons"
 export interface BotCronMetadata extends Record<string, unknown> {}
 export interface BotCronContext extends Record<string, unknown> {}
 
-export class BotCron extends Base {
-  protected _init = false
+export interface BotCronParams {
+  pattern: BotCronPattern
+  metadata: BotCronMetadata
+  execute: BotCronExecute
+}
+
+export class BotCron extends Base implements Readonly<BotCronParams> {
   protected _cron: Cron | undefined
 
-  public readonly pattern: BotCronPattern
-  public readonly metadata: BotCronMetadata
-  public readonly execute: BotCronExecute
+  public readonly pattern
+  public readonly metadata
+  public readonly execute
 
-  constructor(
-    phase: BotClient,
-    params: {
-      pattern: BotCronPattern
-      metadata: BotCronMetadata
-      execute: BotCronExecute
-    },
-  ) {
+  constructor(phase: BotClient, params: BotCronParams) {
     super(phase)
 
     this.pattern = params.pattern
     this.metadata = params.metadata
     this.execute = params.execute
-  }
 
-  /**
-   * Initialises the cron job.
-   *
-   * @throws If the cron is already initialised.
-   */
-  public init() {
-    if (this._init) {
-      throw new Error("Cron has already been initialised.")
-    }
-
-    this._cron = new Cron(this.pattern, async () => {
+    this._cron = new Cron(this.pattern, { paused: true }, async () => {
       try {
         if (!this.phase.isReady()) {
           throw new Error("Client is not ready.")
@@ -59,17 +46,16 @@ export class BotCron extends Base {
       }
     })
 
-    this._init = true
-    return this
+    this.phase.emitter.on("phaseReady", () => {
+      if (!this._cron) return
+      this._cron.resume()
+    })
   }
 
-  /**
-   * Destroys the cron job.
-   */
+  /** Destroys the cron job. */
   public destroy() {
+    if (!this._cron) return
     this._cron?.stop()
     this._cron = undefined
-    this._init = false
-    return this
   }
 }

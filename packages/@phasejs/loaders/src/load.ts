@@ -7,7 +7,7 @@ import {
 } from "~/loaders"
 import { scanApp } from "~/scan"
 
-import type { BotClient } from "@phasejs/core"
+import type { BotClient, BotClientInitParams } from "@phasejs/core"
 import type { AppConfig } from "~/types/app"
 
 async function possiblyLoadPrestart(
@@ -43,5 +43,5 @@ export async function loadApp(phase: BotClient, config: AppConfig = {}) {
     commands,
     crons,
     events,
-  }
+  } satisfies BotClientInitParams
 }
