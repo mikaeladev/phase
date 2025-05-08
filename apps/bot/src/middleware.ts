@@ -8,8 +8,6 @@ export async function commands(...params: Parameters<BotCommandMiddleware>) {
 
   const fullCommandName = phase.commands.resolveName(command)
 
-  console.log(`[command] ${fullCommandName}`)
-
   // to make code a little more DRY
   const unknownErr = (error: Error) => {
     console.log(error)
