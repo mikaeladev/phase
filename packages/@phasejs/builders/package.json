@@ -14,8 +14,10 @@
       "default": "./dist/index.js"
     }
   },
+  "dependencies": {
+    "@phasejs/core": "workspace:*"
+  },
   "peerDependencies": {
-    "@phasejs/core": "workspace:*",
     "discord.js": "^14.18.0"
   },
   "tsup": {
