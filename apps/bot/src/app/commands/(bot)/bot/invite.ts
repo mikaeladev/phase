@@ -24,8 +24,9 @@ export default new BotSubcommandBuilder()
 /**
  * Fetches the latest invite link from the bot's redirect page.
  *
- * @remarks By sending the actual invite link, discord will open an in-app modal
- * instead of opening a new browser window.
+ * @remarks
+ *   By sending the actual invite link, discord will open an in-app modal instead
+ *   of opening a new browser window.
  */
 async function fetchBotInviteLink() {
   const url = "https://phasebot.xyz/redirect/invite"

@@ -4,9 +4,7 @@ import { Voice } from "~/structures/Voice"
 
 import type { Client, Snowflake, VoiceBasedChannel } from "discord.js"
 
-/**
- * Manages voice connections and audio players.
- */
+/** Manages voice connections and audio players. */
 export class VoiceManager {
   public readonly client: Client
   public readonly voices: Map<Snowflake, Voice>
@@ -43,9 +41,7 @@ export class VoiceManager {
     setInterval(() => this.cleanupIdleConnections(), 60 * 1000)
   }
 
-  /**
-   * Creates a new voice connection.
-   */
+  /** Creates a new voice connection. */
   public create(channel: VoiceBasedChannel) {
     const { guild } = channel
 
@@ -65,9 +61,7 @@ export class VoiceManager {
     return voice
   }
 
-  /**
-   * Deletes a voice connection.
-   */
+  /** Deletes a voice connection. */
   public delete(guildId: Snowflake) {
     this.voices.get(guildId)?.destroy()
   }

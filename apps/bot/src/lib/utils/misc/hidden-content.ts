@@ -1,8 +1,11 @@
 /**
- * Exploits a long-lasting bug in Discord where the content of a message is hidden if it's preceded by a bunch of pipe characters. Useful for hiding metadata in messages.
+ * Exploits a long-lasting bug in Discord where the content of a message is
+ * hidden if it's preceded by a bunch of pipe characters. Useful for hiding
+ * metadata in messages.
  *
  * @param content The content to hide.
- * @throws If the message exceeds 997 characters due to Discord's message length limit.
+ * @throws If the message exceeds 997 characters due to Discord's message length
+ *   limit.
  */
 export function createHiddenContent(content: string) {
   const glitchedPipes =

@@ -47,9 +47,7 @@ import type {
   VoiceBasedChannel,
 } from "discord.js"
 
-/**
- * Maps audit log events to their corresponding category names in the dashboard.
- */
+/** Maps audit log events to their corresponding category names in the dashboard. */
 const AuditLogCategories: Record<
   AuditLogEvent,
   keyof GuildModules[ModuleId.AuditLogs]["channels"]
@@ -122,9 +120,7 @@ const AuditLogCategories: Record<
   [AuditLogEvent.HomeSettingsUpdate]: "server",
 }
 
-/**
- * Maps audit log events to their corresponding embed titles.
- */
+/** Maps audit log events to their corresponding embed titles. */
 // prettier-ignore
 const AuditLogTitles: Record<AuditLogEvent, string> = {
   [AuditLogEvent.GuildUpdate]: "Server Updated",
@@ -195,9 +191,7 @@ const AuditLogTitles: Record<AuditLogEvent, string> = {
   [AuditLogEvent.HomeSettingsUpdate]: "Home Settings Updated",
 }
 
-/**
- * Serializes a permissions bitfield into an array of permission names.
- */
+/** Serializes a permissions bitfield into an array of permission names. */
 function serializePermissions(bitfield: bigint | string) {
   bitfield = BigInt(bitfield)
 
@@ -210,9 +204,7 @@ function serializePermissions(bitfield: bigint | string) {
   )
 }
 
-/**
- * A reducer function for formatting permissions overwrites.
- */
+/** A reducer function for formatting permissions overwrites. */
 function formatOverwrites(acc: string[], overwrite: APIOverwrite) {
   const roleOrUserId = overwrite.id
 
@@ -231,9 +223,7 @@ function formatOverwrites(acc: string[], overwrite: APIOverwrite) {
   return acc
 }
 
-/**
- * A map of target field types to their corresponding types.
- */
+/** A map of target field types to their corresponding types. */
 type TargetFieldTypeMap = {
   [K in keyof GuildAuditLogsEntryTargetField<GuildAuditLogsActionType>]: GuildAuditLogsEntryTargetField<GuildAuditLogsActionType>[K]
 } & {
@@ -243,9 +233,7 @@ type TargetFieldTypeMap = {
   Emoji: GuildEmoji | { id: string }
 }
 
-/**
- * A map of extra field types to their corresponding types.
- */
+/** A map of extra field types to their corresponding types. */
 type ExtraFieldTypeMap = {
   Channel:
     | Role

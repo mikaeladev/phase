@@ -4,9 +4,7 @@ import { ModuleId } from "@repo/utils/modules"
 
 import { db } from "~/lib/db"
 
-/**
- * Deletes the JTC channel when the owner leaves.
- */
+/** Deletes the JTC channel when the owner leaves. */
 export default new BotEventBuilder()
   .setName("voiceStateUpdate")
   .setExecute(async (_, oldVoice, newVoice, ctx) => {

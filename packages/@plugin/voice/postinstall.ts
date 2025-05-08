@@ -1,6 +1,6 @@
 /**
- * temporary workaround for `@discordjs/opus`: can't build with bun, falls
- * back to node. results in bot failing to find opus bindings with bun due to
+ * Temporary workaround for `@discordjs/opus`: can't build with bun, falls back
+ * to node. results in bot failing to find opus bindings with bun due to
  * incorrect path.
  */
 

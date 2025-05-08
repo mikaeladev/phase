@@ -19,9 +19,7 @@ import type { VoiceManager } from "~/structures/VoiceManager"
 import type { Guild, VoiceBasedChannel } from "discord.js"
 import type { Readable } from "node:stream"
 
-/**
- * Represents a connection to a voice channel.
- */
+/** Represents a connection to a voice channel. */
 export class Voice {
   private readonly manager: VoiceManager
 
@@ -104,9 +102,7 @@ export class Voice {
     }
   }
 
-  /**
-   * Joins the voice channel and subscribes to the audio player.
-   */
+  /** Joins the voice channel and subscribes to the audio player. */
   public async join() {
     try {
       await entersState(this.connection, VoiceConnectionStatus.Ready, 30_000)
@@ -151,17 +147,13 @@ export class Voice {
     this.player.play(this.resource)
   }
 
-  /**
-   * Pauses the audio player.
-   */
+  /** Pauses the audio player. */
   public pause() {
     if (!this.player) return
     this.player.pause()
   }
 
-  /**
-   * Resumes the audio player.
-   */
+  /** Resumes the audio player. */
   public resume() {
     if (!this.player) return
     this.player.unpause()

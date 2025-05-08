@@ -19,7 +19,7 @@ export type DfmTransformer = {
  *
  * @param flags - The editor flags.
  * @param guildData - The guild data.
- **/
+ */
 export function createDfmTransformer(
   flags: RichtextFlags,
   guildData: GuildElementData,

@@ -107,9 +107,7 @@ async function fetchBackgroundImage(url: string, fallback: string) {
   }
 }
 
-/**
- * Transforms VERY basic markdown strings into JSX.
- */
+/** Transforms VERY basic markdown strings into JSX. */
 function markdownToJSX(markdown: string, index?: number) {
   const boldRegex = /\*\*(.*?)\*\*/g
 

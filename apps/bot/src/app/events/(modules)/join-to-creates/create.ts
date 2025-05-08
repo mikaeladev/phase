@@ -8,9 +8,7 @@ import { Emojis } from "~/lib/emojis"
 
 import { MessageBuilder } from "~/structures/builders/MessageBuilder"
 
-/**
- * Creates a JTC channel when a member joins the trigger channel.
- */
+/** Creates a JTC channel when a member joins the trigger channel. */
 export default new BotEventBuilder()
   .setName("voiceStateUpdate")
   .setExecute(async (client, oldVoice, newVoice, ctx) => {

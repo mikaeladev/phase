@@ -189,30 +189,22 @@ export class Queue {
     return this.previousSong
   }
 
-  /**
-   * Pauses the queue.
-   */
+  /** Pauses the queue. */
   public pause() {
     this.voice.pause()
   }
 
-  /**
-   * Resumes the queue.
-   */
+  /** Resumes the queue. */
   public resume() {
     this.voice.resume()
   }
 
-  /**
-   * Sets the repeat mode of the queue.
-   */
+  /** Sets the repeat mode of the queue. */
   public setRepeatMode(repeatMode: QueueRepeatMode) {
     this.repeatMode = repeatMode
   }
 
-  /**
-   * Deletes the queue and destroys the voice connection.
-   */
+  /** Deletes the queue and destroys the voice connection. */
   public delete() {
     this.voice.destroy()
     this.music.queues.delete(this.id)

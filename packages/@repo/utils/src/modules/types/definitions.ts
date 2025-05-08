@@ -25,12 +25,8 @@ export interface ModuleDefinition {
    * third-person singular present tense.
    */
   description: string
-  /**
-   * An array of {@link moduleTags | tags} that describe the module.
-   */
+  /** An array of {@link moduleTags | tags} that describe the module. */
   tags: ModuleTag[]
-  /**
-   * The variables that the module uses.
-   */
+  /** The variables that the module uses. */
   variables?: VariableGroup
 }

@@ -2,9 +2,7 @@ import unsafeMs from "ms"
 
 import type { StringValue } from "ms"
 
-/**
- * The options to format with.
- */
+/** The options to format with. */
 export type MsOptions = { long: boolean }
 
 /**

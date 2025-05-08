@@ -5,9 +5,7 @@ import { ModuleId } from "@repo/utils/modules"
 
 import { db } from "~/lib/db"
 
-/**
- * Cleans up JTC documents when their channels are deleted.
- */
+/** Cleans up JTC documents when their channels are deleted. */
 export default new BotEventBuilder()
   .setName("channelDelete")
   .setExecute(async (client, channel, ctx) => {

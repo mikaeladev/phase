@@ -40,9 +40,7 @@ export type IconProps =
   | IconPropsWithIconElementProp
   | IconPropsWithIconComponentProp
 
-/**
- * Applies icon styles to its child element.
- */
+/** Applies icon styles to its child element. */
 export function Icon(props: IconPropsWithChildrenProp): React.JSX.Element
 
 /**

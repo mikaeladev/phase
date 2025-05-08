@@ -15,7 +15,7 @@ const transformationRegex =
  *
  * @param flags - The editor flags.
  * @param guildData - The guild data.
- **/
+ */
 export function createInlineElementSplitter(
   flags: RichtextFlags,
   guildData: GuildElementData,

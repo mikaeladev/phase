@@ -5,7 +5,8 @@ import React from "react"
 import { useIsClient } from "@uidotdev/usehooks"
 
 /**
- * hack to work around next.js hydration
+ * Hack to work around next.js hydration
+ *
  * @see https://github.com/uidotdev/usehooks/issues/218
  */
 

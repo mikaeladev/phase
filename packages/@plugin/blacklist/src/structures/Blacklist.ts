@@ -23,9 +23,7 @@ export class Blacklist {
     return this.entries.filter((entry) => entry.type === EntryType.User)
   }
 
-  /**
-   * Checks if a guild or its owner is blacklisted.
-   */
+  /** Checks if a guild or its owner is blacklisted. */
   public check(guild: Guild) {
     const guildId = guild.id
     const ownerId = guild.ownerId
@@ -36,9 +34,7 @@ export class Blacklist {
     return blacklistedGuild ?? blacklistedUser
   }
 
-  /**
-   * Creates a new blacklist entry.
-   */
+  /** Creates a new blacklist entry. */
   public create(entry: Entry | EntryCreateOptions) {
     const newEntry = entry instanceof Entry ? entry : new Entry(entry)
 
@@ -48,9 +44,7 @@ export class Blacklist {
     return newEntry
   }
 
-  /**
-   * Deletes an existing blacklist entry.
-   */
+  /** Deletes an existing blacklist entry. */
   public delete(id: Snowflake) {
     const entry = this.entries.get(id)
     if (!entry) return false
@@ -61,9 +55,7 @@ export class Blacklist {
     return true
   }
 
-  /**
-   * Edits an existing blacklist entry.
-   */
+  /** Edits an existing blacklist entry. */
   public edit(id: Snowflake, options: EntryEditOptions) {
     const entry = this.entries.get(id)
     if (!entry) return
