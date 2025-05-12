@@ -12,7 +12,7 @@
     "bot#build": {
       "cache": true,
       "dependsOn": ["^build"],
-      "outputs": [".phase/**"],
+      "outputs": [".phase/**", "!.phase/cache/**"],
       "passThroughEnv": ["TURBO_*"],
       "env": [
         "BASE_URL",

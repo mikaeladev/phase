@@ -3,8 +3,6 @@
   "exclude": [".phase"],
   "include": ["src/**/*", "scripts/**/*", "eslint.config.js"],
   "compilerOptions": {
-    "outDir": ".phase",
-    "incremental": true,
     "baseUrl": ".",
     "paths": { "~/*": ["src/*"] }
   }
