@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@distube/youtube": "^1.0.4",
-    "@distube/ytdl-core": "^4.16.8",
+    "@distube/ytdl-core": "4.16.8",
     "@phasejs/core": "workspace:*"
   },
   "devDependencies": {
