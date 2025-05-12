@@ -162,8 +162,10 @@
     "packages/@phasejs/builders": {
       "name": "@phasejs/builders",
       "version": "0.4.0",
-      "peerDependencies": {
+      "dependencies": {
         "@phasejs/core": "workspace:*",
+      },
+      "peerDependencies": {
         "discord.js": "^14.18.0",
       },
     },
@@ -199,7 +201,7 @@
     },
     "packages/@phasejs/loaders": {
       "name": "@phasejs/loaders",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@phasejs/builders": "workspace:*",
         "@phasejs/core": "workspace:*",
@@ -256,7 +258,7 @@
       "version": "0.1.0",
       "dependencies": {
         "@distube/youtube": "^1.0.4",
-        "@distube/ytdl-core": "^4.16.8",
+        "@distube/ytdl-core": "4.16.8",
         "@phasejs/core": "workspace:*",
       },
       "devDependencies": {
