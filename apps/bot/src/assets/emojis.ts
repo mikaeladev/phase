@@ -1,5 +1,3 @@
-import { join } from "node:path"
-
 import connect4EmptyFilePath from "~/assets/emojis/connect4-empty.png" with { type: "file" }
 import connect4Player1FilePath from "~/assets/emojis/connect4-player1.png" with { type: "file" }
 import connect4Player2FilePath from "~/assets/emojis/connect4-player2.png" with { type: "file" }
@@ -19,28 +17,24 @@ import shuffleFilePath from "~/assets/emojis/shuffle.png" with { type: "file" }
 import stopFilePath from "~/assets/emojis/stop.png" with { type: "file" }
 import transferFilePath from "~/assets/emojis/transfer.png" with { type: "file" }
 import usersFilePath from "~/assets/emojis/users.png" with { type: "file" }
+import { loadAsset } from "~/assets/load"
 
-function loadFile(path: string) {
-  const absolutePath = path.startsWith(".") ? join(import.meta.dir, path) : path
-  return Bun.file(absolutePath)
-}
-
-export const connect4EmptyFile = loadFile(connect4EmptyFilePath)
-export const connect4Player1File = loadFile(connect4Player1FilePath)
-export const connect4Player2File = loadFile(connect4Player2FilePath)
-export const deleteFile = loadFile(deleteFilePath)
-export const editFile = loadFile(editFilePath)
-export const lockClosedFile = loadFile(lockClosedFilePath)
-export const lockOpenFile = loadFile(lockOpenFilePath)
-export const minusFile = loadFile(minusFilePath)
-export const mutedFile = loadFile(mutedFilePath)
-export const nextTrackFile = loadFile(nextTrackFilePath)
-export const pauseFile = loadFile(pauseFilePath)
-export const playFile = loadFile(playFilePath)
-export const plusFile = loadFile(plusFilePath)
-export const previousTrackFile = loadFile(previousTrackFilePath)
-export const repeatFile = loadFile(repeatFilePath)
-export const shuffleFile = loadFile(shuffleFilePath)
-export const stopFile = loadFile(stopFilePath)
-export const transferFile = loadFile(transferFilePath)
-export const usersFile = loadFile(usersFilePath)
+export const connect4EmptyFile = loadAsset(connect4EmptyFilePath)
+export const connect4Player1File = loadAsset(connect4Player1FilePath)
+export const connect4Player2File = loadAsset(connect4Player2FilePath)
+export const deleteFile = loadAsset(deleteFilePath)
+export const editFile = loadAsset(editFilePath)
+export const lockClosedFile = loadAsset(lockClosedFilePath)
+export const lockOpenFile = loadAsset(lockOpenFilePath)
+export const minusFile = loadAsset(minusFilePath)
+export const mutedFile = loadAsset(mutedFilePath)
+export const nextTrackFile = loadAsset(nextTrackFilePath)
+export const pauseFile = loadAsset(pauseFilePath)
+export const playFile = loadAsset(playFilePath)
+export const plusFile = loadAsset(plusFilePath)
+export const previousTrackFile = loadAsset(previousTrackFilePath)
+export const repeatFile = loadAsset(repeatFilePath)
+export const shuffleFile = loadAsset(shuffleFilePath)
+export const stopFile = loadAsset(stopFilePath)
+export const transferFile = loadAsset(transferFilePath)
+export const usersFile = loadAsset(usersFilePath)
