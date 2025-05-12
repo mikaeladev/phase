@@ -59,7 +59,7 @@ export default new BotCommandBuilder()
             .setColor("Primary")
             .setAuthor({
               name: videoDetails.author.name,
-              iconURL: videoDetails.author.avatar,
+              iconURL: videoDetails.author.thumbnails?.[0]?.url,
               url: videoDetails.author.channel_url,
             })
             .setURL(videoDetails.video_url)
