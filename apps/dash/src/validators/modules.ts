@@ -1,6 +1,6 @@
 import { ModuleId } from "@repo/utils/modules"
 import { ms } from "@repo/utils/ms"
-import { z } from "@repo/utils/zod"
+import { z } from "@repo/zod"
 
 function moduleSchema<T extends Record<string, Zod.ZodType>>(schema: T) {
   return z.object({ enabled: z.boolean(), ...schema })

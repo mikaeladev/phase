@@ -1,5 +1,5 @@
 import { ModuleId } from "@repo/utils/modules"
-import { z } from "@repo/utils/zod"
+import { z } from "@repo/zod"
 
 import { privateProcedure, router } from "~/server/trpc"
 

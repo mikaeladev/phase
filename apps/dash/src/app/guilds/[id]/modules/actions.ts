@@ -2,7 +2,7 @@
 
 import { auth } from "@repo/auth"
 import { ModuleId } from "@repo/utils/modules"
-import { z } from "@repo/utils/zod"
+import { z } from "@repo/zod"
 
 import { db } from "~/lib/db"
 import { env } from "~/lib/env"

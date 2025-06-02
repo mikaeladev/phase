@@ -1,6 +1,6 @@
 import { AttachmentBuilder } from "discord.js"
 
-import { z } from "@repo/utils/zod"
+import { z } from "@repo/zod"
 
 import { parseHiddenContent } from "~/lib/utils/misc"
 

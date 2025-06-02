@@ -1,6 +1,6 @@
 import { EmbedBuilder, roleMention } from "discord.js"
 
-import { z } from "@repo/utils/zod"
+import { z } from "@repo/zod"
 
 import { authRouter } from "~/server/router/auth"
 import { guildsRouter } from "~/server/router/guilds"

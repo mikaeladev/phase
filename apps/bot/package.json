@@ -27,6 +27,7 @@
     "@repo/env": "workspace:*",
     "@repo/trpc": "workspace:*",
     "@repo/utils": "workspace:*",
+    "@repo/zod": "workspace:*",
     "@twurple/api": "^7.2.1",
     "@twurple/auth": "^7.2.1",
     "change-case": "^5.4.4",

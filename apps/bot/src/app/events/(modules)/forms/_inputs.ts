@@ -1,6 +1,6 @@
 import { ButtonStyle, PermissionFlagsBits } from "discord.js"
 
-import { z } from "@repo/utils/zod"
+import { z } from "@repo/zod"
 
 import { dateToTimestamp } from "~/lib/utils/formatting"
 

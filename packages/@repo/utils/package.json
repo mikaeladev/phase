@@ -9,10 +9,6 @@
     "lint": "SKIP_ENV_VALIDATION=true eslint ."
   },
   "exports": {
-    "./site": {
-      "types": "./dist/site.d.ts",
-      "default": "./dist/site.js"
-    },
     "./discord": {
       "types": "./dist/discord.d.ts",
       "default": "./dist/discord.js"
@@ -25,18 +21,18 @@
       "types": "./dist/ms.d.ts",
       "default": "./dist/ms.js"
     },
-    "./zod": {
-      "types": "./dist/zod.d.ts",
-      "default": "./dist/zod.js"
+    "./site": {
+      "types": "./dist/site.d.ts",
+      "default": "./dist/site.js"
     }
   },
   "dependencies": {
     "@repo/config": "workspace:*",
+    "@repo/zod": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "ms": "^2.1.3",
-    "tailwind-merge": "^2.6.0",
-    "zod": "^3.24.2"
+    "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
     "@types/ms": "^2.1.0"

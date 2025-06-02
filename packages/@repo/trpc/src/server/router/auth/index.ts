@@ -2,7 +2,7 @@ import { createHmac } from "node:crypto"
 
 import { makeURLSearchParams, Routes } from "discord.js"
 
-import { z } from "@repo/utils/zod"
+import { z } from "@repo/zod"
 
 import { privateProcedure, router } from "~/server/trpc"
 

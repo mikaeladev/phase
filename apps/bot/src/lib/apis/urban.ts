@@ -1,4 +1,4 @@
-import { z } from "@repo/utils/zod"
+import { z } from "@repo/zod"
 
 const removeBracketsRegex = /\[([^\]]+)\]/g
 

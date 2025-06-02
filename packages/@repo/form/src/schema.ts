@@ -1,6 +1,6 @@
 // THIS IS VERY UGLY AND STILL A WORK IN PROGRESS //
 
-import { z } from "@repo/utils/zod"
+import { z } from "@repo/zod"
 
 import type {
   Form,
