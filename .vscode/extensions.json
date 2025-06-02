@@ -5,7 +5,6 @@
     "unifiedjs.vscode-mdx",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "editorconfig.editorconfig",
-    "redhat.vscode-yaml"
+    "editorconfig.editorconfig"
   ]
 }

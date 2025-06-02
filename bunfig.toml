@@ -1,2 +1,0 @@
-# loads bun plugins
-preload = ["./scripts/preload.ts"]

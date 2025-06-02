@@ -1,5 +1,0 @@
-{
-  "extends": "@repo/style/typescript/react.json",
-  "include": ["src/**/*", "eslint.config.js"],
-  "compilerOptions": { "baseUrl": "." }
-}
