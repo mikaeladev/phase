@@ -13,6 +13,10 @@
       "types": "./dist/site.d.ts",
       "default": "./dist/site.js"
     },
+    "./discord": {
+      "types": "./dist/discord.d.ts",
+      "default": "./dist/discord.js"
+    },
     "./modules": {
       "types": "./dist/modules/index.d.ts",
       "default": "./dist/modules/index.js"
