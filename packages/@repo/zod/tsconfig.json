@@ -1,5 +1,8 @@
 {
   "extends": "@repo/style/typescript",
-  "include": ["src/**/*", "scripts/**/*", "eslint.config.js"],
-  "compilerOptions": { "baseUrl": "." }
+  "include": ["lib/**/*", "eslint.config.js"],
+  "exclude": ["lib/v3/lib.js"],
+  "compilerOptions": {
+    "baseUrl": ".",
+  }
 }

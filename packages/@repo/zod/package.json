@@ -4,30 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "tsup",
-    "postbuild": "bun run scripts/postbuild.ts",
-    "dev": "tsup --watch",
     "lint": "SKIP_ENV_VALIDATION=true eslint ."
   },
   "exports": {
     ".": {
-      "types": "./dist/types.d.ts",
-      "default": "./dist/index.js"
+      "types": "./lib/v3/types.d.ts",
+      "default": "./lib/v3/index.js"
     }
   },
   "dependencies": {
-    "zod": "^3.24.2"
-  },
-  "tsup": {
-    "clean": true,
-    "dts": true,
-    "minify": true,
-    "splitting": true,
-    "sourcemap": true,
-    "format": "esm",
-    "onSuccess": "bun run postbuild",
-    "entry": [
-      "./src/*.ts"
-    ]
+    "zod": "3.25.x"
   }
 }
