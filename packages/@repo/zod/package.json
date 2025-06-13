@@ -3,9 +3,6 @@
   "name": "@repo/zod",
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
-    "lint": "SKIP_ENV_VALIDATION=true eslint ."
-  },
   "exports": {
     ".": {
       "types": "./lib/v3/types.d.ts",

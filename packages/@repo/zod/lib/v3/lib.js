@@ -2,6 +2,7 @@ import { errorUtil } from "../../../../../node_modules/zod/dist/esm/v3/helpers/e
 import {
   array,
   union,
+  ZodObject,
   ZodString,
 } from "../../../../../node_modules/zod/dist/esm/v3/types.js"
 
@@ -28,6 +29,30 @@ import {
 
   proto.nonempty = function (message = "Required") {
     return this.trim().min(1, message)
+  }
+
+  proto._patched = true
+})()
+;(function patchZodObject() {
+  const proto = ZodObject.prototype
+
+  if (proto._patched) return
+
+  proto.nullablePartial = function (mask) {
+    const newShape = {}
+    for (const key of util.objectKeys(this.shape)) {
+      const fieldSchema = this.shape[key]
+      if (mask && !mask[key]) {
+        newShape[key] = fieldSchema
+      } else {
+        newShape[key] = fieldSchema.nullish().optional()
+      }
+    }
+
+    return new ZodObject({
+      ...this._def,
+      shape: () => newShape,
+    })
   }
 
   proto._patched = true
