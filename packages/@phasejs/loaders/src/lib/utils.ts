@@ -1,4 +1,4 @@
-import { join } from "node:path"
+import { isAbsolute, join } from "node:path"
 
 import type { AppConfig } from "~/types/app"
 
@@ -12,6 +12,6 @@ export function regexFilter(pattern: string) {
 
 export async function loadFile(filePath: string, config: AppConfig) {
   const basePath = resolveRootDir(config)
-  const fullPath = join(basePath, filePath)
+  const fullPath = isAbsolute(filePath) ? filePath : join(basePath, filePath)
   return (await import(fullPath)) as Record<string, unknown>
 }
