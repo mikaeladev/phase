@@ -46,7 +46,7 @@ export default new BotSubcommandBuilder()
         .setComponents((actionrow) => {
           return actionrow.addButton((button) => {
             return button
-              .setURL("https://phasebot.xyz/auth/signin")
+              .setURL("https://phasebot.xyz/dashboard/auth/signin")
               .setLabel("Login page")
               .setStyle(ButtonStyle.Link)
           })
