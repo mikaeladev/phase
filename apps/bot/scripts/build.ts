@@ -5,7 +5,7 @@ import { getAppPaths, resolveRootDir } from "@phasejs/loaders"
 
 import chalk from "chalk"
 
-import type { Arrayable } from "~/types/utils"
+import type { Arrayable } from "@repo/utils/types"
 
 const BuildFlags = {
   NoCheck: "--no-check", // skip type checking

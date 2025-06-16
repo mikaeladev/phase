@@ -56,11 +56,8 @@ export default defineConfig({
     preserveDirectivesPlugin(),
     tsconfigPathsPlugin(),
     dtsPlugin({
-      include: [
-        "src/components/*/index.tsx",
-        "src/types/declarations/**/*.d.ts",
-        "src/types/utils.ts",
-      ],
+      include: ["src/components/*/index.tsx", "src/types/overrides.d.ts"],
+      outDir: "dist/components",
     }),
     {
       name: "post-build",

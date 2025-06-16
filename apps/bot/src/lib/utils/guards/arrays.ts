@@ -1,4 +1,4 @@
-import type { TupleOf } from "~/types/utils"
+import type { TupleOf } from "@repo/utils/types"
 
 export function isLength<TArrayValue, TLength extends number>(
   array: TArrayValue[],

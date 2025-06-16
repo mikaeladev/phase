@@ -17,7 +17,7 @@ import { Icon } from "~/components/icon"
 import { CheckIcon, ChevronsUpDownIcon } from "~/components/lucide-icon"
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/popover"
 
-import type { Arrayable, Optional } from "~/types/utils"
+import type { Arrayable, Optional } from "@repo/utils/types"
 
 export interface ComboboxItem {
   label: string
@@ -144,7 +144,7 @@ export function ComboboxValue({
 
 export interface ComboboxContentProps<
   TMultiselect extends boolean,
-  TValue extends Optional<Arrayable<string, TMultiselect>>,
+  TValue extends Optional<TMultiselect extends true ? string[] : string>,
 > extends React.ComponentPropsWithRef<typeof PopoverContent> {
   items: ComboboxItem[]
   multiselect?: TMultiselect
@@ -156,7 +156,7 @@ export interface ComboboxContentProps<
 export function ComboboxContent<
   TMultiselect extends boolean = boolean,
   TValue extends Optional<
-    Arrayable<string, TMultiselect>
+    TMultiselect extends true ? string[] : string
   > = TMultiselect extends true ? string[] : string,
 >({
   className,

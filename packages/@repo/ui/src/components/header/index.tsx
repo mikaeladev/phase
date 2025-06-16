@@ -23,9 +23,9 @@ import { Moon } from "~/components/moon"
 import { DiscordIcon, GithubIcon } from "~/components/simple-icon"
 
 import type { VariantProps } from "@repo/utils/site"
+import type { With } from "@repo/utils/types"
 import type { BaseLinkProps } from "~/components/base-link"
 import type { IconPropsWithIconComponentProp } from "~/components/icon"
-import type { With } from "~/types/utils"
 
 // nav items //
 

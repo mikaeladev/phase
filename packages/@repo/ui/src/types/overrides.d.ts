@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/consistent-indexed-object-style */
 
-import type {} from "react"
+import "@total-typescript/ts-reset"
+import "react"
 
 declare module "react" {
   // add css variable support

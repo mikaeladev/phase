@@ -13,7 +13,7 @@ import type {
   TicTacToePlayerMarker,
   TicTacToePlayers,
 } from "./shared"
-import type { TupleOf } from "~/types/utils"
+import type { TupleOf } from "@repo/utils/types"
 import type { Client, User } from "discord.js"
 
 export class TicTacToe {

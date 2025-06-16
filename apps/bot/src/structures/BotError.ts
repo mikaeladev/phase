@@ -4,8 +4,22 @@ import { constantCase } from "change-case"
 import { MessageBuilder } from "~/structures/builders/MessageBuilder"
 
 import type { ModuleId } from "@repo/utils/modules"
-import type { ChannelTypeName } from "~/types/utils"
 import type { APIEmbed, ChannelType, PermissionFlagsBits } from "discord.js"
+
+type PascalToSentence<S extends string> =
+  S extends `${infer T}${infer U}`
+    ? `${Lowercase<T>}${U extends Capitalize<U> ? ` ${Lowercase<U>}` : PascalToSentence<U>}`
+    : S
+
+type TrimTrailingSpaces<S extends string> = S extends `${infer R} `
+  ? TrimTrailingSpaces<R>
+  : S
+
+type ChannelTypeName<S extends string> = TrimTrailingSpaces<
+  S extends `${infer Prefix}Guild${infer Suffix}`
+    ? PascalToSentence<`${Prefix}${Suffix}`>
+    : PascalToSentence<S>
+>
 
 export class BotErrorMessage extends MessageBuilder {
   readonly ephemeral: boolean

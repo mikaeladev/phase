@@ -2,7 +2,7 @@ import { tictactoeWinningMoves } from "./shared"
 
 import type { TicTacToePlayerMarker } from "./shared"
 import type { TicTacToe } from "./TicTacToe"
-import type { TupleOf } from "~/types/utils"
+import type { TupleOf } from "@repo/utils/types"
 import type { User } from "discord.js"
 
 export type TicTacToePlayerWinningMoves<TWinner extends boolean = boolean> =

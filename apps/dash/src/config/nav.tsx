@@ -7,7 +7,7 @@ import {
 
 import { absoluteURL } from "~/lib/utils"
 
-import type { ExclusiveOr, Prettify, With } from "~/types/utils"
+import type { ExclusiveOr, Prettify, With } from "@repo/utils/types"
 
 export type NavItem = Prettify<
   {

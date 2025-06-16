@@ -13,11 +13,11 @@ import { AtSignIcon, LockIcon } from "@repo/ui/lucide-icon"
 import { useDashboardContext } from "~/hooks/use-dashboard-context"
 
 import type { ComboboxItem } from "@repo/ui/combobox"
-import type { Arrayable, Optional } from "~/types/utils"
+import type { Optional } from "@repo/utils/types"
 
 interface SelectRoleProps<
   TMultiselect extends boolean,
-  TValue extends Optional<Arrayable<string, TMultiselect>>,
+  TValue extends Optional<TMultiselect extends true ? string[] : string>,
 > {
   placeholder?: string
   multiselect?: TMultiselect
@@ -29,7 +29,7 @@ interface SelectRoleProps<
 
 export function SelectRole<
   TMultiselect extends boolean,
-  TValue extends Optional<Arrayable<string, TMultiselect>>,
+  TValue extends Optional<TMultiselect extends true ? string[] : string>,
 >({
   disabled,
   placeholder = "Select a role",

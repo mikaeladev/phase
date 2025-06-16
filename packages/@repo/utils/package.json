@@ -24,6 +24,9 @@
     "./site": {
       "types": "./dist/site.d.ts",
       "default": "./dist/site.js"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts"
     }
   },
   "dependencies": {

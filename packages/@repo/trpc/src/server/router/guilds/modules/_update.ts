@@ -13,8 +13,8 @@ import { TRPCError } from "@trpc/server"
 import { findPinnedMessage, sendAndPin } from "./_utils"
 
 import type { GuildModules } from "@repo/db"
+import type { NullishPartial } from "@repo/utils/types"
 import type { ContextWithGuildAuth } from "~/server/context"
-import type { NullishPartial } from "~/types/utils"
 
 export async function updateModuleDependents(
   ctx: ContextWithGuildAuth,

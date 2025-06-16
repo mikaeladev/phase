@@ -13,11 +13,12 @@ import { AllowedChannelTypes, channelIcons } from "~/components/channel-icons"
 import { useDashboardContext } from "~/hooks/use-dashboard-context"
 
 import type { ComboboxItem } from "@repo/ui/combobox"
-import type { Arrayable, Optional } from "~/types/utils"
+import type { Optional } from "@repo/utils/types"
+import type { AllowedChannelType } from "~/components/channel-icons"
 
 export interface SelectChannelProps<
   TMultiselect extends boolean,
-  TValue extends Optional<Arrayable<string, TMultiselect>>,
+  TValue extends Optional<TMultiselect extends true ? string[] : string>,
 > {
   channelType?: keyof typeof AllowedChannelTypes
   placeholder?: string
@@ -30,7 +31,7 @@ export interface SelectChannelProps<
 
 export function SelectChannel<
   TMultiselect extends boolean,
-  TValue extends Optional<Arrayable<string, TMultiselect>>,
+  TValue extends Optional<TMultiselect extends true ? string[] : string>,
 >({
   disabled,
   channelType = "GuildText",
@@ -53,7 +54,7 @@ export function SelectChannel<
     if (channelType === "GuildCategory") {
       items.push(
         ...categories.map((category) => {
-          const ChannelIcon = channelIcons[category.type]
+          const ChannelIcon = channelIcons[ChannelType.GuildCategory]
           return {
             label: category.name,
             value: category.id,
@@ -67,13 +68,14 @@ export function SelectChannel<
           .filter(
             (channel) =>
               channel.parentId === category.id &&
-              AllowedChannelTypes[channelType] === channel.type,
+              AllowedChannelTypes[channelType] ===
+                (channel.type as ChannelType),
           )
           .sort((a, b) => a.position + b.position)
 
         items.push(
           ...channels.map((channel): ComboboxItem => {
-            const ChannelIcon = channelIcons[channel.type]
+            const ChannelIcon = channelIcons[channel.type as AllowedChannelType]
             return {
               label: channel.name,
               value: channel.id,

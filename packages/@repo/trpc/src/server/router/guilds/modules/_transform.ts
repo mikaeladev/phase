@@ -5,9 +5,9 @@ import { AppTokenAuthProvider } from "@twurple/auth"
 
 import type { UpdateInputSchemaType } from "./update"
 import type { GuildModules } from "@repo/db"
+import type { NullishPartial } from "@repo/utils/types"
 import type { ContextWithGuildAuth } from "~/server/context"
 import type { GuildModulesWithExtraData } from "~/types/modules"
-import type { NullishPartial } from "~/types/utils"
 
 export async function transformUpdateInput(
   ctx: ContextWithGuildAuth,

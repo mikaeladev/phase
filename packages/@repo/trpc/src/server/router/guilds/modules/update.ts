@@ -7,7 +7,7 @@ import { updateModuleDependents } from "./_update"
 
 import type { GuildModules } from "@repo/db"
 import type { ModuleId } from "@repo/utils/modules"
-import type { NullishPartial } from "~/types/utils"
+import type { NullishPartial } from "@repo/utils/types"
 
 export const updateInputSchema = z.object(trpcModuleSchemas).nullablePartial()
 export type UpdateInputSchemaType = z.TypeOf<typeof updateInputSchema>

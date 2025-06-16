@@ -13,74 +13,16 @@ export function preventDefault(event: { preventDefault: () => void }) {
   event.preventDefault()
 }
 
-/** `Object.keys` but with better typing. */
-export function keys<T extends object>(obj: T): (keyof T)[] {
-  return Object.keys(obj) as (keyof T)[]
+export type Keys<T extends object> = (keyof T)[]
+
+export function keys<T extends object>(obj: T) {
+  return Object.keys(obj) as Keys<T>
 }
 
-/** `Object.entries` but with better typing. */
+export type Entries<T extends object> = Required<{
+  [K in keyof T]: [K, Required<T>[K]]
+}>[keyof T][]
+
 export function entries<T extends object>(obj: T) {
-  return Object.entries(obj) as Required<{
-    [K in keyof T]: [K, Required<T>[K]]
-  }>[keyof T][]
-}
-
-export function deleteKeyRecursively<TObj, TKey extends string>(
-  obj: TObj,
-  keyToDelete: TKey,
-): Omit<TObj, TKey> {
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  typeof obj === "object" &&
-    obj !== null &&
-    (Array.isArray(obj)
-      ? obj.forEach((item) => deleteKeyRecursively(item, keyToDelete))
-      : Object.entries(obj).forEach(([key, value]) =>
-          key === keyToDelete
-            ? delete obj[key as keyof typeof obj]
-            : deleteKeyRecursively(value, keyToDelete),
-        ))
-
-  return obj as Omit<TObj, TKey>
-}
-
-/**
- * Exploits a long-lasting bug in Discord where the content of a message is
- * hidden if it's preceded by a bunch of pipe characters. Useful for hiding
- * metadata in messages.
- *
- * @param content The content to hide.
- * @throws If the message exceeds 997 characters due to Discord's message length
- *   limit.
- */
-export function createHiddenContent(content: string) {
-  const glitchedPipes =
-    "||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​|| _ _ _ _ _ _ "
-
-  const maximumLength = 2000
-  const messageLength = glitchedPipes.length + content.length
-
-  if (messageLength > maximumLength) {
-    throw new Error(
-      `Message length exceeds maximum length of ${maximumLength} characters.`,
-    )
-  }
-
-  return glitchedPipes + content
-}
-
-/**
- * Parses a message that was hidden using `createHiddenContent`.
- *
- * @param content The content to parse.
- */
-export function parseHiddenContent(content: string) {
-  const glitchedPipes =
-    "||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​|| _ _ _ _ _ _ "
-
-  if (!content.includes(glitchedPipes)) {
-    return null
-  }
-
-  const hiddenContent = content.split(glitchedPipes)[1]!
-  return hiddenContent
+  return Object.entries(obj) as Entries<T>
 }

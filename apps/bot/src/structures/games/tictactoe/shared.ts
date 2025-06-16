@@ -1,7 +1,7 @@
 import { Emojis } from "~/lib/emojis"
 
 import type { TicTacToePlayer } from "./TicTacToePlayer"
-import type { TupleOf, ValueOf } from "~/types/utils"
+import type { TupleOf, ValueOf } from "@repo/utils/types"
 
 // types //
 

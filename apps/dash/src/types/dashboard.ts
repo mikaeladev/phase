@@ -1,10 +1,10 @@
 import type { Session } from "@repo/auth"
 import type { TRPCGuild } from "@repo/trpc/client"
 import type { ModuleDefinitions, ModuleId } from "@repo/utils/modules"
+import type { Mutable, Prettify } from "@repo/utils/types"
 import type { z } from "@repo/zod"
 import type { modulesFormSchema, modulesTrpcSchema } from "~/lib/schemas"
 import type { GuildModules } from "~/types/db"
-import type { Mutable, Prettify } from "~/types/utils"
 import type { UseFormReturn } from "react-hook-form"
 
 type ExtraModuleFormData = {

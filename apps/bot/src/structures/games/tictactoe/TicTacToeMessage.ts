@@ -13,7 +13,7 @@ import { TicTacToeErrorMessages, TicTacToeMarkers } from "./shared"
 import { TicTacToe } from "./TicTacToe"
 
 import type { TicTacToeBoard, TicTacToeMarker } from "./shared"
-import type { TupleOf } from "~/types/utils"
+import type { TupleOf } from "@repo/utils/types"
 import type {
   ButtonComponent,
   ButtonInteraction,
