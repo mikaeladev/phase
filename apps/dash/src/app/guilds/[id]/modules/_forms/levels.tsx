@@ -14,10 +14,10 @@ import { FormFieldSelectRole } from "~/components/form/field/select-role"
 import { FormFieldSwitch } from "~/components/form/field/switch"
 import { FormFieldWrapper } from "~/components/form/field/wrapper"
 
-import type { ModulesFormValuesInput } from "~/types/dashboard"
+import type { ModulesFormSchemaType } from "~/types/dashboard"
 
 export const Levels = () => {
-  const form = useFormContext<ModulesFormValuesInput>()
+  const form = useFormContext<ModulesFormSchemaType>()
   const formFields = form.watch()[ModuleId.Levels]!
 
   return (

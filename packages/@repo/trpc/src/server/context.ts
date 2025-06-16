@@ -1,24 +1,36 @@
 import type { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch"
 import type { RequestHandlerConfig } from "~/server"
+import type { GuildDoc } from "~/types/bot"
+import type { Guild as GuildAPI } from "discord.js"
 
 interface CreateContextParams
   extends FetchCreateContextFnOptions,
     RequestHandlerConfig {}
 
 export function createContext(params: CreateContextParams) {
-  const headers = params.req.headers
-
-  const authorization = headers.get("Authorization") ?? ""
-  const [prefix, token] = authorization.split(" ")
-
-  const isAuthorized = prefix === "Secret" && token === params.env.TRPC_TOKEN
-
   return {
+    req: params.req,
     db: params.db,
     env: params.env,
     phase: params.phase,
-    isAuthorized,
   }
 }
 
-export type Context = Awaited<ReturnType<typeof createContext>>
+export type Context = ReturnType<typeof createContext>
+
+export type ContextWithAdminAuth = Context & {
+  auth: {
+    adminId: string
+  }
+}
+
+export type ContextWithGuildAuth = Context & {
+  auth: {
+    adminId: string
+    guildId: string
+    guildDoc: GuildDoc
+    guildAPI: GuildAPI
+  }
+}
+
+export type AnyContext = Context | ContextWithAdminAuth | ContextWithGuildAuth

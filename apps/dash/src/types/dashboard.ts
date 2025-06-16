@@ -1,44 +1,47 @@
 import type { Session } from "@repo/auth"
-import type { client } from "@repo/trpc/client"
-import type { ModuleId } from "@repo/utils/modules"
+import type { TRPCGuild } from "@repo/trpc/client"
+import type { ModuleDefinitions, ModuleId } from "@repo/utils/modules"
 import type { z } from "@repo/zod"
+import type { modulesFormSchema, modulesTrpcSchema } from "~/lib/schemas"
 import type { GuildModules } from "~/types/db"
-import type { modulesSchema } from "~/validators/modules"
+import type { Mutable, Prettify } from "~/types/utils"
 import type { UseFormReturn } from "react-hook-form"
 
-export interface GuildModulesDataFields {
+type ExtraModuleFormData = {
   [ModuleId.TwitchNotifications]: {
     streamerNames: Record<number, string>
   }
 }
 
-export type ModulesFormValuesInput = z.input<typeof modulesSchema>
-export type ModulesFormValuesOutput = z.output<typeof modulesSchema>
+export type ModulesTRPCSchemaType = z.TypeOf<typeof modulesTrpcSchema>
+export type ModulesFormSchemaType = z.TypeOf<typeof modulesFormSchema>
 
-export type ModulesFormReturn = UseFormReturn<ModulesFormValuesInput>
+export type ModulesFormReturn = UseFormReturn<ModulesFormSchemaType>
 
-export type ModulesFormValuesInputWithData = Partial<{
-  [K in keyof ModulesFormValuesInput]: ModulesFormValuesInput[K] & {
-    _data: K extends keyof GuildModulesDataFields
-      ? GuildModulesDataFields[K]
-      : unknown
-  }
+export type ModulesFormValuesInputWithExtraData = Partial<{
+  [K in ModuleId]: K extends keyof ExtraModuleFormData
+    ? ModulesFormSchemaType[K] & { _data: ExtraModuleFormData[K] }
+    : ModulesFormSchemaType[K]
 }>
 
-export type GuildModulesWithData = Partial<{
-  [K in keyof GuildModules]: GuildModules[K] & {
-    _data: K extends keyof GuildModulesDataFields
-      ? GuildModulesDataFields[K]
-      : unknown
-  }
+export type GuildModulesWithExtraData = Partial<{
+  [K in ModuleId]: K extends keyof ExtraModuleFormData
+    ? GuildModules[K] & { _data: ExtraModuleFormData[K] }
+    : GuildModules[K]
 }>
 
-type DashboardGuildData = Exclude<
-  Awaited<ReturnType<typeof client.guilds.getById.query>>,
-  null
->
+type ModuleDefinition<T extends ModuleId = ModuleId> =
+  (typeof ModuleDefinitions)[T]
 
-export interface DashboardData {
+export type ModuleDefinitionWithConfig<T extends ModuleId = ModuleId> = {
+  [K in ModuleId]: Prettify<
+    Mutable<ModuleDefinition<K>> & {
+      config: ModulesFormSchemaType[K]
+    }
+  >
+}[T]
+
+export type DashboardData = {
   session: Session
-  guild: Promise<DashboardGuildData>
+  guild: Promise<TRPCGuild>
 }

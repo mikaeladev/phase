@@ -9,12 +9,12 @@ import { FormFieldSelectChannel } from "~/components/form/field/select-channel"
 import { FormFieldSwitch } from "~/components/form/field/switch"
 import { FormFieldWrapper } from "~/components/form/field/wrapper"
 
-import type { ModulesFormValuesInput } from "~/types/dashboard"
+import type { ModulesFormSchemaType } from "~/types/dashboard"
 
 const baseName = ModuleId.WelcomeMessages
 
 export const WelcomeMessages = () => {
-  const form = useFormContext<ModulesFormValuesInput>()
+  const form = useFormContext<ModulesFormSchemaType>()
   const formFields = form.watch(baseName)!
 
   return (

@@ -11,12 +11,12 @@ import { FormFieldSelectChannel } from "~/components/form/field/select-channel"
 import { FormFieldSelectMention } from "~/components/form/field/select-mention"
 import { FormFieldWrapper } from "~/components/form/field/wrapper"
 
-import type { ModulesFormValuesInput } from "~/types/dashboard"
+import type { ModulesFormSchemaType } from "~/types/dashboard"
 
 const baseName = ModuleId.TwitchNotifications
 
 export const TwitchNotifications = () => {
-  const form = useFormContext<ModulesFormValuesInput>()
+  const form = useFormContext<ModulesFormSchemaType>()
   const formFields = form.watch(baseName)!
 
   return (
@@ -32,9 +32,9 @@ export const TwitchNotifications = () => {
           {fields.map((field, index) => {
             const streamerBaseName = `${baseName}.streamers.${index}` as const
 
-            const idField = formFields.streamers[index]?.id
-            const cardTitle = idField?.length
-              ? idField
+            const usernameField = formFields.streamers[index]?.username
+            const cardTitle = usernameField?.length
+              ? usernameField
               : `Streamer ${index + 1}`
 
             return (
@@ -48,9 +48,9 @@ export const TwitchNotifications = () => {
                 <FormFieldInput
                   label="Streamer ID"
                   description="The ID of the streamer"
-                  placeholder="Example: sirphase45"
+                  placeholder="Example: mikaeladev"
                   control={form.control}
-                  name={`${streamerBaseName}.id`}
+                  name={`${streamerBaseName}.username`}
                 />
                 <FormFieldSelectChannel
                   label="Channel"

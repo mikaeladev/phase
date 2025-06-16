@@ -22,13 +22,16 @@
     "@repo/env": "workspace:*",
     "@repo/utils": "workspace:*",
     "@repo/zod": "workspace:*",
-    "@trpc/client": "^11.0.4",
-    "@trpc/server": "^11.0.4"
+    "@trpc/client": "^11.3.1",
+    "@trpc/server": "^11.3.1",
+    "@twurple/api": "^7.3.0",
+    "@twurple/auth": "^7.3.0"
   },
   "devDependencies": {
     "@phasejs/core": "workspace:*",
     "@phasejs/stores": "workspace:*",
-    "@repo/db": "workspace:*"
+    "@repo/db": "workspace:*",
+    "@total-typescript/ts-reset": "^0.6.1"
   },
   "peerDependencies": {
     "discord.js": "^14.18.0",

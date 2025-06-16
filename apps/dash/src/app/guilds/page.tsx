@@ -1,8 +1,5 @@
 import { Suspense } from "react"
 
-import { auth } from "@repo/auth"
-import { client } from "@repo/trpc/client"
-
 import { Button } from "@repo/ui/button"
 import { Icon } from "@repo/ui/icon"
 import { PlusIcon } from "@repo/ui/lucide-icon"
@@ -12,11 +9,9 @@ import {
 } from "~/components/guilds/guild-card-grid"
 import { GuildCardSearch } from "~/components/guilds/guild-card-search"
 
+import { getSession } from "~/lib/auth"
+import { createClient } from "~/lib/trpc"
 import { absoluteURL } from "~/lib/utils"
-
-export type DashboardGuild = Awaited<
-  ReturnType<typeof client.guilds.getByAdminId.query>
->[number]
 
 export default function GuildsPage() {
   return (
@@ -44,11 +39,10 @@ export default function GuildsPage() {
 }
 
 async function GuildCards() {
-  const session = (await auth())!
+  const session = await getSession()
+  const client = createClient({ adminId: session.user.id })
 
-  const guilds = await client.guilds.getByAdminId.query({
-    adminId: session.user.id,
-  })
+  const guilds = await client.guilds.getAll.query()
 
   return <GuildCardGrid guilds={guilds} />
 }

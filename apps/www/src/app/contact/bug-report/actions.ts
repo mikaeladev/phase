@@ -1,9 +1,17 @@
 "use server"
 
-import { client } from "@repo/trpc/client"
+import { createClient } from "@repo/trpc/client"
 
-type BugReportInput = Parameters<typeof client.createBugReport.mutate>[0]
+import { env } from "~/lib/env"
+
+type TRPCClient = ReturnType<typeof createClient>
+type BugReportInput = Parameters<TRPCClient["createBugReport"]["mutate"]>[0]
 
 export async function createBugReport(input: BugReportInput) {
+  const client = createClient({
+    url: env.TRPC_URL,
+    auth: { token: env.TRPC_TOKEN },
+  })
+
   return await client.createBugReport.mutate(input)
 }

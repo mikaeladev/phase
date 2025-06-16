@@ -1,10 +1,8 @@
-import { redirect } from "next/navigation"
-
-import { auth } from "@repo/auth"
-import { client } from "@repo/trpc/client"
-
 import { ClientOnly } from "~/components/client-only"
 import { DashboardProvider } from "~/components/context"
+
+import { getSession } from "~/lib/auth"
+import { createClient } from "~/lib/trpc"
 
 import type { DashboardData } from "~/types/dashboard"
 import type { LayoutProps } from "~/types/props"
@@ -14,24 +12,17 @@ interface GuildLayoutProps extends LayoutProps {
 }
 
 export default async function GuildLayout({
-  params,
+  params: paramsPromise,
   children,
 }: GuildLayoutProps) {
-  const session = (await auth())!
+  const params = await paramsPromise
+  const session = await getSession()
 
-  const guildId = (await params).id
-  const adminId = session.user.id
-
-  const guildDataPromise = client.guilds.getById
-    .query({ guildId, adminId })
-    .then((data) => {
-      if (!data) redirect("/guilds")
-      return data
-    })
+  const client = createClient({ adminId: session.user.id, guildId: params.id })
 
   const dashboardData: DashboardData = {
     session,
-    guild: guildDataPromise,
+    guild: client.guilds.getCurrent.query(),
   }
 
   return (

@@ -22,14 +22,14 @@ import { PlusIcon } from "@repo/ui/lucide-icon"
 import { ModuleTags } from "~/components/modules/module-tags"
 
 import type { ModuleId } from "@repo/utils/modules"
-import type { ModuleData } from "~/app/guilds/[id]/modules/page"
+import type { ModuleDefinitionWithConfig } from "~/types/dashboard"
 
-export interface AddButtonProps {
-  moduleDataArray: ModuleData[]
+export interface AddModuleProps {
+  moduleDataArray: ModuleDefinitionWithConfig[]
   onSelect?: (moduleId: ModuleId) => void
 }
 
-export function AddModule({ moduleDataArray, onSelect }: AddButtonProps) {
+export function AddModule({ moduleDataArray, onSelect }: AddModuleProps) {
   const [isOpen, setIsOpen] = React.useState(false)
 
   return (

@@ -4,10 +4,10 @@ import { useQueryState } from "nuqs"
 
 import { GuildCard, GuildCardFallback } from "~/components/guilds/guild-card"
 
-import type { DashboardGuild } from "~/app/guilds/page"
+import type { TRPCGuild } from "@repo/trpc/client"
 
 export interface GuildCardGridProps {
-  guilds: DashboardGuild[]
+  guilds: TRPCGuild[]
 }
 
 export function GuildCardGrid(props: GuildCardGridProps) {

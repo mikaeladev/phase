@@ -35,7 +35,7 @@ import { ModuleTags } from "~/components/modules/module-tags"
 import { cva } from "~/lib/utils"
 
 import type { ModuleDefinition, ModuleTag } from "@repo/utils/modules"
-import type { ModuleData } from "~/app/guilds/[id]/modules/page"
+import type { ModuleDefinitionWithConfig } from "~/types/dashboard"
 
 export type ConfigCardData = ModuleDefinition
 export type ConfigCardOption = (typeof moduleOptions)[number]["value"]
@@ -62,7 +62,7 @@ const moduleCardVariants = cva("relative h-full transition-colors", {
 
 export interface ConfigCardProps {
   children: React.ReactNode
-  moduleData: ModuleData
+  moduleData: ModuleDefinitionWithConfig
   moduleStatus: ConfigCardStatus
   onTagSelect: (tag: ModuleTag) => void
   onDropdownSelect: (option: ConfigCardOption) => void

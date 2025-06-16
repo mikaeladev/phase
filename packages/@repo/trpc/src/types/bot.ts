@@ -4,8 +4,8 @@ import type { Config, Guild } from "@repo/db"
 import type { Snowflake } from "discord.js"
 import type { Types } from "mongoose"
 
-type GuildDoc = Guild & { _id: Types.ObjectId }
-type Streamer = {
+export type GuildDoc = Guild & { _id: Types.ObjectId }
+export type Streamer = {
   id: string
   username: string
   displayName: string
@@ -28,12 +28,12 @@ type Streamer = {
   }[]
 }
 
-type ConfigStore = BaseBotStore & Config
-type GuildStore = BaseBotKVStore<Snowflake, GuildDoc>
-type StreamersStore = BaseBotKVStore<string, Streamer>
+export type ConfigStore = BaseBotStore & Config
+export type GuildStore = BaseBotKVStore<Snowflake, GuildDoc>
+export type StreamersStore = BaseBotKVStore<string, Streamer>
 
 // currently unused
-type InviteStore = BaseBotKVStore
+export type InviteStore = BaseBotKVStore
 
 export type BotClientWithStores = BotClient<true> & {
   stores: {

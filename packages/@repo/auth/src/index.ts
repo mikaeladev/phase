@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 
 import { dash } from "@repo/env"
-import { client } from "@repo/trpc/client"
+import { createClient } from "@repo/trpc/client"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import DiscordProvider from "next-auth/providers/discord"
@@ -11,6 +11,11 @@ import type { JWT } from "next-auth/jwt"
 
 const env = dash()
 const isProd = env.NEXT_PUBLIC_BASE_URL.startsWith("https")
+
+const client = createClient({
+  url: env.TRPC_URL,
+  auth: { token: env.TRPC_TOKEN },
+})
 
 const nextAuth = NextAuth({
   basePath: "/dashboard/auth/internal",

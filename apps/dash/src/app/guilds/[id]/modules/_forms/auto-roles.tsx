@@ -13,12 +13,12 @@ import { FormFieldWrapper } from "~/components/form/field/wrapper"
 
 import { getOrdinal } from "~/lib/utils"
 
-import type { ModulesFormValuesInput } from "~/types/dashboard"
+import type { ModulesFormSchemaType } from "~/types/dashboard"
 
 const baseName = `${ModuleId.AutoRoles}.roles`
 
 export const AutoRoles = () => {
-  const form = useFormContext<ModulesFormValuesInput>()
+  const form = useFormContext<ModulesFormSchemaType>()
 
   return (
     <FormFieldArray

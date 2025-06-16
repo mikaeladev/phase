@@ -11,7 +11,7 @@ import { useElementSize } from "~/hooks/use-element-size"
 
 import { cn } from "~/lib/utils"
 
-import type { ModulesFormValuesInput } from "~/types/dashboard"
+import type { ModulesFormSchemaType } from "~/types/dashboard"
 
 interface ActionBarProps {
   dirtyKeys: string[]
@@ -19,7 +19,7 @@ interface ActionBarProps {
 }
 
 export function ActionBar(props: ActionBarProps) {
-  const form = useFormContext<ModulesFormValuesInput>()
+  const form = useFormContext<ModulesFormSchemaType>()
 
   const isDirty = !!props.dirtyKeys.length
   const isInvalid = !!props.invalidKeys.length

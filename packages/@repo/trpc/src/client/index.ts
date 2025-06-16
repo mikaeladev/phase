@@ -1,17 +1,34 @@
-import { nextBaseOptions, trpcClient } from "@repo/env"
 import { createTRPCClient, httpBatchLink } from "@trpc/client"
 
 import type { AppRouter } from "~/server/router"
 
-export const env = trpcClient(nextBaseOptions)
+export interface ClientConfig {
+  url: string
+  auth: {
+    token: string
+    adminId?: string
+    guildId?: string
+  }
+}
 
-export const client = createTRPCClient<AppRouter>({
-  links: [
-    httpBatchLink({
-      url: env.TRPC_URL,
-      headers: {
-        Authorization: `Secret ${env.TRPC_TOKEN}`,
-      },
-    }),
-  ],
-})
+export function createClient(config: ClientConfig) {
+  const headers = new Headers()
+
+  headers.set("Authorization", `Secret ${config.auth.token}`)
+
+  if (config.auth.adminId) headers.set("X-Admin-ID", config.auth.adminId)
+  if (config.auth.guildId) headers.set("X-Guild-ID", config.auth.guildId)
+
+  return createTRPCClient<AppRouter>({
+    links: [
+      httpBatchLink({
+        url: config.url,
+        headers,
+      }),
+    ],
+  })
+}
+
+export { isTRPCClientError } from "@trpc/client"
+export type { TRPCClientError } from "@trpc/client"
+export type * from "~/types/trpc"

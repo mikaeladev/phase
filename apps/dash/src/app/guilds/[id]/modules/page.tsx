@@ -14,28 +14,25 @@ import { SelectFilter } from "~/components/modules/select-filter"
 
 import { useDashboardContext } from "~/hooks/use-dashboard-context"
 
-import { keys } from "~/lib/utils"
+import { modulesFormSchema } from "~/lib/schemas"
 
+import { updateModules } from "./actions"
+import { moduleFormFields } from "./forms"
 import {
-  defaultEmptyFormValues,
-  getDefaultValues,
-  getDirtyFields,
-} from "~/app/guilds/[id]/modules/_utils/client"
-import { updateModules } from "~/app/guilds/[id]/modules/actions"
-import { moduleFormFields } from "~/app/guilds/[id]/modules/forms"
-import { modulesSchema } from "~/validators/modules"
+  emptyFormValues,
+  getDirtyKeys,
+  getInvalidKeys,
+  resolveFormValues,
+} from "./utils"
 
 import type { ModuleId, ModuleTag } from "@repo/utils/modules"
 import type { ConfigCardOption } from "~/components/modules/config-card"
 import type { FilterOption } from "~/components/modules/select-filter"
 import type {
-  ModulesFormValuesInput,
-  ModulesFormValuesOutput,
+  ModuleDefinitionWithConfig,
+  ModulesFormSchemaType,
 } from "~/types/dashboard"
-
-export type ModuleData<T extends ModuleId = ModuleId> = {
-  -readonly [K in keyof (typeof ModuleDefinitions)[T]]: (typeof ModuleDefinitions)[T][K]
-} & { config: ModulesFormValuesInput[T] }
+import type { SubmitHandler } from "react-hook-form"
 
 export default function ModulesPage() {
   const dashboardData = useDashboardContext()
@@ -43,65 +40,51 @@ export default function ModulesPage() {
 
   const [filter, setFilter] = React.useState<FilterOption["value"]>("none")
 
-  const defaultFormValues = getDefaultValues(
-    guildData.id,
-    guildData.modules ?? {},
-  )
+  const defaultFormValues = resolveFormValues(guildData)
 
-  const form = useForm<ModulesFormValuesInput>({
-    resolver: zodResolver(modulesSchema),
+  const form = useForm<ModulesFormSchemaType>({
+    resolver: zodResolver(modulesFormSchema),
     defaultValues: defaultFormValues,
   })
 
   const formFields = form.watch()
   const formState = form.formState
 
-  const dirtyFields = getDirtyFields(formFields, formState.dirtyFields)
-  const dirtyFieldNames = keys(dirtyFields) as ModuleId[]
-  const invalidFieldNames = keys(formState.errors) as ModuleId[]
+  const dirtyKeys = getDirtyKeys(form)
+  const invalidKeys = getInvalidKeys(form)
 
-  const moduleDataArray: ModuleData[] = React.useMemo(() => {
-    const modulesArray = Object.values(ModuleDefinitions).map((value) => ({
-      config: formFields[value.id],
-      ...value,
-    }))
+  const moduleDefinitionsWithConfigs = React.useMemo(() => {
+    return Object.values(ModuleDefinitions).map((value) => {
+      return {
+        ...value,
+        config: formFields[value.id],
+      } as ModuleDefinitionWithConfig
+    })
+  }, [formFields])
 
-    return modulesArray.filter((module) => {
+  const filteredModuleDefinitionsWithConfigs = React.useMemo(() => {
+    return moduleDefinitionsWithConfigs.filter((module) => {
       if (filter === "none") return true
       return module.tags.some((tag) => tag.toLowerCase() === filter)
     })
-  }, [formFields, filter])
+  }, [filter, moduleDefinitionsWithConfigs])
 
-  const onModuleAdd = React.useCallback(
-    (moduleId: ModuleId) => {
-      const moduleConfig = ModuleDefinitions[moduleId]
-      if (!moduleConfig) return
+  const onModuleAdd = (moduleId: ModuleId) => {
+    form.setValue(
+      moduleId,
+      { ...emptyFormValues[moduleId], enabled: true },
+      { shouldDirty: true },
+    )
+  }
 
-      form.setValue(
-        moduleId,
-        {
-          ...defaultEmptyFormValues[moduleId],
-          enabled: true,
-        },
-        {
-          shouldDirty: true,
-        },
-      )
-    },
-    [form],
-  )
+  const onSubmit: SubmitHandler<ModulesFormSchemaType> = async (formValues) => {
+    const id = guildData.id
 
-  const onSubmit = React.useCallback(
-    async (data: ModulesFormValuesOutput) => {
-      const id = guildData.id
+    const updateResult = await updateModules(id, formValues, dirtyKeys)
+    const newDefaultValues = resolveFormValues({ id, modules: updateResult })
 
-      const updatedModules = await updateModules(id, data, dirtyFieldNames)
-      const updatedDefaultValues = getDefaultValues(id, updatedModules)
-
-      form.reset(updatedDefaultValues)
-    },
-    [form, dirtyFieldNames, guildData.id],
-  ) as Parameters<typeof form.handleSubmit>[0]
+    form.reset(newDefaultValues)
+  }
 
   return (
     <Form {...form}>
@@ -116,17 +99,14 @@ export default function ModulesPage() {
           <div className="flex space-x-2">
             <SelectFilter value={filter} onValueChange={setFilter} />
             <AddModule
-              moduleDataArray={moduleDataArray}
+              moduleDataArray={filteredModuleDefinitionsWithConfigs}
               onSelect={onModuleAdd}
             />
           </div>
         </div>
-        <ActionBar
-          dirtyKeys={dirtyFieldNames}
-          invalidKeys={invalidFieldNames}
-        />
+        <ActionBar dirtyKeys={dirtyKeys} invalidKeys={invalidKeys} />
         <div className="grid grid-cols-[repeat(var(--column-count),minmax(0,1fr))] gap-4">
-          {moduleDataArray.map((moduleData) => {
+          {filteredModuleDefinitionsWithConfigs.map((moduleData) => {
             if (!moduleData.config) return null
 
             const ModuleFormFields = moduleFormFields[moduleData.id]
@@ -134,9 +114,9 @@ export default function ModulesPage() {
 
             const moduleStatus = formState.isSubmitting
               ? ConfigCardStatus.Disabled
-              : invalidFieldNames.includes(moduleData.id)
+              : invalidKeys.includes(moduleData.id)
                 ? ConfigCardStatus.Invalid
-                : dirtyFieldNames.includes(moduleData.id)
+                : dirtyKeys.includes(moduleData.id)
                   ? ConfigCardStatus.Dirty
                   : ConfigCardStatus.Clean
 
@@ -156,7 +136,7 @@ export default function ModulesPage() {
                 case "reset": {
                   return form.setValue(
                     moduleData.id,
-                    defaultEmptyFormValues[moduleData.id],
+                    { ...emptyFormValues[moduleData.id], enabled: true },
                     { shouldDirty: true },
                   )
                 }

@@ -8,12 +8,12 @@ import { FormFieldRichTextarea } from "~/components/form/field/rich-textarea"
 import { FormFieldSelectMention } from "~/components/form/field/select-mention"
 import { FormFieldWrapper } from "~/components/form/field/wrapper"
 
-import type { ModulesFormValuesInput } from "~/types/dashboard"
+import type { ModulesFormSchemaType } from "~/types/dashboard"
 
 const baseName = `${ModuleId.BumpReminders}`
 
 export const BumpReminders = () => {
-  const form = useFormContext<ModulesFormValuesInput>()
+  const form = useFormContext<ModulesFormSchemaType>()
 
   return (
     <FormFieldWrapper>

@@ -9,12 +9,12 @@ import { FormFieldArrayCard } from "~/components/form/field/array-card"
 import { FormFieldSelectRole } from "~/components/form/field/select-role"
 import { FormFieldWrapper } from "~/components/form/field/wrapper"
 
-import type { ModulesFormValuesInput } from "~/types/dashboard"
+import type { ModulesFormSchemaType } from "~/types/dashboard"
 
 const baseName = ModuleId.Warnings
 
 export const Warnings = () => {
-  const form = useFormContext<ModulesFormValuesInput>()
+  const form = useFormContext<ModulesFormSchemaType>()
 
   return (
     <FormFieldArray

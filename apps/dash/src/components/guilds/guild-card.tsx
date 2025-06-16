@@ -6,10 +6,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/avatar"
 import { Card, CardHeader, CardTitle } from "@repo/ui/card"
 import { Skeleton } from "@repo/ui/skeleton"
 
-import type { DashboardGuild } from "~/app/guilds/page"
+import type { TRPCGuild } from "@repo/trpc/client"
 
 export interface GuildCardProps {
-  guild: DashboardGuild
+  guild: TRPCGuild
 }
 
 export function GuildCard(props: GuildCardProps) {
@@ -30,12 +30,12 @@ export function GuildCard(props: GuildCardProps) {
           <CardTitle className="line-clamp-1">{props.guild.name}</CardTitle>
           <div className="text-muted-foreground flex gap-3 text-sm">
             <div className="inline-flex items-center space-x-1">
-              <div className="bg-foreground inline-block size-3 rounded-full" />
-              <span>{props.guild.presenceCount} Online</span>
-            </div>
-            <div className="inline-flex items-center space-x-1">
               <div className="bg-muted-foreground my-auto inline-block size-3 rounded-full" />
               <span>{props.guild.memberCount} Members</span>
+            </div>
+            <div className="inline-flex items-center space-x-1">
+              <div className="inline-block size-3 rounded-full bg-green-300" />
+              <span>{props.guild.presenceCount ?? "?"} Online</span>
             </div>
           </div>
         </CardHeader>

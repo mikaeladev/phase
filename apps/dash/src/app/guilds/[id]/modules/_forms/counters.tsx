@@ -11,12 +11,12 @@ import { FormFieldSelectChannel } from "~/components/form/field/select-channel"
 import { FormFieldWrapper } from "~/components/form/field/wrapper"
 import { Link } from "~/components/link"
 
-import type { ModulesFormValuesInput } from "~/types/dashboard"
+import type { ModulesFormSchemaType } from "~/types/dashboard"
 
 const baseName = `${ModuleId.Counters}.counters`
 
 export const Counters = () => {
-  const form = useFormContext<ModulesFormValuesInput>()
+  const form = useFormContext<ModulesFormSchemaType>()
   // const formFields = form.watch()[ModuleId.Counters]!
 
   return (

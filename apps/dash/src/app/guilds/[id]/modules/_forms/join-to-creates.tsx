@@ -6,12 +6,12 @@ import { useFormContext } from "react-hook-form"
 import { FormFieldSelectChannel } from "~/components/form/field/select-channel"
 import { FormFieldWrapper } from "~/components/form/field/wrapper"
 
-import type { ModulesFormValuesInput } from "~/types/dashboard"
+import type { ModulesFormSchemaType } from "~/types/dashboard"
 
 const baseName = `${ModuleId.JoinToCreates}`
 
 export const JoinToCreates = () => {
-  const form = useFormContext<ModulesFormValuesInput>()
+  const form = useFormContext<ModulesFormSchemaType>()
 
   return (
     <FormFieldWrapper>

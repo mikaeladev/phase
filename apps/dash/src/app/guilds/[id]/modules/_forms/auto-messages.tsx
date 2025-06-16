@@ -12,12 +12,12 @@ import { FormFieldSelectChannel } from "~/components/form/field/select-channel"
 import { FormFieldSelectMention } from "~/components/form/field/select-mention"
 import { FormFieldWrapper } from "~/components/form/field/wrapper"
 
-import type { ModulesFormValuesInput } from "~/types/dashboard"
+import type { ModulesFormSchemaType } from "~/types/dashboard"
 
 const baseName = `${ModuleId.AutoMessages}.messages`
 
 export function AutoMessages() {
-  const form = useFormContext<ModulesFormValuesInput>()
+  const form = useFormContext<ModulesFormSchemaType>()
   const formFields = form.watch()[ModuleId.AutoMessages]!
 
   return (

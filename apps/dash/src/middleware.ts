@@ -1,6 +1,6 @@
 import type { MiddlewareConfig } from "next/server"
 
-export { auth as middleware } from "@repo/auth"
+export { middleware } from "~/lib/auth"
 
 export const config: MiddlewareConfig = {
   matcher: [

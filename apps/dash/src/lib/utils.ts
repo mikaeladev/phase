@@ -19,8 +19,10 @@ export function keys<T extends object>(obj: T): (keyof T)[] {
 }
 
 /** `Object.entries` but with better typing. */
-export function entries<T extends object>(obj: T): [keyof T, T[keyof T]][] {
-  return Object.entries(obj) as [keyof T, T[keyof T]][]
+export function entries<T extends object>(obj: T) {
+  return Object.entries(obj) as Required<{
+    [K in keyof T]: [K, Required<T>[K]]
+  }>[keyof T][]
 }
 
 export function deleteKeyRecursively<TObj, TKey extends string>(
