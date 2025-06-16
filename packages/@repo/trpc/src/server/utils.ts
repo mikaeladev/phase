@@ -134,8 +134,12 @@ export async function fetchAdmins(
   const { guildDoc, guildAPI } = ctx.auth
 
   const adminIds = guildDoc.admins
-  const adminMemberPromises = adminIds.map((id) => guildAPI.members.fetch(id))
+  const adminMemberPromises = adminIds.map((id) =>
+    guildAPI.members.fetch(id).catch(() => null),
+  )
   const adminMembers = await Promise.all(adminMemberPromises)
 
-  return adminMembers.map((member) => transformBotMember(member, ctx))
+  return adminMembers
+    .filter(Boolean)
+    .map((member) => transformBotMember(member, ctx))
 }
