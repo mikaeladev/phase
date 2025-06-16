@@ -2,13 +2,6 @@
   "$schema": "https://turbo.build/schema.json",
   "globalEnv": ["NODE_ENV"],
   "tasks": {
-    "@repo/env#build": {
-      "cache": true,
-      "dependsOn": [],
-      "outputs": ["dist/**"],
-      "passThroughEnv": ["TURBO_*"],
-      "env": []
-    },
     "bot#build": {
       "cache": true,
       "dependsOn": ["^build"],
