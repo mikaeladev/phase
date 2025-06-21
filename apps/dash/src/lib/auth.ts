@@ -18,7 +18,6 @@ function withBasePath(path: string) {
 }
 
 const nextAuth = NextAuth({
-  basePath: withBasePath("/auth/internal"),
   secret: env.AUTH_COOKIE_SECRET,
   cookies: {
     sessionToken: {
