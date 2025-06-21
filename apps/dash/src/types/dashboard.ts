@@ -4,31 +4,12 @@ import type { Mutable, Prettify } from "@repo/utils/types"
 import type { z } from "@repo/zod"
 import type { modulesFormSchema, modulesTrpcSchema } from "~/lib/schemas"
 import type { Session } from "~/types/auth"
-import type { GuildModules } from "~/types/db"
 import type { UseFormReturn } from "react-hook-form"
-
-type ExtraModuleFormData = {
-  [ModuleId.TwitchNotifications]: {
-    streamerNames: Record<number, string>
-  }
-}
 
 export type ModulesTRPCSchemaType = z.TypeOf<typeof modulesTrpcSchema>
 export type ModulesFormSchemaType = z.TypeOf<typeof modulesFormSchema>
 
 export type ModulesFormReturn = UseFormReturn<ModulesFormSchemaType>
-
-export type ModulesFormValuesInputWithExtraData = Partial<{
-  [K in ModuleId]: K extends keyof ExtraModuleFormData
-    ? ModulesFormSchemaType[K] & { _data: ExtraModuleFormData[K] }
-    : ModulesFormSchemaType[K]
-}>
-
-export type GuildModulesWithExtraData = Partial<{
-  [K in ModuleId]: K extends keyof ExtraModuleFormData
-    ? GuildModules[K] & { _data: ExtraModuleFormData[K] }
-    : GuildModules[K]
-}>
 
 type ModuleDefinition<T extends ModuleId = ModuleId> =
   (typeof ModuleDefinitions)[T]
