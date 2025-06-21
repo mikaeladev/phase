@@ -5,7 +5,5 @@
     "jsx": "preserve",
     "plugins": [{ "name": "next" }],
     "incremental": true,
-    "noEmit": true,
-    "paths": { "~/*": ["./src/*"] }
   }
 }
