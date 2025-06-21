@@ -5,17 +5,9 @@
   "type": "module",
   "exports": {
     "./*": "./src/*",
-    "./site/dash": {
-      "import": "./src/site/dash/index.ts",
-      "require": "./src/site/dash/index.cts"
-    },
-    "./site/docs": {
-      "import": "./src/site/docs/index.ts",
-      "require": "./src/site/docs/index.cts"
-    },
-    "./site/www": {
-      "import": "./src/site/www/index.ts",
-      "require": "./src/site/www/index.cts"
+    "./site": {
+      "import": "./src/site/index.mts",
+      "require": "./src/site/index.cts"
     }
   },
   "dependencies": {

@@ -1,6 +1,6 @@
 import "~/styles/globals.css"
 
-import dashConfig from "@repo/config/site/dash"
+import { siteConfig } from "@repo/config/site"
 /* eslint-disable import-x/no-unresolved */
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
@@ -13,39 +13,39 @@ import type { LayoutProps } from "~/types/props"
 import type { Metadata, Viewport } from "next"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(dashConfig.url),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: dashConfig.title,
-    template: `%s - ${dashConfig.title}`,
+    default: siteConfig.title,
+    template: `%s - ${siteConfig.title}`,
   },
-  description: dashConfig.description,
-  authors: dashConfig.developer,
-  creator: dashConfig.developer.name,
-  keywords: dashConfig.keywords,
+  description: siteConfig.description,
+  authors: siteConfig.developer,
+  creator: siteConfig.developer.name,
+  keywords: siteConfig.keywords,
   icons: {
-    icon: dashConfig.images.favicon,
-    apple: dashConfig.images.apple,
-    shortcut: dashConfig.images.logo,
+    icon: siteConfig.images.favicon,
+    apple: siteConfig.images.apple,
+    shortcut: siteConfig.images.logo,
   },
   openGraph: {
-    url: dashConfig.url,
-    title: dashConfig.title,
-    description: dashConfig.description,
-    siteName: dashConfig.title,
+    url: siteConfig.url,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    siteName: siteConfig.title,
     type: "website",
     locale: "en_GB",
     images: {
-      url: dashConfig.images.logo,
-      alt: dashConfig.title,
+      url: siteConfig.images.logo,
+      alt: siteConfig.title,
       width: 512,
       height: 512,
     },
   },
   twitter: {
     card: "summary",
-    title: dashConfig.title,
-    description: dashConfig.description,
-    images: dashConfig.images.logo,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: siteConfig.images.logo,
   },
 }
 

@@ -1,4 +1,4 @@
-import wwwConfig from "@repo/config/site/www"
+import { siteConfig } from "@repo/config/site"
 import { clsx } from "clsx"
 import { extendTailwindMerge } from "tailwind-merge"
 
@@ -20,27 +20,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function absoluteURL(path: string, includeMFEBase = true) {
-  const basePathname = includeMFEBase ? mfeBase() : ""
-  return new URL(`${basePathname}${path}`, wwwConfig.url).href
-}
-
-export function mfeName() {
-  const cwd = process.cwd().replace(/\\/g, "/")
-  const app = cwd.split("/apps/")[1]?.split("/")[0]
-
-  if (!app) throw new Error(`Could not determine app name from cwd '${cwd}'`)
-  if (app === "bot") throw new Error(`This app is not a MFE`)
-
-  return app
-}
-
-export function mfeBase() {
-  return {
-    www: "/",
-    docs: "/docs",
-    dash: "/dashboard",
-  }[mfeName()]
+export function absoluteURL(path: string, withBasePath = true) {
+  const basePath = withBasePath ? siteConfig.basePath : ""
+  const fullPath = basePath + (path.startsWith("/") ? path : `/${path}`)
+  return new URL(fullPath, siteConfig.baseUrl).href
 }
 
 export { cva, type VariantProps } from "class-variance-authority"

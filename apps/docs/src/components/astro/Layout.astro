@@ -3,7 +3,7 @@ import "~/styles/globals.css"
 
 import { ClientRouter } from "astro:transitions"
 
-import docsConfig from "@repo/config/site/docs"
+import { siteConfig } from "@repo/config/site"
 import { SEO } from "astro-seo"
 
 import Breadcrumbs from "~/components/astro/Breadcrumbs.astro"
@@ -25,30 +25,30 @@ const { title, description } = frontmatter
     <SEO
       charset="utf-8"
       title={title}
-      titleTemplate={`%s - ${docsConfig.title}`}
+      titleTemplate={`%s - ${siteConfig.title}`}
       description={description}
       twitter={{
         card: "summary",
-        title: docsConfig.title,
-        description: docsConfig.description,
-        image: docsConfig.images.logo.href,
+        title: siteConfig.title,
+        description: siteConfig.description,
+        image: siteConfig.images.logo.href,
       }}
       openGraph={{
         basic: {
           type: "website",
-          url: docsConfig.url,
-          title: docsConfig.title,
-          image: docsConfig.images.logo.href,
+          url: siteConfig.url,
+          title: siteConfig.title,
+          image: siteConfig.images.logo.href,
         },
         image: {
-          url: docsConfig.images.logo.href,
-          alt: docsConfig.title,
+          url: siteConfig.images.logo.href,
+          alt: siteConfig.title,
           width: 512,
           height: 512,
         },
         optional: {
-          siteName: docsConfig.title,
-          description: docsConfig.description,
+          siteName: siteConfig.title,
+          description: siteConfig.description,
         },
       }}
       extend={{
@@ -56,7 +56,7 @@ const { title, description } = frontmatter
           {
             rel: "icon",
             type: "image/x-icon",
-            href: docsConfig.images.favicon.href,
+            href: siteConfig.images.favicon.href,
           },
           {
             as: "font",

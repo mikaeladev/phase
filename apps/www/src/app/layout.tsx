@@ -1,6 +1,6 @@
 import "~/styles/globals.css"
 
-import wwwConfig from "@repo/config/site/www"
+import { siteConfig } from "@repo/config/site"
 import { cn } from "@repo/utils/site"
 import { Analytics } from "@vercel/analytics/react"
 /* eslint-disable import-x/no-unresolved */
@@ -16,39 +16,39 @@ import type { LayoutProps } from "~/types/props"
 import type { Metadata, Viewport } from "next"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(wwwConfig.url),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: wwwConfig.title,
-    template: `%s - ${wwwConfig.title}`,
+    default: siteConfig.title,
+    template: `%s - ${siteConfig.title}`,
   },
-  description: wwwConfig.description,
-  authors: wwwConfig.developer,
-  creator: wwwConfig.developer.name,
-  keywords: wwwConfig.keywords,
+  description: siteConfig.description,
+  authors: siteConfig.developer,
+  creator: siteConfig.developer.name,
+  keywords: siteConfig.keywords,
   icons: {
-    icon: wwwConfig.images.favicon,
-    apple: wwwConfig.images.apple,
-    shortcut: wwwConfig.images.logo,
+    icon: siteConfig.images.favicon,
+    apple: siteConfig.images.apple,
+    shortcut: siteConfig.images.logo,
   },
   openGraph: {
-    url: wwwConfig.url,
-    title: wwwConfig.title,
-    description: wwwConfig.description,
-    siteName: wwwConfig.title,
+    url: siteConfig.url,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    siteName: siteConfig.title,
     type: "website",
     locale: "en_GB",
     images: {
-      url: wwwConfig.images.logo,
-      alt: wwwConfig.title,
+      url: siteConfig.images.logo,
+      alt: siteConfig.title,
       width: 512,
       height: 512,
     },
   },
   twitter: {
     card: "summary",
-    title: wwwConfig.title,
-    description: wwwConfig.description,
-    images: wwwConfig.images.logo,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: siteConfig.images.logo,
   },
 }
 

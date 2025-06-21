@@ -1,13 +1,13 @@
-import wwwConfig from "@repo/config/site/www"
+import { siteConfig } from "@repo/config/site"
 
 import type { NextConfig } from "next"
 
 const protocolRegex = /^https?:\/\//
-const proxyOrigin = wwwConfig.url.replace(protocolRegex, "")
+const proxyOrigin = siteConfig.baseUrl.replace(protocolRegex, "")
 
 export default {
   transpilePackages: ["@repo/ui"],
-  basePath: "/dashboard",
+  basePath: siteConfig.basePath,
   experimental: {
     serverActions: {
       allowedOrigins: [proxyOrigin],
