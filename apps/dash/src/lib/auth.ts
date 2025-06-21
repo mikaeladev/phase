@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 
-import { absoluteURL } from "@repo/utils/site"
+import { siteConfig } from "@repo/config/site"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import DiscordProvider from "next-auth/providers/discord"
@@ -11,10 +11,14 @@ import { createClient } from "~/lib/trpc"
 import type { Profile, Session } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 
-const isProduction = env.NEXT_PUBLIC_BASE_URL.startsWith("https")
+const isProduction = siteConfig.url.startsWith("https")
+
+function withBasePath(path: string) {
+  return `${siteConfig.basePath ?? ""}${path}`
+}
 
 const nextAuth = NextAuth({
-  basePath: "/dashboard/auth/internal",
+  basePath: withBasePath("/auth/internal"),
   secret: env.AUTH_COOKIE_SECRET,
   cookies: {
     sessionToken: {
@@ -24,8 +28,8 @@ const nextAuth = NextAuth({
     },
   },
   pages: {
-    signIn: "/dashboard/auth/signin",
-    error: "/dashboard/auth/error",
+    signIn: withBasePath("/auth/signin"),
+    error: withBasePath("/auth/error"),
   },
   providers: [
     DiscordProvider({
@@ -33,12 +37,7 @@ const nextAuth = NextAuth({
       clientSecret: env.DISCORD_SECRET,
       authorization: {
         url: "https://discord.com/api/oauth2/authorize",
-        params: {
-          scope: "identify",
-          redirect_url: absoluteURL(
-            "/dashboard/auth/internal/callback/discord",
-          ),
-        },
+        params: { scope: "identify" },
       },
       profile(profile: Profile) {
         return { userId: profile.id! }
