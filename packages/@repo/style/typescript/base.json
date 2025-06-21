@@ -20,9 +20,6 @@
     "baseUrl": "${configDir}",
     "paths": { "~/*": ["./src/*"] },
 
-    // Plugins
-    "plugins": [{ "name": "typescript-plugin-yaml" }],
-
     // Best practices
     "strict": true,
     "checkJs": true,

@@ -348,7 +348,6 @@
         "prettier-plugin-packagejson": "^2.5.10",
         "prettier-plugin-tailwindcss": "^0.6.11",
         "typescript-eslint": "^8.29.1",
-        "typescript-plugin-yaml": "rickdgeerling/typescript-plugin-yaml#v0.1.0-beta.2",
       },
       "devDependencies": {
         "@types/eslint__js": "^8.42.3",
@@ -2730,8 +2729,6 @@
     "typescript-auto-import-cache": ["typescript-auto-import-cache@0.3.5", "", { "dependencies": { "semver": "^7.3.8" } }, "sha512-fAIveQKsoYj55CozUiBoj4b/7WpN0i4o74wiGY5JVUEoD0XiqDk1tJqTEjgzL2/AizKQrXxyRosSebyDzBZKjw=="],
 
     "typescript-eslint": ["typescript-eslint@8.29.1", "", { "dependencies": { "@typescript-eslint/eslint-plugin": "8.29.1", "@typescript-eslint/parser": "8.29.1", "@typescript-eslint/utils": "8.29.1" }, "peerDependencies": { "eslint": "^8.57.0 || ^9.0.0", "typescript": ">=4.8.4 <5.9.0" } }, "sha512-f8cDkvndhbQMPcysk6CUSGBWV+g1utqdn71P5YKwMumVMOG/5k7cHq0KyG4O52nB0oKS4aN2Tp5+wB4APJGC+w=="],
-
-    "typescript-plugin-yaml": ["typescript-plugin-yaml@github:rickdgeerling/typescript-plugin-yaml#bbf117d", { "dependencies": { "js-yaml": "^4.1.0" } }, "rickdgeerling-typescript-plugin-yaml-bbf117d"],
 
     "ufo": ["ufo@1.6.1", "", {}, "sha512-9a4/uxlTWJ4+a5i0ooc1rU7C7YOw3wT+UGqdeNNHWnOF9qcMBgLRS+4IYUqbczewFx4mLEig6gawh7X6mFlEkA=="],
 
