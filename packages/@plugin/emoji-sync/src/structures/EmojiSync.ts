@@ -15,7 +15,6 @@ type BotEmojiStringRecord<TEmojis extends BotEmojiRecord> = Record<
 >
 
 declare global {
-  // eslint-disable-next-line no-var
   var emojiSync: EmojiSync<BotEmojiRecord>
 }
 

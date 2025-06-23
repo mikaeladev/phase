@@ -1,5 +1,3 @@
-import * as React from "react"
-
 import { cn } from "@repo/utils/site"
 
 import { Icon } from "~/components/icon"

@@ -20,7 +20,7 @@ function parseEntries(entries: AnyCollectionEntry[]) {
         return acc
       }
 
-      if (!acc[key]) acc[key] = []
+      acc[key] ??= []
       acc[key].push(entry)
 
       return acc
