@@ -1,1 +1,1 @@
-export { default } from "@repo/style/eslint/react.js"
+export { default } from "@repo/style/eslint/bun.js"

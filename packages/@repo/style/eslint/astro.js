@@ -1,6 +1,17 @@
 import astroPlugin from "eslint-plugin-astro"
 import tseslint from "typescript-eslint"
 
-import base from "./base.js"
+import baseConfig from "./base.js"
+import reactPluginConfig from "./plugins/react.js"
 
-export default tseslint.config(...base, ...astroPlugin.configs.recommended)
+export default tseslint.config(
+  baseConfig,
+  reactPluginConfig,
+  astroPlugin.configs["flat/recommended"],
+  {
+    name: "phase/astro",
+    rules: {
+      "import-x/no-unresolved": ["error", { ignore: ["^astro(:\\w+)?$"] }],
+    },
+  },
+)

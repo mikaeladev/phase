@@ -4,32 +4,34 @@
   "version": "0.0.0",
   "type": "module",
   "exports": {
-    "./eslint": "./eslint/base.js",
-    "./eslint/*": "./eslint/*",
+    "./eslint": {
+      "default": "./eslint/base.js",
+      "types": "./eslint/types/exports.d.ts"
+    },
+    "./eslint/*": {
+      "default": "./eslint/*",
+      "types": "./eslint/types/exports.d.ts"
+    },
     "./prettier": "./prettier/base.json",
     "./prettier/*": "./prettier/*",
     "./typescript": "./typescript/base.json",
     "./typescript/*": "./typescript/*"
   },
   "dependencies": {
-    "@eslint/js": "^9.24.0",
-    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
-    "@next/eslint-plugin-next": "^15.3.0",
-    "eslint-import-resolver-typescript": "^3.10.0",
+    "@eslint/js": "^9.29.0",
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.2",
+    "@next/eslint-plugin-next": "^15.3.4",
+    "eslint-import-resolver-typescript": "^3.10.1",
     "eslint-plugin-astro": "^1.3.1",
-    "eslint-plugin-import-x": "^4.10.2",
+    "eslint-plugin-import-x": "^4.15.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-yml": "^1.17.0",
     "globals": "^15.15.0",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-jsdoc": "^1.3.2",
     "prettier-plugin-packagejson": "^2.5.10",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "typescript-eslint": "^8.29.1"
-  },
-  "devDependencies": {
-    "@types/eslint__js": "^8.42.3"
+    "typescript-eslint": "^8.34.1"
   },
   "peerDependencies": {
     "eslint": "^9.24.0",

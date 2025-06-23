@@ -5,6 +5,7 @@
   "scripts": {
     "build": "bun run --bun astro build",
     "dev": "bun run --bun astro dev",
+    "lint": "eslint .",
     "preview": "bun run build && bun run start",
     "start": "bun run --bun astro preview"
   },
@@ -28,6 +29,7 @@
     "tailwindcss": "^4.1.3"
   },
   "peerDependencies": {
+    "typescript-eslint": "^8.34.1",
     "vite": "^6"
   }
 }

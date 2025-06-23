@@ -1,47 +1,18 @@
 import eslint from "@eslint/js"
 import eslintPluginImport from "eslint-plugin-import-x"
-import eslintPluginYml from "eslint-plugin-yml"
 import globals from "globals"
 import tseslint from "typescript-eslint"
 
-const importPluginConfig = tseslint.config(
+export default tseslint.config(
+  eslint.configs.recommended,
+  tseslint.configs.recommendedTypeChecked,
+  tseslint.configs.stylisticTypeChecked,
   eslintPluginImport.flatConfigs.recommended,
   eslintPluginImport.flatConfigs.typescript,
   {
-    rules: {
-      "import-x/no-extraneous-dependencies": [
-        "error",
-        {
-          includeTypes: true,
-          packageDir: ["./", "../../", "../../../"],
-        },
-      ],
-      "import-x/no-unresolved": [
-        "error",
-        {
-          ignore: ["^astro(:\\w+)?$"],
-        },
-      ],
-    },
-  },
-)
-
-const ignoresConfig = tseslint.config({
-  ignores: ["dist/", "node_modules/", ".astro/", ".next/", ".phase/"],
-})
-
-export default tseslint.config(
-  eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
-  ...eslintPluginYml.configs["flat/recommended"],
-  ...importPluginConfig,
-  ...ignoresConfig,
-  {
+    name: "phase/base",
     languageOptions: {
-      parser: tseslint.parser,
       parserOptions: {
-        project: true,
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
@@ -50,6 +21,7 @@ export default tseslint.config(
       },
     },
     rules: {
+      // typescript-eslint
       "@typescript-eslint/array-type": "off",
       "@typescript-eslint/no-empty-interface": "off",
       "@typescript-eslint/no-empty-object-type": "off",
@@ -71,6 +43,25 @@ export default tseslint.config(
         "error",
         { checksVoidReturn: { attributes: false } },
       ],
+      // import-x
+      "import-x/no-extraneous-dependencies": [
+        "error",
+        {
+          includeTypes: true,
+          packageDir: ["./", "../../", "../../../"],
+        },
+      ],
     },
+  },
+  {
+    // i sure do love eslint v9
+    // https://github.com/eslint/eslint/discussions/18304
+    ignores: [
+      "**/.astro/*",
+      "**/.phase/*",
+      "**/.next/*",
+      "**/dist/*",
+      "**/node_modules/*",
+    ],
   },
 )
