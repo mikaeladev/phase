@@ -17,8 +17,6 @@ export default new BotCronBuilder()
     for (const [id, newStreamer] of ctx.phase.stores.streamers) {
       const oldStreamer = oldStreamers.get(id)
 
-      console.log(oldStreamer, newStreamer)
-
       // cross-reference the stream status with the old values
       const isLiveNow = !!newStreamer.stream
       const wasLiveBefore = !!oldStreamer?.stream
