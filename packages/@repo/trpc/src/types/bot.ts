@@ -6,11 +6,13 @@ import type { Types } from "mongoose"
 
 export type GuildDoc = Guild & { _id: Types.ObjectId }
 export type Streamer = {
-  id: string
-  username: string
-  displayName: string
-  avatarUrl: string
-  description: string
+  user: {
+    id: string
+    username: string
+    displayName: string
+    avatarUrl: string
+    description: string
+  }
   stream?: {
     id: string
     url: string

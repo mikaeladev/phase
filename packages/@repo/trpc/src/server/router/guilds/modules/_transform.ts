@@ -26,11 +26,11 @@ export async function transformUpdateInput(
           let streamerId: string
 
           const storedStreamer = phase.stores.streamers.find(
-            (s) => s.username === username,
+            (s) => s.user.username === username,
           )
 
           if (storedStreamer) {
-            streamerId = storedStreamer.id
+            streamerId = storedStreamer.user.id
           } else {
             const twitchAPI = new ApiClient({
               authProvider: new AppTokenAuthProvider(
@@ -95,7 +95,7 @@ export function transformUpdateOutput(
               const storedStreamer = phase.stores.streamers.get(streamer.id)
               return {
                 ...acc,
-                [index]: storedStreamer?.username ?? "unknown",
+                [index]: storedStreamer?.user.username ?? "unknown",
               }
             },
             {},

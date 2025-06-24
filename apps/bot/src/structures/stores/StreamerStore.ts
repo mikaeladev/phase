@@ -4,7 +4,7 @@ import { ModuleId } from "@repo/utils/modules"
 
 import { twitchAPI } from "~/lib/clients/twitch"
 
-export interface StreamerUser {
+export interface TwitchUser {
   id: string
   username: string
   displayName: string
@@ -12,7 +12,7 @@ export interface StreamerUser {
   description: string
 }
 
-export interface StreamerStream {
+export interface TwitchStream {
   id: string
   url: string
   title: string
@@ -29,13 +29,14 @@ export interface StreamerNotification {
   mention?: string
 }
 
-export interface Streamer extends StreamerUser {
-  stream?: StreamerStream
-  notifications: StreamerNotification[]
+export interface Streamer {
+  user: TwitchUser
+  stream?: TwitchStream
+  get notifications(): StreamerNotification[]
 }
 
 export class StreamerStore extends BaseBotKVStore<string, Streamer> {
-  private userCache!: Map<string, StreamerUser>
+  private userCache!: Map<string, TwitchUser>
 
   public async init() {
     if (this._init) return this
@@ -53,53 +54,58 @@ export class StreamerStore extends BaseBotKVStore<string, Streamer> {
     // clear the store if it has any entries
     if (this.size > 0) this.clear()
 
-    // get all guilds with twitch notifications enabled
-    const guildDocs = this.phase.stores.guilds
-      .filter((g) => g.modules?.[ModuleId.TwitchNotifications]?.enabled)
-      .values()
+    // loop over each guild and fetch the streamers
+    for (const guildDoc of this.phase.stores.guilds.values()) {
+      const config = guildDoc.modules?.[ModuleId.TwitchNotifications]
+      if (!config?.enabled) continue
 
-    // loop over each guild and get the streamers
-    for (const guildDoc of guildDocs) {
-      const streamers =
-        guildDoc.modules![ModuleId.TwitchNotifications]!.streamers
+      const streamers = config.streamers
 
-      // loop over each streamer and fetch their data
-      for (const { id, channel, mention } of streamers) {
-        const streamerData = this.get(id) ?? (await this.fetchStreamer(id))
-        if (!streamerData) continue
-
-        // add the guild to the streamer notifications array
-        streamerData.notifications.push({
-          guildId: guildDoc.id,
-          channelId: channel,
-          mention: mention,
-        })
-
-        // update the streamer data in the store
-        this.set(id, streamerData)
+      for (const streamer of streamers) {
+        const data = await this.fetchStreamer(streamer.id)
+        if (data) this.set(streamer.id, data)
+        else this.delete(streamer.id)
       }
     }
   }
 
   private async fetchStreamer(id: string, force = false) {
-    // get the streamer user data
-    const streamerUser = await this.fetchStreamerUser(id, force)
-    if (!streamerUser) return
+    // fetch the user data
+    const user = await this.fetchTwitchUser(id, force)
+    if (!user) return
 
-    // get the streamer stream data
-    const streamerStream = await this.fetchStreamerStream(id)
+    // fetch the stream data
+    const stream = await this.fetchTwitchStream(id)
 
-    // format the streamer data
+    // compile the streamer data
+    const guildStore = this.phase.stores.guilds
+
     const streamer: Streamer = {
-      ...streamerUser,
-      stream: streamerStream,
-      notifications: [],
+      user,
+      stream,
+      get notifications() {
+        return guildStore.reduce<StreamerNotification[]>((acc, guildDoc) => {
+          const config = guildDoc.modules?.[ModuleId.TwitchNotifications]
+          if (!config?.enabled) return acc
+
+          const streamer = config.streamers.find((s) => s.id === id)
+          if (!streamer) return acc
+
+          acc.push({
+            guildId: guildDoc.id,
+            channelId: streamer.channel,
+            mention: streamer.mention,
+          })
+
+          return acc
+        }, [])
+      },
     }
 
     return streamer
   }
 
-  private async fetchStreamerUser(id: string, force = false) {
+  private async fetchTwitchUser(id: string, force = false) {
     // check if the user is already cached
     const cachedUser = this.userCache.get(id)
     if (cachedUser && !force) return cachedUser
@@ -109,7 +115,7 @@ export class StreamerStore extends BaseBotKVStore<string, Streamer> {
     if (!user) return
 
     // format the user data
-    const streamerUser: StreamerUser = {
+    const streamerUser: TwitchUser = {
       id: user.id,
       username: user.name,
       displayName: user.displayName,
@@ -123,13 +129,13 @@ export class StreamerStore extends BaseBotKVStore<string, Streamer> {
     return streamerUser
   }
 
-  private async fetchStreamerStream(id: string) {
+  private async fetchTwitchStream(id: string) {
     // fetch the stream from the twitch api
     const stream = await twitchAPI.streams.getStreamByUserId(id)
     if (!stream) return
 
     // format the stream data
-    const streamerStream: StreamerStream = {
+    const streamerStream: TwitchStream = {
       id: stream.id,
       url: `https://twitch.tv/${stream.userName}`,
       title: stream.title,

@@ -82,7 +82,7 @@ export function transformModuleConfig<T extends ModuleId>(
 
     for (let i = 0; i < transformedConfig.streamers.length; i++) {
       const id = transformedConfig.streamers[i]!.id
-      const name = ctx.phase.stores.streamers.get(id)?.username
+      const name = ctx.phase.stores.streamers.get(id)?.user.username
       if (name) streamerNames[i] = name
     }
 
