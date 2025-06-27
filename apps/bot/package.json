@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "bot",
-  "version": "3.28.0",
+  "version": "3.29.0",
   "type": "module",
   "scripts": {
     "build": "bun run scripts/build.ts --copy-envs",
