@@ -3,6 +3,6 @@
   "include": ["lib/**/*", "eslint.config.js"],
   "exclude": ["lib/v3/lib.js"],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "."
   }
 }

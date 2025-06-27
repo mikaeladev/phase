@@ -4,6 +4,6 @@
   "compilerOptions": {
     "jsx": "preserve",
     "plugins": [{ "name": "next" }],
-    "incremental": true,
+    "incremental": true
   }
 }

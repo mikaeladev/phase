@@ -8,7 +8,6 @@ import type {
   MessageCreateOptions,
 } from "discord.js"
 
-
 export async function sendAndPin(
   channel: GuildTextBasedChannel,
   body: MessageCreateOptions,

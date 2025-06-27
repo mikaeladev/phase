@@ -6,10 +6,9 @@ import { MessageBuilder } from "~/structures/builders/MessageBuilder"
 import type { ModuleId } from "@repo/utils/modules"
 import type { APIEmbed, ChannelType, PermissionFlagsBits } from "discord.js"
 
-type PascalToSentence<S extends string> =
-  S extends `${infer T}${infer U}`
-    ? `${Lowercase<T>}${U extends Capitalize<U> ? ` ${Lowercase<U>}` : PascalToSentence<U>}`
-    : S
+type PascalToSentence<S extends string> = S extends `${infer T}${infer U}`
+  ? `${Lowercase<T>}${U extends Capitalize<U> ? ` ${Lowercase<U>}` : PascalToSentence<U>}`
+  : S
 
 type TrimTrailingSpaces<S extends string> = S extends `${infer R} `
   ? TrimTrailingSpaces<R>
