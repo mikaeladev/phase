@@ -24,7 +24,7 @@
     "@types/lodash": "^4.17.16"
   },
   "peerDependencies": {
-    "discord.js": "^14.18.0"
+    "discord.js": "catalog:bot"
   },
   "tsup": {
     "clean": true,

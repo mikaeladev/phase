@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@discordjs/opus": "^0.9.0",
-    "@discordjs/voice": "^0.18.0",
+    "@discordjs/voice": "catalog:bot",
     "@phasejs/core": "workspace:*",
     "ffmpeg-static": "^5.2.0",
     "fluent-ffmpeg": "^2.1.3",
@@ -29,7 +29,7 @@
     "@types/fluent-ffmpeg": "^2.1.27"
   },
   "peerDependencies": {
-    "discord.js": "^14.18.0"
+    "discord.js": "catalog:bot"
   },
   "tsup": {
     "clean": true,

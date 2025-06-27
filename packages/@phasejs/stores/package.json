@@ -19,7 +19,7 @@
     "ts-mixer": "^6.0.4"
   },
   "peerDependencies": {
-    "discord.js": "^14.18.0"
+    "discord.js": "catalog:bot"
   },
   "tsup": {
     "clean": true,

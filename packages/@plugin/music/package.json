@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@distube/youtube": "^1.0.4",
-    "@distube/ytdl-core": "4.16.8",
+    "@distube/ytdl-core": "catalog:bot",
     "@phasejs/core": "workspace:*"
   },
   "devDependencies": {
@@ -25,8 +25,8 @@
     "distube": "^5.0.7"
   },
   "peerDependencies": {
-    "@discordjs/voice": "^0.18.0",
-    "discord.js": "^14.18.0"
+    "@discordjs/voice": "catalog:bot",
+    "discord.js": "catalog:bot"
   },
   "tsup": {
     "clean": true,

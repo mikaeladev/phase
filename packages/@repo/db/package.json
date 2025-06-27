@@ -31,7 +31,7 @@
   "dependencies": {
     "@repo/utils": "workspace:*",
     "drizzle-orm": "^0.38.4",
-    "mongoose": "^8.13.2",
+    "mongoose": "catalog:bot",
     "pg": "^8.14.1"
   },
   "devDependencies": {

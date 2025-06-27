@@ -24,18 +24,18 @@
     "@repo/zod": "workspace:*",
     "@trpc/client": "^11.3.1",
     "@trpc/server": "^11.3.1",
-    "@twurple/api": "^7.3.0",
-    "@twurple/auth": "^7.3.0"
+    "@twurple/api": "catalog:bot",
+    "@twurple/auth": "catalog:bot"
   },
   "devDependencies": {
     "@phasejs/core": "workspace:*",
     "@phasejs/stores": "workspace:*",
     "@repo/db": "workspace:*",
-    "@total-typescript/ts-reset": "^0.6.1"
+    "@total-typescript/ts-reset": "catalog:utils"
   },
   "peerDependencies": {
-    "discord.js": "^14.18.0",
-    "mongoose": "^8.13.2"
+    "discord.js": "catalog:bot",
+    "mongoose": "catalog:bot"
   },
   "tsup": {
     "clean": true,

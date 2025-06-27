@@ -17,11 +17,11 @@
   },
   "dependencies": {
     "@phasejs/core": "workspace:*",
-    "sharp": "^0.33.5",
+    "sharp": "catalog:web",
     "sharp-phash": "^2.2.0"
   },
   "peerDependencies": {
-    "discord.js": "^14.18.0"
+    "discord.js": "catalog:bot"
   },
   "tsup": {
     "clean": true,

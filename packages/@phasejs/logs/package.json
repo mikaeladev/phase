@@ -17,10 +17,10 @@
   },
   "dependencies": {
     "@phasejs/core": "workspace:*",
-    "chalk": "^5.3.0"
+    "chalk": "catalog:utils"
   },
   "peerDependencies": {
-    "discord.js": "^14"
+    "discord.js": "catalog:bot"
   },
   "tsup": {
     "clean": true,

@@ -20,10 +20,10 @@
     "satori": "^0.12.2"
   },
   "devDependencies": {
-    "@types/react": "^19.1.0"
+    "@types/react": "catalog:web"
   },
   "peerDependencies": {
-    "discord.js": "^14.18.0"
+    "discord.js": "catalog:bot"
   },
   "tsup": {
     "clean": true,

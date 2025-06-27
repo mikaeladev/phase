@@ -52,13 +52,14 @@
     "name",
     "version",
     "type",
+    "packageManager",
     "prettier",
     "scripts",
     "exports",
+    "workspaces",
     "dependencies",
     "devDependencies",
     "peerDependencies",
-    "trustedDependencies",
-    "workspaces"
+    "trustedDependencies"
   ]
 }
